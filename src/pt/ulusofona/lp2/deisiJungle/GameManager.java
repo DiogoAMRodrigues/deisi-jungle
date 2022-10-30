@@ -95,6 +95,8 @@ public class GameManager {
                             return false;
                         }
                     }
+                }else{
+                    return false;
                 }
             }
         }
