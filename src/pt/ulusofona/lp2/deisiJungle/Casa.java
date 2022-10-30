@@ -22,4 +22,12 @@ public class Casa {
     public void setOccupied(boolean occupied) {
         this.occupied = occupied;
     }
+
+    public ArrayList<Jogador> getJogadores() {
+        return jogadores;
+    }
+
+    public void setJogadores(ArrayList<Jogador> jogadores) {
+        this.jogadores = jogadores;
+    }
 }

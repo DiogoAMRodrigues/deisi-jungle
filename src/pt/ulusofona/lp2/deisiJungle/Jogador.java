@@ -1,9 +1,9 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 public class Jogador {
-    int id; //Não pode existir a msma id
+    int id;
     String name;
-    Especie species; //Só pode existir um Tarzan
+    Especie species;
     private int position;
     private int energy;
     private boolean finished;
