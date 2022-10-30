@@ -43,6 +43,7 @@ public class GameManager {
         if (playersInfo != null) {
             if (playersInfo.length < 2 || playersInfo.length > 4) {
                 return false;
+
             }
 
             //Tabuleiro size check
