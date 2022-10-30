@@ -52,8 +52,7 @@ public class GameManager {
             }
 
             for (int player1 = 0; player1 < playersInfo.length - 1; player1++) {
-                if (playersInfo[player1] != null) {
-
+                if (playersInfo != null && playersInfo[player1] != null) {
                     //name is well made
                     String thisName = playersInfo[player1][name];
                     if (thisName == null || thisName.length() == 0) {
