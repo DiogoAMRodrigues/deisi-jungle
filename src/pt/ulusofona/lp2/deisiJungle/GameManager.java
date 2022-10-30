@@ -116,7 +116,7 @@ public class GameManager {
                     Jogador thisPlayerObject = new Jogador(Integer.parseInt(playersInfo[player1][0]), thisName, new Especie(thisSpecies.charAt(0)),
                             initialEnergy);
                     tabuleiro.addJogador(thisPlayerObject);
-                    tabuleiro.casas[0].jogadores.add(thisPlayerObject);
+                    //tabuleiro.casas[0].jogadores.add(thisPlayerObject);
                 }else{
                     return false;
                 }
@@ -131,7 +131,7 @@ public class GameManager {
     public int[] getPlayerIds(int squareNr){
         int[] playerIDs;
         if (tabuleiro != null){
-            int convertedSquare = squareNr - 1;
+            int convertedSquare = squareNr ;
             if (!(convertedSquare > tabuleiro.getSize()) && tabuleiro.getCasas()[convertedSquare] != null) {
                 int amountOfPlayersInSquare = tabuleiro.getCasas()[convertedSquare].getJogadores().size();
                 playerIDs = new int[amountOfPlayersInSquare];
@@ -148,7 +148,7 @@ public class GameManager {
 
     //UNDONE
     public String[] getSquareInfo(int squareNr){
-        int convertedSquare = squareNr - 1;
+        int convertedSquare = squareNr;
         String[] casa = new String[3];
         if (tabuleiro != null){
             if (convertedSquare < 0 || tabuleiro.getSize() < convertedSquare){
@@ -169,10 +169,6 @@ public class GameManager {
         }
 
         return casa;
-    }
-
-    public static void main(String[] args) {
-
     }
 
     //UNDONE
