@@ -128,7 +128,7 @@ public class GameManager {
     }
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
-
+        return null;
     }
 
     public String[] getWinnerInfo(){
