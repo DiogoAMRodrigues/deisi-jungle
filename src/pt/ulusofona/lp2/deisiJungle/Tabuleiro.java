@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Tabuleiro {
-    Casa[] tabuleiro;
+    Casa[] casas;
     int size;
     ArrayList<Jogador> jogadores;
     HashMap<Integer, Jogador> jogaresHS;
@@ -13,7 +13,7 @@ public class Tabuleiro {
 
     public Tabuleiro(int size) {
         this.size = size;
-        tabuleiro = new Casa[size];
+        casas = new Casa[size];
         jogadores = new ArrayList<>();
         jogaresHS = new HashMap<>();
         currentPlayerInt = 0;
@@ -42,12 +42,12 @@ public class Tabuleiro {
         currentPlayer = jogadores.get(currentPlayerInt);
     }
 
-    public Casa[] getTabuleiro() {
-        return tabuleiro;
+    public Casa[] getCasas() {
+        return casas;
     }
 
-    public void setTabuleiro(Casa[] tabuleiro) {
-        this.tabuleiro = tabuleiro;
+    public void setCasas(Casa[] tabuleiro) {
+        this.casas = tabuleiro;
     }
 
     public int getSize() {

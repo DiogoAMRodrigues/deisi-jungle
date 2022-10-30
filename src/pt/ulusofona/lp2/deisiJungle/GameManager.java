@@ -116,7 +116,7 @@ public class GameManager {
 
     //UNDONE
     public int[] getPlayerIds(int squareNr){
-        int[] playerIDs = new int[4];
+        int[] playerIDs = new int[];
         for (int i = 0; tabuleiro.getJogadores())
         return playerIDs;
     }
