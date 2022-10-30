@@ -41,6 +41,14 @@ public class GameManager {
         boolean hasTarzan = false;
 
         if (playersInfo != null) {
+            if (playersInfo.length < 2 || playersInfo.length > 4) {
+                return false;
+            }
+
+            //Tabuleiro size check
+            if (jungleSize < playersInfo.length * 2) {
+                return false;
+            }
 
             for (int player1 = 0; player1 < playersInfo.length - 1; player1++) {
                 if (playersInfo[player1] != null) {
@@ -89,14 +97,6 @@ public class GameManager {
                 }
 
                 //Player amount check
-                if (playersInfo.length < 2 || playersInfo.length > 4) {
-                    return false;
-                }
-
-                //Tabuleiro size check
-                if (jungleSize < playersInfo.length * 2) {
-                    return false;
-                }
             }
         }
         return true;
