@@ -31,8 +31,5 @@ public class Especie {
                 this.name = "Cobra";
                 this.image = "snake.png";
         }
-
-
-
     }
 }
