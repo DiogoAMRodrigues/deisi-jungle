@@ -106,12 +106,11 @@ public class GameManager {
                         }catch (NumberFormatException n) {
                             return false;
                         }
-
-                        //Adding the Player into the Tabuleiro
-                        Jogador thisPlayerObject = new Jogador(player1, thisName, new Especie(thisSpecies.charAt(0)),
-                                initialEnergy);
-                        tabuleiro.addJogador(thisPlayerObject);
                     }
+                    //Adding the Player into the Tabuleiro
+                    Jogador thisPlayerObject = new Jogador(player1, thisName, new Especie(thisSpecies.charAt(0)),
+                            initialEnergy);
+                    tabuleiro.addJogador(thisPlayerObject);
                 }else{
                     return false;
                 }
