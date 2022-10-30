@@ -22,6 +22,7 @@ public class Tabuleiro {
     void addJogador(Jogador player){
         jogadores.add(player);
         jogaresHS.putIfAbsent(player.getId(), player);
+        casas[0].setOccupied(true);
         for (int i = 0; i < jogadores.size() - 1; i++ ){
             Jogador firstPlayer = jogadores.get(i);
             for (int j = 0; j < jogadores.size(); j++){
