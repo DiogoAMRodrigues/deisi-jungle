@@ -135,7 +135,26 @@ public class GameManager {
 
     //UNDONE
     public String[] getSquareInfo(int squareNr){
+        int convertedSquare = squareNr - 1;
         String[] casa = new String[3];
+        if (tabuleiro != null){
+            if (tabuleiro.getSize() < convertedSquare){
+                return null;
+            }
+            if (convertedSquare == tabuleiro.getSize()){
+                casa[0] = "finish.png";
+                casa[1] = "Meta";
+            } else {
+                casa[0] = "blank.png";
+                casa[1] = "Vazio";
+            }
+            casa[2] = "";
+            for (int i = 0; i < getPlayerIds(squareNr).length - 1; i++) {
+                casa[2] += getPlayerIds(squareNr)[i] + ",";
+            }
+            casa[2] += getPlayerIds(squareNr)[getPlayerIds(squareNr).length - 1];
+        }
+
         return casa;
     }
 
