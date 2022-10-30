@@ -41,9 +41,9 @@ public class GameManager {
         boolean hasTarzan = false;
 
         if (playersInfo != null) {
+            //Player amount check
             if (playersInfo.length < 2 || playersInfo.length > 4) {
                 return false;
-
             }
 
             //Tabuleiro size check
@@ -96,8 +96,6 @@ public class GameManager {
                         }
                     }
                 }
-
-                //Player amount check
             }
         }
         return true;
