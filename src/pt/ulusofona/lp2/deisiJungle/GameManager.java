@@ -3,9 +3,10 @@ package pt.ulusofona.lp2.deisiJungle;
 import javax.swing.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class GameManager {
-
+    Tabuleiro tabuleiro;
     public GameManager() {
     }
 
@@ -116,6 +117,7 @@ public class GameManager {
     //UNDONE
     public int[] getPlayerIds(int squareNr){
         int[] playerIDs = new int[4];
+
         return playerIDs;
     }
 
