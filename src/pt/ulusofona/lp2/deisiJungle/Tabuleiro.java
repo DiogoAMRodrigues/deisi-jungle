@@ -13,18 +13,19 @@ public class Tabuleiro {
 
     public Tabuleiro(int size) {
         this.size = size;
-        casas = new Casa[size];
-        jogadores = new ArrayList<>();
-        jogaresHS = new HashMap<>();
-        currentPlayerInt = 0;
+        this.casas = new Casa[size];
+        for(int i = 0; i < size; ++i){
+            casas[i] = new Casa();
+        }
+        this.jogadores = new ArrayList<>();
+        this.jogaresHS = new HashMap<>();
+        this.currentPlayerInt = 0;
     }
 
     void addJogador(Jogador player){
         jogadores.add(player);
         jogaresHS.putIfAbsent(player.getId(), player);
-        if (casas[0] != null) {
-            casas[0].setOccupied(true);
-        }
+
         for (int i = 0; i < jogadores.size() - 1; i++ ){
             Jogador firstPlayer = jogadores.get(i);
             for (int j = 0; j < jogadores.size(); j++){

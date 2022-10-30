@@ -3,6 +3,7 @@ package pt.ulusofona.lp2.deisiJungle;
 import javax.swing.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.TreeMap;
 
 public class GameManager {
@@ -41,6 +42,9 @@ public class GameManager {
         int species = 2;
         boolean hasTarzan = false;
 
+        //Creating tabuleiro
+        tabuleiro = new Tabuleiro(jungleSize);
+
         if (playersInfo != null) {
             //Player amount check
             if (playersInfo.length < 2 || playersInfo.length > 4) {
@@ -52,10 +56,9 @@ public class GameManager {
                 return false;
             }
 
-            //Creating tabuleiro
-            tabuleiro = new Tabuleiro(jungleSize);
 
-            for (int player1 = 0; player1 < playersInfo.length - 1; player1++) {
+
+            for (int player1 = 0; player1 < playersInfo.length; player1++) {
                 if (playersInfo[player1] != null) {
 
                     //name is well-made
@@ -75,6 +78,7 @@ public class GameManager {
                             return false;
                         }
                     }
+
                     /*
                     boolean isEligibleSpecies = false;
                     for (int i = 0; i < getSpecies().length; i++){
@@ -106,12 +110,13 @@ public class GameManager {
                         }catch (NumberFormatException n) {
                             return false;
                         }
-
-                        //Adding the Player into the Tabuleiro
-                        Jogador thisPlayerObject = new Jogador(player1, thisName, new Especie(thisSpecies.charAt(0)),
-                                initialEnergy);
-                        tabuleiro.addJogador(thisPlayerObject);
                     }
+
+                    //Adding the Player into the Tabuleiro
+                    Jogador thisPlayerObject = new Jogador(Integer.parseInt(playersInfo[player1][0]), thisName, new Especie(thisSpecies.charAt(0)),
+                            initialEnergy);
+                    tabuleiro.addJogador(thisPlayerObject);
+                    tabuleiro.casas[0].jogadores.add(thisPlayerObject);
                 }else{
                     return false;
                 }
@@ -146,7 +151,7 @@ public class GameManager {
         int convertedSquare = squareNr - 1;
         String[] casa = new String[3];
         if (tabuleiro != null){
-            if (convertedSquare < 1 || tabuleiro.getSize() < convertedSquare){
+            if (convertedSquare < 0 || tabuleiro.getSize() < convertedSquare){
                 return null;
             }
             if (convertedSquare == tabuleiro.getSize()){
@@ -164,6 +169,10 @@ public class GameManager {
         }
 
         return casa;
+    }
+
+    public static void main(String[] args) {
+
     }
 
     //UNDONE
@@ -208,4 +217,5 @@ public class GameManager {
     public String whoIsTaborda(){
         return null;
     }
+
 }
