@@ -52,8 +52,9 @@ public class GameManager {
             }
 
             for (int player1 = 0; player1 < playersInfo.length - 1; player1++) {
-                if (playersInfo != null && playersInfo[player1] != null) {
-                    //name is well made
+                if (playersInfo[player1] != null) {
+
+                    //name is well-made
                     String thisName = playersInfo[player1][name];
                     if (thisName == null || thisName.length() == 0) {
                         return false;
@@ -94,11 +95,20 @@ public class GameManager {
                         if (firstPlayerID.equals(secondPlayerID)) {
                             return false;
                         }
+                        //Check if the ID is an Integer
+                        try {
+                            Integer.parseInt(firstPlayerID);
+                            Integer.parseInt(secondPlayerID);
+                        }catch (NumberFormatException n) {
+                            return false;
+                        }
                     }
                 }else{
                     return false;
                 }
             }
+        }else {
+            return false;
         }
         return true;
     }
