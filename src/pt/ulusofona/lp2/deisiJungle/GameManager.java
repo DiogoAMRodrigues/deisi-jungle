@@ -104,11 +104,12 @@ public class GameManager {
                             return false;
                         }
 
+                        //Creating tabuleiro
+                        tabuleiro = new Tabuleiro(jungleSize);
                         //Adding the Player into the Tabuleiro
                         Jogador thisPlayerObject = new Jogador(player1, thisName, new Especie(thisSpecies.charAt(0)),
                                 initialEnergy);
-                        tabuleiro.getJogadores().add(thisPlayerObject);
-                        tabuleiro.getJogaresHS().put(player1, thisPlayerObject);
+                        tabuleiro.addJogador(thisPlayerObject);
                     }
                 }else{
                     return false;
