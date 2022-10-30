@@ -58,7 +58,6 @@ public class GameManager {
                     if (thisName == null || thisName.length() == 0) {
                         return false;
                     }
-
                     //is an eligible Species
                     String thisSpecies = playersInfo[player1][species];
                     if (!(thisSpecies.equals("E") || thisSpecies.equals("L") ||
