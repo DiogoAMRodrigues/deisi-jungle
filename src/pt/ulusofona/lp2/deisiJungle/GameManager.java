@@ -127,8 +127,7 @@ public class GameManager {
         int[] playerIDs;
         if (tabuleiro != null){
             int convertedSquare = squareNr - 1;
-            if (!(convertedSquare > tabuleiro.getSize()) &&
-                    tabuleiro.getCasas()[convertedSquare].getJogadores() != null) {
+            if (!(convertedSquare > tabuleiro.getSize()) && tabuleiro.getCasas()[convertedSquare] != null) {
                 int amountOfPlayersInSquare = tabuleiro.getCasas()[convertedSquare].getJogadores().size();
                 playerIDs = new int[amountOfPlayersInSquare];
                 for (int i = 0; i < amountOfPlayersInSquare; i++) {
