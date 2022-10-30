@@ -8,6 +8,5 @@ public class GameManager {
 
     public String[][] getSpecies(){
         String[6][3] specie;
-
     }
 }
