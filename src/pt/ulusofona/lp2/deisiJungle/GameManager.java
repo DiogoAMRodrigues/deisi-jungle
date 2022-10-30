@@ -116,8 +116,13 @@ public class GameManager {
 
     //UNDONE
     public int[] getPlayerIds(int squareNr){
-        int[] playerIDs = new int[];
-        for (int i = 0; tabuleiro.getJogadores())
+        int convertedSquare = squareNr - 1;
+        int amountOfPlayersInSquare = tabuleiro.getCasas()[convertedSquare].getJogadores().size();
+        int[] playerIDs = new int[amountOfPlayersInSquare];
+        for (int i = 0; i < amountOfPlayersInSquare; i++){
+            int thisPlayersID = tabuleiro.getCasas()[convertedSquare].getJogadores().get(i).getId();
+            playerIDs[i] = thisPlayersID;
+        }
         return playerIDs;
     }
 
