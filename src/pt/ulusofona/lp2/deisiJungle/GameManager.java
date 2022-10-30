@@ -52,6 +52,9 @@ public class GameManager {
                 return false;
             }
 
+            //Creating tabuleiro
+            tabuleiro = new Tabuleiro(jungleSize);
+
             for (int player1 = 0; player1 < playersInfo.length - 1; player1++) {
                 if (playersInfo[player1] != null) {
 
@@ -104,8 +107,6 @@ public class GameManager {
                             return false;
                         }
 
-                        //Creating tabuleiro
-                        tabuleiro = new Tabuleiro(jungleSize);
                         //Adding the Player into the Tabuleiro
                         Jogador thisPlayerObject = new Jogador(player1, thisName, new Especie(thisSpecies.charAt(0)),
                                 initialEnergy);
@@ -126,7 +127,8 @@ public class GameManager {
         int[] playerIDs;
         if (tabuleiro != null){
             int convertedSquare = squareNr - 1;
-            if (!(convertedSquare > tabuleiro.getSize())) {
+            if (!(convertedSquare > tabuleiro.getSize()) &&
+                    tabuleiro.getCasas()[convertedSquare].getJogadores() != null) {
                 int amountOfPlayersInSquare = tabuleiro.getCasas()[convertedSquare].getJogadores().size();
                 playerIDs = new int[amountOfPlayersInSquare];
                 for (int i = 0; i < amountOfPlayersInSquare; i++) {
