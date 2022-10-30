@@ -1,8 +1,11 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import javax.swing.*;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class GameManager {
+
     public GameManager() {
     }
 
@@ -118,33 +121,39 @@ public class GameManager {
         return playerInfo;
     }
 
+    //UNDONE
     public String[] getCurrentPlayerInfo(){
         String[] thisPlayer = new String[4];
         return thisPlayer;
     }
 
+    //UNDONE
     public String[][] getPlayersInfo(){
         return null;
     }
 
+    //UNDONE
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
-        return null;
+        return false;
     }
 
+    //UNDONE
     public String[] getWinnerInfo(){
         return null;
     }
 
+    //UNDONE
     public ArrayList<String> getGameResults(){
         return null;
     }
 
+    //UNDONE
     public JPanel getAuthorsPanel(){
         return null;
     }
 
+    //UNDONE
     public String whoIsTaborda(){
         return null;
     }
-
 }
