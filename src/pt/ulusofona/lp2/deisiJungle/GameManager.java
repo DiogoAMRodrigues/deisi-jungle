@@ -114,7 +114,7 @@ public class GameManager {
         return true;
     }
 
-    //UNDONE
+    //UNDON
     public int[] getPlayerIds(int squareNr){
         int[] playerIDs;
         if (tabuleiro != null){
