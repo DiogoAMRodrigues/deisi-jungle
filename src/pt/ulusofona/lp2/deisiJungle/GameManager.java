@@ -3,7 +3,6 @@ package pt.ulusofona.lp2.deisiJungle;
 import java.lang.reflect.Array;
 
 public class GameManager {
-    Tabuleiro tabuleiro;
     public GameManager() {
     }
 
@@ -119,16 +118,33 @@ public class GameManager {
         return playerInfo;
     }
 
-    //UNDONE
     public String[] getCurrentPlayerInfo(){
         String[] thisPlayer = new String[4];
         return thisPlayer;
     }
 
-    //UNDONE
     public String[][] getPlayersInfo(){
         return null;
     }
 
+    public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
+
+    }
+
+    public String[] getWinnerInfo(){
+        return null;
+    }
+
+    public ArrayList<String> getGameResults(){
+        return null;
+    }
+
+    public JPanel getAuthorsPanel(){
+        return null;
+    }
+
+    public String whoIsTaborda(){
+        return null;
+    }
 
 }

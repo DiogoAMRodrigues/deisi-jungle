@@ -27,9 +27,6 @@ public class Especie {
                 this.name = "Tarzan";
                 this.image = "tarzan.png";
                 break;
-            case 'S':
-                this.name = "Cobra";
-                this.image = "snake.png";
         }
 
     }
