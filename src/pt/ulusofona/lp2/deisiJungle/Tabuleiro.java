@@ -81,4 +81,8 @@ public class Tabuleiro {
     public void setCurrentPlayerInt(int currentPlayerInt) {
         this.currentPlayerInt = currentPlayerInt;
     }
+
+    public HashMap<Integer, Jogador> getJogaresHS() {
+        return jogaresHS;
+    }
 }
