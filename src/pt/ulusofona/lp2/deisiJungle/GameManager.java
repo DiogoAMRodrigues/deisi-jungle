@@ -116,7 +116,7 @@ public class GameManager {
                     Jogador thisPlayerObject = new Jogador(Integer.parseInt(playersInfo[player1][0]), thisName, new Especie(thisSpecies.charAt(0)),
                             initialEnergy);
                     tabuleiro.addJogador(thisPlayerObject);
-                    tabuleiro.casas[0].jogadores.add(thisPlayerObject);
+                    //tabuleiro.casas[0].jogadores.add(thisPlayerObject);
                 }else{
                     return false;
                 }
@@ -131,7 +131,7 @@ public class GameManager {
     public int[] getPlayerIds(int squareNr){
         int[] playerIDs;
         if (tabuleiro != null){
-            int convertedSquare = squareNr - 1;
+            int convertedSquare = squareNr ;
             if (!(convertedSquare > tabuleiro.getSize()) && tabuleiro.getCasas()[convertedSquare] != null) {
                 int amountOfPlayersInSquare = tabuleiro.getCasas()[convertedSquare].getJogadores().size();
                 playerIDs = new int[amountOfPlayersInSquare];
@@ -142,7 +142,7 @@ public class GameManager {
                 return playerIDs;
             }
         }
-        playerIDs = new int[1];
+        playerIDs = new int[0];
         return playerIDs;
     }
 
@@ -165,14 +165,11 @@ public class GameManager {
             for (int i = 0; i < getPlayerIds(squareNr).length - 1; i++) {
                 casa[2] += getPlayerIds(squareNr)[i] + ",";
             }
-            if(getPlayerIds(squareNr).length > 0) {
-                casa[2] += getPlayerIds(squareNr)[getPlayerIds(squareNr).length - 1];
-            }
+            casa[2] += getPlayerIds(squareNr)[getPlayerIds(squareNr).length - 1];
         }
 
         return casa;
     }
-
 
     //UNDONE
     public String[] getPlayerInfo(int playerId){
