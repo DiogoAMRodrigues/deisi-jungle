@@ -142,7 +142,7 @@ public class GameManager {
                 return playerIDs;
             }
         }
-        playerIDs = new int[1];
+        playerIDs = new int[0];
         return playerIDs;
     }
 
