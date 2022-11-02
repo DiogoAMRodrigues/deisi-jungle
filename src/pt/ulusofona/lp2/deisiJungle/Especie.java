@@ -28,6 +28,7 @@ public class Especie {
                 this.image = "tarzan.png";
                 break;
         }
+        this.identifier = identifier;
     }
 
     public char getIdentifier() {
