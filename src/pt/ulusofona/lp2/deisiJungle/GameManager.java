@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 public class GameManager {
     Tabuleiro tabuleiro;
+
     public GameManager() {
     }
 
@@ -34,7 +35,7 @@ public class GameManager {
         return species;
     }
 
-    public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo){
+    public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo) {
         //assuming the start and finishlines count for the amount of houses
         int id = 0;
         int name = 1;
@@ -104,7 +105,7 @@ public class GameManager {
                         try {
                             Integer.parseInt(firstPlayerID);
                             Integer.parseInt(secondPlayerID);
-                        }catch (NumberFormatException n) {
+                        } catch (NumberFormatException n) {
                             return false;
                         }
                     }
@@ -114,11 +115,11 @@ public class GameManager {
                             initialEnergy);
                     tabuleiro.addJogador(thisPlayerObject);
                     tabuleiro.casas[0].jogadores.add(thisPlayerObject);
-                }else{
+                } else {
                     return false;
                 }
             }
-        }else {
+        } else {
             return false;
         }
         return true;
@@ -126,9 +127,9 @@ public class GameManager {
 
 
     //UNDONE
-    public int[] getPlayerIds(int squareNr){
+    public int[] getPlayerIds(int squareNr) {
         int[] playerIDs;
-        if (tabuleiro != null){
+        if (tabuleiro != null) {
             int convertedSquare = squareNr - 1;
             if (!(convertedSquare > tabuleiro.getSize() || convertedSquare < 0) && tabuleiro.getCasas()[convertedSquare] != null) {
                 int amountOfPlayersInSquare = tabuleiro.getCasas()[convertedSquare].getJogadores().size();
@@ -145,14 +146,14 @@ public class GameManager {
     }
 
     //UNDONE
-    public String[] getSquareInfo(int squareNr){
+    public String[] getSquareInfo(int squareNr) {
         int convertedSquare = squareNr - 1;
         String[] casa = new String[3];
-        if (tabuleiro != null){
-            if (convertedSquare < 0 || tabuleiro.getSize() < convertedSquare){
+        if (tabuleiro != null) {
+            if (convertedSquare < 0 || tabuleiro.getSize() < convertedSquare) {
                 return null;
             }
-            if (convertedSquare == tabuleiro.getSize()){
+            if (convertedSquare == tabuleiro.getSize()) {
                 casa[0] = "finish.png";
                 casa[1] = "Meta";
             } else {
@@ -170,7 +171,7 @@ public class GameManager {
     }
 
     //UNDONE
-    public String[] getPlayerInfo(int playerId){
+    public String[] getPlayerInfo(int playerId) {
         String[] thisPlayer = new String[4];
         Jogador thisJogador = tabuleiro.getJogaresHS().get(playerId);
         if (tabuleiro != null && tabuleiro.getJogaresHS() != null && thisJogador != null) {
@@ -178,14 +179,14 @@ public class GameManager {
             thisPlayer[1] = thisJogador.getName();
             thisPlayer[2] = thisJogador.getSpecies().getIdentifier() + "";
             thisPlayer[3] = thisJogador.getEnergy() + "";
-        }else {
+        } else {
             return null;
         }
         return thisPlayer;
     }
 
     //UNDONE
-    public String[] getCurrentPlayerInfo(){
+    public String[] getCurrentPlayerInfo() {
         String[] thisPlayer = new String[4];
         Jogador thisJogador = tabuleiro.getCurrentPlayer();
         thisPlayer[0] = thisJogador.getId() + "";
@@ -199,20 +200,21 @@ public class GameManager {
     public String[][] getPlayersInfo() {
         String[][] thesePlayers = new String[tabuleiro.getJogadores().size()][4];
         ArrayList<Jogador> players = new ArrayList<>();
-        for (int i = 0; i < tabuleiro.getJogadores().size(); i++) {
-            if (tabuleiro != null && tabuleiro.getJogaresHS() != null) {
+        if (tabuleiro != null) {
+            for (int i = 0; i < tabuleiro.getJogadores().size(); i++) {
                 Jogador thisJogador = tabuleiro.getJogadores().get(i);
                 thesePlayers[i][0] = thisJogador.getId() + "";
                 thesePlayers[i][1] = thisJogador.getName();
                 thesePlayers[i][2] = thisJogador.getSpecies().getIdentifier() + "";
                 thesePlayers[i][3] = thisJogador.getEnergy() + "";
             }
+            return thesePlayers;
         }
-        return thesePlayers;
+        return null;
     }
 
     //UNDONE
-    public boolean moveCurrentPlayer ( int nrSquares, boolean bypassValidations){
+    public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
         if (!bypassValidations) {
             if (nrSquares > 0 && nrSquares <= 6) {
                 theMovementPart(nrSquares);
@@ -226,7 +228,7 @@ public class GameManager {
         return true;
     }
 
-    void theMovementPart ( int nrSquares){
+    void theMovementPart(int nrSquares) {
         //everythingsFine
         Jogador thisPlayer = tabuleiro.getCurrentPlayer();
         if (thisPlayer != null) {
@@ -253,23 +255,24 @@ public class GameManager {
             }
         }
     }
+
     //UNDONE
-    public String[] getWinnerInfo () {
+    public String[] getWinnerInfo() {
         return null;
     }
 
     //UNDONE
-    public ArrayList<String> getGameResults () {
+    public ArrayList<String> getGameResults() {
         return null;
     }
 
     //UNDONE
-    public JPanel getAuthorsPanel () {
+    public JPanel getAuthorsPanel() {
         return null;
     }
 
     //UNDONE
-    public String whoIsTaborda () {
+    public String whoIsTaborda() {
         return "100m swimming";// n sei se percebi isso :D
     }
 }
