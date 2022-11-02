@@ -198,15 +198,14 @@ public class GameManager {
     //UNDONE
     public String[][] getPlayersInfo() {
         String[][] thesePlayers = new String[tabuleiro.getJogadores().size()][4];
+        ArrayList<Jogador> players = new ArrayList<>();
         for (int i = 0; i < tabuleiro.getJogadores().size(); i++) {
             if (tabuleiro != null && tabuleiro.getJogaresHS() != null) {
-                Jogador thisJogador = tabuleiro.getJogaresHS().get(tabuleiro.getJogadores().get(i));
-                if (thisJogador != null) {
-                    thesePlayers[i][0] = thisJogador.getId() + "";
-                    thesePlayers[i][1] = thisJogador.getName();
-                    thesePlayers[i][2] = thisJogador.getSpecies().getIdentifier() + "";
-                    thesePlayers[i][3] = thisJogador.getEnergy() + "";
-                }
+                Jogador thisJogador = tabuleiro.getJogadores().get(i);
+                thesePlayers[i][0] = thisJogador.getId() + "";
+                thesePlayers[i][1] = thisJogador.getName();
+                thesePlayers[i][2] = thisJogador.getSpecies().getIdentifier() + "";
+                thesePlayers[i][3] = thisJogador.getEnergy() + "";
             }
         }
         return thesePlayers;
