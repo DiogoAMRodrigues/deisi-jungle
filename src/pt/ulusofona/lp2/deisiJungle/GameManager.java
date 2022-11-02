@@ -130,7 +130,7 @@ public class GameManager {
     public int[] getPlayerIds(int squareNr){
         int[] playerIDs;
         if (tabuleiro != null){
-            int convertedSquare = squareNr;
+            int convertedSquare = squareNr - 1;
             if (!(convertedSquare > tabuleiro.getSize() || convertedSquare < 0) && tabuleiro.getCasas()[convertedSquare] != null) {
                 int amountOfPlayersInSquare = tabuleiro.getCasas()[convertedSquare].getJogadores().size();
                 playerIDs = new int[amountOfPlayersInSquare];
