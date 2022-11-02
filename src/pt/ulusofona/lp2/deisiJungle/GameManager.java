@@ -245,10 +245,11 @@ public class GameManager {
                 int otherHousePosition = playersPosition + nrSquares;
                 int lastHousePosition = tabuleiro.getCasas().length - 1;
                 //IF it is over the ending it stops at the end
-                if (otherHousePosition > lastHousePosition) {
+                if (otherHousePosition >= lastHousePosition) {
                     Casa otherHouse = tabuleiro.getCasas()[lastHousePosition];
                     otherHouse.getJogadores().add(thisPlayer);
                     thisPlayer.setPosition(lastHousePosition);
+                    thisPlayer.setFinished(true);
                 } else {
                     Casa otherHouse = tabuleiro.getCasas()[otherHousePosition];
                     otherHouse.getJogadores().add(thisPlayer);
@@ -274,7 +275,7 @@ public class GameManager {
 
     //UNDONE
     public String whoIsTaborda () {
-        return null;
+        return "100m swimming";// n sei se percebi isso :D
     }
 }
 
