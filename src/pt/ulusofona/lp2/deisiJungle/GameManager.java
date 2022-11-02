@@ -123,6 +123,7 @@ public class GameManager {
         }
         tabuleiro.jogadores.addAll(jogadores);
         tabuleiro.casas[0].jogadores.addAll(jogadores);
+        tabuleiro.currentPlayer = tabuleiro.jogadores.get(0);
         return true;
     }
 
@@ -206,7 +207,6 @@ public class GameManager {
                 thesePlayers[i][1] = thisJogador.getName();
                 thesePlayers[i][2] = thisJogador.getSpecies().getIdentifier() + "";
                 thesePlayers[i][3] = thisJogador.getEnergy() + "";
-                System.out.println(Arrays.toString(thesePlayers[i]));
             }
             return thesePlayers;
         }
@@ -214,7 +214,7 @@ public class GameManager {
     }
 
     //UNDONE
-     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
+    public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
         if (!bypassValidations) {
             if (nrSquares > 0 && nrSquares <= 6) {
                 theMovementPart(nrSquares);
@@ -228,7 +228,7 @@ public class GameManager {
         return true;
     }
 
-     void theMovementPart(int nrSquares) {
+    void theMovementPart(int nrSquares) {
         //everythingsFine
         Jogador thisPlayer = tabuleiro.getCurrentPlayer();
         if (thisPlayer != null) {

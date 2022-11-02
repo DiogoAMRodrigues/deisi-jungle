@@ -36,13 +36,12 @@ public class Tabuleiro {
                 }
             }
         }
-
     }
 
     void nextTurn(){
         currentPlayerInt++;
-        if (currentPlayerInt >= size){
-            currentPlayerInt -= size;
+        if (currentPlayerInt == jogadores.size()){
+            currentPlayerInt = 0;
         }
         currentPlayer = jogadores.get(currentPlayerInt);
     }
