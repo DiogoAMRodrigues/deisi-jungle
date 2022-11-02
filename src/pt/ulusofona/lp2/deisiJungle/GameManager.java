@@ -197,7 +197,7 @@ public class GameManager {
 
     //UNDONE
     public String[][] getPlayersInfo() {
-        String[][] thesePlayers = new String[4][4];
+        String[][] thesePlayers = new String[tabuleiro.getJogadores().size()][4];
         for (int i = 0; i < tabuleiro.getJogadores().size(); i++) {
             if (tabuleiro != null && tabuleiro.getJogaresHS() != null) {
                 Jogador thisJogador = tabuleiro.getJogaresHS().get(tabuleiro.getJogadores().get(i));
