@@ -125,7 +125,6 @@ public class GameManager {
         return true;
     }
 
-
     //UNDONE
     public int[] getPlayerIds(int squareNr) {
         int[] playerIDs;
