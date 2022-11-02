@@ -180,6 +180,10 @@ public class GameManager {
     //UNDONE
     public String[] getCurrentPlayerInfo(){
         String[] thisPlayer = new String[4];
+        thisPlayer[0] = tabuleiro.getCurrentPlayer().getId() + "";
+        thisPlayer[1] = tabuleiro.getCurrentPlayer().getName();
+        thisPlayer[2] = tabuleiro.getCurrentPlayer().getSpecies().getIdentifier() + "";
+        thisPlayer[3] = tabuleiro.getCurrentPlayer().getEnergy() + "";
         return thisPlayer;
     }
 
@@ -190,6 +194,8 @@ public class GameManager {
 
     //UNDONE
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
+
+
         return false;
     }
 
