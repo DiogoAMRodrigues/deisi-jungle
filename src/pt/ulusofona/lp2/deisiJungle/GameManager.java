@@ -172,24 +172,48 @@ public class GameManager {
 
     //UNDONE
     public String[] getPlayerInfo(int playerId){
-        String[] playerInfo = new String[4];
-        //getTabuleiro to use HS to get player
-        return playerInfo;
+        String[] thisPlayer = new String[4];
+        Jogador thisJogador = tabuleiro.getJogaresHS().get(playerId);
+        if (tabuleiro != null && tabuleiro.getJogaresHS() != null && thisJogador != null) {
+            thisPlayer[0] = thisJogador.getId() + "";
+            thisPlayer[1] = thisJogador.getName();
+            thisPlayer[2] = thisJogador.getSpecies().getIdentifier() + "";
+            thisPlayer[3] = thisJogador.getEnergy() + "";
+        }else {
+            return null;
+        }
+        return thisPlayer;
     }
 
     //UNDONE
     public String[] getCurrentPlayerInfo(){
         String[] thisPlayer = new String[4];
-        thisPlayer[0] = tabuleiro.getCurrentPlayer().getId() + "";
-        thisPlayer[1] = tabuleiro.getCurrentPlayer().getName();
-        thisPlayer[2] = tabuleiro.getCurrentPlayer().getSpecies().getIdentifier() + "";
-        thisPlayer[3] = tabuleiro.getCurrentPlayer().getEnergy() + "";
+        Jogador thisJogador = tabuleiro.getCurrentPlayer();
+        thisPlayer[0] = thisJogador.getId() + "";
+        thisPlayer[1] = thisJogador.getName();
+        thisPlayer[2] = thisJogador.getSpecies().getIdentifier() + "";
+        thisPlayer[3] = thisJogador.getEnergy() + "";
         return thisPlayer;
     }
 
     //UNDONE
     public String[][] getPlayersInfo(){
-        return null;
+        String[][] thesePlayers = new String[4][4];
+        for (int i = 0; i < tabuleiro.getJogadores().size(); i++) {
+            if (tabuleiro != null && tabuleiro.getJogaresHS() != null) {
+                Jogador thisJogador = tabuleiro.getJogaresHS().get(tabuleiro.getJogadores().get(i));
+                if (thisJogador != null){
+
+                    thesePlayers[i][0] = thisJogador.getId() + "";
+                    thesePlayers[i][1] = thisJogador.getName();
+                    thesePlayers[i][2] = thisJogador.getSpecies().getIdentifier() + "";
+                    thesePlayers[i][3] = thisJogador.getEnergy() + "";
+
+                } else {
+                    return null;
+                }
+        }
+        return thesePlayers;
     }
 
     //UNDONE
