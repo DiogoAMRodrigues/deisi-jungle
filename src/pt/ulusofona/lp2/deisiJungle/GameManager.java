@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.TreeMap;
 
 public class GameManager {
     Tabuleiro tabuleiro;
@@ -197,12 +196,12 @@ public class GameManager {
     }
 
     //UNDONE
-    public String[][] getPlayersInfo(){
+    public String[][] getPlayersInfo() {
         String[][] thesePlayers = new String[4][4];
         for (int i = 0; i < tabuleiro.getJogadores().size(); i++) {
             if (tabuleiro != null && tabuleiro.getJogaresHS() != null) {
                 Jogador thisJogador = tabuleiro.getJogaresHS().get(tabuleiro.getJogadores().get(i));
-                if (thisJogador != null){
+                if (thisJogador != null) {
 
                     thesePlayers[i][0] = thisJogador.getId() + "";
                     thesePlayers[i][1] = thisJogador.getName();
@@ -212,25 +211,27 @@ public class GameManager {
                 } else {
                     return null;
                 }
+            }
         }
         return thesePlayers;
     }
 
     //UNDONE
-    public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
-        if (!bypassValidations){
-            if (nrSquares > 0 && nrSquares <= 6){
+    public boolean moveCurrentPlayer ( int nrSquares, boolean bypassValidations){
+        if (!bypassValidations) {
+            if (nrSquares > 0 && nrSquares <= 6) {
                 theMovementPart(nrSquares);
-            }else {
+            } else {
                 return false;
             }
-        }else {
+        } else {
             theMovementPart(nrSquares);
         }
         tabuleiro.nextTurn();
         return true;
     }
-    void theMovementPart(int nrSquares){
+
+    void theMovementPart ( int nrSquares){
         //everythingsFine
         Jogador thisPlayer = tabuleiro.getCurrentPlayer();
         if (thisPlayer != null) {
@@ -257,23 +258,23 @@ public class GameManager {
         }
     }
     //UNDONE
-    public String[] getWinnerInfo(){
+    public String[] getWinnerInfo () {
         return null;
     }
 
     //UNDONE
-    public ArrayList<String> getGameResults(){
+    public ArrayList<String> getGameResults () {
         return null;
     }
 
     //UNDONE
-    public JPanel getAuthorsPanel(){
+    public JPanel getAuthorsPanel () {
         return null;
     }
 
     //UNDONE
-    public String whoIsTaborda(){
+    public String whoIsTaborda () {
         return null;
     }
-
 }
+
