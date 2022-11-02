@@ -7,6 +7,7 @@ public class Jogador {
     private int position;
     private int energy;
     private boolean finished;
+    private boolean outOfEnergy;
 
     public Jogador(int id, String name, Especie species, int energy) {
         this.id = id;
@@ -14,10 +15,16 @@ public class Jogador {
         this.species = species;
         this.position = 0;
         this.energy = energy;
+        this.outOfEnergy = false;
     }
 
     void loseEnergy(){
-        this.energy -= 2;
+        if (this.energy >= 2){
+            this.energy -= 2;
+        }else {
+            this.outOfEnergy = true;
+        }
+
     }
 
     void move(int amount){
@@ -58,5 +65,25 @@ public class Jogador {
 
     public void setFinished(boolean finished) {
         this.finished = finished;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSpecies(Especie species) {
+        this.species = species;
+    }
+
+    public boolean isOutOfEnergy() {
+        return outOfEnergy;
+    }
+
+    public void setOutOfEnergy(boolean outOfEnergy) {
+        this.outOfEnergy = outOfEnergy;
     }
 }

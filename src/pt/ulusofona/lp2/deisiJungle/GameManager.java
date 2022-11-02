@@ -194,11 +194,41 @@ public class GameManager {
 
     //UNDONE
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
-
-
+        if (!bypassValidations){
+            if (nrSquares > 0 && nrSquares <= 6){
+                theMovementPart(nrSquares);
+            }else {
+                return false;
+            }
+        }else {
+            theMovementPart(nrSquares);
+        }
         return false;
     }
-
+    void theMovementPart(int nrSquares){
+        //everythingsFine
+        Jogador thisPlayer = tabuleiro.getCurrentPlayer();
+        int playersPosition = thisPlayer.getPosition();
+        Casa thisHouse = tabuleiro.getCasas()[playersPosition];
+        //remove him from that House and update the occupationState of that house IF he has energy
+        if (!thisPlayer.isOutOfEnergy()) {
+            thisHouse.getJogadores().remove(thisPlayer);
+            thisHouse.occupied = thisHouse.isOccupied();
+            //add him to the other house
+            int otherHousePosition = playersPosition + nrSquares;
+            int lastHousePosition = tabuleiro.getCasas().length - 1;
+            //IF it is over the ending it stops at the end
+            if (otherHousePosition > lastHousePosition){
+                Casa otherHouse = tabuleiro.getCasas()[lastHousePosition];
+                otherHouse.getJogadores().add(thisPlayer);
+                thisPlayer.setPosition(lastHousePosition);
+            }else {
+                Casa otherHouse = tabuleiro.getCasas()[otherHousePosition];
+                otherHouse.getJogadores().add(thisPlayer);
+                thisPlayer.setPosition(otherHousePosition);
+            }
+        }
+    }
     //UNDONE
     public String[] getWinnerInfo(){
         return null;
