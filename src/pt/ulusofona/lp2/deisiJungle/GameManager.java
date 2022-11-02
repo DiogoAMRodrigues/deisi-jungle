@@ -203,7 +203,8 @@ public class GameManager {
         }else {
             theMovementPart(nrSquares);
         }
-        return false;
+        tabuleiro.nextTurn();
+        return true;
     }
     void theMovementPart(int nrSquares){
         //everythingsFine
