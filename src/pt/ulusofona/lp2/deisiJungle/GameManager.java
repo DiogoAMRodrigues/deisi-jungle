@@ -151,7 +151,8 @@ public class GameManager {
         int convertedSquare = squareNr - 1;
         String[] casa = new String[3];
         if (tabuleiro != null) {
-            if (convertedSquare < 0 || tabuleiro.getSize() < convertedSquare) {
+            //switched < to <= on both conditions
+            if (convertedSquare <= 0 || tabuleiro.getSize() <= convertedSquare) {
                 return null;
             }
             if (convertedSquare == tabuleiro.getSize()-1) {
