@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GameManager {
-    static Tabuleiro tabuleiro;
+    Tabuleiro tabuleiro;
 
     public GameManager() {
     }
@@ -35,7 +35,7 @@ public class GameManager {
         return species;
     }
 
-    static public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo) {
+    public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo) {
         //assuming the start and finishlines count for the amount of houses
         int id = 0;
         int name = 1;
@@ -128,7 +128,7 @@ public class GameManager {
     }
 
     //UNDONE
-    static public int[] getPlayerIds(int squareNr) {
+    public int[] getPlayerIds(int squareNr) {
         int[] playerIDs;
         if (tabuleiro != null) {
             int convertedSquare = squareNr - 1;
@@ -147,7 +147,7 @@ public class GameManager {
     }
 
     //UNDONE
-    static public String[] getSquareInfo(int squareNr) {
+    public String[] getSquareInfo(int squareNr) {
         int convertedSquare = squareNr - 1;
         String[] casa = new String[3];
         if (tabuleiro != null) {
@@ -173,20 +173,6 @@ public class GameManager {
         return casa;
     }
 
-    public static void main(String[] args) {
-        createInitialJungle(10, 10, new String[][]{{"1", "Passaro", "P"}, {"2", "Leao", "L"}});
-        System.out.println(Arrays.toString(getSquareInfo(1)));
-        System.out.println(Arrays.toString(getSquareInfo(2)));
-        System.out.println(Arrays.toString(getSquareInfo(3)));
-        System.out.println(Arrays.toString(getSquareInfo(4)));
-        System.out.println(Arrays.toString(getSquareInfo(5)));
-        System.out.println(Arrays.toString(getSquareInfo(6)));
-        System.out.println(Arrays.toString(getSquareInfo(7)));
-        System.out.println(Arrays.toString(getSquareInfo(8)));
-        System.out.println(Arrays.toString(getSquareInfo(9)));
-        System.out.println(Arrays.toString(getSquareInfo(10)));
-        System.out.println(Arrays.toString(getSquareInfo(11)));
-    }
     //UNDONE
     public String[] getPlayerInfo(int playerId) {
         String[] thisPlayer = new String[4];
