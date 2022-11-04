@@ -148,9 +148,9 @@ public class GameManager {
 
     //UNDONE
     public String[] getSquareInfo(int squareNr) {
-        //int convertedSquare = squareNr - 1;
+        int convertedSquare = squareNr - 1;
         String[] casa = new String[3];
-        if (squareNr <= 0 || squareNr > tabuleiro.getSize()) {
+        if (!(convertedSquare < tabuleiro.getSize() && convertedSquare >= 0)) {
             return null;
         }
         if (tabuleiro != null) {
