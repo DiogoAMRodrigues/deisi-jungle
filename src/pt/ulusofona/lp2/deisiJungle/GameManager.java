@@ -88,7 +88,7 @@ public class GameManager {
                     String thisSpecies = playersInfo[player1][species];
 
                     if ((thisSpecies.equals("E") || thisSpecies.equals("L") || thisSpecies.equals("P") || thisSpecies.equals("Z") || thisSpecies.equals("S"))
-                    || (thisSpecies.equals("T") && !hasTarzan)) {
+                            || (thisSpecies.equals("T") && !hasTarzan)) {
                         //Adding the Player into the Tabuleiro
                         Jogador thisPlayerObject = new Jogador(Integer.parseInt(playersInfo[player1][0]), thisName, new Especie(thisSpecies.charAt(0)),
                                 initialEnergy);
@@ -151,7 +151,7 @@ public class GameManager {
         int convertedSquare = squareNr - 1;
         String[] casa = new String[3];
         if (tabuleiro != null) {
-            if (convertedSquare < 0 || tabuleiro.getSize() <= convertedSquare) {
+            if (convertedSquare < 0 || tabuleiro.getSize() < convertedSquare) {
                 return null;
             }
             if (convertedSquare == tabuleiro.getSize()-1) {
@@ -237,7 +237,7 @@ public class GameManager {
             int playersPosition = thisPlayer.getPosition();
             Casa thisHouse = tabuleiro.getCasas()[playersPosition];
             //remove him from that House and update the occupationState of that house IF he has energy
-            if (thisPlayer.getEnergy() - 2 < 0) {
+            if (!thisPlayer.isOutOfEnergy()) {
                 thisHouse.getJogadores().remove(thisPlayer);
                 thisHouse.occupied = thisHouse.isOccupied();
                 //add him to the other house
@@ -249,12 +249,10 @@ public class GameManager {
                     otherHouse.getJogadores().add(thisPlayer);
                     thisPlayer.setPosition(lastHousePosition);
                     thisPlayer.setFinished(true);
-                    thisPlayer.setEnergy(thisPlayer.getEnergy()-2);
                 } else {
                     Casa otherHouse = tabuleiro.getCasas()[otherHousePosition];
                     otherHouse.getJogadores().add(thisPlayer);
                     thisPlayer.setPosition(otherHousePosition);
-                    thisPlayer.setEnergy(thisPlayer.getEnergy()-2);
                 }
             }
         }
