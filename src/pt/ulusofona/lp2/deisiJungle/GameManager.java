@@ -165,7 +165,9 @@ public class GameManager {
             for (int i = 0; i < getPlayerIds(squareNr).length - 1; i++) {
                 casa[2] += getPlayerIds(squareNr)[i] + ",";
             }
-            casa[2] += getPlayerIds(squareNr)[getPlayerIds(squareNr).length - 1];
+            if(getPlayerIds(squareNr).length > 0){
+                casa[2] += getPlayerIds(squareNr)[getPlayerIds(squareNr).length - 1];
+            }
         }
 
         return casa;
