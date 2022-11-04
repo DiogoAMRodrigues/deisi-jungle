@@ -132,7 +132,7 @@ public class GameManager {
         int[] playerIDs;
         if (tabuleiro != null) {
             int convertedSquare = squareNr - 1;
-            if (!(convertedSquare > tabuleiro.getSize() || convertedSquare < 0) && tabuleiro.getCasas()[convertedSquare] != null) {
+            if ((convertedSquare < tabuleiro.getSize() && convertedSquare >= 0) && tabuleiro.getCasas()[convertedSquare] != null) {
                 int amountOfPlayersInSquare = tabuleiro.getCasas()[convertedSquare].getJogadores().size();
                 playerIDs = new int[amountOfPlayersInSquare];
                 for (int i = 0; i < amountOfPlayersInSquare; i++) {
@@ -154,7 +154,7 @@ public class GameManager {
             if (convertedSquare < 0 || tabuleiro.getSize() < convertedSquare) {
                 return null;
             }
-            if (convertedSquare == tabuleiro.getSize()) {
+            if (convertedSquare == tabuleiro.getSize()-1) {
                 casa[0] = "finish.png";
                 casa[1] = "Meta";
             } else {
