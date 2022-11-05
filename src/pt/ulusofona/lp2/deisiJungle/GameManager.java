@@ -236,7 +236,8 @@ public class GameManager {
             int playersPosition = thisPlayer.getPosition();
             Casa thisHouse = tabuleiro.getCasas()[playersPosition];
             //remove him from that House and update the occupationState of that house IF he has energy
-            if (!thisPlayer.isOutOfEnergy()) {
+            if (thisPlayer.getEnergy()-2 >= 0) {
+                thisPlayer.loseEnergy();
                 thisHouse.getJogadores().remove(thisPlayer);
                 thisHouse.occupied = thisHouse.isOccupied();
                 //add him to the other house
