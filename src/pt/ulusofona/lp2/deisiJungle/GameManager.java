@@ -275,7 +275,7 @@ public class GameManager {
 
     //UNDONE
     public String whoIsTaborda() {
-        return "100m swimming";// n sei se percebi isso :D
+        return "Wrestling";
     }
 }
 
