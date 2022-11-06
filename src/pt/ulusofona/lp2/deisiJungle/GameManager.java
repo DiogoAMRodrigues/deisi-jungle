@@ -274,7 +274,19 @@ public class GameManager {
 
     //UNDONE
     public ArrayList<String> getGameResults() {
-        return null;
+        ArrayList<String> players = new ArrayList<>();
+        int counter = 0;
+
+        for(int i = 0; i < tabuleiro.getCasas().length; ++i){
+            if(tabuleiro.getCasas()[i].jogadores.size() != 0){
+                for(int j = 0; j < tabuleiro.getCasas()[i].jogadores.size(); ++j){
+                    Jogador player = tabuleiro.getCasas()[i].jogadores.get(j);
+                    players.add("#"+counter+" "+player.name+", " + player.species + ", " + player.getPosition());
+                    counter++;
+                }
+            }
+        }
+        return players;
     }
 
     //UNDONE
