@@ -216,17 +216,20 @@ public class GameManager {
 
     //UNDONE
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
-        if (!bypassValidations) {
-            if (nrSquares > 0 && nrSquares <= 6) {
-                theMovementPart(nrSquares);
+        if(!tabuleiro.winner){
+            if (!bypassValidations) {
+                if (nrSquares > 0 && nrSquares <= 6) {
+                    theMovementPart(nrSquares);
+                } else {
+                    return false;
+                }
             } else {
-                return false;
+                theMovementPart(nrSquares);
             }
-        } else {
-            theMovementPart(nrSquares);
+            tabuleiro.nextTurn();
+            return true;
         }
-        tabuleiro.nextTurn();
-        return true;
+        return false;
     }
 
     void theMovementPart(int nrSquares) {
@@ -249,6 +252,8 @@ public class GameManager {
                     otherHouse.getJogadores().add(thisPlayer);
                     thisPlayer.setPosition(lastHousePosition);
                     thisPlayer.setFinished(true);
+                    tabuleiro.playerWin = thisPlayer;
+                    tabuleiro.winner = true;
                 } else {
                     Casa otherHouse = tabuleiro.getCasas()[otherHousePosition];
                     otherHouse.getJogadores().add(thisPlayer);
@@ -260,7 +265,11 @@ public class GameManager {
 
     //UNDONE
     public String[] getWinnerInfo() {
-        return null;
+        if(!tabuleiro.winner){
+            return null;
+        }
+        return new String[]{String.valueOf(tabuleiro.playerWin.id), tabuleiro.playerWin.name, String.valueOf(tabuleiro.playerWin.getSpecies()),
+                String.valueOf(tabuleiro.playerWin.getEnergy())};
     }
 
     //UNDONE
@@ -278,4 +287,3 @@ public class GameManager {
         return "Wrestling";
     }
 }
-

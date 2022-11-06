@@ -11,6 +11,10 @@ public class Tabuleiro {
     Jogador currentPlayer;
     int currentPlayerInt;
 
+    boolean winner = false;
+
+    Jogador playerWin;
+
     public Tabuleiro(int size) {
         this.size = size;
         this.casas = new Casa[size];
