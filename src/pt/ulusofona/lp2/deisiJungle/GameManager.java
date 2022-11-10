@@ -217,6 +217,18 @@ public class GameManager {
 
     //UNDONE
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
+        boolean allNoEnergy = true;
+        for(int i = 0; i < tabuleiro.jogadores.size(); ++i){
+            if(tabuleiro.jogadores.get(i).getEnergy() >= 2){
+                allNoEnergy = false;
+            }
+        }
+
+        if(allNoEnergy){
+            tabuleiro.nextTurn();
+            return false;
+        }
+
         boolean state = false;
         if (tabuleiro.currentPlayer.getEnergy() >= 2) {
             if (!bypassValidations) {
