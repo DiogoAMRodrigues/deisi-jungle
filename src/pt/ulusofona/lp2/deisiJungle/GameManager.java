@@ -231,8 +231,6 @@ public class GameManager {
             tabuleiro.nextTurn();
             return true;
         }
-        tabuleiro.nextTurn();
-
         return false;
     }
 
