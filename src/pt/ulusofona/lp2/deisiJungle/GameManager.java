@@ -230,8 +230,9 @@ public class GameManager {
                     tabuleiro.nextTurn();
                 }
                 return true;
+            }else{
+                tabuleiro.nextTurn();
             }
-            tabuleiro.nextTurn();
         }
         return false;
     }
