@@ -30,7 +30,7 @@ public class Tabuleiro {
         jogadores.add(player);
         jogaresHS.putIfAbsent(player.getId(), player);
 
-        for (int i = 0; i < jogadores.size() - 1; i++ ){
+        for (int i = 0; i < jogadores.size(); i++ ){
             Jogador firstPlayer = jogadores.get(i);
             for (int j = 0; j < jogadores.size(); j++){
                 Jogador secondPlayer = jogadores.get(j);
@@ -44,7 +44,7 @@ public class Tabuleiro {
 
     void nextTurn(){
         currentPlayerInt++;
-        if (currentPlayerInt == jogadores.size()-1){
+        if (currentPlayerInt == jogadores.size()){
             currentPlayerInt = 0;
         }
         currentPlayer = jogadores.get(currentPlayerInt);
