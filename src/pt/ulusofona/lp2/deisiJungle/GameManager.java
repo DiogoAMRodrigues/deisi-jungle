@@ -90,6 +90,7 @@ public class GameManager {
                     if ((thisSpecies.equals("E") || thisSpecies.equals("L") || thisSpecies.equals("P") || thisSpecies.equals("Z") || thisSpecies.equals("S"))
                             || (thisSpecies.equals("T") && !hasTarzan)) {
                         //Adding the Player into the Tabuleiro
+
                         Jogador thisPlayerObject = new Jogador(Integer.parseInt(playersInfo[player1][0]), thisName, new Especie(thisSpecies.charAt(0)),
                                 initialEnergy);
                         jogadores.add(thisPlayerObject);
@@ -311,7 +312,7 @@ public class GameManager {
             if (tabuleiro.getCasas()[i].jogadores.size() != 0) {
                 for (int j = 0; j < tabuleiro.getCasas()[i].jogadores.size(); ++j) {
                     Jogador player = tabuleiro.getCasas()[i].jogadores.get(j);
-                    players.add("#" + counter + " " + player.name + ", " + player.species.getName() + ", " + player.getPosition());
+                    players.add("#" + counter + " " + player.name + ", " + player.species.getIdentifier() + ", " + player.getPosition()+1);
                     counter++;
                 }
             }
