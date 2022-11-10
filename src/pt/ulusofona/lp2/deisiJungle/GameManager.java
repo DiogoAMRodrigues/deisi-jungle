@@ -217,7 +217,7 @@ public class GameManager {
     //UNDONE
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
         if(!tabuleiro.winner){
-            if(tabuleiro.currentPlayer.getEnergy()-2 >= 0){
+            if(tabuleiro.currentPlayer.getEnergy() >= 2){
                 if (!bypassValidations) {
                     if (nrSquares > 0 && nrSquares <= 6) {
                         theMovementPart(nrSquares);
