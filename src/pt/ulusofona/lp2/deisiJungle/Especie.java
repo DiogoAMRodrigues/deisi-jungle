@@ -20,7 +20,7 @@ public class Especie {
                 this.image = "turtle.png";
             }
             case 'P' -> {
-                this.name = "Passáro";
+                this.name = "Pássaro";
                 this.image = "bird.png";
             }
             case 'Z' -> {
