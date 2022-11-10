@@ -216,23 +216,23 @@ public class GameManager {
 
     //UNDONE
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
-        if(tabuleiro.currentPlayer.getEnergy()-2 >= 0){
-            if(!tabuleiro.winner){
+        if(!tabuleiro.winner){
+            if(tabuleiro.currentPlayer.getEnergy()-2 >= 0){
                 if (!bypassValidations) {
                     if (nrSquares > 0 && nrSquares <= 6) {
                         theMovementPart(nrSquares);
-                    } else {
                         tabuleiro.nextTurn();
+                    } else {
                         return false;
                     }
                 } else {
                     theMovementPart(nrSquares);
+                    tabuleiro.nextTurn();
                 }
-                tabuleiro.nextTurn();
                 return true;
             }
+            tabuleiro.nextTurn();
         }
-        tabuleiro.nextTurn();
         return false;
     }
 
