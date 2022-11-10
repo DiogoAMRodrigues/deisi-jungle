@@ -121,7 +121,9 @@ public class GameManager {
         } else {
             return false;
         }
-        tabuleiro.jogadores.addAll(jogadores);
+        for(int i = 0; i < jogadores.size(); ++i){
+            tabuleiro.addJogador(jogadores.get(i));
+        }
         tabuleiro.casas[0].jogadores.addAll(jogadores);
         tabuleiro.currentPlayer = tabuleiro.jogadores.get(0);
         return true;
@@ -217,18 +219,6 @@ public class GameManager {
 
     //UNDONE
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
-        boolean allNoEnergy = true;
-        for(int i = 0; i < tabuleiro.jogadores.size(); ++i){
-            if(tabuleiro.jogadores.get(i).getEnergy() >= 2){
-                allNoEnergy = false;
-            }
-        }
-
-        if(allNoEnergy){
-            tabuleiro.nextTurn();
-            return false;
-        }
-
         boolean state = false;
         if (tabuleiro.currentPlayer.getEnergy() >= 2) {
             if (!bypassValidations) {
