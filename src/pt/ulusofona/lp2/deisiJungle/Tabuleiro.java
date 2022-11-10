@@ -29,7 +29,7 @@ public class Tabuleiro {
     void addJogador(Jogador player){
         jogadores.add(player);
         jogaresHS.putIfAbsent(player.getId(), player);
-
+        /*
         for (int i = 0; i < jogadores.size(); i++ ){
             Jogador firstPlayer = jogadores.get(i);
             for (int j = 0; j < jogadores.size(); j++){
@@ -39,7 +39,7 @@ public class Tabuleiro {
                     jogadores.set(j, firstPlayer);
                 }
             }
-        }
+        }*/
     }
 
     void nextTurn(){
