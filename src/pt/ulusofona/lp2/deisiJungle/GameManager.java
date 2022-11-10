@@ -223,6 +223,7 @@ public class GameManager {
                         theMovementPart(nrSquares);
                         tabuleiro.nextTurn();
                     } else {
+                        tabuleiro.nextTurn();
                         return false;
                     }
                 } else {
