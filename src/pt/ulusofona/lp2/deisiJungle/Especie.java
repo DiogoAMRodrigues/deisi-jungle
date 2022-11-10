@@ -6,7 +6,7 @@ public class Especie {
     String image;
 
     public Especie(char identifier) {
-        switch (this.identifier) {
+        switch (identifier) {
             case 'E' -> {
                 this.name = "Elefante";
                 this.image = "elephant.png";
