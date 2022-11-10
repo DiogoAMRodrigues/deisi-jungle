@@ -268,11 +268,22 @@ public class GameManager {
         }
     }
 
+    boolean playersWithEnergy(){
+        for(int i = 0; i < tabuleiro.jogadores.size(); ++i){
+            if(tabuleiro.jogadores.get(i).getEnergy() > 0){
+                return true;
+            }
+        }
+        return false;
+    }
+
     //UNDONE
     public String[] getWinnerInfo() {
-        if (!tabuleiro.winner) {
+
+        if (!tabuleiro.winner && playersWithEnergy()) {
             return null;
         }
+
         return new String[]{String.valueOf(tabuleiro.playerWin.id), tabuleiro.playerWin.name, String.valueOf(tabuleiro.playerWin.getSpecies()),
                 String.valueOf(tabuleiro.playerWin.getEnergy())};
     }
