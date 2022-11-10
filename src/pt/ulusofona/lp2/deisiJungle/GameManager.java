@@ -224,6 +224,9 @@ public class GameManager {
             if (!bypassValidations) {
                 if (nrSquares > 0 && nrSquares <= 6) {
                     theMovementPart(nrSquares);
+                }else{
+                    tabuleiro.nextTurn();
+                    return false;
                 }
             } else {
                 theMovementPart(nrSquares);
