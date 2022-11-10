@@ -285,10 +285,17 @@ public class GameManager {
             return null;
         }
 
-        for (int i = tabuleiro.getCasas().length - 1; i >= 0; --i) {
-            if (tabuleiro.getCasas()[i].jogadores.size() != 0) {
-                tabuleiro.playerWin = tabuleiro.getCasas()[i].jogadores.get(0);
+        if(!tabuleiro.winner && playersWithEnergy() == 0){
+            int max = tabuleiro.jogadores.get(0).getPosition();
+            Jogador player = tabuleiro.jogadores.get(0);
+
+            for(int i = 0; i < tabuleiro.jogadores.size(); ++i){
+                if(tabuleiro.jogadores.get(i).getPosition() > max){
+                    max = tabuleiro.jogadores.get(i).getPosition();
+                    player = tabuleiro.jogadores.get(i);
+                }
             }
+            tabuleiro.playerWin = player;
         }
 
         return new String[]{String.valueOf(tabuleiro.playerWin.id), tabuleiro.playerWin.name, String.valueOf(tabuleiro.playerWin.getSpecies()),
