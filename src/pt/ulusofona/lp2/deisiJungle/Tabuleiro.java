@@ -1,6 +1,8 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class Tabuleiro {
@@ -29,8 +31,10 @@ public class Tabuleiro {
     void addJogador(Jogador player){
         jogadores.add(player);
         jogaresHS.putIfAbsent(player.getId(), player);
-        /*
-        for (int i = 0; i < jogadores.size(); i++ ){
+
+        jogadores.sort(Comparator.comparingInt(Jogador::getId));
+
+        /*for (int i = 0; i < jogadores.size(); i++ ){
             Jogador firstPlayer = jogadores.get(i);
             for (int j = 0; j < jogadores.size(); j++){
                 Jogador secondPlayer = jogadores.get(j);
