@@ -48,7 +48,7 @@ public class Tabuleiro {
 
     void nextTurn(){
         currentPlayerInt++;
-        if (currentPlayerInt == jogadores.size()){
+        if (currentPlayerInt >= jogadores.size()){
             currentPlayerInt = 0;
         }
         currentPlayer = jogadores.get(currentPlayerInt);

@@ -217,19 +217,19 @@ public class GameManager {
 
     //UNDONE
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
+        boolean state = false;
         if (tabuleiro.currentPlayer.getEnergy() >= 2) {
             if (!bypassValidations) {
                 if (nrSquares > 0 && nrSquares <= 6) {
                     theMovementPart(nrSquares);
-                } else {
-                    return false;
                 }
             } else {
                 theMovementPart(nrSquares);
             }
-            return true;
+            state = true;
         }
-        return false;
+        tabuleiro.nextTurn();
+        return state;
     }
 
     void theMovementPart(int nrSquares) {
