@@ -268,20 +268,27 @@ public class GameManager {
         }
     }
 
-    boolean playersWithEnergy(){
+    int playersWithEnergy(){
+        int count = 0;
         for(int i = 0; i < tabuleiro.jogadores.size(); ++i){
             if(tabuleiro.jogadores.get(i).getEnergy() > 0){
-                return true;
+                count++;
             }
         }
-        return false;
+        return count;
     }
 
     //UNDONE
     public String[] getWinnerInfo() {
 
-        if (!tabuleiro.winner && playersWithEnergy()) {
+        if (!tabuleiro.winner && playersWithEnergy() > 0) {
             return null;
+        }
+
+        for (int i = tabuleiro.getCasas().length - 1; i >= 0; --i) {
+            if (tabuleiro.getCasas()[i].jogadores.size() != 0) {
+                tabuleiro.playerWin = tabuleiro.getCasas()[i].jogadores.get(0);
+            }
         }
 
         return new String[]{String.valueOf(tabuleiro.playerWin.id), tabuleiro.playerWin.name, String.valueOf(tabuleiro.playerWin.getSpecies()),
