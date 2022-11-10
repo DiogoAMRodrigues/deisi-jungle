@@ -312,7 +312,7 @@ public class GameManager {
             if (tabuleiro.getCasas()[i].jogadores.size() != 0) {
                 for (int j = 0; j < tabuleiro.getCasas()[i].jogadores.size(); ++j) {
                     Jogador player = tabuleiro.getCasas()[i].jogadores.get(j);
-                    players.add("#" + counter + " " + player.name + ", " + player.species.getIdentifier() + ", " + String.valueOf(player.getPosition()+1));
+                    players.add("#" + counter + " " + player.name + ", " + player.species.getName() + ", " + String.valueOf(player.getPosition()+1));
                     counter++;
                 }
             }
