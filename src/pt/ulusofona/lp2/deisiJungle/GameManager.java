@@ -227,10 +227,10 @@ public class GameManager {
                 } else {
                     theMovementPart(nrSquares);
                 }
-                tabuleiro.nextTurn();
                 return true;
             }
         }
+        tabuleiro.nextTurn();
         return false;
     }
 
@@ -283,7 +283,7 @@ public class GameManager {
             if(tabuleiro.getCasas()[i].jogadores.size() != 0){
                 for(int j = 0; j < tabuleiro.getCasas()[i].jogadores.size(); ++j){
                     Jogador player = tabuleiro.getCasas()[i].jogadores.get(j);
-                    players.add("#"+counter+" "+player.name+", " + player.species + ", " + player.getPosition());
+                    players.add("#"+counter+" "+player.name+", " + player.species.getName() + ", " + player.getPosition());
                     counter++;
                 }
             }
