@@ -227,6 +227,7 @@ public class GameManager {
                 } else {
                     theMovementPart(nrSquares);
                 }
+                tabuleiro.nextTurn();
                 return true;
             }
         }
