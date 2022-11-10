@@ -222,13 +222,11 @@ public class GameManager {
                 if (nrSquares > 0 && nrSquares <= 6) {
                     theMovementPart(nrSquares);
                 } else {
-                    tabuleiro.nextTurn();
                     return false;
                 }
             } else {
                 theMovementPart(nrSquares);
             }
-            tabuleiro.nextTurn();
             return true;
         }
         return false;
