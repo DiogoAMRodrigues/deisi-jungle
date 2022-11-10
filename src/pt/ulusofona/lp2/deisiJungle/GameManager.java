@@ -77,7 +77,7 @@ public class GameManager {
                     }
                     //Check if the ID is an Integer
                     try {
-                        if(Integer.parseInt(firstPlayerID) <= 0){
+                        if (Integer.parseInt(firstPlayerID) <= 0) {
                             return false;
                         }
                     } catch (NumberFormatException n) {
@@ -93,7 +93,7 @@ public class GameManager {
                         Jogador thisPlayerObject = new Jogador(Integer.parseInt(playersInfo[player1][0]), thisName, new Especie(thisSpecies.charAt(0)),
                                 initialEnergy);
                         jogadores.add(thisPlayerObject);
-                    }else {
+                    } else {
                         return false;
                     }
 
@@ -154,7 +154,7 @@ public class GameManager {
             return null;
         }
         if (tabuleiro != null) {
-            if (convertedSquare == tabuleiro.getSize()-1) {
+            if (convertedSquare == tabuleiro.getSize() - 1) {
                 casa[0] = "finish.png";
                 casa[1] = "Meta";
             } else {
@@ -165,13 +165,14 @@ public class GameManager {
             for (int i = 0; i < getPlayerIds(squareNr).length - 1; i++) {
                 casa[2] += getPlayerIds(squareNr)[i] + ",";
             }
-            if(getPlayerIds(squareNr).length > 0){
+            if (getPlayerIds(squareNr).length > 0) {
                 casa[2] += getPlayerIds(squareNr)[getPlayerIds(squareNr).length - 1];
             }
         }
 
         return casa;
     }
+
     //UNDONE
     public String[] getPlayerInfo(int playerId) {
         String[] thisPlayer = new String[4];
@@ -215,25 +216,23 @@ public class GameManager {
     }
 
     //UNDONE
-    public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations){
-        if(!tabuleiro.winner){
-            if(tabuleiro.currentPlayer.getEnergy() >= 2){
-                if (!bypassValidations) {
-                    if (nrSquares > 0 && nrSquares <= 6) {
-                        theMovementPart(nrSquares);
-                        tabuleiro.nextTurn();
-                    } else {
-                        return false;
-                    }
-                } else {
+    public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
+        if (tabuleiro.currentPlayer.getEnergy() >= 2) {
+            if (!bypassValidations) {
+                if (nrSquares > 0 && nrSquares <= 6) {
                     theMovementPart(nrSquares);
+                } else {
                     tabuleiro.nextTurn();
+                    return false;
                 }
-                return true;
-            }else{
-                tabuleiro.nextTurn();
+            } else {
+                theMovementPart(nrSquares);
             }
+            tabuleiro.nextTurn();
+            return true;
         }
+        tabuleiro.nextTurn();
+
         return false;
     }
 
@@ -244,7 +243,7 @@ public class GameManager {
             int playersPosition = thisPlayer.getPosition();
             Casa thisHouse = tabuleiro.getCasas()[playersPosition];
             //remove him from that House and update the occupationState of that house IF he has energy
-            if (thisPlayer.getEnergy()-2 >= 0) {
+            if (thisPlayer.getEnergy() - 2 >= 0) {
                 thisPlayer.loseEnergy();
                 thisHouse.getJogadores().remove(thisPlayer);
                 thisHouse.occupied = thisHouse.isOccupied();
@@ -270,7 +269,7 @@ public class GameManager {
 
     //UNDONE
     public String[] getWinnerInfo() {
-        if(!tabuleiro.winner){
+        if (!tabuleiro.winner) {
             return null;
         }
         return new String[]{String.valueOf(tabuleiro.playerWin.id), tabuleiro.playerWin.name, String.valueOf(tabuleiro.playerWin.getSpecies()),
@@ -282,11 +281,11 @@ public class GameManager {
         ArrayList<String> players = new ArrayList<>();
         int counter = 1;
 
-        for(int i = tabuleiro.getCasas().length-1; i >= 0; --i){
-            if(tabuleiro.getCasas()[i].jogadores.size() != 0){
-                for(int j = 0; j < tabuleiro.getCasas()[i].jogadores.size(); ++j){
+        for (int i = tabuleiro.getCasas().length - 1; i >= 0; --i) {
+            if (tabuleiro.getCasas()[i].jogadores.size() != 0) {
+                for (int j = 0; j < tabuleiro.getCasas()[i].jogadores.size(); ++j) {
                     Jogador player = tabuleiro.getCasas()[i].jogadores.get(j);
-                    players.add("#"+counter+" "+player.name+", " + player.species.getName() + ", " + player.getPosition());
+                    players.add("#" + counter + " " + player.name + ", " + player.species.getName() + ", " + player.getPosition());
                     counter++;
                 }
             }
