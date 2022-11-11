@@ -258,10 +258,8 @@ public class GameManager {
     int playersWithEnergy(){
         int count = 0;
         for(int i = 0; i < tabuleiro.jogadores.size(); ++i){
-            /*if(tabuleiro.jogadores.get(i).getEnergy() > 0){
-                count++;
-            }*/
-            if (!tabuleiro.jogadores.get(i).isOutOfEnergy()){
+            //I put a 1 instead of a 0
+            if(tabuleiro.jogadores.get(i).getEnergy() > 1){
                 count++;
             }
         }
