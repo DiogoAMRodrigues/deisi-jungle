@@ -86,8 +86,12 @@ public class Test {
 
       a.createInitialJungle(8,20,playersInfo);
       a.moveCurrentPlayer(9, true);
-
-      //assertEquals(true, );
+      String[] winnerExpected = new String[]{playersInfo[player1][id], playersInfo[player1][nome],
+              playersInfo[player1][species]};
+      String[] winner = a.getWinnerInfo();
+      assertEquals(winnerExpected[0],winner[0]);
+      assertEquals(winnerExpected[1],winner[1]);
+      assertEquals(winnerExpected[2],winner[2]);
    }
 
 }
