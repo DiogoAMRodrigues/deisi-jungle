@@ -62,58 +62,11 @@ public class GameManager {
                 String firstPlayerID = playersInfo[player1][id];
 
                 if (playersInfo[player1] != null) {
-                    //name is well-made
-                    String thisName = playersInfo[player1][name];
-                    if (thisName == null || thisName.length() == 0) {
+
+                    if(!playerAttributeChecksAndAdd(playersInfo, player1, name, firstPlayerID, id, species, hasTarzan,
+                            initialEnergy, jogadores)){
                         return false;
                     }
-
-                    //no repeated ID's
-                    for (int player2 = player1 + 1; player2 < playersInfo.length; player2++) {
-                        String secondPlayerID = playersInfo[player2][id];
-                        if (firstPlayerID.equals(secondPlayerID)) {
-                            return false;
-                        }
-                    }
-                    //Check if the ID is an Integer
-                    try {
-                        if (Integer.parseInt(firstPlayerID) <= 0) {
-                            return false;
-                        }
-                    } catch (NumberFormatException n) {
-                        return false;
-                    }
-                    //only 1 of the 2 needed
-                    //is an eligible Species
-                    String thisSpecies = playersInfo[player1][species];
-
-                    if ((thisSpecies.equals("E") || thisSpecies.equals("L") || thisSpecies.equals("P") || thisSpecies.equals("Z") || thisSpecies.equals("S"))
-                            || (thisSpecies.equals("T") && !hasTarzan)) {
-                        //Adding the Player into the Tabuleiro
-
-                        Jogador thisPlayerObject = new Jogador(Integer.parseInt(playersInfo[player1][0]), thisName, new Especie(thisSpecies.charAt(0)),
-                                initialEnergy);
-                        jogadores.add(thisPlayerObject);
-                    } else {
-                        return false;
-                    }
-
-                    /*
-                    boolean isEligibleSpecies = false;
-                    for (int i = 0; i < getSpecies().length; i++){
-                        if (thisSpecies.equals(getSpecies()[i][id])){
-                            if (thisSpecies.equals("T") && !hasTarzan){
-                                hasTarzan = true;
-                            }else {
-                                return false;
-                            }
-                            isEligibleSpecies = true;
-                        }
-                    }
-                    if (!isEligibleSpecies){
-                        return false;
-                    }
-                    */
 
                 } else {
                     return false;
@@ -127,6 +80,45 @@ public class GameManager {
         }
         tabuleiro.casas[0].jogadores.addAll(jogadores);
         tabuleiro.currentPlayer = tabuleiro.jogadores.get(0);
+        return true;
+    }
+
+    boolean playerAttributeChecksAndAdd(String[][] playersInfo, int player1, int name, String firstPlayerID, int id,
+                                int species, boolean hasTarzan, int initialEnergy, ArrayList<Jogador> jogadores){
+        //name is well-made
+        String thisName = playersInfo[player1][name];
+        if (thisName == null || thisName.length() == 0) {
+            return false;
+        }
+
+        //no repeated ID's
+        for (int player2 = player1 + 1; player2 < playersInfo.length; player2++) {
+            String secondPlayerID = playersInfo[player2][id];
+            if (firstPlayerID.equals(secondPlayerID)) {
+                return false;
+            }
+        }
+        //Check if the ID is an Integer
+        try {
+            if (Integer.parseInt(firstPlayerID) <= 0) {
+                return false;
+            }
+        } catch (NumberFormatException n) {
+            return false;
+        }
+        //is an eligible Species
+        String thisSpecies = playersInfo[player1][species];
+
+        if ((thisSpecies.equals("E") || thisSpecies.equals("L") || thisSpecies.equals("P") || thisSpecies.equals("Z") || thisSpecies.equals("S"))
+                || (thisSpecies.equals("T") && !hasTarzan)) {
+            //Adding the Player into the Tabuleiro
+
+            Jogador thisPlayerObject = new Jogador(Integer.parseInt(playersInfo[player1][0]), thisName, new Especie(thisSpecies.charAt(0)),
+                    initialEnergy);
+            jogadores.add(thisPlayerObject);
+        } else {
+            return false;
+        }
         return true;
     }
 
