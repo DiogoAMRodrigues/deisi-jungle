@@ -4,7 +4,7 @@ import static junit.framework.TestCase.assertEquals;
 
 public class Test {
     @org.junit.Test
-     void TestNr1(){
+     public void TestNr1(){
         GameManager a = new GameManager();
         String[][] playersInfo = new String[4][3];
         int player1 = 0;
@@ -12,8 +12,8 @@ public class Test {
         int player3 = 2;
         int player4 = 3;
         int id = 0;
-        int nome = 2;
-        int species = 3;
+        int nome = 1;
+        int species = 2;
         playersInfo[player1][id] = "1";
         playersInfo[player1][nome] = "John";
         playersInfo[player1][species] = "E";
@@ -28,7 +28,7 @@ public class Test {
         playersInfo[player4][species] = "Z";
 
 
-        assertEquals(true, a.createInitialJungle(10,20,playersInfo));
+        assertEquals(true, a.createInitialJungle(8,20,playersInfo));
     }
 
 }
