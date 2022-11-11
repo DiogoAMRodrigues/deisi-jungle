@@ -57,9 +57,7 @@ public class Test {
 
       a.createInitialJungle(8,20,playersInfo);
 
-      a.moveCurrentPlayer()
-
-      assertEquals();
+      assertEquals(true, a.moveCurrentPlayer(9, true));
    }
 
 }
