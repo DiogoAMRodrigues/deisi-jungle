@@ -83,7 +83,7 @@ public class GameManager {
         return true;
     }
 
-    boolean playerAttributeChecksAndAdd(String[][] playersInfo, int player1, int name, String firstPlayerID, int id,
+    private boolean playerAttributeChecksAndAdd(String[][] playersInfo, int player1, int name, String firstPlayerID, int id,
                                 int species, boolean hasTarzan, int initialEnergy, ArrayList<Jogador> jogadores){
         //name is well-made
         String thisName = playersInfo[player1][name];
@@ -224,7 +224,7 @@ public class GameManager {
         return state;
     }
 
-    void theMovementPart(int nrSquares) {
+    private void theMovementPart(int nrSquares) {
         //everythingsFine
         Jogador thisPlayer = tabuleiro.getCurrentPlayer();
         if (thisPlayer != null) {
@@ -255,7 +255,7 @@ public class GameManager {
         }
     }
 
-    int playersWithEnergy(){
+    private int playersWithEnergy(){
         int count = 0;
         for(int i = 0; i < tabuleiro.jogadores.size(); ++i){
             //I put a 1 instead of a 0
