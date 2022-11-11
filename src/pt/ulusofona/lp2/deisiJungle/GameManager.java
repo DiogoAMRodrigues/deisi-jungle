@@ -122,7 +122,6 @@ public class GameManager {
         return true;
     }
 
-    //UNDONE
     public int[] getPlayerIds(int squareNr) {
         int[] playerIDs;
         if (tabuleiro != null) {
@@ -141,7 +140,6 @@ public class GameManager {
         return playerIDs;
     }
 
-    //UNDONE
     public String[] getSquareInfo(int squareNr) {
         int convertedSquare = squareNr - 1;
         String[] casa = new String[3];
@@ -168,7 +166,6 @@ public class GameManager {
         return casa;
     }
 
-    //UNDONE
     public String[] getPlayerInfo(int playerId) {
         String[] thisPlayer = new String[4];
         Jogador thisJogador = tabuleiro.getJogaresHS().get(playerId);
@@ -183,7 +180,6 @@ public class GameManager {
         return thisPlayer;
     }
 
-    //UNDONE
     public String[] getCurrentPlayerInfo() {
         String[] thisPlayer = new String[4];
         Jogador thisJogador = tabuleiro.getCurrentPlayer();
@@ -194,7 +190,6 @@ public class GameManager {
         return thisPlayer;
     }
 
-    //UNDONE
     public String[][] getPlayersInfo() {
         String[][] thesePlayers = new String[tabuleiro.getJogadores().size()][4];
         if (tabuleiro != null) {
@@ -210,7 +205,6 @@ public class GameManager {
         return null;
     }
 
-    //UNDONE
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
         boolean state = false;
         if (tabuleiro.currentPlayer.getEnergy() >= 2) {
@@ -264,14 +258,17 @@ public class GameManager {
     int playersWithEnergy(){
         int count = 0;
         for(int i = 0; i < tabuleiro.jogadores.size(); ++i){
-            if(tabuleiro.jogadores.get(i).getEnergy() > 0){
+            /*if(tabuleiro.jogadores.get(i).getEnergy() > 0){
+                count++;
+            }*/
+            if (!tabuleiro.jogadores.get(i).isOutOfEnergy()){
                 count++;
             }
         }
         return count;
     }
 
-    //UNDONE
+    //NEEDS FIXINGS
     public String[] getWinnerInfo() {
 
         if (!tabuleiro.winner && playersWithEnergy() > 0) {
@@ -291,11 +288,10 @@ public class GameManager {
             tabuleiro.playerWin = player;
         }
 
-        return new String[]{String.valueOf(tabuleiro.playerWin.id), tabuleiro.playerWin.name, String.valueOf(tabuleiro.playerWin.getSpecies()),
-                String.valueOf(tabuleiro.playerWin.getEnergy())};
+        return new String[]{String.valueOf(tabuleiro.playerWin.id), tabuleiro.playerWin.name,
+                String.valueOf(tabuleiro.playerWin.getSpecies()), String.valueOf(tabuleiro.playerWin.getEnergy())};
     }
 
-    //UNDONE
     public ArrayList<String> getGameResults() {
         ArrayList<String> players = new ArrayList<>();
         int counter = 1;
@@ -312,12 +308,10 @@ public class GameManager {
         return players;
     }
 
-    //UNDONE
     public JPanel getAuthorsPanel() {
         return null;
     }
 
-    //UNDONE
     public String whoIsTaborda() {
         return "Wrestling";
     }
