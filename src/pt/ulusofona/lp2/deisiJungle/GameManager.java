@@ -205,6 +205,7 @@ public class GameManager {
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
         boolean state = false;
+        //Refuse to let em move if there is already a winner
         if (tabuleiro.playerWin == null){
             if (tabuleiro.currentPlayer.getEnergy() >= 2) {
                 if (!bypassValidations) {
