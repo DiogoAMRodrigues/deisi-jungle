@@ -288,7 +288,7 @@ public class GameManager {
         }
 
         return new String[]{String.valueOf(tabuleiro.playerWin.id), tabuleiro.playerWin.name,
-                String.valueOf(tabuleiro.playerWin.getSpecies().getIdentifier())};
+                String.valueOf(tabuleiro.playerWin.getSpecies().getIdentifier()),String.valueOf(tabuleiro.playerWin.getEnergy())};
     }
 
     public ArrayList<String> getGameResults() {

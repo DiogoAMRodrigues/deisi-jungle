@@ -87,7 +87,7 @@ public class Test {
       a.createInitialJungle(8,20,playersInfo);
       a.moveCurrentPlayer(9, true);
       String[] winnerExpected = new String[]{playersInfo[player1][id], playersInfo[player1][nome],
-              playersInfo[player1][species]};
+              playersInfo[player1][species], a.tabuleiro.getJogadores().get(0).getEnergy() + "" };
       String[] winner = a.getWinnerInfo();
       assertEquals(winnerExpected[0],winner[0]);
       assertEquals(winnerExpected[1],winner[1]);
@@ -120,7 +120,7 @@ public class Test {
       a.createInitialJungle(8,20,playersInfo);
       a.moveCurrentPlayer(9, true);
       String[] winnerExpected = new String[]{playersInfo[player1][id], playersInfo[player1][nome],
-              playersInfo[player1][species]};
+              playersInfo[player1][species], a.tabuleiro.getJogadores().get(0).getEnergy() + "" };
       String[] winner = a.getWinnerInfo();
 
       assertEquals(winnerExpected[1],winner[1]);
@@ -155,7 +155,7 @@ public class Test {
       a.createInitialJungle(8,20,playersInfo);
       a.moveCurrentPlayer(9, true);
       String[] winnerExpected = new String[]{playersInfo[player1][id], playersInfo[player1][nome],
-              playersInfo[player1][species]};
+              playersInfo[player1][species], a.tabuleiro.getJogadores().get(0).getEnergy() + "" };
       String[] winner = a.getWinnerInfo();
 
       assertEquals(winnerExpected[nome],winner[nome]);
@@ -189,7 +189,7 @@ public class Test {
       a.moveCurrentPlayer(1, true);
       a.moveCurrentPlayer(9, true);
       String[] winnerExpected = new String[]{playersInfo[player2][id], playersInfo[player2][nome],
-              playersInfo[player2][species]};
+              playersInfo[player2][species], a.tabuleiro.getJogadores().get(1).getEnergy() + "" };
       String[] winner = a.getWinnerInfo();
 
       assertEquals(winnerExpected[nome],winner[nome]);
@@ -224,7 +224,7 @@ public class Test {
       a.moveCurrentPlayer(1, true);
       a.moveCurrentPlayer(9, true);
       String[] winnerExpected = new String[]{playersInfo[player3][id], playersInfo[player3][nome],
-              playersInfo[player3][species]};
+              playersInfo[player3][species], a.tabuleiro.getJogadores().get(2).getEnergy() + "" };
       String[] winner = a.getWinnerInfo();
 
       assertEquals(winnerExpected[nome],winner[nome]);
@@ -260,7 +260,7 @@ public class Test {
       a.moveCurrentPlayer(1, true);
       a.moveCurrentPlayer(9, true);
       String[] winnerExpected = new String[]{playersInfo[player4][id], playersInfo[player4][nome],
-              playersInfo[player4][species]};
+              playersInfo[player4][species], a.tabuleiro.getJogadores().get(3).getEnergy() + "" };
       String[] winner = a.getWinnerInfo();
 
       assertEquals(winnerExpected[nome],winner[nome]);
@@ -299,7 +299,7 @@ public class Test {
          a.moveCurrentPlayer(2, false);
       }
       String[] winnerExpected = new String[]{playersInfo[player4][id], playersInfo[player4][nome],
-              playersInfo[player4][species]};
+              playersInfo[player4][species], a.tabuleiro.getJogadores().get(3).getEnergy() + "" };
       String[] winner = a.getWinnerInfo();
 
       assertEquals(winnerExpected[nome],winner[nome]);
@@ -337,7 +337,7 @@ public class Test {
          a.moveCurrentPlayer(3, false);
       }
       String[] winnerExpected = new String[]{playersInfo[player4][id], playersInfo[player4][nome],
-              playersInfo[player4][species]};
+              playersInfo[player4][species], a.tabuleiro.getJogadores().get(3).getEnergy() + "" };
       String[] winner = a.getWinnerInfo();
 
       assertEquals(winnerExpected[nome],winner[nome]);
@@ -375,7 +375,7 @@ public class Test {
          a.moveCurrentPlayer(3, false);
       }
       String[] winnerExpected = new String[]{playersInfo[player3][id], playersInfo[player3][nome],
-              playersInfo[player3][species]};
+              playersInfo[player3][species], a.tabuleiro.getJogadores().get(2).getEnergy() + "" };
       String[] winner = a.getWinnerInfo();
 
       assertEquals(winnerExpected[nome],winner[nome]);
@@ -413,7 +413,7 @@ public class Test {
          a.moveCurrentPlayer(1, false);
       }
       String[] winnerExpected = new String[]{playersInfo[player1][id], playersInfo[player1][nome],
-              playersInfo[player1][species]};
+              playersInfo[player1][species], a.tabuleiro.getJogadores().get(0).getEnergy() + "" };
       String[] winner = a.getWinnerInfo();
 
       assertEquals(winnerExpected[nome],winner[nome]);
@@ -451,18 +451,9 @@ public class Test {
          a.moveCurrentPlayer(3, false);
       }
       String[] winnerExpected = new String[]{playersInfo[player3][id], playersInfo[player3][nome],
-              playersInfo[player3][species]};
+              playersInfo[player3][species], a.tabuleiro.getJogadores().get(2).getEnergy() + "" };
       String[] winner = a.getWinnerInfo();
 
       assertEquals(winnerExpected[nome],winner[nome]);
    }
-
-
-
-
-
-
-
-
-
 }
