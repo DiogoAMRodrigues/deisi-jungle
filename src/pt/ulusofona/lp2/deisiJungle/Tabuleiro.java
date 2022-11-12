@@ -33,17 +33,6 @@ public class Tabuleiro {
         jogaresHS.putIfAbsent(player.getId(), player);
 
         jogadores.sort(Comparator.comparingInt(Jogador::getId));
-
-        /*for (int i = 0; i < jogadores.size(); i++ ){
-            Jogador firstPlayer = jogadores.get(i);
-            for (int j = 0; j < jogadores.size(); j++){
-                Jogador secondPlayer = jogadores.get(j);
-                if (firstPlayer.getId() > secondPlayer.getId()){
-                    jogadores.set(i, secondPlayer);
-                    jogadores.set(j, firstPlayer);
-                }
-            }
-        }*/
     }
 
     void nextTurn(){
@@ -97,4 +86,5 @@ public class Tabuleiro {
     public HashMap<Integer, Jogador> getJogaresHS() {
         return jogaresHS;
     }
+
 }

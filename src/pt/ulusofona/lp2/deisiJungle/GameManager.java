@@ -205,20 +205,22 @@ public class GameManager {
 
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
         boolean state = false;
-        if (tabuleiro.currentPlayer.getEnergy() >= 2) {
-            if (!bypassValidations) {
-                if (nrSquares > 0 && nrSquares <= 6) {
+        if (tabuleiro.playerWin == null){
+            if (tabuleiro.currentPlayer.getEnergy() >= 2) {
+                if (!bypassValidations) {
+                    if (nrSquares > 0 && nrSquares <= 6) {
+                        theMovementPart(nrSquares);
+                    }else{
+                        tabuleiro.nextTurn();
+                        return false;
+                    }
+                } else {
                     theMovementPart(nrSquares);
-                }else{
-                    tabuleiro.nextTurn();
-                    return false;
                 }
-            } else {
-                theMovementPart(nrSquares);
+                state = true;
             }
-            state = true;
+            tabuleiro.nextTurn();
         }
-        tabuleiro.nextTurn();
         return state;
     }
 
