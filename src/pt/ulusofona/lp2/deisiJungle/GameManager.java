@@ -1,9 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 import javax.swing.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class GameManager {
     Tabuleiro tabuleiro;
