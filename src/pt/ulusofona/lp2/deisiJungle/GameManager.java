@@ -244,7 +244,6 @@ public class GameManager {
                     Casa otherHouse = tabuleiro.getCasas()[lastHousePosition];
                     otherHouse.getJogadores().add(thisPlayer);
                     thisPlayer.setPosition(lastHousePosition);
-                    thisPlayer.setFinished(true);
                     tabuleiro.playerWin = thisPlayer;
                     tabuleiro.winner = true;
                 } else {
@@ -267,7 +266,6 @@ public class GameManager {
         return count;
     }
 
-    //NEEDS FIXINGS
     public String[] getWinnerInfo() {
 
         if (!tabuleiro.winner && playersWithEnergy() > 0) {

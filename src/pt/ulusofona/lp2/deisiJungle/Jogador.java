@@ -6,7 +6,6 @@ public class Jogador {
     Especie species;
     private int position;
     private int energy;
-    private boolean finished;
 
     public Jogador(int id, String name, Especie species, int energy) {
         this.id = id;
@@ -45,10 +44,6 @@ public class Jogador {
 
     public int getEnergy() {
         return energy;
-    }
-
-    public void setFinished(boolean finished) {
-        this.finished = finished;
     }
 
 }
