@@ -1,6 +1,4 @@
 package pt.ulusofona.lp2.deisiJungle;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Casa {
@@ -19,15 +17,7 @@ public class Casa {
         return false;
     }
 
-    public void setOccupied(boolean occupied) {
-        this.occupied = occupied;
-    }
-
     public ArrayList<Jogador> getJogadores() {
         return jogadores;
-    }
-
-    public void setJogadores(ArrayList<Jogador> jogadores) {
-        this.jogadores = jogadores;
     }
 }

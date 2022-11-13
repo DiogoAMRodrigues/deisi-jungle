@@ -47,40 +47,16 @@ public class Tabuleiro {
         return casas;
     }
 
-    public void setCasas(Casa[] tabuleiro) {
-        this.casas = tabuleiro;
-    }
-
     public int getSize() {
         return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
     }
 
     public ArrayList<Jogador> getJogadores() {
         return jogadores;
     }
 
-    public void setJogadores(ArrayList<Jogador> jogadores) {
-        this.jogadores = jogadores;
-    }
-
     public Jogador getCurrentPlayer() {
         return currentPlayer;
-    }
-
-    public void setCurrentPlayer(Jogador currentPlayer) {
-        this.currentPlayer = currentPlayer;
-    }
-
-    public int getCurrentPlayerInt() {
-        return currentPlayerInt;
-    }
-
-    public void setCurrentPlayerInt(int currentPlayerInt) {
-        this.currentPlayerInt = currentPlayerInt;
     }
 
     public HashMap<Integer, Jogador> getJogaresHS() {
