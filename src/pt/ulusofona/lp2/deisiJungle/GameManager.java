@@ -21,7 +21,7 @@ public class GameManager {
         species[2][1] = "Tartaruga";
         species[2][2] = "turtle.png";
         species[3][0] = "P";
-        species[3][1] = "Passáro";
+        species[3][1] = "Pássaro";
         species[3][2] = "bird.png";
         species[4][0] = "Z";
         species[4][1] = "Tarzan";

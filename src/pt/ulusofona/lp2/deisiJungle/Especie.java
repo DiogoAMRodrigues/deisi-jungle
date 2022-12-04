@@ -1,11 +1,17 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-public class Especie {
+import org.w3c.dom.ranges.Range;
+
+public abstract class Especie {
     char identifier;
     String name;
     String image;
+    int startEnergy; //Max 200 never surpass 200
+    int energyConsumption;
+    int energyGain;
+    Range speed;
 
-    public Especie(char identifier) {
+    protected Especie(char identifier) { //Set all the stuff in the constructors
         switch (identifier) {
             case 'E' -> {
                 this.name = "Elefante";
@@ -41,5 +47,21 @@ public class Especie {
 
     public String getImage() {
         return image;
+    }
+
+    public int getStartEnergy() {
+        return startEnergy;
+    }
+
+    public int getEnergyConsumption() {
+        return energyConsumption;
+    }
+
+    public int getEnergyGain() {
+        return energyGain;
+    }
+
+    public Range getSpeed() {
+        return speed;
     }
 }
