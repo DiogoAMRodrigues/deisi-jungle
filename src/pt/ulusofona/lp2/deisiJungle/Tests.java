@@ -1,10 +1,12 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import org.junit.Test;
+
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertEquals;
 
-public class Test {
-    @org.junit.Test
+public class Tests {
+    @Test
      public void createAnimalsGetSpeed_01(){
         GameManager a = new GameManager();
         Elefante e = new Elefante();
