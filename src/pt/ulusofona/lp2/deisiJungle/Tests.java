@@ -8,7 +8,6 @@ import static junit.framework.TestCase.assertEquals;
 public class Tests {
     @Test
      public void createAnimalsGetSpeed_01(){
-        GameManager a = new GameManager();
         Elefante e = new Elefante();
         int thisSpeedTest = e.getSpeed();
         assertTrue(thisSpeedTest > 0 && thisSpeedTest < 7);

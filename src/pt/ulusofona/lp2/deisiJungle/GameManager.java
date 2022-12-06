@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class GameManager {
-    Tabuleiro tabuleiro;
+    public Tabuleiro tabuleiro;
 
     public GameManager() {
     }
