@@ -110,11 +110,11 @@ public class GameManager {
         if ((thisSpecies.equals("E") || thisSpecies.equals("L") || thisSpecies.equals("P") || thisSpecies.equals("Z") || thisSpecies.equals("S"))
                 || (thisSpecies.equals("T") && !hasTarzan)) {
             //Adding the Player into the Tabuleiro
-
+/*
             Jogador thisPlayerObject = new Jogador(Integer.parseInt(playersInfo[player1][0]), thisName, new Especie(thisSpecies.charAt(0)),
                     initialEnergy);
             jogadores.add(thisPlayerObject);
-        } else {
+        } else {*/
             return false;
         }
         return true;
@@ -170,7 +170,7 @@ public class GameManager {
         if (tabuleiro != null && tabuleiro.getJogaresHS() != null && thisJogador != null) {
             thisPlayer[0] = thisJogador.getId() + "";
             thisPlayer[1] = thisJogador.getName();
-            thisPlayer[2] = thisJogador.getSpecies().getIdentifier() + "";
+            /*thisPlayer[2] = thisJogador.getSpecies().getIdentifier() + "";*/
             thisPlayer[3] = thisJogador.getEnergy() + "";
         } else {
             return null;
@@ -183,7 +183,7 @@ public class GameManager {
         Jogador thisJogador = tabuleiro.getCurrentPlayer();
         thisPlayer[0] = thisJogador.getId() + "";
         thisPlayer[1] = thisJogador.getName();
-        thisPlayer[2] = thisJogador.getSpecies().getIdentifier() + "";
+        /*thisPlayer[2] = thisJogador.getSpecies().getIdentifier() + "";*/
         thisPlayer[3] = thisJogador.getEnergy() + "";
         return thisPlayer;
     }
@@ -195,7 +195,7 @@ public class GameManager {
                 Jogador thisJogador = tabuleiro.getJogadores().get(i);
                 thesePlayers[i][0] = thisJogador.getId() + "";
                 thesePlayers[i][1] = thisJogador.getName();
-                thesePlayers[i][2] = thisJogador.getSpecies().getIdentifier() + "";
+                /*thesePlayers[i][2] = thisJogador.getSpecies().getIdentifier() + "";*/
                 thesePlayers[i][3] = thisJogador.getEnergy() + "";
             }
             return thesePlayers;
@@ -285,8 +285,9 @@ public class GameManager {
             tabuleiro.playerWin = player;
         }
 
-        return new String[]{String.valueOf(tabuleiro.playerWin.id), tabuleiro.playerWin.name,
-                String.valueOf(tabuleiro.playerWin.getSpecies().getIdentifier()),String.valueOf(tabuleiro.playerWin.getEnergy())};
+        return new String[]{
+                /*String.valueOf(tabuleiro.playerWin.id), tabuleiro.playerWin.name,
+                String.valueOf(tabuleiro.playerWin.getSpecies().getIdentifier()),String.valueOf(tabuleiro.playerWin.getEnergy())*/};
     }
 
     public ArrayList<String> getGameResults() {
@@ -297,7 +298,7 @@ public class GameManager {
             if (tabuleiro.getCasas()[i].jogadores.size() != 0) {
                 for (int j = 0; j < tabuleiro.getCasas()[i].jogadores.size(); ++j) {
                     Jogador player = tabuleiro.getCasas()[i].jogadores.get(j);
-                    players.add("#" + counter + " " + player.name + ", " + player.species.getName() + ", " + String.valueOf(player.getPosition()+1));
+                    /*players.add("#" + counter + " " + player.name + ", " + player.species.getName() + ", " + String.valueOf(player.getPosition()+1));*/
                     counter++;
                 }
             }
