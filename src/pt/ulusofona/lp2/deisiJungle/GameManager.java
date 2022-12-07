@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class GameManager {
     public Tabuleiro tabuleiro;
-
     public GameManager() {
     }
 
@@ -76,8 +75,8 @@ public class GameManager {
         for(int i = 0; i < jogadores.size(); ++i){
             tabuleiro.addJogador(jogadores.get(i));
         }
-        tabuleiro.casas[0].jogadores.addAll(jogadores);
-        tabuleiro.currentPlayer = tabuleiro.jogadores.get(0);
+        tabuleiro.getCasas()[0].getJogadores().addAll(jogadores);
+        tabuleiro.setCurrentPlayer(tabuleiro.getJogadores().get(0));
         return true;
     }
 
@@ -206,8 +205,8 @@ public class GameManager {
     public boolean moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
         boolean state = false;
         //Refuse to let em move if there is already a winner
-        if (tabuleiro.playerWin == null){
-            if (tabuleiro.currentPlayer.getEnergy() >= 2) {
+        if (tabuleiro.getPlayerWin() == null){
+            if (tabuleiro.getCurrentPlayer().getEnergy() >= 2) {
                 if (!bypassValidations) {
                     if (nrSquares > 0 && nrSquares <= 6) {
                         theMovementPart(nrSquares);
@@ -235,7 +234,7 @@ public class GameManager {
             if (thisPlayer.getEnergy() - 2 >= 0) {
                 thisPlayer.loseEnergy();
                 thisHouse.getJogadores().remove(thisPlayer);
-                thisHouse.occupied = thisHouse.isOccupied();
+                thisHouse.setOccupied(thisHouse.isOccupied());
                 //add him to the other house
                 int otherHousePosition = playersPosition + nrSquares;
                 int lastHousePosition = tabuleiro.getCasas().length - 1;
@@ -244,8 +243,8 @@ public class GameManager {
                     Casa otherHouse = tabuleiro.getCasas()[lastHousePosition];
                     otherHouse.getJogadores().add(thisPlayer);
                     thisPlayer.setPosition(lastHousePosition);
-                    tabuleiro.playerWin = thisPlayer;
-                    tabuleiro.winner = true;
+                    tabuleiro.setPlayerWin(thisPlayer);
+                    tabuleiro.setWinner(true);
                 } else {
                     Casa otherHouse = tabuleiro.getCasas()[otherHousePosition];
                     otherHouse.getJogadores().add(thisPlayer);
@@ -257,9 +256,9 @@ public class GameManager {
 
     private int playersWithEnergy(){
         int count = 0;
-        for(int i = 0; i < tabuleiro.jogadores.size(); ++i){
+        for(int i = 0; i < tabuleiro.getJogadores().size(); ++i){
             //I put a 1 instead of a 0
-            if(tabuleiro.jogadores.get(i).getEnergy() > 1){
+            if(tabuleiro.getJogadores().get(i).getEnergy() > 1){
                 count++;
             }
         }
@@ -268,21 +267,21 @@ public class GameManager {
 
     public String[] getWinnerInfo() {
 
-        if (!tabuleiro.winner && playersWithEnergy() > 0) {
+        if (!tabuleiro.getWinner() && playersWithEnergy() > 0) {
             return null;
         }
 
-        if(!tabuleiro.winner && playersWithEnergy() == 0){
-            int max = tabuleiro.jogadores.get(0).getPosition();
-            Jogador player = tabuleiro.jogadores.get(0);
+        if(!tabuleiro.getWinner() && playersWithEnergy() == 0){
+            int max = tabuleiro.getJogadores().get(0).getPosition();
+            Jogador player = tabuleiro.getJogadores().get(0);
 
-            for(int i = 0; i < tabuleiro.jogadores.size(); ++i){
-                if(tabuleiro.jogadores.get(i).getPosition() > max){
-                    max = tabuleiro.jogadores.get(i).getPosition();
-                    player = tabuleiro.jogadores.get(i);
+            for(int i = 0; i < tabuleiro.getJogadores().size(); ++i){
+                if(tabuleiro.getJogadores().get(i).getPosition() > max){
+                    max = tabuleiro.getJogadores().get(i).getPosition();
+                    player = tabuleiro.getJogadores().get(i);
                 }
             }
-            tabuleiro.playerWin = player;
+            tabuleiro.setPlayerWin(player);
         }
 
         return new String[]{
@@ -295,9 +294,9 @@ public class GameManager {
         int counter = 1;
 
         for (int i = tabuleiro.getCasas().length - 1; i >= 0; --i) {
-            if (tabuleiro.getCasas()[i].jogadores.size() != 0) {
-                for (int j = 0; j < tabuleiro.getCasas()[i].jogadores.size(); ++j) {
-                    Jogador player = tabuleiro.getCasas()[i].jogadores.get(j);
+            if (tabuleiro.getCasas()[i].getJogadores().size() != 0) {
+                for (int j = 0; j < tabuleiro.getCasas()[i].getJogadores().size(); ++j) {
+                    Jogador player = tabuleiro.getCasas()[i].getJogadores().get(j);
                     /*players.add("#" + counter + " " + player.name + ", " + player.species.getName() + ", " + String.valueOf(player.getPosition()+1));*/
                     counter++;
                 }
@@ -312,5 +311,9 @@ public class GameManager {
 
     public String whoIsTaborda() {
         return "Wrestling";
+    }
+
+    public static void main(String[] args) {
+
     }
 }

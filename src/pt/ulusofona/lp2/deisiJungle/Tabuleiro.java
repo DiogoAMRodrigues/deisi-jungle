@@ -6,16 +6,16 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 public class Tabuleiro {
-    Casa[] casas;
-    int size;
-    ArrayList<Jogador> jogadores;
-    HashMap<Integer, Jogador> jogaresHS;
-    Jogador currentPlayer;
-    int currentPlayerInt;
+    private Casa[] casas;
+    private int size;
+    private ArrayList<Jogador> jogadores;
+    private HashMap<Integer, Jogador> jogaresHS;
+    private Jogador currentPlayer;
+    private int currentPlayerInt;
 
-    boolean winner = false;
+    private boolean winner = false;
 
-    Jogador playerWin;
+    private Jogador playerWin;
 
     public Tabuleiro(int size) {
         this.size = size;
@@ -55,12 +55,30 @@ public class Tabuleiro {
         return jogadores;
     }
 
+    public void setCurrentPlayer(Jogador jogador){
+        this.currentPlayer = jogador;
+    }
+
     public Jogador getCurrentPlayer() {
         return currentPlayer;
     }
 
     public HashMap<Integer, Jogador> getJogaresHS() {
         return jogaresHS;
+    }
+
+    public boolean getWinner(){
+        return winner;
+    }
+    public void setWinner(boolean win){
+        this.winner = win;
+    }
+
+    public Jogador getPlayerWin(){
+        return playerWin;
+    }
+    public void setPlayerWin(Jogador jogador){
+        this.playerWin = jogador;
     }
 
 }

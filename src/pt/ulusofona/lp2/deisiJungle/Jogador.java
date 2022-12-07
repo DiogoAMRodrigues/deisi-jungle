@@ -20,8 +20,6 @@ public class Jogador {
             this.energy -= 2;
         }
     }
-
-
     public int getId() {
         return id;
     }
