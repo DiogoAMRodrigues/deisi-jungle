@@ -2,7 +2,6 @@ package pt.ulusofona.lp2.deisiJungle;
 
 import org.junit.Test;
 
-import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertEquals;
 
 public class Tests {
