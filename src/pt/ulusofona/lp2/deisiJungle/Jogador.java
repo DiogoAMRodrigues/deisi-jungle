@@ -75,6 +75,7 @@ public class Jogador {
         return energy;
     }
 
+
     public void theMovementPart(Tabuleiro tabuleiro, int nrSquares)  {
         //everythingsFine
         int playersPosition = this.getPosition();
