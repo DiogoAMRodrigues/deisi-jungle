@@ -177,10 +177,17 @@ public class GameManager {
                 || (thisSpecies.equals("T") && !hasTarzan)) {
             //Adding the Player into the Tabuleiro
 
-            int playerId = Integer.parseInt(playersInfo[player1][0]);
+            int playerID = Integer.parseInt(playersInfo[player1][0]);
+            int speciesID = 2;
+            char thisPlayersSpeciesID =  playersInfo[player1][speciesID].charAt(0);
+            Especie thisPlayersSpecies = createAnimal(thisPlayersSpeciesID);
+            if (thisPlayersSpecies != null){
+                Jogador thisPlayerObject = new Jogador(playerID, thisName, thisPlayersSpecies);
+                jogadores.add(thisPlayerObject);
+            }else {
+                return InitializationError.ILLEGALANIMAL;
+            }
 
-            Jogador thisPlayerObject = new Jogador(playerId, thisName, createAnimal(thisSpecies.charAt(0)));
-            jogadores.add(thisPlayerObject);
         } else {
             return false;
         }
@@ -190,7 +197,31 @@ public class GameManager {
     private Especie createAnimal(char id){
         switch (id){
             case 'E':
+                Elefante e = new Elefante();
+                return e;
 
+            case 'L':
+                Leao l = new Leao();
+                return l;
+
+            case 'T':
+                Tartaruga t = new Tartaruga();
+                return t;
+
+            case 'P':
+                Passaro p = new Passaro();
+                return p;
+
+            case 'Z':
+                Tarzan z = new Tarzan();
+                return z;
+
+            case 'C':
+                Cobra c = new Cobra();
+                return c;
+
+            default:
+                return null;
         }
     }
 
