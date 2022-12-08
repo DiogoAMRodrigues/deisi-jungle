@@ -9,12 +9,12 @@ import java.util.HashMap;
 public class Tabuleiro {
     private final Casa[] casas;
     private final int size;
-    private final ArrayList<Shrooms.Jogador> jogadores;
-    private final HashMap<Integer, Shrooms.Jogador> jogaresHS;
-    private Shrooms.Jogador currentPlayer;
+    private final ArrayList<Jogador> jogadores;
+    private final HashMap<Integer, Jogador> jogaresHS;
+    private Jogador currentPlayer;
     private int currentPlayerInt;
     private boolean winner = false;
-    private Shrooms.Jogador playerWin;
+    private Jogador playerWin;
     public Tabuleiro(int size) {
         this.size = size;
         this.casas = new Casa[size];
@@ -26,11 +26,11 @@ public class Tabuleiro {
         this.currentPlayerInt = 0;
     }
 
-    public void addJogador(Shrooms.Jogador player){
+    public void addJogador(Jogador player){
         jogadores.add(player);
         jogaresHS.putIfAbsent(player.getId(), player);
 
-        jogadores.sort(Comparator.comparingInt(Shrooms.Jogador::getId));
+        jogadores.sort(Comparator.comparingInt(Jogador::getId));
     }
 
     public void nextTurn(){
@@ -49,19 +49,19 @@ public class Tabuleiro {
         return size;
     }
 
-    public ArrayList<Shrooms.Jogador> getJogadores() {
+    public ArrayList<Jogador> getJogadores() {
         return jogadores;
     }
 
-    public void setCurrentPlayer(Shrooms.Jogador jogador){
+    public void setCurrentPlayer(Jogador jogador){
         this.currentPlayer = jogador;
     }
 
-    public Shrooms.Jogador getCurrentPlayer() {
+    public Jogador getCurrentPlayer() {
         return currentPlayer;
     }
 
-    public HashMap<Integer, Shrooms.Jogador> getJogaresHS() {
+    public HashMap<Integer, Jogador> getJogaresHS() {
         return jogaresHS;
     }
 
@@ -72,11 +72,11 @@ public class Tabuleiro {
         this.winner = win;
     }
 
-    public Shrooms.Jogador getPlayerWin(){
+    public Jogador getPlayerWin(){
         return playerWin;
     }
 
-    public void setPlayerWin(Shrooms.Jogador jogador){
+    public void setPlayerWin(Jogador jogador){
         this.playerWin = jogador;
     }
 

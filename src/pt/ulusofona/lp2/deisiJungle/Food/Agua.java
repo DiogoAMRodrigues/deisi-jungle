@@ -9,7 +9,7 @@ public class Agua extends Food {
     }
 
     @Override
-    public void getEaten(Shrooms.Jogador player) {
+    public void getEaten(Jogador player) {
         AnimalType tipo = player.getSpecies().getTipoAnimal();
         if(tipo == AnimalType.CARNIVORO || tipo == AnimalType.HERBIVORO){
             player.gainEnergy(15);

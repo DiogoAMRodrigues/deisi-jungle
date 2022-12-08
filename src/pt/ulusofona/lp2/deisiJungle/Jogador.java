@@ -1,5 +1,4 @@
 package pt.ulusofona.lp2.deisiJungle;
-
 import pt.ulusofona.lp2.deisiJungle.Species.Especie;
 
 public class Jogador {
@@ -8,13 +7,19 @@ public class Jogador {
     private final Especie species;
     private int position;
     private int energy;
+    protected boolean hasEatenBanana;
 
-    public Jogador(int id, String name, Especie species, int energy) {
+    public Jogador(int id, String name, Especie species) {
         this.id = id;
         this.name = name;
         this.species = species;
         this.position = 0;
-        this.energy = energy;
+        energy = species.getStartEnergy();
+        hasEatenBanana = false;
+    }
+
+    public boolean getHasEatenBanana() {
+        return hasEatenBanana;
     }
 
     public void gainEnergy(int amount){
@@ -76,7 +81,7 @@ public class Jogador {
     }
 
 
-    public void theMovementPart(Tabuleiro tabuleiro, int nrSquares)  {
+    public void theMovementPart(Tabuleiro tabuleiro, int nrSquares)  {/*
         //everythingsFine
         int playersPosition = this.getPosition();
         Casa thisHouse = tabuleiro.getCasas()[playersPosition];
@@ -102,6 +107,6 @@ public class Jogador {
                 otherHouse.getJogadores().add(this);
                 this.setPosition(otherHousePosition);
             }
-        }
+        }*/
     }
 }

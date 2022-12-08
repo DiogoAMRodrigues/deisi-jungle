@@ -9,7 +9,7 @@ public class Erva extends Food{
     }
 
     @Override
-    public void getEaten(Shrooms.Jogador player) {
+    public void getEaten(Jogador player) {
         AnimalType tipo = player.getSpecies().getTipoAnimal();
         if(tipo == AnimalType.OMNIVORO || tipo == AnimalType.HERBIVORO){
             player.gainEnergy(20);

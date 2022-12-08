@@ -5,4 +5,5 @@ public class Carne extends Food {
         id = 'c';
         img = "meat.png";
     }
+
 }

@@ -9,11 +9,11 @@ public class Bananas extends Food {
     }
 
     @Override
-    public void getEaten(Shrooms.Jogador player) {
+    public void getEaten(Jogador player) {
         if(bananaAmount > 0){
-            bananaAmount--;
             player.gainEnergy(40);
-
+            bananaAmount--;
+            player.getHasEatenBanana
         }
     }
 }
