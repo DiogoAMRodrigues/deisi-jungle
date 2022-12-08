@@ -186,4 +186,47 @@ public class Tests {
 
       assertEquals(testString, actualString);
    }
+
+   @Test
+   public void getFoodTypes_03(){
+      GameManager gameManager = new GameManager();
+      String[][] foodTypes = new String[5][3];
+      foodTypes[0][0] = "e";
+      foodTypes[0][1] = "Erva";
+      foodTypes[0][2] = "grass.png";
+
+      foodTypes[1][0] = "a";
+      foodTypes[1][1] = "Agua";
+      foodTypes[1][2] = "water.png";
+
+      foodTypes[2][0] = "b";
+      foodTypes[2][1] = "Cacho de bananas";
+      foodTypes[2][2] = "bananas.png";
+
+      foodTypes[3][0] = "c";
+      foodTypes[3][1] = "Carne";
+      foodTypes[3][2] = "meat.png";
+
+      foodTypes[4][0] = "m";
+      foodTypes[4][1] = "Cogumelos magicos";
+      foodTypes[4][2] = "mushroom.png";
+
+      String expected = "";
+      for(int i = 0; i < foodTypes.length; i++){
+         for(int j = 0; j < foodTypes[i].length; j++){
+            expected += foodTypes[i][j];
+         }
+      }
+
+      String[][] actualTypes = gameManager.getFoodTypes();
+      String actual = "";
+      for(int i = 0; i < actualTypes.length; i++){
+         for(int j = 0; j < actualTypes[i].length; j++){
+            actual += actualTypes[i][j];
+         }
+      }
+      assertEquals(expected, actual);
+   }
+
+
 }
