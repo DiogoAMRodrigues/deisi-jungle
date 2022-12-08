@@ -126,14 +126,22 @@ public class GameManager {
         } else {
             return false;
         }
+
         for(int i = 0; i < jogadores.size(); ++i){
             tabuleiro.addJogador(jogadores.get(i));
         }
+
         tabuleiro.getCasas()[0].getJogadores().addAll(jogadores);
         tabuleiro.setCurrentPlayer(tabuleiro.getJogadores().get(0));
 
         for(int i = 0; i < foodsInfo.length; ++i){
+            int foodPosition = Integer.parseInt(foodsInfo[i][1]) - 1;
+            char foodIdentifier = foodsInfo[i][0].charAt(0);
 
+            //Check if food array has the correct size and if the food is inside the board, can't be on starting pos or finish line
+            if(foodsInfo[i].length == 2 && foodPosition > 0 && foodPosition < tabuleiro.getSize()-1){
+                tabuleiro.getCasas()[foodPosition].setComida(new Food(foodIdentifier));
+            }
         }
 
         return true;
