@@ -61,7 +61,7 @@ public class GameManager {
         return species;
     }
 
-    public boolean createInitialJungle(int jungleSize, int initialEnergy, String[][] playersInfo) {
+    public boolean createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo) {
         //assuming the start and finishlines count for the amount of houses
         int id = 0;
         int name = 1;
@@ -89,8 +89,8 @@ public class GameManager {
 
                 if (playersInfo[player1] != null) {
 
-                    if(!playerAttributeChecksAndAdd(playersInfo, player1, name, firstPlayerID, id, species, hasTarzan,
-                            initialEnergy, jogadores)){
+                    if(!playerAttributeChecksAndAdd(playersInfo, player1, name, firstPlayerID, id, species, hasTarzan
+                            /*initialEnergy*/, jogadores)){
                         return false;
                     }
 
@@ -106,11 +106,16 @@ public class GameManager {
         }
         tabuleiro.getCasas()[0].getJogadores().addAll(jogadores);
         tabuleiro.setCurrentPlayer(tabuleiro.getJogadores().get(0));
+
+        for(int i = 0; i < foodsInfo.length; ++i){
+
+        }
+
         return true;
     }
 
     private boolean playerAttributeChecksAndAdd(String[][] playersInfo, int player1, int name, String firstPlayerID, int id,
-                                int species, boolean hasTarzan, int initialEnergy, ArrayList<Jogador> jogadores){
+                                int species, boolean hasTarzan /*int initialEnergy*/, ArrayList<Jogador> jogadores){
         //name is well-made
         String thisName = playersInfo[player1][name];
         if (thisName == null || thisName.length() == 0) {
@@ -239,51 +244,19 @@ public class GameManager {
             if (tabuleiro.getCurrentPlayer().getEnergy() >= 2) {
                 if (!bypassValidations) {
                     if (nrSquares > 0 && nrSquares <= 6) {
-                        theMovementPart(nrSquares);
+                        tabuleiro.getCurrentPlayer().theMovementPart(tabuleiro, nrSquares);
                     }else{
                         tabuleiro.nextTurn();
                         return false;
                     }
                 } else {
-                    theMovementPart(nrSquares);
+                    tabuleiro.getCurrentPlayer().theMovementPart(tabuleiro, nrSquares);
                 }
                 state = true;
             }
             tabuleiro.nextTurn();
         }
         return state;
-    }
-
-    private void theMovementPart(int nrSquares) {
-        //everythingsFine
-        Jogador thisPlayer = tabuleiro.getCurrentPlayer();
-        if (thisPlayer != null) {
-            int playersPosition = thisPlayer.getPosition();
-            Casa thisHouse = tabuleiro.getCasas()[playersPosition];
-            //remove him from that House and update the occupationState of that house IF he has energy
-            if (thisPlayer.getEnergy() - 2 >= 0) {
-                thisPlayer.loseEnergy();
-                thisHouse.getJogadores().remove(thisPlayer);
-                if (thisHouse.isOccupied()){
-                    thisHouse.occupy();
-                }
-                //add him to the other house
-                int otherHousePosition = playersPosition + nrSquares;
-                int lastHousePosition = tabuleiro.getCasas().length - 1;
-                //IF it is over the ending it stops at the end
-                if (otherHousePosition >= lastHousePosition) {
-                    Casa otherHouse = tabuleiro.getCasas()[lastHousePosition];
-                    otherHouse.getJogadores().add(thisPlayer);
-                    thisPlayer.setPosition(lastHousePosition);
-                    tabuleiro.setPlayerWin(thisPlayer);
-                    tabuleiro.setWinner(true);
-                } else {
-                    Casa otherHouse = tabuleiro.getCasas()[otherHousePosition];
-                    otherHouse.getJogadores().add(thisPlayer);
-                    thisPlayer.setPosition(otherHousePosition);
-                }
-            }
-        }
     }
 
     private int playersWithEnergy(){
@@ -345,7 +318,5 @@ public class GameManager {
         return "Wrestling";
     }
 
-    public static void main(String[] args) {
 
-    }
 }

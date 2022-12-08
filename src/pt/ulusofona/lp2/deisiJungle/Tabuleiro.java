@@ -12,11 +12,8 @@ public class Tabuleiro {
     private HashMap<Integer, Jogador> jogaresHS;
     private Jogador currentPlayer;
     private int currentPlayerInt;
-
     private boolean winner = false;
-
     private Jogador playerWin;
-
     public Tabuleiro(int size) {
         this.size = size;
         this.casas = new Casa[size];
@@ -77,6 +74,7 @@ public class Tabuleiro {
     public Jogador getPlayerWin(){
         return playerWin;
     }
+
     public void setPlayerWin(Jogador jogador){
         this.playerWin = jogador;
     }
