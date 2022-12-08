@@ -6,10 +6,10 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 public class Tabuleiro {
-    private Casa[] casas;
-    private int size;
-    private ArrayList<Jogador> jogadores;
-    private HashMap<Integer, Jogador> jogaresHS;
+    private final Casa[] casas;
+    private final int size;
+    private final ArrayList<Jogador> jogadores;
+    private final HashMap<Integer, Jogador> jogaresHS;
     private Jogador currentPlayer;
     private int currentPlayerInt;
     private boolean winner = false;

@@ -113,29 +113,35 @@ public class GameManager {
                 String firstPlayerID = playersInfo[player1][id];
 
                 if (playersInfo[player1] != null) {
+                    InitializationError theCheck = playerAttributeChecksAndAdd(playersInfo, player1, name, firstPlayerID, id, species, hasTarzan, jogadores);
+                    if(!(theCheck == InitializationError.GOODPLAYERATTRIBUTES)){
+                        return theCheck;
+                    }
 
-                    if(!playerAttributeChecksAndAdd(playersInfo, player1, name, firstPlayerID, id, species, hasTarzan
-                            /*initialEnergy*/, jogadores)){
-                        return ;
+                    //Check if player is Tarzan
+                    if (!hasTarzan && playersInfo[player1][species].equals("Z")){
+                        hasTarzan = true;
                     }
 
                 } else {
-                    return false;
+                    return InitializationError.THISPLAYERSINFOISNULL;
                 }
             }
         } else {
-            return new InitializationError();
+            return InitializationError.PLAYERINFOISNULL;
         }
 
-        for(int i = 0; i < jogadores.size(); ++i){
+        //add players to board
+        for(int i = 0; i < jogadores.size(); i++){
             tabuleiro.addJogador(jogadores.get(i));
         }
 
+        //add players to first Position of board and define currentPlayer
         tabuleiro.getCasas()[0].getJogadores().addAll(jogadores);
         tabuleiro.setCurrentPlayer(tabuleiro.getJogadores().get(0));
 
-        for(int i = 0; i < foodsInfo.length; ++i){
-            int foodPosition = Integer.parseInt(foodsInfo[i][1]) - 1;
+        for(int i = 0; i < foodsInfo.length; i++){
+            int foodPosition = Integer.parseInt(foodsInfo[i][1]) - 1; //ASSUMING THEY COUNT LIKE HUMANS
             char foodIdentifier = foodsInfo[i][0].charAt(0);
 
             //Check if food array has the correct size and if the food is inside the board, can't be on starting pos or finish line
@@ -148,7 +154,7 @@ public class GameManager {
     }
 
     private InitializationError playerAttributeChecksAndAdd(String[][] playersInfo, int player1, int name, String firstPlayerID, int id,
-                                int species, boolean hasTarzan /*int initialEnergy*/, ArrayList<Jogador> jogadores){
+                                int species, boolean hasTarzan, ArrayList<Jogador> jogadores){
         //name is well-made
         String thisName = playersInfo[player1][name];
         if (thisName == null || thisName.length() == 0) {
@@ -171,27 +177,22 @@ public class GameManager {
             return InitializationError.WRONGTYPEID;
         }
         //is an eligible Species
-        String thisSpecies = playersInfo[player1][species];
+        int playerID = Integer.parseInt(playersInfo[player1][0]);
+        char thisPlayersSpeciesID =  playersInfo[player1][species].charAt(0);
+        Especie thisPlayersSpecies = createAnimal(thisPlayersSpeciesID);
 
-        if ((thisSpecies.equals("E") || thisSpecies.equals("L") || thisSpecies.equals("P") || thisSpecies.equals("Z") || thisSpecies.equals("S"))
-                || (thisSpecies.equals("T") && !hasTarzan)) {
-            //Adding the Player into the Tabuleiro
-
-            int playerID = Integer.parseInt(playersInfo[player1][0]);
-            int speciesID = 2;
-            char thisPlayersSpeciesID =  playersInfo[player1][speciesID].charAt(0);
-            Especie thisPlayersSpecies = createAnimal(thisPlayersSpeciesID);
-            if (thisPlayersSpecies != null){
-                Jogador thisPlayerObject = new Jogador(playerID, thisName, thisPlayersSpecies);
-                jogadores.add(thisPlayerObject);
-            }else {
-                return InitializationError.ILLEGALANIMAL;
-            }
-
-        } else {
-            return false;
+        if (hasTarzan && thisPlayersSpeciesID == 'Z') {
+            return InitializationError.TOOMANYTARZAN;
         }
-        return true;
+
+        //Adding the Player into the Tabuleiro
+        if (thisPlayersSpecies != null){
+            Jogador thisPlayerObject = new Jogador(playerID, thisName, thisPlayersSpecies);
+            jogadores.add(thisPlayerObject);
+        }else {
+            return InitializationError.ILLEGALANIMAL;
+        }
+        return InitializationError.GOODPLAYERATTRIBUTES;
     }
 
     private Especie createAnimal(char id){
