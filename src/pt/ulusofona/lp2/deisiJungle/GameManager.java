@@ -140,17 +140,33 @@ public class GameManager {
         tabuleiro.getCasas()[0].getJogadores().addAll(jogadores);
         tabuleiro.setCurrentPlayer(tabuleiro.getJogadores().get(0));
 
-        for(int i = 0; i < foodsInfo.length; i++){
-            int foodPosition = Integer.parseInt(foodsInfo[i][1]) - 1; //ASSUMING THEY COUNT LIKE HUMANS
-            char foodIdentifier = foodsInfo[i][0].charAt(0);
+        if (foodsInfo != null) {
+            for (int i = 0; i < foodsInfo.length; i++) {
 
-            //Check if food array has the correct size and if the food is inside the board, can't be on starting pos or finish line
-            if(foodsInfo[i].length == 2 && foodPosition > 0 && foodPosition < tabuleiro.getSize()-1){
-                tabuleiro.getCasas()[foodPosition].setComida(new Food(foodIdentifier));
+                int foodPosition = Integer.parseInt(foodsInfo[i][1]) - 1; //ASSUMING THEY COUNT LIKE HUMANS
+                char foodIdentifier = foodsInfo[i][0].charAt(0);
+
+                //Check if food array has the correct size
+                if (!(foodsInfo[i].length == 2)){
+                    return InitializationError.WRONGFOODARRAYDIMENSIONS;
+                }
+                //Check if the food is inside the board, can't be on starting pos or finish line
+                if (foodPosition > 0 && foodPosition < tabuleiro.getSize() - 1) {
+                    Food food = foodFactory(foodIdentifier);
+                    if (food != null){
+                        tabuleiro.getCasas()[foodPosition].setComida(food);
+                    }else {
+                        return InitializationError.ILLEGALFOOD;
+                    }
+                }else {
+                    return InitializationError.FOODOUTSIDETABULEIRO;
+                }
             }
+        }else {
+            return InitializationError.FOODSINFOISNULL;
         }
 
-        return InitializationError.CREATEDJUNGLETRUE;
+        return null;
     }
 
     private InitializationError playerAttributeChecksAndAdd(String[][] playersInfo, int player1, int name, String firstPlayerID, int id,
@@ -168,6 +184,7 @@ public class GameManager {
                 return InitializationError.REPEATEDPLAYER;
             }
         }
+
         //Check if the ID is an Integer
         try {
             if (Integer.parseInt(firstPlayerID) <= 0) {
@@ -220,6 +237,33 @@ public class GameManager {
             case 'C':
                 Cobra c = new Cobra();
                 return c;
+
+            default:
+                return null;
+        }
+    }
+
+    private Food foodFactory(char id){
+        switch (id){
+            case 'e':
+                Erva e = new Erva();
+                return e;
+
+            case 'a':
+                Agua a = new Agua();
+                return a;
+
+            case 'b':
+                Bananas b = new Bananas();
+                return b;
+
+            case 'c':
+                Carne c = new Carne();
+                return c;
+
+            case 'm':
+                Shrooms m = new Shrooms();
+                return m;
 
             default:
                 return null;

@@ -10,6 +10,7 @@ public abstract class Especie {
     protected int minSpeed;
     protected int maxSpeed;
 
+
     public char getIdentifier() {
         return identifier;
     }
