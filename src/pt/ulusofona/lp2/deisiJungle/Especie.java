@@ -1,9 +1,5 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-import org.w3c.dom.ranges.Range;
-
-import static java.lang.Math.random;
-
 public abstract class Especie {
     protected char identifier;
     protected String name;
