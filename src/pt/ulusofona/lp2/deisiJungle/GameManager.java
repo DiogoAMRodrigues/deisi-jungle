@@ -102,7 +102,46 @@ public class GameManager {
         return foodTypes;
     }
 
+    public InitializationError setFoodOnBoard(String[][] foodsInfo){
+        if (foodsInfo != null) {
+            for (int i = 0; i < foodsInfo.length; i++) {
+
+                int foodPosition = Integer.parseInt(foodsInfo[i][1]) - 1; //ASSUMING THEY COUNT LIKE HUMANS
+                char foodIdentifier = foodsInfo[i][0].charAt(0);
+
+                //Check if food array has the correct size
+                if (!(foodsInfo[i].length == 2)){
+                    return InitializationError.WRONGFOODARRAYDIMENSIONS;
+                }
+                //Check if the food is inside the board, can't be on starting pos or finish line
+                if (foodPosition > 0 && foodPosition < tabuleiro.getSize() - 1) {
+                    Food food = foodFactory(foodIdentifier);
+                    if (food != null){
+                        tabuleiro.getCasas()[foodPosition].setComida(food);
+                    }else {
+                        return InitializationError.ILLEGALFOOD;
+                    }
+                }else {
+                    return InitializationError.FOODOUTSIDETABULEIRO;
+                }
+            }
+        }else {
+            return InitializationError.FOODSINFOISNULL;
+        }
+        return null;
+    }
+
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo) {
+        InitializationError createJungle = createInitialJungle(jungleSize, playersInfo);
+        if(createJungle != null){
+            return createJungle;
+        }
+
+        InitializationError food = setFoodOnBoard(foodsInfo);
+        return food;
+    }
+
+    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
         //assuming the start and finishlines count for the amount of houses
         int id = 0;
         int name = 1;
@@ -155,32 +194,6 @@ public class GameManager {
         //add players to first Position of board and define currentPlayer
         tabuleiro.getCasas()[0].getJogadores().addAll(jogadores);
         tabuleiro.setCurrentPlayer(tabuleiro.getJogadores().get(0));
-
-        if (foodsInfo != null) {
-            for (int i = 0; i < foodsInfo.length; i++) {
-
-                int foodPosition = Integer.parseInt(foodsInfo[i][1]) - 1; //ASSUMING THEY COUNT LIKE HUMANS
-                char foodIdentifier = foodsInfo[i][0].charAt(0);
-
-                //Check if food array has the correct size
-                if (!(foodsInfo[i].length == 2)){
-                    return InitializationError.WRONGFOODARRAYDIMENSIONS;
-                }
-                //Check if the food is inside the board, can't be on starting pos or finish line
-                if (foodPosition > 0 && foodPosition < tabuleiro.getSize() - 1) {
-                    Food food = foodFactory(foodIdentifier);
-                    if (food != null){
-                        tabuleiro.getCasas()[foodPosition].setComida(food);
-                    }else {
-                        return InitializationError.ILLEGALFOOD;
-                    }
-                }else {
-                    return InitializationError.FOODOUTSIDETABULEIRO;
-                }
-            }
-        }else {
-            return InitializationError.FOODSINFOISNULL;
-        }
 
         return null;
     }
