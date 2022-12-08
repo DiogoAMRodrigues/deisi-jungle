@@ -13,11 +13,4 @@ public class Leao extends Especie{
         minSpeed = 4;
         maxSpeed = 6;
     }
-
-    @Override
-    public int getSpeed(){
-        Random randomNr = new Random();
-        int randomSpeed = randomNr.nextInt(minSpeed,maxSpeed + 1);
-        return randomSpeed;
-    }
 }

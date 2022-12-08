@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Tarzan extends Especie{
     public Tarzan() {
-        identifier = 'T';
+        identifier = 'Z';
         name = "Tarzan";
         image = "tarzan.png";
         startEnergy = 70;
@@ -12,12 +12,5 @@ public class Tarzan extends Especie{
         energyGain = 20;
         minSpeed = 1;
         maxSpeed = 6;
-    }
-
-    @Override
-    public int getSpeed(){
-        Random randomNr = new Random();
-        int randomSpeed = randomNr.nextInt(minSpeed,maxSpeed + 1);
-        return randomSpeed;
     }
 }

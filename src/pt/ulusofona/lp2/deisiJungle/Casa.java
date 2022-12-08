@@ -14,8 +14,8 @@ public class Casa {
         }
         return false;
     }
-    public void setOccupied(boolean bool){
-        this.occupied = bool;
+    public void occupy(){
+        this.occupied = true;
     }
     public ArrayList<Jogador> getJogadores() {
         return jogadores;

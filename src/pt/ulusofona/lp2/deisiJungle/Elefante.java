@@ -13,12 +13,4 @@ public class Elefante extends Especie{
         minSpeed = 1;
         maxSpeed = 6;
     }
-
-    @Override
-    public int getSpeed(){
-        Random randomNr = new Random();
-        int randomSpeed = randomNr.nextInt(minSpeed,maxSpeed + 1);
-        return randomSpeed;
-    }
-
 }

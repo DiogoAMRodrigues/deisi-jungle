@@ -1,9 +1,9 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 public class Jogador {
-    int id;
-    String name;
-    Especie species;
+    private final int id;
+    private final String name;
+    private final Especie species;
     private int position;
     private int energy;
 
@@ -15,7 +15,7 @@ public class Jogador {
         this.energy = energy;
     }
 
-    void loseEnergy(){
+    protected void loseEnergy(){
         if (this.energy >= 2){
             this.energy -= 2;
         }

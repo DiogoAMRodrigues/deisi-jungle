@@ -7,30 +7,30 @@ import static junit.framework.TestCase.assertEquals;
 
 public class Tests {
     @Test
-     public void createAnimalsGetSpeed_01(){
+     public void createAnimalsGetIdentifier_01(){
         Elefante e = new Elefante();
-        int thisSpeedTest = e.getSpeed();
-        assertTrue(thisSpeedTest > 0 && thisSpeedTest < 7);
+        char identifier = e.getIdentifier();
+        assertEquals('E', identifier);
 
         Leao l = new Leao();
-        thisSpeedTest = l.getSpeed();
-        assertTrue(thisSpeedTest > 3 && thisSpeedTest < 7);
+        identifier = l.getIdentifier();
+        assertEquals('L', identifier);
 
         Tartaruga t = new Tartaruga();
-        thisSpeedTest = t.getSpeed();
-        assertTrue(thisSpeedTest > 0 && thisSpeedTest < 4);
+        identifier = t.getIdentifier();
+        assertEquals('T', identifier);
 
         Passaro p = new Passaro();
-        thisSpeedTest = p.getSpeed();
-        assertTrue(thisSpeedTest > 4 && thisSpeedTest < 7);
+        identifier = p.getIdentifier();
+        assertEquals('P', identifier);
 
         Tarzan tarz = new Tarzan();
-        thisSpeedTest = tarz.getSpeed();
-        assertTrue(thisSpeedTest > 0 && thisSpeedTest < 7);
+        identifier = tarz.getIdentifier();
+        assertEquals('Z', identifier);
 
         Cobra c = new Cobra();
-        thisSpeedTest = c.getSpeed();
-        assertTrue(thisSpeedTest > 2 && thisSpeedTest < 7);
+        identifier = c.getIdentifier();
+        assertEquals('C', identifier);
     }
 
 }

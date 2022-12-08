@@ -234,7 +234,9 @@ public class GameManager {
             if (thisPlayer.getEnergy() - 2 >= 0) {
                 thisPlayer.loseEnergy();
                 thisHouse.getJogadores().remove(thisPlayer);
-                thisHouse.setOccupied(thisHouse.isOccupied());
+                if (thisHouse.isOccupied()){
+                    thisHouse.occupy();
+                }
                 //add him to the other house
                 int otherHousePosition = playersPosition + nrSquares;
                 int lastHousePosition = tabuleiro.getCasas().length - 1;

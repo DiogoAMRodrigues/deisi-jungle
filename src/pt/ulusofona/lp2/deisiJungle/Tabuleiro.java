@@ -28,14 +28,14 @@ public class Tabuleiro {
         this.currentPlayerInt = 0;
     }
 
-    void addJogador(Jogador player){
+    public void addJogador(Jogador player){
         jogadores.add(player);
         jogaresHS.putIfAbsent(player.getId(), player);
 
         jogadores.sort(Comparator.comparingInt(Jogador::getId));
     }
 
-    void nextTurn(){
+    public void nextTurn(){
         currentPlayerInt++;
         if (currentPlayerInt >= jogadores.size()){
             currentPlayerInt = 0;
