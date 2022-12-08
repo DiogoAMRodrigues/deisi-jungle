@@ -2,7 +2,7 @@ package pt.ulusofona.lp2.deisiJungle;
 import java.util.ArrayList;
 
 public class Casa {
-    private ArrayList<Jogador> jogadores;
+    private final ArrayList<Jogador> jogadores;
 
     private Food comida = null;
     private boolean occupied;
@@ -11,12 +11,20 @@ public class Casa {
         jogadores = new ArrayList<>();
     }
     public boolean isOccupied() {
-        if (jogadores != null) {
+        if (jogadores.isEmpty()) {
             return this.occupied = jogadores.size() > 0;
         }
         return false;
     }
-    public void occupy(){
+
+    public void leaveHouse(Jogador player){
+        jogadores.remove(player);
+        if (jogadores.isEmpty()){
+            this.occupied = false;
+        }
+    }
+    public void addJogadorCasa(Jogador player){
+        jogadores.add(player);
         this.occupied = true;
     }
     public ArrayList<Jogador> getJogadores() {
