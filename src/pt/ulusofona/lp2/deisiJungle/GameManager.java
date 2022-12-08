@@ -61,6 +61,22 @@ public class GameManager {
         return species;
     }
 
+    public String[] getCurrentPlayerEnergyInfo(int nrPositions){
+        String[] info = new String[2];
+
+        for(int i = 0; i < getSpecies().length; ++i){
+            char identifier = tabuleiro.getCurrentPlayer().getSpecies().getIdentifier();
+            char identifier_compare = getSpecies()[i][0].charAt(0);
+
+            if(identifier == identifier_compare){
+                info[0] = getSpecies()[i][4];
+                info[1] = getSpecies()[i][5];
+            }
+        }
+
+        return info;
+    }
+
     public String[][] getFoodTypes(){
         String[][] foodTypes = new String[5][3];
         foodTypes[0][0] = "e";
