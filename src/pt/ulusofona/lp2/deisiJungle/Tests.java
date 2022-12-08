@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 import org.junit.Test;
+import pt.ulusofona.lp2.deisiJungle.Species.*;
 
 import static junit.framework.TestCase.assertEquals;
 

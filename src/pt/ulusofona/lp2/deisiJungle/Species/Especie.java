@@ -1,4 +1,4 @@
-package pt.ulusofona.lp2.deisiJungle;
+package pt.ulusofona.lp2.deisiJungle.Species;
 
 public abstract class Especie {
     protected char identifier;

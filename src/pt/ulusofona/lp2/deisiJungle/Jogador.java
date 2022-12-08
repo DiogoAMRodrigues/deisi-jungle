@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import pt.ulusofona.lp2.deisiJungle.Species.Especie;
+
 public class Jogador {
     private final int id;
     private final String name;

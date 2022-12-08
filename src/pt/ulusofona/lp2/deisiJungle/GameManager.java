@@ -1,5 +1,9 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import pt.ulusofona.lp2.deisiJungle.Codes.InitializationError;
+import pt.ulusofona.lp2.deisiJungle.Food.*;
+import pt.ulusofona.lp2.deisiJungle.Species.*;
+
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -131,16 +135,6 @@ public class GameManager {
         return null;
     }
 
-    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo) {
-        InitializationError createJungle = createInitialJungle(jungleSize, playersInfo);
-        if(createJungle != null){
-            return createJungle;
-        }
-
-        InitializationError food = setFoodOnBoard(foodsInfo);
-        return food;
-    }
-
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
         //assuming the start and finishlines count for the amount of houses
         int id = 0;
@@ -196,6 +190,16 @@ public class GameManager {
         tabuleiro.setCurrentPlayer(tabuleiro.getJogadores().get(0));
 
         return null;
+    }
+
+    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo) {
+        InitializationError createJungle = createInitialJungle(jungleSize, playersInfo);
+        if(createJungle != null){
+            return createJungle;
+        }
+
+        InitializationError food = setFoodOnBoard(foodsInfo);
+        return food;
     }
 
     private InitializationError playerAttributeChecksAndAdd(String[][] playersInfo, int player1, int name, String firstPlayerID, int id,

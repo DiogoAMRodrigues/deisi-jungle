@@ -1,6 +1,6 @@
-package pt.ulusofona.lp2.deisiJungle;
+package pt.ulusofona.lp2.deisiJungle.Codes;
 
-enum InitializationError{
+public enum InitializationError{
     //Player and board checks
     WRONGPLAYERAMOUNT, REPEATEDPLAYER, ILLEGALNAME , WRONGJUNGLESIZE, NEGATIVEID,
     WRONGTYPEID, ILLEGALANIMAL, TOOMANYTARZAN, GOODPLAYERATTRIBUTES, THISPLAYERSINFOISNULL, PLAYERINFOISNULL,

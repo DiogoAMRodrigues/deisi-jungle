@@ -1,4 +1,4 @@
-package pt.ulusofona.lp2.deisiJungle;
+package pt.ulusofona.lp2.deisiJungle.Species;
 
 public class Passaro extends Especie{
     public Passaro() {
