@@ -8,7 +8,12 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class GameManager {
-    public Tabuleiro tabuleiro;
+    private Tabuleiro tabuleiro;
+
+    public Tabuleiro getTabuleiro() {
+        return tabuleiro;
+    }
+
     public GameManager() {}
 
     public String[][] getSpecies() {

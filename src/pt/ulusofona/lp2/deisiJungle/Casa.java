@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Casa {
     private final ArrayList<Jogador> jogadores;
 
-    private Food comida = null;
+    private ArrayList<Food> comida = null;
     private boolean occupied;
     public Casa() {
         this.occupied = false;
@@ -34,12 +34,15 @@ public class Casa {
         return jogadores;
     }
 
-    public Food getComida(){
+    public ArrayList<Food> getComida() {
         return comida;
     }
 
-    public void setComida(Food comida){
-        this.comida = comida;
+    public boolean addComida(Food food){
+        if (food != null){
+            comida.add(food);
+            return true;
+        }
+        return false;
     }
-
 }

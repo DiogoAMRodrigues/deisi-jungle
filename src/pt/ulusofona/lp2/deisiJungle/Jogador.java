@@ -22,6 +22,10 @@ public class Jogador {
         return hasEatenBanana;
     }
 
+    public void eatBanana(){
+        hasEatenBanana = true;
+    }
+
     public void gainEnergy(int amount){
         if(this.energy + amount >= 200){
             this.energy = 200;

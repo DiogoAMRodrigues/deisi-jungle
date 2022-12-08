@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle.Food;
-
 import pt.ulusofona.lp2.deisiJungle.Codes.AnimalType;
+import pt.ulusofona.lp2.deisiJungle.Jogador;
+import pt.ulusofona.lp2.deisiJungle.Tabuleiro;
 
 public class Agua extends Food {
     public Agua() {
@@ -9,7 +10,7 @@ public class Agua extends Food {
     }
 
     @Override
-    public void getEaten(Jogador player) {
+    public void getEaten(Jogador player, Tabuleiro tabuleiro) {
         AnimalType tipo = player.getSpecies().getTipoAnimal();
         if(tipo == AnimalType.CARNIVORO || tipo == AnimalType.HERBIVORO){
             player.gainEnergy(15);
@@ -17,7 +18,7 @@ public class Agua extends Food {
         else if(tipo == AnimalType.OMNIVORO){
             player.gainEnergy((int) (player.getEnergy()*1.2));
         }
-        //tooltip: "Agua : + 10U|20% energia"
+        //tooltip: "Agua : + 10U|20% energia"        U = unidades
     }
 
 }

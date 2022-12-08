@@ -15,15 +15,17 @@ public class Tabuleiro {
     private int currentPlayerInt;
     private boolean winner = false;
     private Jogador playerWin;
+    private int turns;
     public Tabuleiro(int size) {
         this.size = size;
-        this.casas = new Casa[size];
+        casas = new Casa[size];
         for(int i = 0; i < size; ++i){
             casas[i] = new Casa();
         }
-        this.jogadores = new ArrayList<>();
-        this.jogaresHS = new HashMap<>();
-        this.currentPlayerInt = 0;
+        jogadores = new ArrayList<>();
+        jogaresHS = new HashMap<>();
+        currentPlayerInt = 0;
+        turns = 1;
     }
 
     public void addJogador(Jogador player){
@@ -39,6 +41,11 @@ public class Tabuleiro {
             currentPlayerInt = 0;
         }
         currentPlayer = jogadores.get(currentPlayerInt);
+        turns++;
+    }
+
+    public int getTurns() {
+        return turns;
     }
 
     public Casa[] getCasas() {
