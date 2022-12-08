@@ -9,25 +9,54 @@ public class GameManager {
     }
 
     public String[][] getSpecies() {
-        String[][] species = new String[6][3];
+        String[][] species = new String[6][7];
         species[0][0] = "E";
         species[0][1] = "Elefante";
         species[0][2] = "elephant.png";
+        species[0][3] = "180";
+        species[0][4] = "4";
+        species[0][5] = "10";
+        species[0][6] = "1..6";
+
         species[1][0] = "L";
         species[1][1] = "Leão";
         species[1][2] = "lion.png";
+        species[1][3] = "80";
+        species[1][4] = "2";
+        species[1][5] = "10";
+        species[1][6] = "4..6";
+
         species[2][0] = "T";
         species[2][1] = "Tartaruga";
         species[2][2] = "turtle.png";
+        species[2][3] = "150";
+        species[2][4] = "1";
+        species[2][5] = "5";
+        species[2][6] = "1..3";
+
         species[3][0] = "P";
         species[3][1] = "Pássaro";
         species[3][2] = "bird.png";
+        species[3][3] = "70";
+        species[3][4] = "4";
+        species[3][5] = "50";
+        species[3][6] = "5..6";
+
         species[4][0] = "Z";
         species[4][1] = "Tarzan";
         species[4][2] = "tarzan.png";
+        species[4][3] = "70";
+        species[4][4] = "2";
+        species[4][5] = "20";
+        species[4][6] = "1..6";
+
         species[5][0] = "S";
         species[5][1] = "Cobra";
         species[5][2] = "snake.png";
+        species[5][3] = "100";
+        species[5][4] = "10";
+        species[5][5] = "30";
+        species[5][6] = "3..6";
 
         return species;
     }
@@ -164,13 +193,14 @@ public class GameManager {
     }
 
     public String[] getPlayerInfo(int playerId) {
-        String[] thisPlayer = new String[4];
+        String[] thisPlayer = new String[5];
         Jogador thisJogador = tabuleiro.getJogaresHS().get(playerId);
         if (tabuleiro != null && tabuleiro.getJogaresHS() != null && thisJogador != null) {
             thisPlayer[0] = thisJogador.getId() + "";
             thisPlayer[1] = thisJogador.getName();
-            /*thisPlayer[2] = thisJogador.getSpecies().getIdentifier() + "";*/
+            thisPlayer[2] = thisJogador.getSpecies().getIdentifier() + "";
             thisPlayer[3] = thisJogador.getEnergy() + "";
+            thisPlayer[4] = thisJogador.getSpecies().getMinSpeed() + ".." + thisJogador.getSpecies().getMaxSpeed();
         } else {
             return null;
         }
@@ -194,7 +224,7 @@ public class GameManager {
                 Jogador thisJogador = tabuleiro.getJogadores().get(i);
                 thesePlayers[i][0] = thisJogador.getId() + "";
                 thesePlayers[i][1] = thisJogador.getName();
-                /*thesePlayers[i][2] = thisJogador.getSpecies().getIdentifier() + "";*/
+                thesePlayers[i][2] = thisJogador.getSpecies().getIdentifier() + "";
                 thesePlayers[i][3] = thisJogador.getEnergy() + "";
             }
             return thesePlayers;
