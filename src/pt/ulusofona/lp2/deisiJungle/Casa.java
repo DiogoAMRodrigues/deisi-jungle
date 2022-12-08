@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 public class Casa {
     private ArrayList<Jogador> jogadores;
+
+    private Food comida = null;
     private boolean occupied;
     public Casa() {
         this.occupied = false;
@@ -19,6 +21,14 @@ public class Casa {
     }
     public ArrayList<Jogador> getJogadores() {
         return jogadores;
+    }
+
+    public Food getComida(){
+        return comida;
+    }
+
+    public void setComida(Food comida){
+        this.comida = comida;
     }
 
 }
