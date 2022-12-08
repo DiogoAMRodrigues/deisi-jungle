@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle.Species;
 
+import pt.ulusofona.lp2.deisiJungle.Codes.AnimalType;
+
 public abstract class Especie {
     protected char identifier;
     protected String name;
@@ -10,6 +12,11 @@ public abstract class Especie {
     protected int minSpeed;
     protected int maxSpeed;
 
+    protected AnimalType tipoAnimal;
+
+    public AnimalType getTipoAnimal() {
+        return tipoAnimal;
+    }
 
     public char getIdentifier() {
         return identifier;

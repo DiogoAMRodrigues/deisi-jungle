@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle.Species;
 
+import pt.ulusofona.lp2.deisiJungle.Codes.AnimalType;
+
 public class Leao extends Especie{
     public Leao() {
         identifier = 'L';
@@ -10,5 +12,6 @@ public class Leao extends Especie{
         energyGain = 10;
         minSpeed = 4;
         maxSpeed = 6;
+        tipoAnimal = AnimalType.CARNIVORO;
     }
 }

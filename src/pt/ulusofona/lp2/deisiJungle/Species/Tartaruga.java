@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle.Species;
 
+import pt.ulusofona.lp2.deisiJungle.Codes.AnimalType;
+
 public class Tartaruga extends Especie{
     public Tartaruga() {
         identifier = 'T';
@@ -10,5 +12,6 @@ public class Tartaruga extends Especie{
         energyGain = 5;
         minSpeed = 1;
         maxSpeed = 3;
+        tipoAnimal = AnimalType.OMNIVORO;
     }
 }

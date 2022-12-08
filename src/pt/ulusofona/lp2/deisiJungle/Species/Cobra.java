@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle.Species;
 
+import pt.ulusofona.lp2.deisiJungle.Codes.AnimalType;
+
 public class Cobra extends Especie{
     public Cobra() {
         identifier = 'C';
@@ -10,5 +12,7 @@ public class Cobra extends Especie{
         energyGain = 30;
         minSpeed = 3;
         maxSpeed = 6;
+        tipoAnimal = AnimalType.CARNIVORO;
+
     }
 }

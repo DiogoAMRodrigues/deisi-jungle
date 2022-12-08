@@ -17,11 +17,40 @@ public class Jogador {
         this.energy = energy;
     }
 
-    protected void loseEnergy(){
-        if (this.energy >= 2){
-            this.energy -= 2;
+    public void gainEnergy(int amount){
+        if(this.energy + amount >= 200){
+            this.energy = 200;
+        }else{
+            this.energy += amount;
         }
     }
+
+    public void gainEnergyResting(){
+        int amount = this.getSpecies().getEnergyGain();
+        if(this.energy + amount >= 200){
+            this.energy = 200;
+        }else{
+            this.energy += amount;
+        }
+    }
+
+    public void loseEnergy(int amount){
+        if (this.energy >= amount){
+            this.energy -= amount;
+        }else{
+            this.energy = 0;
+        }
+    }
+
+    public boolean loseEnergyMovement(){
+        int amount = this.getSpecies().getEnergyConsumption();
+        if(this.energy >= amount){
+            this.energy -= amount;
+            return true;
+        }
+        return false;
+    }
+
     public int getId() {
         return id;
     }
@@ -46,7 +75,7 @@ public class Jogador {
         return energy;
     }
 
-    public void theMovementPart(Tabuleiro tabuleiro, int nrSquares) {
+    public void theMovementPart(Tabuleiro tabuleiro, int nrSquares)  {
         //everythingsFine
         int playersPosition = this.getPosition();
         Casa thisHouse = tabuleiro.getCasas()[playersPosition];
