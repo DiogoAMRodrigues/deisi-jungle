@@ -1,7 +1,5 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-import java.util.Random;
-
 public class Leao extends Especie{
     public Leao() {
         identifier = 'L';

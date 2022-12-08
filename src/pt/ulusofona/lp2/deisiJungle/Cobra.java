@@ -1,7 +1,5 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-import java.util.Random;
-
 public class Cobra extends Especie{
     public Cobra() {
         identifier = 'C';
