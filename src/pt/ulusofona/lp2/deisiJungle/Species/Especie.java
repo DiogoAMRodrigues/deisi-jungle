@@ -18,6 +18,7 @@ public abstract class Especie {
         return tipoAnimal;
     }
 
+
     public char getIdentifier() {
         return identifier;
     }

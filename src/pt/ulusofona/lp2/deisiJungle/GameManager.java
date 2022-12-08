@@ -142,7 +142,7 @@ public class GameManager {
         int species = 2;
         boolean hasTarzan = false;
 
-        ArrayList<Jogador> jogadores = new ArrayList<>();
+        ArrayList<Shrooms.Jogador> jogadores = new ArrayList<>();
 
         //Creating tabuleiro
         tabuleiro = new Tabuleiro(jungleSize);
@@ -203,7 +203,7 @@ public class GameManager {
     }
 
     private InitializationError playerAttributeChecksAndAdd(String[][] playersInfo, int player1, int name, String firstPlayerID, int id,
-                                int species, boolean hasTarzan, ArrayList<Jogador> jogadores){
+                                int species, boolean hasTarzan, ArrayList<Shrooms.Jogador> jogadores){
         //name is well-made
         String thisName = playersInfo[player1][name];
         if (thisName == null || thisName.length() == 0) {
@@ -237,7 +237,7 @@ public class GameManager {
 
         //Adding the Player into the Tabuleiro
         if (thisPlayersSpecies != null){
-            Jogador thisPlayerObject = new Jogador(playerID, thisName, thisPlayersSpecies);
+            Shrooms.Jogador thisPlayerObject = new Shrooms.Jogador(playerID, thisName, thisPlayersSpecies);
             jogadores.add(thisPlayerObject);
         }else {
             return InitializationError.ILLEGALANIMAL;
@@ -349,7 +349,7 @@ public class GameManager {
 
     public String[] getPlayerInfo(int playerId) {
         String[] thisPlayer = new String[5];
-        Jogador thisJogador = tabuleiro.getJogaresHS().get(playerId);
+        Shrooms.Jogador thisJogador = tabuleiro.getJogaresHS().get(playerId);
         if (tabuleiro != null && tabuleiro.getJogaresHS() != null && thisJogador != null) {
             thisPlayer[0] = thisJogador.getId() + "";
             thisPlayer[1] = thisJogador.getName();
@@ -364,7 +364,7 @@ public class GameManager {
 
     public String[] getCurrentPlayerInfo() {
         String[] thisPlayer = new String[4];
-        Jogador thisJogador = tabuleiro.getCurrentPlayer();
+        Shrooms.Jogador thisJogador = tabuleiro.getCurrentPlayer();
         thisPlayer[0] = thisJogador.getId() + "";
         thisPlayer[1] = thisJogador.getName();
         /*thisPlayer[2] = thisJogador.getSpecies().getIdentifier() + "";*/
@@ -376,7 +376,7 @@ public class GameManager {
         String[][] thesePlayers = new String[tabuleiro.getJogadores().size()][4];
         if (tabuleiro != null) {
             for (int i = 0; i < tabuleiro.getJogadores().size(); i++) {
-                Jogador thisJogador = tabuleiro.getJogadores().get(i);
+                Shrooms.Jogador thisJogador = tabuleiro.getJogadores().get(i);
                 thesePlayers[i][0] = thisJogador.getId() + "";
                 thesePlayers[i][1] = thisJogador.getName();
                 thesePlayers[i][2] = thisJogador.getSpecies().getIdentifier() + "";
@@ -428,7 +428,7 @@ public class GameManager {
 
         if(!tabuleiro.getWinner() && playersWithEnergy() == 0){
             int max = tabuleiro.getJogadores().get(0).getPosition();
-            Jogador player = tabuleiro.getJogadores().get(0);
+            Shrooms.Jogador player = tabuleiro.getJogadores().get(0);
 
             for(int i = 0; i < tabuleiro.getJogadores().size(); ++i){
                 if(tabuleiro.getJogadores().get(i).getPosition() > max){
@@ -451,7 +451,7 @@ public class GameManager {
         for (int i = tabuleiro.getCasas().length - 1; i >= 0; --i) {
             if (tabuleiro.getCasas()[i].getJogadores().size() != 0) {
                 for (int j = 0; j < tabuleiro.getCasas()[i].getJogadores().size(); ++j) {
-                    Jogador player = tabuleiro.getCasas()[i].getJogadores().get(j);
+                    Shrooms.Jogador player = tabuleiro.getCasas()[i].getJogadores().get(j);
                     /*players.add("#" + counter + " " + player.name + ", " + player.species.getName() + ", " + String.valueOf(player.getPosition()+1));*/
                     counter++;
                 }

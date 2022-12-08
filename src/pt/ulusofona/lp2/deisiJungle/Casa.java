@@ -1,10 +1,11 @@
 package pt.ulusofona.lp2.deisiJungle;
 import pt.ulusofona.lp2.deisiJungle.Food.Food;
+import pt.ulusofona.lp2.deisiJungle.Food.Shrooms;
 
 import java.util.ArrayList;
 
 public class Casa {
-    private final ArrayList<Jogador> jogadores;
+    private final ArrayList<Shrooms.Jogador> jogadores;
 
     private Food comida = null;
     private boolean occupied;
@@ -19,17 +20,17 @@ public class Casa {
         return false;
     }
 
-    public void leaveHouse(Jogador player){
+    public void leaveHouse(Shrooms.Jogador player){
         jogadores.remove(player);
         if (jogadores.isEmpty()){
             this.occupied = false;
         }
     }
-    public void addJogadorCasa(Jogador player){
+    public void addJogadorCasa(Shrooms.Jogador player){
         jogadores.add(player);
         this.occupied = true;
     }
-    public ArrayList<Jogador> getJogadores() {
+    public ArrayList<Shrooms.Jogador> getJogadores() {
         return jogadores;
     }
 

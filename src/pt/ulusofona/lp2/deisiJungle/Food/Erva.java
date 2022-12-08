@@ -1,7 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle.Food;
 
 import pt.ulusofona.lp2.deisiJungle.Codes.AnimalType;
-import pt.ulusofona.lp2.deisiJungle.Jogador;
 
 public class Erva extends Food{
     public Erva() {
@@ -10,7 +9,7 @@ public class Erva extends Food{
     }
 
     @Override
-    public void getEaten(Jogador player) {
+    public void getEaten(Shrooms.Jogador player) {
         AnimalType tipo = player.getSpecies().getTipoAnimal();
         if(tipo == AnimalType.OMNIVORO || tipo == AnimalType.HERBIVORO){
             player.gainEnergy(20);

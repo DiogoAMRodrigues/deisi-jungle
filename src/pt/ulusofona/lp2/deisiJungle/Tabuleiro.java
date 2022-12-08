@@ -1,19 +1,20 @@
 package pt.ulusofona.lp2.deisiJungle;
 
+import pt.ulusofona.lp2.deisiJungle.Food.Shrooms;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 
 public class Tabuleiro {
     private final Casa[] casas;
     private final int size;
-    private final ArrayList<Jogador> jogadores;
-    private final HashMap<Integer, Jogador> jogaresHS;
-    private Jogador currentPlayer;
+    private final ArrayList<Shrooms.Jogador> jogadores;
+    private final HashMap<Integer, Shrooms.Jogador> jogaresHS;
+    private Shrooms.Jogador currentPlayer;
     private int currentPlayerInt;
     private boolean winner = false;
-    private Jogador playerWin;
+    private Shrooms.Jogador playerWin;
     public Tabuleiro(int size) {
         this.size = size;
         this.casas = new Casa[size];
@@ -25,11 +26,11 @@ public class Tabuleiro {
         this.currentPlayerInt = 0;
     }
 
-    public void addJogador(Jogador player){
+    public void addJogador(Shrooms.Jogador player){
         jogadores.add(player);
         jogaresHS.putIfAbsent(player.getId(), player);
 
-        jogadores.sort(Comparator.comparingInt(Jogador::getId));
+        jogadores.sort(Comparator.comparingInt(Shrooms.Jogador::getId));
     }
 
     public void nextTurn(){
@@ -48,19 +49,19 @@ public class Tabuleiro {
         return size;
     }
 
-    public ArrayList<Jogador> getJogadores() {
+    public ArrayList<Shrooms.Jogador> getJogadores() {
         return jogadores;
     }
 
-    public void setCurrentPlayer(Jogador jogador){
+    public void setCurrentPlayer(Shrooms.Jogador jogador){
         this.currentPlayer = jogador;
     }
 
-    public Jogador getCurrentPlayer() {
+    public Shrooms.Jogador getCurrentPlayer() {
         return currentPlayer;
     }
 
-    public HashMap<Integer, Jogador> getJogaresHS() {
+    public HashMap<Integer, Shrooms.Jogador> getJogaresHS() {
         return jogaresHS;
     }
 
@@ -71,11 +72,11 @@ public class Tabuleiro {
         this.winner = win;
     }
 
-    public Jogador getPlayerWin(){
+    public Shrooms.Jogador getPlayerWin(){
         return playerWin;
     }
 
-    public void setPlayerWin(Jogador jogador){
+    public void setPlayerWin(Shrooms.Jogador jogador){
         this.playerWin = jogador;
     }
 
