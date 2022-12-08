@@ -86,7 +86,7 @@ public class GameManager {
         return foodTypes;
     }
 
-    public boolean createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo) {
+    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo) {
         //assuming the start and finishlines count for the amount of houses
         int id = 0;
         int name = 1;
@@ -101,12 +101,12 @@ public class GameManager {
         if (playersInfo != null) {
             //Player amount check
             if (playersInfo.length < 2 || playersInfo.length > 4) {
-                return false;
+                return InitializationError.WRONGPLAYERAMOUNT;
             }
 
             //Tabuleiro size check
             if (jungleSize < playersInfo.length * 2) {
-                return false;
+                return InitializationError.WRONGJUNGLESIZE;
             }
 
             for (int player1 = 0; player1 < playersInfo.length; player1++) {
@@ -116,7 +116,7 @@ public class GameManager {
 
                     if(!playerAttributeChecksAndAdd(playersInfo, player1, name, firstPlayerID, id, species, hasTarzan
                             /*initialEnergy*/, jogadores)){
-                        return false;
+                        return ;
                     }
 
                 } else {
@@ -124,7 +124,7 @@ public class GameManager {
                 }
             }
         } else {
-            return false;
+            return new InitializationError();
         }
 
         for(int i = 0; i < jogadores.size(); ++i){
@@ -144,31 +144,31 @@ public class GameManager {
             }
         }
 
-        return true;
+        return InitializationError.CREATEDJUNGLETRUE;
     }
 
-    private boolean playerAttributeChecksAndAdd(String[][] playersInfo, int player1, int name, String firstPlayerID, int id,
+    private InitializationError playerAttributeChecksAndAdd(String[][] playersInfo, int player1, int name, String firstPlayerID, int id,
                                 int species, boolean hasTarzan /*int initialEnergy*/, ArrayList<Jogador> jogadores){
         //name is well-made
         String thisName = playersInfo[player1][name];
         if (thisName == null || thisName.length() == 0) {
-            return false;
+            return InitializationError.ILLEGALNAME;
         }
 
         //no repeated ID's
         for (int player2 = player1 + 1; player2 < playersInfo.length; player2++) {
             String secondPlayerID = playersInfo[player2][id];
             if (firstPlayerID.equals(secondPlayerID)) {
-                return false;
+                return InitializationError.REPEATEDPLAYER;
             }
         }
         //Check if the ID is an Integer
         try {
             if (Integer.parseInt(firstPlayerID) <= 0) {
-                return false;
+                return InitializationError.NEGATIVEID;
             }
         } catch (NumberFormatException n) {
-            return false;
+            return InitializationError.WRONGTYPEID;
         }
         //is an eligible Species
         String thisSpecies = playersInfo[player1][species];
@@ -176,14 +176,22 @@ public class GameManager {
         if ((thisSpecies.equals("E") || thisSpecies.equals("L") || thisSpecies.equals("P") || thisSpecies.equals("Z") || thisSpecies.equals("S"))
                 || (thisSpecies.equals("T") && !hasTarzan)) {
             //Adding the Player into the Tabuleiro
-/*
-            Jogador thisPlayerObject = new Jogador(Integer.parseInt(playersInfo[player1][0]), thisName, new Especie(thisSpecies.charAt(0)),
-                    initialEnergy);
+
+            int playerId = Integer.parseInt(playersInfo[player1][0]);
+
+            Jogador thisPlayerObject = new Jogador(playerId, thisName, createAnimal(thisSpecies.charAt(0)));
             jogadores.add(thisPlayerObject);
-        } else {*/
+        } else {
             return false;
         }
         return true;
+    }
+
+    private Especie createAnimal(char id){
+        switch (id){
+            case 'E':
+
+        }
     }
 
     public int[] getPlayerIds(int squareNr) {

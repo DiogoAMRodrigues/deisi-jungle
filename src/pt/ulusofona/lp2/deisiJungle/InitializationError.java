@@ -1,5 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-public class InitializationError {
-
+enum InitializationError{
+    CREATEDJUNGLETRUE, WRONGPLAYERAMOUNT, REPEATEDPLAYER, ILLEGALNAME , WRONGJUNGLESIZE, NEGATIVEID, WRONGTYPEID
 }
+

@@ -7,7 +7,7 @@ public class Jogador {
     private int position;
     private int energy;
 
-    public Jogador(int id, String name, Especie species, int energy) {
+    public Jogador(int id, String name, Especie species) {
         this.id = id;
         this.name = name;
         this.species = species;
