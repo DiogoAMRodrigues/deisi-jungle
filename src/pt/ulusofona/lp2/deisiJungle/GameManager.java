@@ -1,10 +1,13 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 import pt.ulusofona.lp2.deisiJungle.Codes.InitializationError;
+import pt.ulusofona.lp2.deisiJungle.Codes.MovementResult;
+import pt.ulusofona.lp2.deisiJungle.Codes.MovementResultCode;
 import pt.ulusofona.lp2.deisiJungle.Food.*;
 import pt.ulusofona.lp2.deisiJungle.Species.*;
 
 import javax.swing.*;
+import java.io.File;
 import java.util.ArrayList;
 
 public class GameManager {
@@ -124,9 +127,9 @@ public class GameManager {
                 //Check if the food is inside the board, can't be on starting pos or finish line
                 if (foodPosition > 0 && foodPosition < tabuleiro.getSize() - 1) {
                     Food food = foodFactory(foodIdentifier);
-                    if (food != null){
+                    if (food != null){/*
                         tabuleiro.getCasas()[foodPosition].setComida(food);
-                    }else {
+                    }else {*/
                         return InitializationError.ILLEGALFOOD;
                     }
                 }else {
@@ -391,8 +394,8 @@ public class GameManager {
         return null;
     }
 
-    /*
-    public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
+
+    public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations) {/*
         boolean state = false;
         //Refuse to let em move if there is already a winner
         if (tabuleiro.getPlayerWin() == null){
@@ -411,8 +414,10 @@ public class GameManager {
             }
             tabuleiro.nextTurn();
         }
-        return state;
-    }*/
+        return state;*/
+        String yes = "yes";
+        return new MovementResult(MovementResultCode.INVALID_MOVEMENT, yes);
+    }
 
     private int playersWithEnergy(){
         int count = 0;
@@ -471,6 +476,14 @@ public class GameManager {
 
     public String whoIsTaborda() {
         return "Wrestling";
+    }
+
+    public boolean saveGame(File file){
+        return false;
+    }
+
+    public boolean loadGame(File file){
+        return false;
     }
 
 }
