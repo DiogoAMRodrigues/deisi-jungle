@@ -12,7 +12,7 @@ public enum InitializationError{
 /* No clue where to go
 public String getMessage(String message){
         return "";
- }
+}
  */
 
 
