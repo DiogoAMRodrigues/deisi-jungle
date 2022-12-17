@@ -1,8 +1,5 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-import pt.ulusofona.lp2.deisiJungle.Codes.InitializationError;
-import pt.ulusofona.lp2.deisiJungle.Codes.MovementResult;
-import pt.ulusofona.lp2.deisiJungle.Codes.MovementResultCode;
 import pt.ulusofona.lp2.deisiJungle.Food.*;
 import pt.ulusofona.lp2.deisiJungle.Species.*;
 

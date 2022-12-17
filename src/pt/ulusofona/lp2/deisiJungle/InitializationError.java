@@ -1,4 +1,4 @@
-package pt.ulusofona.lp2.deisiJungle.Codes;
+package pt.ulusofona.lp2.deisiJungle;
 
 public enum InitializationError{
     //Player and board checks
