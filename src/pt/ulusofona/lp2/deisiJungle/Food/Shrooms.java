@@ -17,19 +17,37 @@ public class Shrooms extends Food {
 
     @Override
     public int getEatenSim(Jogador player, int turn) {
+        double percentN =(double) n / 100;
         int thisPlayersEnergy = player.getEnergy();
-        double percentN = n / 100;
+        int beginningEnergy = thisPlayersEnergy;
+        int amount = (int) (thisPlayersEnergy * percentN);
         if (turn%2 == 0){
-            player.gainEnergy((int) (thisPlayersEnergy * percentN));
+            thisPlayersEnergy += amount;
         }else {
-            player.loseEnergy((int) (thisPlayersEnergy * percentN));
+            thisPlayersEnergy -= amount;
         }
-        return player.getEnergy();
-        //tooltip: “Cogumelo Magico: +- <N>% energia"           N = n
+        int lostEnergy = beginningEnergy - thisPlayersEnergy;
+        return lostEnergy;
     }
 
     @Override
     public String getEaten(Tabuleiro tabuleiro){
+        Jogador player = tabuleiro.getCurrentPlayer();
+        int thisPlayersEnergy = player.getEnergy();
+        double percentN =(double) n / 100;
+        int turn = tabuleiro.getTurns();
+        String tooltip = "";
+        if (turn%2 == 0){
+            player.gainEnergy((int) (thisPlayersEnergy * percentN));
+            tooltip = "Cogumelo Magico: + " + n + "% energia";
+        }else {
+            player.loseEnergy((int) (thisPlayersEnergy * percentN));
+            tooltip = "Cogumelo Magico: - " + n + "% energia";
+        }
+        return tooltip;
+    }
 
+    public int getN() {
+        return n;
     }
 }

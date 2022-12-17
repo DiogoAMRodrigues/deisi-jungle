@@ -14,22 +14,35 @@ public class Carne extends Food {
     @Override
     public int getEatenSim(Jogador player, int turn) {
         AnimalType tipo = player.getSpecies().getTipoAnimal();
-        int turns = tabuleiro.getTurns();
-
+        int thisPlayersEnergy = player.getEnergy();
+        int beginningEnergy = thisPlayersEnergy;
         if (tipo != AnimalType.HERBIVORO ){
-            if (turns <= 12){
-                player.gainEnergy(50);
+            if (turn <= 12){
+                thisPlayersEnergy += 50;
             }else {
-                int thisPlayersEnergy = player.getEnergy();
-                player.loseEnergy(thisPlayersEnergy/2);
+                thisPlayersEnergy /= 2;
             }
         }
-        return player.getEnergy();
-        //tooltip: "Carne : +- 50 energia : <N> jogadas"        N = turns      if N > 12    tooltip:"Carne toxica"
+        int lostEnergy = beginningEnergy - thisPlayersEnergy;
+        return lostEnergy;
     }
 
     @Override
     public String getEaten(Tabuleiro tabuleiro){
-
+        Jogador player = tabuleiro.getCurrentPlayer();
+        AnimalType tipo = player.getSpecies().getTipoAnimal();
+        String tooltip = "";
+        int turns = tabuleiro.getTurns();
+        if (tipo != AnimalType.HERBIVORO ){
+            if (turns <= 12){
+                player.gainEnergy(50);
+                tooltip = "Carne : + 50 energia : "+ turns +" jogadas";
+            }else {
+                int thisPlayersEnergy = player.getEnergy();
+                player.loseEnergy(thisPlayersEnergy/2);
+                tooltip = "Carne : - 50 energia : Carne toxica jogadas";
+            }
+        }
+        return tooltip;
     }
 }

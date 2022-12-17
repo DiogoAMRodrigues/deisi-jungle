@@ -13,18 +13,31 @@ public class Erva extends Food{
     @Override
     public int getEatenSim(Jogador player, int turn) {
         AnimalType tipo = player.getSpecies().getTipoAnimal();
+        int thisPlayersEnergy = player.getEnergy();
+        int beginningEnergy = thisPlayersEnergy;
         if(tipo == AnimalType.OMNIVORO || tipo == AnimalType.HERBIVORO){
-            player.gainEnergy(20);
+            thisPlayersEnergy += 20;
         }
         else if(tipo == AnimalType.CARNIVORO){
-            player.loseEnergy(20);
+            thisPlayersEnergy -= 20;
         }
-        return player.getEnergy();
-        //tooltip: "Erva : +- 20 energia"
+        int lostEnergy = beginningEnergy - thisPlayersEnergy;
+        return lostEnergy;
     }
 
     @Override
     public String getEaten(Tabuleiro tabuleiro){
-
+        Jogador player = tabuleiro.getCurrentPlayer();
+        AnimalType tipo = player.getSpecies().getTipoAnimal();
+        String tooltip = "";
+        if(tipo == AnimalType.OMNIVORO || tipo == AnimalType.HERBIVORO){
+            player.gainEnergy(20);
+            tooltip = "Erva : + 20 energia";
+        }
+        else if(tipo == AnimalType.CARNIVORO){
+            player.loseEnergy(20);
+            tooltip = "Erva : - 20 energia";
+        }
+        return tooltip;
     }
 }

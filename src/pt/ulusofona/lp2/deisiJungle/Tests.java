@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 import org.junit.Test;
+import pt.ulusofona.lp2.deisiJungle.Food.*;
 import pt.ulusofona.lp2.deisiJungle.Species.*;
 
 import static junit.framework.TestCase.assertEquals;
@@ -227,6 +228,62 @@ public class Tests {
          }
       }
       assertEquals(expected, actual);
+   }
+
+   @Test
+   public void getEatenSimTest_04(){
+      Leao lion = new Leao();
+      Elefante elefante = new Elefante();
+      Tartaruga turtle = new Tartaruga();
+      Jogador jogadorCarnivoro = new Jogador(1, "John", lion);
+      Jogador jogadorHerbivoro = new Jogador(2, "Doe", elefante);
+      Jogador jogadorOmivoro = new Jogador(3, "Ketchup", turtle);
+      int turn = 2;
+
+      //Omnivoro Tests
+      Agua agua = new Agua();
+      int returnValue = agua.getEatenSim(jogadorCarnivoro, turn);
+      assertEquals(-15, returnValue);
+
+      Bananas banana = new Bananas();
+      returnValue = banana.getEatenSim(jogadorCarnivoro, turn);
+      //has not eaten Banana
+      assertEquals(-40,returnValue);
+
+      jogadorCarnivoro.eatBanana();
+      returnValue = banana.getEatenSim(jogadorCarnivoro, turn);
+      //has eatenBanana
+      assertEquals(+40,returnValue);
+
+      Carne meat = new Carne();
+      returnValue = meat.getEatenSim(jogadorCarnivoro, turn);
+      //before turn 12
+      assertEquals(-50, returnValue);
+
+      turn = 14;
+      //after turn 12
+      returnValue = meat.getEatenSim(jogadorCarnivoro, turn);
+      assertEquals(40, returnValue);
+
+      Erva grass = new Erva();
+      returnValue = grass.getEatenSim(jogadorCarnivoro, turn);
+      assertEquals(20, returnValue);
+
+      //turno par
+      Shrooms shrooms = new Shrooms();
+      returnValue = shrooms.getEatenSim(jogadorCarnivoro, turn);
+      double percent = (double) shrooms.getN()/100;
+      int expected = ((int) percent * 80) * (-1);
+      assertEquals(expected, returnValue);
+
+      turn = 3;
+      //turno ímpar
+      returnValue = shrooms.getEatenSim(jogadorCarnivoro, turn);
+      percent = (double) shrooms.getN()/100;
+      expected = (int) percent * 80;
+      assertEquals(expected, returnValue);
+
+
    }
 
 }

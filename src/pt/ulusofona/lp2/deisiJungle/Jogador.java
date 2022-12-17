@@ -117,6 +117,7 @@ public class Jogador {
 
 
 
+
         }
         /*
         //everythingsFine
@@ -145,5 +146,8 @@ public class Jogador {
                 this.setPosition(otherHousePosition);
             }
         }*/
+
+        //so it dont die
+        return null;
     }
 }

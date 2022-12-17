@@ -14,17 +14,17 @@ public class Bananas extends Food {
     @Override
     public int getEatenSim(Jogador player, int turn) {
         int bananaEnergy = 40;
+        int thisPlayersEnergy = player.getEnergy();
+        int beginningEnergy = thisPlayersEnergy;
         if(bananaAmount > 0){
             if (player.getHasEatenBanana()){
-                player.loseEnergy(bananaEnergy);
+                thisPlayersEnergy -= bananaEnergy;
             }else {
-                player.gainEnergy(bananaEnergy);
-                player.eatBanana();
+                thisPlayersEnergy += bananaEnergy;
             }
-            bananaAmount--;
         }
-        return player.getEnergy();
-        //tooltip: "Bananas : <N> : + 40 energia"       N = amnt of bananas
+        int lostEnergy = beginningEnergy - thisPlayersEnergy;
+        return lostEnergy;
     }
 
     @Override

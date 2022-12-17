@@ -12,14 +12,16 @@ public class Agua extends Food {
     @Override
     public int getEatenSim(Jogador player, int turn) {
         AnimalType tipo = player.getSpecies().getTipoAnimal();
+        int thisPlayersEnergy = player.getEnergy();
+        int beginningEnergy = thisPlayersEnergy;
         if(tipo == AnimalType.CARNIVORO || tipo == AnimalType.HERBIVORO){
-            player.gainEnergy(15);
+            thisPlayersEnergy += 15;
         }
         else{
-            player.gainEnergy((int) (player.getEnergy()*1.2));
+            thisPlayersEnergy += (int) (thisPlayersEnergy * 1.2);
         }
-        return player.getEnergy();
-        //tooltip: "Agua : + 10U|20% energia"        U = unidades
+        int lostEnergy = beginningEnergy - thisPlayersEnergy;
+        return lostEnergy;
     }
     @Override
     public String getEaten(Tabuleiro tabuleiro){
