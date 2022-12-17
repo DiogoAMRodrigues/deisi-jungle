@@ -6,6 +6,19 @@ public enum InitializationError{
     WRONGTYPEID, ILLEGALANIMAL, TOOMANYTARZAN, GOODPLAYERATTRIBUTES, THISPLAYERSINFOISNULL, PLAYERINFOISNULL,
 
     //FoodChecks
-    FOODSINFOISNULL, WRONGFOODARRAYDIMENSIONS, FOODOUTSIDETABULEIRO, ILLEGALFOOD
-};
+    FOODSINFOISNULL, WRONGFOODARRAYDIMENSIONS, FOODOUTSIDETABULEIRO, ILLEGALFOOD;
+
+    public String getMessage(String message){
+        String msg = "";
+        if (message != null && !message.equals("")){
+            msg = message;
+        }else {
+            return "Ilegal";
+        }
+        return msg;
+    }
+}
+
+
+
 
