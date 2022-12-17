@@ -18,7 +18,7 @@ public class Agua extends Food {
             thisPlayersEnergy += 15;
         }
         else{
-            thisPlayersEnergy += (int) (thisPlayersEnergy * 1.2);
+            thisPlayersEnergy += (int) (thisPlayersEnergy * 0.2);
         }
         int lostEnergy = beginningEnergy - thisPlayersEnergy;
         return lostEnergy;
@@ -35,7 +35,7 @@ public class Agua extends Food {
             tooltip = "Agua : + " + amntGained + " energia";
         }
         else{
-            amntGained = (int) (player.getEnergy()*1.2);
+            amntGained = (int) (player.getEnergy()*0.2);
             player.gainEnergy(amntGained);
             tooltip = "Agua : + " + amntGained + "U|20% energia";
         }

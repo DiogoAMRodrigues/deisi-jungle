@@ -240,20 +240,10 @@ public class Tests {
       Jogador jogadorOmivoro = new Jogador(3, "Ketchup", turtle);
       int turn = 2;
 
-      //Omnivoro Tests
+      //OMNIVORO
       Agua agua = new Agua();
       int returnValue = agua.getEatenSim(jogadorCarnivoro, turn);
       assertEquals(-15, returnValue);
-
-      Bananas banana = new Bananas();
-      returnValue = banana.getEatenSim(jogadorCarnivoro, turn);
-      //has not eaten Banana
-      assertEquals(-40,returnValue);
-
-      jogadorCarnivoro.eatBanana();
-      returnValue = banana.getEatenSim(jogadorCarnivoro, turn);
-      //has eatenBanana
-      assertEquals(+40,returnValue);
 
       Carne meat = new Carne();
       returnValue = meat.getEatenSim(jogadorCarnivoro, turn);
@@ -269,6 +259,38 @@ public class Tests {
       returnValue = grass.getEatenSim(jogadorCarnivoro, turn);
       assertEquals(20, returnValue);
 
+
+      //HERBIVORO
+      returnValue = agua.getEatenSim(jogadorHerbivoro, turn);
+      assertEquals(-15, returnValue);
+
+      returnValue = meat.getEatenSim(jogadorHerbivoro, turn);
+      assertEquals(0, returnValue);
+
+      returnValue = grass.getEatenSim(jogadorHerbivoro, turn);
+      assertEquals(-20, returnValue);
+
+
+      //OMNIVORO
+      returnValue = agua.getEatenSim(jogadorOmivoro, turn);
+      assertEquals((int)-(jogadorOmivoro.getEnergy() *0.2), returnValue);
+      //meat is same as omnivore
+      returnValue = grass.getEatenSim(jogadorHerbivoro, turn);
+      assertEquals(-20, returnValue);
+
+
+      //ALL ANIMAL SAME
+
+      Bananas banana = new Bananas();
+      returnValue = banana.getEatenSim(jogadorCarnivoro, turn);
+      //has not eaten Banana
+      assertEquals(-40,returnValue);
+
+      jogadorCarnivoro.eatBanana();
+      returnValue = banana.getEatenSim(jogadorCarnivoro, turn);
+      //has eatenBanana
+      assertEquals(+40,returnValue);
+
       //turno par
       Shrooms shrooms = new Shrooms();
       returnValue = shrooms.getEatenSim(jogadorCarnivoro, turn);
@@ -282,8 +304,6 @@ public class Tests {
       percent = (double) shrooms.getN()/100;
       expected = (int) percent * 80;
       assertEquals(expected, returnValue);
-
-
    }
 
 }
