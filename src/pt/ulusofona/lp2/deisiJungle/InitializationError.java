@@ -8,16 +8,12 @@ public enum InitializationError{
     //FoodChecks
     FOODSINFOISNULL, WRONGFOODARRAYDIMENSIONS, FOODOUTSIDETABULEIRO, ILLEGALFOOD;
 
-    public String getMessage(String message){
-        String msg = "";
-        if (message != null && !message.equals("")){
-            msg = message;
-        }else {
-            return "Ilegal";
-        }
-        return msg;
-    }
 }
+/* No clue where to go
+public String getMessage(String message){
+        return "";
+ }
+ */
 
 
 
