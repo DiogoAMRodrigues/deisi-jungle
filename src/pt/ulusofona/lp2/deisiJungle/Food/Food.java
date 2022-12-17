@@ -6,7 +6,8 @@ public abstract class Food {
     protected char id;
     protected String img;
 
-    public abstract void getEaten(Jogador player, Tabuleiro tabuleiro);
+    public abstract int getEatenSim(Jogador player, int turn);
+    public abstract String getEaten(Tabuleiro tabuleiro);
 
     public char getId() {
         return id;

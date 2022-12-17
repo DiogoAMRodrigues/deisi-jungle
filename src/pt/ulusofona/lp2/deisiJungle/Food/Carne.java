@@ -12,7 +12,7 @@ public class Carne extends Food {
     }
 
     @Override
-    public void getEaten(Jogador player, Tabuleiro tabuleiro) {
+    public int getEatenSim(Jogador player, int turn) {
         AnimalType tipo = player.getSpecies().getTipoAnimal();
         int turns = tabuleiro.getTurns();
 
@@ -24,6 +24,12 @@ public class Carne extends Food {
                 player.loseEnergy(thisPlayersEnergy/2);
             }
         }
+        return player.getEnergy();
         //tooltip: "Carne : +- 50 energia : <N> jogadas"        N = turns      if N > 12    tooltip:"Carne toxica"
+    }
+
+    @Override
+    public String getEaten(Tabuleiro tabuleiro){
+
     }
 }

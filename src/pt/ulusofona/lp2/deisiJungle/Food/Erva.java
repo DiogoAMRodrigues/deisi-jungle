@@ -11,7 +11,7 @@ public class Erva extends Food{
     }
 
     @Override
-    public void getEaten(Jogador player, Tabuleiro tabuleiro) {
+    public int getEatenSim(Jogador player, int turn) {
         AnimalType tipo = player.getSpecies().getTipoAnimal();
         if(tipo == AnimalType.OMNIVORO || tipo == AnimalType.HERBIVORO){
             player.gainEnergy(20);
@@ -19,6 +19,12 @@ public class Erva extends Food{
         else if(tipo == AnimalType.CARNIVORO){
             player.loseEnergy(20);
         }
+        return player.getEnergy();
         //tooltip: "Erva : +- 20 energia"
+    }
+
+    @Override
+    public String getEaten(Tabuleiro tabuleiro){
+
     }
 }

@@ -1,5 +1,8 @@
 package pt.ulusofona.lp2.deisiJungle;
+import pt.ulusofona.lp2.deisiJungle.Food.Food;
 import pt.ulusofona.lp2.deisiJungle.Species.Especie;
+
+import java.util.ArrayList;
 
 public class Jogador {
     private final int id;
@@ -85,7 +88,37 @@ public class Jogador {
     }
 
 
-    public void theMovementPart(Tabuleiro tabuleiro, int nrSquares)  {/*
+    public MovementResult theMovementPart(Tabuleiro tabuleiro, int nrSquares, boolean byPassValidations)  {
+        MovementResult theResult = new MovementResult(MovementResultCode.VALID_MOVEMENT,"");
+        Especie mySpecies = this.species;
+        //Refuse to let em move if there is already a winner
+        if (tabuleiro.getPlayerWin() == null){
+            //Is position in board if not go to last postion
+            int moveToPos = this.position += nrSquares;
+            if (moveToPos >= tabuleiro.getSize()){
+                moveToPos = tabuleiro.getSize();
+            }
+            //Check if the movementspeed is legal
+            if (!(mySpecies.getMinSpeed() <= nrSquares && mySpecies.getMaxSpeed() >= nrSquares)){
+                theResult = new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Illegal movementSpeed");
+                return theResult;
+            }
+            //Check energy I need for this House
+            int amountOfEnergyRequired = mySpecies.getEnergyConsumption();
+            ArrayList<Food> thisHousesFood = tabuleiro.getCasas()[moveToPos].getComida();
+            for (int i = 0; i < thisHousesFood.size(); i++){
+                amountOfEnergyRequired += thisHousesFood.get(i).getEatenSim(this, tabuleiro.getTurns());
+            }
+            //Current energy needs to be bigger than energy usage while move
+            if (this.energy <= amountOfEnergyRequired){
+                theResult = new MovementResult(MovementResultCode.NO_ENERGY, "Not enough energy");
+                return theResult;
+            }
+
+
+
+        }
+        /*
         //everythingsFine
         int playersPosition = this.getPosition();
         Casa thisHouse = tabuleiro.getCasas()[playersPosition];

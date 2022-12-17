@@ -16,8 +16,7 @@ public class Shrooms extends Food {
     }
 
     @Override
-    public void getEaten(Jogador player, Tabuleiro tabuleiro) {
-        int turn = tabuleiro.getTurns();
+    public int getEatenSim(Jogador player, int turn) {
         int thisPlayersEnergy = player.getEnergy();
         double percentN = n / 100;
         if (turn%2 == 0){
@@ -25,6 +24,12 @@ public class Shrooms extends Food {
         }else {
             player.loseEnergy((int) (thisPlayersEnergy * percentN));
         }
+        return player.getEnergy();
         //tooltip: “Cogumelo Magico: +- <N>% energia"           N = n
+    }
+
+    @Override
+    public String getEaten(Tabuleiro tabuleiro){
+
     }
 }

@@ -12,7 +12,7 @@ public class Bananas extends Food {
     }
 
     @Override
-    public void getEaten(Jogador player, Tabuleiro tabuleiro) {
+    public int getEatenSim(Jogador player, int turn) {
         int bananaEnergy = 40;
         if(bananaAmount > 0){
             if (player.getHasEatenBanana()){
@@ -23,6 +23,26 @@ public class Bananas extends Food {
             }
             bananaAmount--;
         }
+        return player.getEnergy();
         //tooltip: "Bananas : <N> : + 40 energia"       N = amnt of bananas
+    }
+
+    @Override
+    public String getEaten(Tabuleiro tabuleiro){
+        String tooltip = "";
+        Jogador player = tabuleiro.getCurrentPlayer();
+        int bananaEnergy = 40;
+        if(bananaAmount > 0){
+            if (player.getHasEatenBanana()){
+                player.loseEnergy(bananaEnergy);
+                tooltip = "Bananas : " + bananaAmount + " : - 40 energia";
+            }else {
+                player.gainEnergy(bananaEnergy);
+                player.eatBanana();
+                tooltip = "Bananas : " + bananaAmount + " : + 40 energia";
+            }
+            bananaAmount--;
+        }
+        return tooltip;
     }
 }
