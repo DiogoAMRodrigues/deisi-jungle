@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class GameManager {
-    private Tabuleiro tabuleiro;
+    public Tabuleiro tabuleiro;
 
     public GameManager() {}
 
@@ -163,6 +163,7 @@ public class GameManager {
 
                 if (playersInfo[player1] != null) {
                     InitializationError theCheck = playerAttributeChecksAndAdd(playersInfo, player1, name, firstPlayerID, id, species, hasTarzan, jogadores);
+                    System.out.println("here");
                     if(!(theCheck.getMessage().equals("GOODPLAYERATTRIBUTES"))){
                         return theCheck;
                     }
@@ -272,7 +273,7 @@ public class GameManager {
                 return c;
 
             default:
-                return null;
+                return new Elefante();
         }
     }
 
@@ -351,11 +352,11 @@ public class GameManager {
         String[] thisPlayer = new String[5];
         Jogador thisJogador = tabuleiro.getJogaresHS().get(playerId);
         if (tabuleiro != null && tabuleiro.getJogaresHS() != null && thisJogador != null) {
-            thisPlayer[0] = thisJogador.getId() + "";
-            thisPlayer[1] = thisJogador.getName();
-            thisPlayer[2] = thisJogador.getSpecies().getIdentifier() + "";
-            thisPlayer[3] = thisJogador.getEnergy() + "";
-            thisPlayer[4] = thisJogador.getSpecies().getMinSpeed() + ".." + thisJogador.getSpecies().getMaxSpeed();
+                thisPlayer[0] = thisJogador.getId() + "";
+                thisPlayer[1] = thisJogador.getName();
+                thisPlayer[2] = thisJogador.getSpecies().getIdentifier() + "";
+                thisPlayer[3] = thisJogador.getEnergy() + "";
+                thisPlayer[4] = thisJogador.getSpecies().getMinSpeed() + ".." + thisJogador.getSpecies().getMaxSpeed();
         } else {
             return null;
         }
