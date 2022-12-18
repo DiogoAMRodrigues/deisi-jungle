@@ -151,36 +151,35 @@ public class GameManager {
         //Creating tabuleiro
         tabuleiro = new Tabuleiro(jungleSize);
 
-        if (playersInfo != null) {
-            //Player amount check
-            if (playersInfo.length < 2 || playersInfo.length > 4) {
-                return new InitializationError("WRONGPLAYERAMOUNT");
-            }
-
-            //Tabuleiro size check
-            if (jungleSize < playersInfo.length * 2) {
-                return new InitializationError("WRONGJUNGLESIZE");
-            }
-
-            for (int player1 = 0; player1 < playersInfo.length; player1++) {
-                String firstPlayerID = "";
-                if (playersInfo[player1] != null) {
-                    firstPlayerID = playersInfo[player1][id];
-                    InitializationError theCheck = playerAttributeChecksAndAdd(playersInfo, player1, name, firstPlayerID, id, species, hasTarzan, jogadores);
-                    if(!(theCheck.getMessage().equals("GOODPLAYERATTRIBUTES"))){
-                        return theCheck;
-                    }
-
-                    //Check if player is Tarzan
-                    if (!hasTarzan && playersInfo[player1][species].equals("Z")){
-                        hasTarzan = true;
-                    }
-                } else {
-                    return new InitializationError("THISPLAYERSINFOISNULL");
-                }
-            }
-        } else {
+        if (playersInfo == null) {
             return new InitializationError("PLAYERINFOISNULL");
+        }
+        //Player amount check
+        if (playersInfo.length < 2 || playersInfo.length > 4) {
+            return new InitializationError("WRONGPLAYERAMOUNT");
+        }
+
+        //Tabuleiro size check
+        if (jungleSize < playersInfo.length * 2) {
+            return new InitializationError("WRONGJUNGLESIZE");
+        }
+
+        for (int player1 = 0; player1 < playersInfo.length; player1++) {
+            String firstPlayerID = "";
+            if (playersInfo[player1] != null) {
+                firstPlayerID = playersInfo[player1][id];
+                InitializationError theCheck = playerAttributeChecksAndAdd(playersInfo, player1, name, firstPlayerID, id, species, hasTarzan, jogadores);
+                if(!(theCheck.getMessage().equals("GOODPLAYERATTRIBUTES"))){
+                    return theCheck;
+                }
+
+                //Check if player is Tarzan
+                if (!hasTarzan && playersInfo[player1][species].equals("Z")){
+                    hasTarzan = true;
+                }
+            } else {
+                return new InitializationError("THISPLAYERSINFOISNULL");
+            }
         }
 
         //add players to board
