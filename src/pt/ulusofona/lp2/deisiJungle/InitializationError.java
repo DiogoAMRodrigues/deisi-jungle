@@ -1,14 +1,14 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 class InitializationError{
-    String asd;
+    String mensagem;
 
     public InitializationError(String asd){
-        this.asd = asd;
+        this.mensagem = asd;
     }
 
     public String getMessage(){
-        return "";
+        return mensagem;
     }
 }
 
