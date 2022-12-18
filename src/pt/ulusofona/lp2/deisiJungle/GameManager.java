@@ -167,7 +167,7 @@ public class GameManager {
 
                 if (playersInfo[player1] != null) {
                     InitializationError theCheck = playerAttributeChecksAndAdd(playersInfo, player1, name, firstPlayerID, id, species, hasTarzan, jogadores);
-                    if(!(theCheck.asd.equals("GOODPLAYERATTRIBUTES"))){
+                    if(!(theCheck.getMessage().equals("GOODPLAYERATTRIBUTES"))){
                         return theCheck;
                     }
 
