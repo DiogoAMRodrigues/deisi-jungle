@@ -430,6 +430,29 @@ public class Tests {
       players[1][2] = "Z";
       theError = "TOOMANYTARZAN";
       assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      g = new GameManager();
+   }
+
+   @Test
+   public void moveCurrentPlayer_08(){
+      GameManager g = new GameManager();
+
+      String[][] players = new String[4][3];
+      players[0][0] = "1";
+      players[0][1] = "Jeff";
+      players[0][2] = "E";
+      players[1][0] = "2";
+      players[1][1] = "Kennedy";
+      players[1][2] = "C";
+      players[2][0] = "3";
+      players[2][1] = "Heinz";
+      players[2][2] = "L";
+      players[3][0] = "4";
+      players[3][1] = "Ketchup";
+      players[3][2] = "P";
+
+      g.createInitialJungle(20, players);
+
 
    }
 }
