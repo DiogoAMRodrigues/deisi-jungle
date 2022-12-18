@@ -306,9 +306,24 @@ public class Tests {
 
    @Test
    public void getPlayersInfo_05(){
+      GameManager g = new GameManager();
+      Tabuleiro tabuleiro = new Tabuleiro(20);
       Jogador player1 = new Jogador(1, "Jeff", new Elefante());
+      Jogador player2 = new Jogador(2, "Kennedy", new Cobra());
+      //add to tabuleiro
+      tabuleiro.addJogador(player1);
+      tabuleiro.addJogador(player2);
 
-      String[][] thesePlayers = new String[2][4];
+      String[][] expected = new String[2][4];
+      expected[0][0] = "1";
+      expected[0][1] = "Jeff";
+      expected[0][2] = "E";
+      expected[0][3] = "180";
+      expected[1][0] = "2";
+      expected[1][1] = "Kennedy";
+      expected[1][2] = "C";
+      expected[1][3] = "100";
 
+      assertEquals(expected, g.getPlayersInfo());
    }
 }
