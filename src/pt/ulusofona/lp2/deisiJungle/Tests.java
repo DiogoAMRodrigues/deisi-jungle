@@ -449,9 +449,8 @@ public class Tests {
       players[3][1] = "Ketchup";
       players[3][2] = "P";
 
-      if (g.createInitialJungle(20, players) != null){
+      g.createInitialJungle(20, players);
 
-      }
 
 
 

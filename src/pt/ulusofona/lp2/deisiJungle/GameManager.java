@@ -387,6 +387,9 @@ public class GameManager {
     }
 
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
+        if (tabuleiro.getCurrentPlayer() == null){
+            return new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Problemo");
+        }
         MovementResult thisResult = tabuleiro.getCurrentPlayer().theMovementPart(tabuleiro, nrSquares, bypassValidations);
         tabuleiro.nextTurn();
         return thisResult;
