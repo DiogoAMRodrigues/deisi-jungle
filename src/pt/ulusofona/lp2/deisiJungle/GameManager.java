@@ -165,6 +165,7 @@ public class GameManager {
         }
 
         for (int player1 = 0; player1 < playersInfo.length; player1++) {
+
             String firstPlayerID = "";
             if (playersInfo[player1] == null) {
                 return new InitializationError("THISPLAYERSINFOISNULL");
