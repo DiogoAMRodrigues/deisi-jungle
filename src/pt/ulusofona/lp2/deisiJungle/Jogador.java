@@ -79,10 +79,6 @@ public class Jogador {
         return position;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
     public int getEnergy() {
         return energy;
     }
@@ -94,14 +90,21 @@ public class Jogador {
         //Refuse to let em move if there is already a winner
         if (tabuleiro.getPlayerWin() == null){
             //Is position in board if not go to last postion
-            int moveToPos = this.position += nrSquares;
+            int moveToPos = this.position + nrSquares;
             if (moveToPos >= tabuleiro.getSize()){
-                moveToPos = tabuleiro.getSize();
+                moveToPos = tabuleiro.getSize() - 1;
+            }
+            //Goes behind first house
+            if (moveToPos < 0){
+                theResult = new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Illegal move behind");
+                return theResult;
             }
             //Check if the movementspeed is legal
-            if (!(mySpecies.getMinSpeed() <= nrSquares && mySpecies.getMaxSpeed() >= nrSquares)){
-                theResult = new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Illegal movementSpeed");
-                return theResult;
+            if (!byPassValidations) {
+                if (!(mySpecies.getMinSpeed() <= Math.abs(nrSquares) && mySpecies.getMaxSpeed() >= Math.abs(nrSquares))) {
+                    theResult = new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Illegal movementSpeed");
+                    return theResult;
+                }
             }
             //Check energy I need for this House
             int amountOfEnergyRequired = mySpecies.getEnergyConsumption();
@@ -114,6 +117,34 @@ public class Jogador {
                 theResult = new MovementResult(MovementResultCode.NO_ENERGY, "Not enough energy");
                 return theResult;
             }
+            //If he moves do this
+            if (nrSquares != 0){
+                Casa myHouse = tabuleiro.getCasas()[this.position];
+                myHouse.leaveHouse(this);
+
+                //Add to other house
+                Casa moveToHouse = tabuleiro.getCasas()[moveToPos];
+                moveToHouse.addJogadorCasa(this);
+                position = moveToPos;
+
+                //Lose energy
+                loseEnergyMovement();
+                for (int i = 0; i < thisHousesFood.size(); i++){
+                    thisHousesFood.get(i).getEaten(tabuleiro);
+                }
+                //Check if he won
+                if (moveToPos == tabuleiro.getSize() - 1){
+                    tabuleiro.winGame();
+                    tabuleiro.setPlayerWin(this);
+                }
+            }else {
+                gainEnergyResting();
+                for (int i = 0; i < thisHousesFood.size(); i++){
+                    thisHousesFood.get(i).getEaten(tabuleiro);
+                }
+            }
+
+
         }
 
 

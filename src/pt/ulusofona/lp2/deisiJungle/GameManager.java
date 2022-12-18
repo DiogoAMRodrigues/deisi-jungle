@@ -110,7 +110,7 @@ public class GameManager {
         return foodTypes;
     }
 
-    public InitializationError setFoodOnBoard(String[][] foodsInfo){
+    private InitializationError setFoodOnBoard(String[][] foodsInfo){
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
 

@@ -75,8 +75,9 @@ public class Tabuleiro {
     public boolean getWinner(){
         return winner;
     }
-    public void setWinner(boolean win){
-        this.winner = win;
+
+    public void winGame(){
+        winner = true;
     }
 
     public Jogador getPlayerWin(){
