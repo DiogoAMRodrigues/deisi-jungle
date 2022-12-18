@@ -450,7 +450,8 @@ public class Tests {
       players[3][2] = "P";
 
       g.createInitialJungle(20, players);
-
+      g.getTabuleiro().winGame();
+      g.moveCurrentPlayer(4, false);
 
 
 
