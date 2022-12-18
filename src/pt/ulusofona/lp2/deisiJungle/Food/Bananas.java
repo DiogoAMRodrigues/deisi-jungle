@@ -3,6 +3,8 @@ package pt.ulusofona.lp2.deisiJungle.Food;
 import pt.ulusofona.lp2.deisiJungle.Jogador;
 import pt.ulusofona.lp2.deisiJungle.Tabuleiro;
 
+import pt.ulusofona.lp2.deisiJungle.Jogador;
+
 public class Bananas extends Food {
 
     int bananaAmount = 3;

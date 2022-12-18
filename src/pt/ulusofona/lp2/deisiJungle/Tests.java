@@ -294,16 +294,13 @@ public class Tests {
       //turno par
       Shrooms shrooms = new Shrooms();
       returnValue = shrooms.getEatenSim(jogadorCarnivoro, turn);
-      double percent = (double) shrooms.getN()/100;
-      int expected = ((int) percent * 80) * (-1);
-      assertEquals(expected, returnValue);
+      double expected = (((double)shrooms.getN()/100) + 1) * 80 * (-1);
+      assertEquals((int)expected, returnValue);
 
       turn = 3;
       //turno ímpar
       returnValue = shrooms.getEatenSim(jogadorCarnivoro, turn);
-      percent = (double) shrooms.getN()/100;
-      expected = (int) percent * 80;
-      assertEquals(expected, returnValue);
+      expected = (((double)shrooms.getN()/100) + 1) * 80;
+      assertEquals((int)expected, returnValue);
    }
-
 }

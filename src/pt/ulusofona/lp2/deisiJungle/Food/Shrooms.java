@@ -20,7 +20,7 @@ public class Shrooms extends Food {
         double percentN =(double) n / 100;
         int thisPlayersEnergy = player.getEnergy();
         int beginningEnergy = thisPlayersEnergy;
-        int amount = (int) (thisPlayersEnergy * percentN);
+        int amount = (int) (thisPlayersEnergy * (1+percentN));
         if (turn%2 == 0){
             thisPlayersEnergy += amount;
         }else {

@@ -114,11 +114,9 @@ public class Jogador {
                 theResult = new MovementResult(MovementResultCode.NO_ENERGY, "Not enough energy");
                 return theResult;
             }
-
-
-
-
         }
+
+
         /*
         //everythingsFine
         int playersPosition = this.getPosition();
