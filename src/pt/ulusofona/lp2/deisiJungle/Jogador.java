@@ -114,6 +114,7 @@ public class Jogador {
             for (int i = 0; i < thisHousesFood.size(); i++){
                 amountOfEnergyRequired += thisHousesFood.get(i).getEatenSim(this, tabuleiro.getTurns());
             }
+            System.out.println(amountOfEnergyRequired);
             //Current energy needs to be bigger than energy usage while move
             if (this.energy <= amountOfEnergyRequired){
                 theResult = new MovementResult(MovementResultCode.NO_ENERGY, "Not enough energy");

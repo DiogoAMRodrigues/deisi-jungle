@@ -165,6 +165,7 @@ public class GameManager {
         }
 
         for (int player1 = 0; player1 < playersInfo.length; player1++) {
+
             String firstPlayerID = "";
             if (playersInfo[player1] != null) {
                 firstPlayerID = playersInfo[player1][id];
@@ -368,7 +369,7 @@ public class GameManager {
         Jogador thisJogador = tabuleiro.getCurrentPlayer();
         thisPlayer[0] = thisJogador.getId() + "";
         thisPlayer[1] = thisJogador.getName();
-        /*thisPlayer[2] = thisJogador.getSpecies().getIdentifier() + "";*/
+        thisPlayer[2] = thisJogador.getSpecies().getIdentifier() + "";
         thisPlayer[3] = thisJogador.getEnergy() + "";
         return thisPlayer;
     }
