@@ -143,40 +143,7 @@ public class Jogador {
                     thisHousesFood.get(i).getEaten(tabuleiro);
                 }
             }
-
-
         }
-
-
-        /*
-        //everythingsFine
-        int playersPosition = this.getPosition();
-        Casa thisHouse = tabuleiro.getCasas()[playersPosition];
-        //remove him from that House and update the occupationState of that house IF he has energy
-        if (this.getEnergy() - 2 >= 0) {
-            this.loseEnergy();
-            thisHouse.getJogadores().remove(this);
-            if (thisHouse.isOccupied()){
-                thisHouse.occupy();
-            }
-            //add him to the other house
-            int otherHousePosition = playersPosition + nrSquares;
-            int lastHousePosition = tabuleiro.getCasas().length - 1;
-            //IF it is over the ending it stops at the end
-            if (otherHousePosition >= lastHousePosition) {
-                Casa otherHouse = tabuleiro.getCasas()[lastHousePosition];
-                otherHouse.getJogadores().add(this);
-                this.setPosition(lastHousePosition);
-                tabuleiro.setPlayerWin(this);
-                tabuleiro.setWinner(true);
-            } else {
-                Casa otherHouse = tabuleiro.getCasas()[otherHousePosition];
-                otherHouse.getJogadores().add(this);
-                this.setPosition(otherHousePosition);
-            }
-        }*/
-
-        //so it dont die
-        return null;
+        return new MovementResult(MovementResultCode.VALID_MOVEMENT, "Worked");
     }
 }
