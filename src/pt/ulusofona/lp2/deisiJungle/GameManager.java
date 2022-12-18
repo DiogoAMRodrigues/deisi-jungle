@@ -10,10 +10,6 @@ import java.util.ArrayList;
 public class GameManager {
     private Tabuleiro tabuleiro;
 
-    public Tabuleiro getTabuleiro() {
-        return tabuleiro;
-    }
-
     public GameManager() {}
 
     public String[][] getSpecies() {
