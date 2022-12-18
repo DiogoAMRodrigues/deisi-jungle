@@ -10,6 +10,10 @@ import java.util.ArrayList;
 public class GameManager {
     private Tabuleiro tabuleiro;
 
+    public Tabuleiro getTabuleiro() {
+        return tabuleiro;
+    }
+
     public GameManager() {}
 
     public String[][] getSpecies() {
@@ -171,7 +175,6 @@ public class GameManager {
                     if (!hasTarzan && playersInfo[player1][species].equals("Z")){
                         hasTarzan = true;
                     }
-
                 } else {
                     return new InitializationError("THISPLAYERSINFOISNULL");
                 }

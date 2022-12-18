@@ -307,13 +307,6 @@ public class Tests {
    @Test
    public void getPlayersInfo_05(){
       GameManager g = new GameManager();
-      Tabuleiro tabuleiro = new Tabuleiro(20);
-      Jogador player1 = new Jogador(1, "Jeff", new Elefante());
-      Jogador player2 = new Jogador(2, "Kennedy", new Cobra());
-      //add to tabuleiro
-      tabuleiro.addJogador(player1);
-      tabuleiro.addJogador(player2);
-
       String[][] expected = new String[2][4];
       expected[0][0] = "1";
       expected[0][1] = "Jeff";
@@ -323,7 +316,59 @@ public class Tests {
       expected[1][1] = "Kennedy";
       expected[1][2] = "C";
       expected[1][3] = "100";
+      g.createInitialJungle(20, expected);
 
-      assertEquals(expected, g.getPlayersInfo());
+
+      assertEquals("1", g.getPlayersInfo()[0][0]);
+      assertEquals("Jeff", g.getPlayersInfo()[0][1]);
+      assertEquals("E", g.getPlayersInfo()[0][2]);
+      assertEquals("180", g.getPlayersInfo()[0][3]);
+      assertEquals("2", g.getPlayersInfo()[1][0]);
+      assertEquals("Kennedy", g.getPlayersInfo()[1][1]);
+      assertEquals("C", g.getPlayersInfo()[1][2]);
+      assertEquals("100", g.getPlayersInfo()[1][3]);
+   }
+
+   @Test
+   public void createInitialJungle_06(){
+      GameManager g = new GameManager();
+      String[][] players = new String[2][4];
+      players[0][0] = "1";
+      players[0][1] = "Jeff";
+      players[0][2] = "E";
+      players[0][3] = "180";
+      players[1][0] = "2";
+      players[1][1] = "Kennedy";
+      players[1][2] = "C";
+      players[1][3] = "100";
+      players[2][0] = "3";
+      players[2][1] = "Heinz";
+      players[2][2] = "L";
+      players[2][3] = "80";
+      players[3][0] = "4";
+      players[3][1] = "Ketchup";
+      players[3][2] = "P";
+      players[3][3] = "70";
+
+      String theError = "PLAYERINFOISNULL";
+      assertEquals(theError, g.createInitialJungle(20, null).getMessage());
+      g = new GameManager();
+
+      theError = "WRONGPLAYERAMOUNT";
+      //less
+      assertEquals(theError, g.createInitialJungle(20, new String[1][4]).getMessage());
+      g = new GameManager();
+      //more
+      assertEquals(theError, g.createInitialJungle(20, new String[5][4]).getMessage());
+      g = new GameManager();
+
+      theError = "WRONGJUNGLESIZE";
+      assertEquals(theError,g.createInitialJungle(5, new String[4][4]).getMessage());
+
+
+
+
+
+
    }
 }
