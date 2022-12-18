@@ -366,7 +366,7 @@ public class GameManager {
         Jogador thisJogador = tabuleiro.getCurrentPlayer();
         thisPlayer[0] = thisJogador.getId() + "";
         thisPlayer[1] = thisJogador.getName();
-        /*thisPlayer[2] = thisJogador.getSpecies().getIdentifier() + "";*/
+        thisPlayer[2] = thisJogador.getSpecies().getIdentifier() + "";
         thisPlayer[3] = thisJogador.getEnergy() + "";
         return thisPlayer;
     }
@@ -387,9 +387,6 @@ public class GameManager {
     }
 
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
-        if (tabuleiro.getCurrentPlayer() == null){
-            return new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Problemo");
-        }
         MovementResult thisResult = tabuleiro.getCurrentPlayer().theMovementPart(tabuleiro, nrSquares, bypassValidations);
         tabuleiro.nextTurn();
         return thisResult;
