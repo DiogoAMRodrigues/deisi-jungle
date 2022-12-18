@@ -454,7 +454,5 @@ public class Tests {
       g.moveCurrentPlayer(4, false);
 
 
-
-
    }
 }

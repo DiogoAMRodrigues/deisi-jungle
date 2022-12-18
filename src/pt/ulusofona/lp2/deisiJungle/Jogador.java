@@ -90,7 +90,7 @@ public class Jogador {
         boolean hasEaten = false;
         String tooltip = "";
         //Refuse to let em move if there is already a winner
-        if (tabuleiro.getPlayerWin() == null){
+        if (!tabuleiro.getWinner()){
             //Is position in board if not go to last postion
             int moveToPos = this.position + nrSquares;
             if (moveToPos >= tabuleiro.getSize()){
