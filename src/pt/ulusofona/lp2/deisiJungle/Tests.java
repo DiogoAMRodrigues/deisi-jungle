@@ -370,11 +370,9 @@ public class Tests {
       g = new GameManager();
 
 
-      theError = "GOODPLAYERATTRIBUTES";
-      assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      theError = null;
+      assertEquals(theError, g.createInitialJungle(20, players));
       g = new GameManager();
-
-
    }
 
    @Test
@@ -451,7 +449,11 @@ public class Tests {
       players[3][1] = "Ketchup";
       players[3][2] = "P";
 
-      g.createInitialJungle(20, players);
+      if (g.createInitialJungle(20, players) != null){
+
+      }
+
+
 
 
    }
