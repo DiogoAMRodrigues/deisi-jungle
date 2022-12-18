@@ -163,11 +163,10 @@ public class GameManager {
             }
 
             for (int player1 = 0; player1 < playersInfo.length; player1++) {
-                String firstPlayerID = playersInfo[player1][id];
-
+                String firstPlayerID = "";
                 if (playersInfo[player1] != null) {
+                    firstPlayerID = playersInfo[player1][id];
                     InitializationError theCheck = playerAttributeChecksAndAdd(playersInfo, player1, name, firstPlayerID, id, species, hasTarzan, jogadores);
-                    System.out.println("here");
                     if(!(theCheck.getMessage().equals("GOODPLAYERATTRIBUTES"))){
                         return theCheck;
                     }
@@ -235,16 +234,15 @@ public class GameManager {
         char thisPlayersSpeciesID =  playersInfo[player1][species].charAt(0);
         Especie thisPlayersSpecies = createAnimal(thisPlayersSpeciesID);
 
-        if (hasTarzan && thisPlayersSpeciesID == 'Z') {
-            return new InitializationError("TOOMANYTARZAN");
-        }
-
         //Adding the Player into the Tabuleiro
         if (thisPlayersSpecies != null){
             Jogador thisPlayerObject = new Jogador(playerID, thisName, thisPlayersSpecies);
             jogadores.add(thisPlayerObject);
         }else {
             return new InitializationError("ILLEGALANIMAL");
+        }
+        if (hasTarzan && thisPlayersSpeciesID == 'Z') {
+            return new InitializationError("TOOMANYTARZAN");
         }
         return new InitializationError("GOODPLAYERATTRIBUTES");
     }

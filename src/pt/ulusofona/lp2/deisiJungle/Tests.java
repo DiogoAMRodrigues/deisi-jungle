@@ -333,6 +333,20 @@ public class Tests {
    public void createInitialJungle_06(){
       GameManager g = new GameManager();
 
+      String[][] players = new String[4][3];
+      players[0][0] = "1";
+      players[0][1] = "Jeff";
+      players[0][2] = "E";
+      players[1][0] = "2";
+      players[1][1] = "Kennedy";
+      players[1][2] = "C";
+      players[2][0] = "3";
+      players[2][1] = "Heinz";
+      players[2][2] = "L";
+      players[3][0] = "4";
+      players[3][1] = "Ketchup";
+      players[3][2] = "P";
+
       String theError = "PLAYERINFOISNULL";
       assertEquals(theError, g.createInitialJungle(20, null).getMessage());
       g = new GameManager();
@@ -350,8 +364,17 @@ public class Tests {
       g = new GameManager();
 
       theError = "THISPLAYERSINFOISNULL";
-      assertEquals(theError, g.createInitialJungle(20, new String[4][4]).getMessage());
+      String[][] theName = new String[4][4];
+      theName[0] = null;
+      assertEquals(theError, g.createInitialJungle(20, theName).getMessage());
       g = new GameManager();
+
+
+      theError = "GOODPLAYERATTRIBUTES";
+      assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      g = new GameManager();
+
+
    }
 
    @Test
@@ -360,22 +383,53 @@ public class Tests {
 
       String[][] players = new String[4][4];
       players[0][0] = "1";
-      players[0][1] = "Jeff";
+      players[0][1] = null;
       players[0][2] = "E";
-      players[0][3] = "180";
       players[1][0] = "2";
       players[1][1] = "Kennedy";
       players[1][2] = "C";
-      players[1][3] = "100";
       players[2][0] = "3";
       players[2][1] = "Heinz";
       players[2][2] = "L";
-      players[2][3] = "80";
       players[3][0] = "4";
       players[3][1] = "Ketchup";
       players[3][2] = "P";
-      players[3][3] = "70";
 
-      String theError ="";
+      String theError = "ILLEGALNAME";
+      assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      g = new GameManager();
+
+      players[0][1] = "";
+      assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      g = new GameManager();
+
+      players[0][1] = "John";
+      players[1][0] = "1";
+      theError = "REPEATEDPLAYER";
+      assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      g = new GameManager();
+
+      players[1][0] = "2";
+      players[0][0] = "-1";
+      theError = "NEGATIVEID";
+      assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      g = new GameManager();
+
+      players[0][0] = "1.1";
+      theError = "WRONGTYPEID";
+      assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      g = new GameManager();
+
+      players[0][0] = "1";
+      players[0][2] = "H";
+      theError = "ILLEGALANIMAL";
+      assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      g = new GameManager();
+
+      players[0][2] = "Z";
+      players[1][2] = "Z";
+      theError = "TOOMANYTARZAN";
+      assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+
    }
 }
