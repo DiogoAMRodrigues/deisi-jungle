@@ -392,28 +392,8 @@ public class GameManager {
     }
 
 
-    public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations) {/*
-        boolean state = false;
-        //Refuse to let em move if there is already a winner
-        if (tabuleiro.getPlayerWin() == null){
-            if (tabuleiro.getCurrentPlayer().getEnergy() >= 2) {
-                if (!bypassValidations) {
-                    if (nrSquares > 0 && nrSquares <= 6) {
-                        tabuleiro.getCurrentPlayer().theMovementPart(tabuleiro, nrSquares);
-                    }else{
-                        tabuleiro.nextTurn();
-                        return false;
-                    }
-                } else {
-                    tabuleiro.getCurrentPlayer().theMovementPart(tabuleiro, nrSquares);
-                }
-                state = true;
-            }
-            tabuleiro.nextTurn();
-        }
-        return state;*/
-        String yes = "yes";
-        return new MovementResult(MovementResultCode.INVALID_MOVEMENT, yes);
+    public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
+        return tabuleiro.getCurrentPlayer().theMovementPart(tabuleiro, nrSquares, bypassValidations);
     }
 
     private int playersWithEnergy(){
