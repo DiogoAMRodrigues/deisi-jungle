@@ -119,7 +119,7 @@ public class GameManager {
 
                 //Check if food array has the correct size
                 if (!(foodsInfo[i].length == 2)){
-                    return InitializationError.WRONGFOODARRAYDIMENSIONS;
+                    return new InitializationError("WRONGFOODARRAYDIMENSIONS");
                 }
                 //Check if the food is inside the board, can't be on starting pos or finish line
                 if (foodPosition > 0 && foodPosition < tabuleiro.getSize() - 1) {
@@ -127,14 +127,14 @@ public class GameManager {
                     if (food != null){/*
                         tabuleiro.getCasas()[foodPosition].setComida(food);
                     }else {*/
-                        return InitializationError.ILLEGALFOOD;
+                        return new InitializationError("ILLEGALFOOD");
                     }
                 }else {
-                    return InitializationError.FOODOUTSIDETABULEIRO;
+                    return new InitializationError("FOODOUTSIDETABULEIRO");
                 }
             }
         }else {
-            return InitializationError.FOODSINFOISNULL;
+            return new InitializationError("FOODSINFOISNULL");
         }
         return null;
     }
@@ -154,12 +154,12 @@ public class GameManager {
         if (playersInfo != null) {
             //Player amount check
             if (playersInfo.length < 2 || playersInfo.length > 4) {
-                return InitializationError.WRONGPLAYERAMOUNT;
+                return new InitializationError("WRONGPLAYERAMOUNT");
             }
 
             //Tabuleiro size check
             if (jungleSize < playersInfo.length * 2) {
-                return InitializationError.WRONGJUNGLESIZE;
+                return new InitializationError("WRONGJUNGLESIZE");
             }
 
             for (int player1 = 0; player1 < playersInfo.length; player1++) {
@@ -167,7 +167,7 @@ public class GameManager {
 
                 if (playersInfo[player1] != null) {
                     InitializationError theCheck = playerAttributeChecksAndAdd(playersInfo, player1, name, firstPlayerID, id, species, hasTarzan, jogadores);
-                    if(!(theCheck == InitializationError.GOODPLAYERATTRIBUTES)){
+                    if(!(theCheck.asd.equals("GOODPLAYERATTRIBUTES"))){
                         return theCheck;
                     }
 
@@ -177,11 +177,11 @@ public class GameManager {
                     }
 
                 } else {
-                    return InitializationError.THISPLAYERSINFOISNULL;
+                    return new InitializationError("THISPLAYERSINFOISNULL");
                 }
             }
         } else {
-            return InitializationError.PLAYERINFOISNULL;
+            return new InitializationError("PLAYERINFOISNULL");
         }
 
         //add players to board
@@ -211,24 +211,24 @@ public class GameManager {
         //name is well-made
         String thisName = playersInfo[player1][name];
         if (thisName == null || thisName.length() == 0) {
-            return InitializationError.ILLEGALNAME;
+            return new InitializationError("ILLEGALNAME");
         }
 
         //no repeated ID's
         for (int player2 = player1 + 1; player2 < playersInfo.length; player2++) {
             String secondPlayerID = playersInfo[player2][id];
             if (firstPlayerID.equals(secondPlayerID)) {
-                return InitializationError.REPEATEDPLAYER;
+                return new InitializationError("REPEATEDPLAYER");
             }
         }
 
         //Check if the ID is an Integer
         try {
             if (Integer.parseInt(firstPlayerID) <= 0) {
-                return InitializationError.NEGATIVEID;
+                return new InitializationError("NEGATIVEID");
             }
         } catch (NumberFormatException n) {
-            return InitializationError.WRONGTYPEID;
+            return new InitializationError("WRONGTYPEID");
         }
         //is an eligible Species
         int playerID = Integer.parseInt(playersInfo[player1][0]);
@@ -236,7 +236,7 @@ public class GameManager {
         Especie thisPlayersSpecies = createAnimal(thisPlayersSpeciesID);
 
         if (hasTarzan && thisPlayersSpeciesID == 'Z') {
-            return InitializationError.TOOMANYTARZAN;
+            return new InitializationError("TOOMANYTARZAN");
         }
 
         //Adding the Player into the Tabuleiro
@@ -244,9 +244,9 @@ public class GameManager {
             Jogador thisPlayerObject = new Jogador(playerID, thisName, thisPlayersSpecies);
             jogadores.add(thisPlayerObject);
         }else {
-            return InitializationError.ILLEGALANIMAL;
+            return new InitializationError("ILLEGALANIMAL");
         }
-        return InitializationError.GOODPLAYERATTRIBUTES;
+        return new InitializationError("GOODPLAYERATTRIBUTES");
     }
 
     private Especie createAnimal(char id){
