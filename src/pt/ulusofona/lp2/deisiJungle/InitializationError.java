@@ -6,6 +6,10 @@ class InitializationError{
     public InitializationError(String asd){
         this.asd = asd;
     }
+
+    public String getMessage(){
+        return "";
+    }
 }
 
 /*public enum InitializationError{
