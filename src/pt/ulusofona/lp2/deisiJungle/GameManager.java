@@ -167,19 +167,17 @@ public class GameManager {
         for (int player1 = 0; player1 < playersInfo.length; player1++) {
 
             String firstPlayerID = "";
-            if (playersInfo[player1] != null) {
-                firstPlayerID = playersInfo[player1][id];
-                InitializationError theCheck = playerAttributeChecksAndAdd(playersInfo, player1, name, firstPlayerID, id, species, hasTarzan, jogadores);
-                if(!(theCheck.getMessage().equals("GOODPLAYERATTRIBUTES"))){
-                    return theCheck;
-                }
-
-                //Check if player is Tarzan
-                if (!hasTarzan && playersInfo[player1][species].equals("Z")){
-                    hasTarzan = true;
-                }
-            } else {
+            if (playersInfo[player1] == null) {
                 return new InitializationError("THISPLAYERSINFOISNULL");
+            }
+            firstPlayerID = playersInfo[player1][id];
+            InitializationError theCheck = playerAttributeChecksAndAdd(playersInfo, player1, name, firstPlayerID, id, species, hasTarzan, jogadores);
+            if(!(theCheck.getMessage().equals("GOODPLAYERATTRIBUTES"))){
+                return theCheck;
+            }
+            //Check if player is Tarzan
+            if (!hasTarzan && playersInfo[player1][species].equals("Z")){
+                hasTarzan = true;
             }
         }
 
