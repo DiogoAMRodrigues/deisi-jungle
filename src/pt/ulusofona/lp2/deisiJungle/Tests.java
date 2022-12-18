@@ -332,7 +332,33 @@ public class Tests {
    @Test
    public void createInitialJungle_06(){
       GameManager g = new GameManager();
-      String[][] players = new String[2][4];
+
+      String theError = "PLAYERINFOISNULL";
+      assertEquals(theError, g.createInitialJungle(20, null).getMessage());
+      g = new GameManager();
+
+      theError = "WRONGPLAYERAMOUNT";
+      //less
+      assertEquals(theError, g.createInitialJungle(20, new String[1][4]).getMessage());
+      g = new GameManager();
+      //more
+      assertEquals(theError, g.createInitialJungle(20, new String[5][4]).getMessage());
+      g = new GameManager();
+
+      theError = "WRONGJUNGLESIZE";
+      assertEquals(theError,g.createInitialJungle(5, new String[4][4]).getMessage());
+      g = new GameManager();
+
+      theError = "THISPLAYERSINFOISNULL";
+      assertEquals(theError, g.createInitialJungle(20, new String[4][4]).getMessage());
+      g = new GameManager();
+   }
+
+   @Test
+   public void playerAttributeChecksAndAdd_07(){
+      GameManager g = new GameManager();
+
+      String[][] players = new String[4][4];
       players[0][0] = "1";
       players[0][1] = "Jeff";
       players[0][2] = "E";
@@ -350,25 +376,6 @@ public class Tests {
       players[3][2] = "P";
       players[3][3] = "70";
 
-      String theError = "PLAYERINFOISNULL";
-      assertEquals(theError, g.createInitialJungle(20, null).getMessage());
-      g = new GameManager();
-
-      theError = "WRONGPLAYERAMOUNT";
-      //less
-      assertEquals(theError, g.createInitialJungle(20, new String[1][4]).getMessage());
-      g = new GameManager();
-      //more
-      assertEquals(theError, g.createInitialJungle(20, new String[5][4]).getMessage());
-      g = new GameManager();
-
-      theError = "WRONGJUNGLESIZE";
-      assertEquals(theError,g.createInitialJungle(5, new String[4][4]).getMessage());
-
-
-
-
-
-
+      String theError ="";
    }
 }
