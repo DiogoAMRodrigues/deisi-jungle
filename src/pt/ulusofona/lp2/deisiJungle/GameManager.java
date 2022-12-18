@@ -276,7 +276,7 @@ public class GameManager {
                 return c;
 
             default:
-                return new Elefante();
+                return null;
         }
     }
 
