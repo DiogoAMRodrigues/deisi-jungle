@@ -387,9 +387,10 @@ public class GameManager {
         return null;
     }
 
-
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
-        return tabuleiro.getCurrentPlayer().theMovementPart(tabuleiro, nrSquares, bypassValidations);
+        MovementResult thisResult = tabuleiro.getCurrentPlayer().theMovementPart(tabuleiro, nrSquares, bypassValidations);
+        tabuleiro.nextTurn();
+        return thisResult;
     }
 
     private int playersWithEnergy(){
@@ -458,5 +459,4 @@ public class GameManager {
     public boolean loadGame(File file){
         return false;
     }
-
 }

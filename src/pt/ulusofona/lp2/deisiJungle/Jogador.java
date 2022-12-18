@@ -87,6 +87,8 @@ public class Jogador {
     public MovementResult theMovementPart(Tabuleiro tabuleiro, int nrSquares, boolean byPassValidations)  {
         MovementResult theResult = new MovementResult(MovementResultCode.VALID_MOVEMENT,"");
         Especie mySpecies = this.species;
+        boolean hasEaten = false;
+        String tooltip = "";
         //Refuse to let em move if there is already a winner
         if (tabuleiro.getPlayerWin() == null){
             //Is position in board if not go to last postion
@@ -130,7 +132,8 @@ public class Jogador {
                 //Lose energy
                 loseEnergyMovement();
                 for (int i = 0; i < thisHousesFood.size(); i++){
-                    thisHousesFood.get(i).getEaten(tabuleiro);
+                    hasEaten = true;
+                    tooltip += thisHousesFood.get(i).getEaten(tabuleiro);
                 }
                 //Check if he won
                 if (moveToPos == tabuleiro.getSize() - 1){
@@ -140,9 +143,13 @@ public class Jogador {
             }else {
                 gainEnergyResting();
                 for (int i = 0; i < thisHousesFood.size(); i++){
-                    thisHousesFood.get(i).getEaten(tabuleiro);
+                    hasEaten = true;
+                    tooltip += thisHousesFood.get(i).getEaten(tabuleiro);
                 }
             }
+        }
+        if (hasEaten){
+            return new MovementResult(MovementResultCode.CAUGHT_FOOD, tooltip);
         }
         return new MovementResult(MovementResultCode.VALID_MOVEMENT, "Worked");
     }

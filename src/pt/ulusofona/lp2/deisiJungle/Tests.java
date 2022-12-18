@@ -303,4 +303,12 @@ public class Tests {
       expected = (((double)shrooms.getN()/100) + 1) * 80;
       assertEquals((int)expected, returnValue);
    }
+
+   @Test
+   public void getPlayersInfo_05(){
+      Jogador player1 = new Jogador(1, "Jeff", new Elefante());
+
+      String[][] thesePlayers = new String[2][4];
+
+   }
 }
