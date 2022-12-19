@@ -54,8 +54,8 @@ public class Jogador {
         }
     }
 
-    public boolean loseEnergyMovement(){
-        int amount = this.getSpecies().getEnergyConsumption();
+    public boolean loseEnergyMovement(int nrHouses){
+        int amount = this.getSpecies().getEnergyConsumption() * nrHouses;
         if(this.energy >= amount){
             this.energy -= amount;
             return true;
@@ -130,7 +130,7 @@ public class Jogador {
                 position = moveToPos;
 
                 //Lose energy
-                loseEnergyMovement();
+                loseEnergyMovement(nrSquares);
                 for (int i = 0; i < thisHousesFood.size(); i++){
                     hasEaten = true;
                     tooltip += thisHousesFood.get(i).getEaten(tabuleiro);

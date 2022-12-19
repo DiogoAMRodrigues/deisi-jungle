@@ -452,6 +452,9 @@ public class Tests {
       g.createInitialJungle(20, players);
       g.getTabuleiro().winGame();
       g.moveCurrentPlayer(4, false);
+   }
+
+   public void foodFactory_09(){
 
 
    }
