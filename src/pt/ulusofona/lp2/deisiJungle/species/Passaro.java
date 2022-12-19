@@ -1,6 +1,6 @@
-package pt.ulusofona.lp2.deisiJungle.Species;
+package pt.ulusofona.lp2.deisiJungle.species;
 
-import pt.ulusofona.lp2.deisiJungle.Codes.AnimalType;
+import pt.ulusofona.lp2.deisiJungle.AnimalType;
 
 public class Passaro extends Especie{
     public Passaro() {
