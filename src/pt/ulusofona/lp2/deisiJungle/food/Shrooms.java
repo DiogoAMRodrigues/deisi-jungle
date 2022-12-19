@@ -1,8 +1,6 @@
-package pt.ulusofona.lp2.deisiJungle.Food;
+package pt.ulusofona.lp2.deisiJungle.food;
 
-import pt.ulusofona.lp2.deisiJungle.Casa;
 import pt.ulusofona.lp2.deisiJungle.Jogador;
-import pt.ulusofona.lp2.deisiJungle.Species.Especie;
 import pt.ulusofona.lp2.deisiJungle.Tabuleiro;
 
 import java.util.Random;

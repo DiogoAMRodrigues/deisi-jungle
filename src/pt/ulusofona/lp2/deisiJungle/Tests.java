@@ -1,8 +1,8 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 import org.junit.Test;
-import pt.ulusofona.lp2.deisiJungle.Food.*;
-import pt.ulusofona.lp2.deisiJungle.Species.*;
+import pt.ulusofona.lp2.deisiJungle.food.*;
+import pt.ulusofona.lp2.deisiJungle.species.*;
 
 import static junit.framework.TestCase.assertEquals;
 

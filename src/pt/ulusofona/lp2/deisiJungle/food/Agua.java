@@ -1,5 +1,5 @@
-package pt.ulusofona.lp2.deisiJungle.Food;
-import pt.ulusofona.lp2.deisiJungle.Codes.AnimalType;
+package pt.ulusofona.lp2.deisiJungle.food;
+import pt.ulusofona.lp2.deisiJungle.AnimalType;
 import pt.ulusofona.lp2.deisiJungle.Jogador;
 import pt.ulusofona.lp2.deisiJungle.Tabuleiro;
 

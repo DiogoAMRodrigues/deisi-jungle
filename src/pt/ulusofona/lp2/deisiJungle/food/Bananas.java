@@ -1,9 +1,7 @@
-package pt.ulusofona.lp2.deisiJungle.Food;
+package pt.ulusofona.lp2.deisiJungle.food;
 
 import pt.ulusofona.lp2.deisiJungle.Jogador;
 import pt.ulusofona.lp2.deisiJungle.Tabuleiro;
-
-import pt.ulusofona.lp2.deisiJungle.Jogador;
 
 public class Bananas extends Food {
 

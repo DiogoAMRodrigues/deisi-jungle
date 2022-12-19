@@ -1,7 +1,5 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-import pt.ulusofona.lp2.deisiJungle.Food.Shrooms;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
