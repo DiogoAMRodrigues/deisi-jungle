@@ -73,7 +73,7 @@ public class GameManager {
     public String[] getCurrentPlayerEnergyInfo(int nrPositions) {
         String[] info = new String[2];
 
-        info[0] = (tabuleiro.getCurrentPlayer().getSpecies().getEnergyConsumption()*nrPositions) + "";
+        info[0] = Math.abs((tabuleiro.getCurrentPlayer().getSpecies().getEnergyConsumption()*nrPositions)) + "";
         info[1] = tabuleiro.getCurrentPlayer().getSpecies().getEnergyGain() + "";
 
         return info;
@@ -230,6 +230,9 @@ public class GameManager {
         //Adding the Player into the Tabuleiro
         if (thisPlayersSpecies != null) {
             Jogador thisPlayerObject = new Jogador(playerID, thisName, thisPlayersSpecies);
+            if(thisPlayerObject.getSpecies() == null){
+                return new InitializationError("ILLEGALANIMAL");
+            }
             jogadores.add(thisPlayerObject);
         } else {
             return new InitializationError("ILLEGALANIMAL");
