@@ -38,7 +38,7 @@ public class Erva extends Food{
             player.loseEnergy(20);
             tooltip = "Erva : - 20 energia";
         }
-        tooltip = "Apanhou Erva\n";
+        tooltip = "Apanhou Erva";
         return tooltip;
     }
 }

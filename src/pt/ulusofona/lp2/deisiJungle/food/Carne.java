@@ -42,7 +42,7 @@ public class Carne extends Food {
                 tooltip = "Carne : - 50 energia : Carne toxica jogadas";
             }
         }
-        tooltip = "Apanhou Carne\n";
+        tooltip = "Apanhou Carne";
         return tooltip;
     }
 }

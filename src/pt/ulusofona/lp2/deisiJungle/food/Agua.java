@@ -39,7 +39,7 @@ public class Agua extends Food {
             player.gainEnergy(amntGained);
             tooltip = "Agua : + " + amntGained + "U|20% energia";
         }
-        tooltip = "Apanhou Agua\n";
+        tooltip = "Apanhou Agua";
         return tooltip;
     }
 
