@@ -196,6 +196,7 @@ public class GameManager {
 
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo) {
         InitializationError createJungle = createInitialJungle(jungleSize, playersInfo);
+
         if(createJungle != null){
             return createJungle;
         }
