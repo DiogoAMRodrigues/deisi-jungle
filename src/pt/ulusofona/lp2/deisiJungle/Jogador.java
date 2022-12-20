@@ -112,12 +112,12 @@ public class Jogador {
             //If he moves do this
             if (nrSquares != 0){
                 //Check energy I need for this House
-                int amountOfEnergyRequired = mySpecies.getEnergyConsumption();
+                int amountOfEnergyRequired = mySpecies.getEnergyConsumption() * nrSquares;
                 for (int i = 0; i < thisHousesFood.size(); i++){
                     amountOfEnergyRequired += thisHousesFood.get(i).getEatenSim(this, tabuleiro.getTurns());
                 }
                 //Current energy needs to be bigger than energy usage while move
-                if (this.energy <= amountOfEnergyRequired ){
+                if (this.energy < amountOfEnergyRequired){
                     theResult = new MovementResult(MovementResultCode.NO_ENERGY, null);
                     return theResult;
                 }

@@ -14,7 +14,8 @@ public class GameManager {
         return tabuleiro;
     }
 
-    public GameManager() {}
+    public GameManager() {
+    }
 
     public String[][] getSpecies() {
         String[][] species = new String[6][7];
@@ -69,23 +70,16 @@ public class GameManager {
         return species;
     }
 
-    public String[] getCurrentPlayerEnergyInfo(int nrPositions){
+    public String[] getCurrentPlayerEnergyInfo(int nrPositions) {
         String[] info = new String[2];
 
-        for(int i = 0; i < getSpecies().length; ++i){
-            char identifier = tabuleiro.getCurrentPlayer().getSpecies().getIdentifier();
-            char identifier_compare = getSpecies()[i][0].charAt(0);
-
-            if(identifier == identifier_compare){
-                info[0] = getSpecies()[i][4];
-                info[1] = getSpecies()[i][5];
-            }
-        }
+        info[0] = (tabuleiro.getCurrentPlayer().getSpecies().getEnergyConsumption()*nrPositions) + "";
+        info[1] = tabuleiro.getCurrentPlayer().getSpecies().getEnergyGain() + "";
 
         return info;
     }
 
-    public String[][] getFoodTypes(){
+    public String[][] getFoodTypes() {
         String[][] foodTypes = new String[5][3];
         foodTypes[0][0] = "e";
         foodTypes[0][1] = "Erva";
@@ -110,35 +104,35 @@ public class GameManager {
         return foodTypes;
     }
 
-    private InitializationError setFoodOnBoard(String[][] foodsInfo){
+    private InitializationError setFoodOnBoard(String[][] foodsInfo) {
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
-                try{
+                try {
                     int foodPosition = Integer.parseInt(foodsInfo[i][1]) - 1; //ASSUMING THEY COUNT LIKE HUMANS
                     char foodIdentifier = foodsInfo[i][0].charAt(0);
 
                     //Check if the food is inside the board, can't be on starting pos or finish line
                     if (foodPosition > 0 && foodPosition < tabuleiro.getSize() - 1) {
                         Food food = foodFactory(foodIdentifier);
-                        if (food != null){
+                        if (food != null) {
                             tabuleiro.getCasas()[foodPosition].addComida(food);
-                        }else {
+                        } else {
                             return new InitializationError("ILLEGALFOOD");
                         }
-                    }else {
+                    } else {
                         return new InitializationError("FOODOUTSIDETABULEIRO");
                     }
-                }catch(NumberFormatException e){
+                } catch (NumberFormatException e) {
                     return new InitializationError("WRONGFOODFORMAT");
                 }
             }
-        }else {
+        } else {
             return new InitializationError("FOODSINFOISNULL");
         }
         return null;
     }
 
-    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo){
+    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo) {
         //assuming the start and finishlines count for the amount of houses
         int id = 0;
         int name = 1;
@@ -172,17 +166,17 @@ public class GameManager {
             String firstPlayerID = playersInfo[player1][id];
 
             InitializationError theCheck = playerAttributeChecksAndAdd(playersInfo, player1, name, firstPlayerID, id, species, hasTarzan, jogadores);
-            if(!(theCheck.getMessage().equals("GOODPLAYERATTRIBUTES"))){
+            if (!(theCheck.getMessage().equals("GOODPLAYERATTRIBUTES"))) {
                 return theCheck;
             }
             //Check if player is Tarzan
-            if (!hasTarzan && playersInfo[player1][species].equals("Z")){
+            if (!hasTarzan && playersInfo[player1][species].equals("Z")) {
                 hasTarzan = true;
             }
         }
 
         //add players to board
-        for(int i = 0; i < jogadores.size(); i++){
+        for (int i = 0; i < jogadores.size(); i++) {
             tabuleiro.addJogador(jogadores.get(i));
         }
 
@@ -196,7 +190,7 @@ public class GameManager {
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo) {
         InitializationError createJungle = createInitialJungle(jungleSize, playersInfo);
 
-        if(createJungle != null){
+        if (createJungle != null) {
             return createJungle;
         }
 
@@ -205,7 +199,7 @@ public class GameManager {
     }
 
     private InitializationError playerAttributeChecksAndAdd(String[][] playersInfo, int player1, int name, String firstPlayerID, int id,
-                                int species, boolean hasTarzan, ArrayList<Jogador> jogadores){
+                                                            int species, boolean hasTarzan, ArrayList<Jogador> jogadores) {
         //name is well-made
         String thisName = playersInfo[player1][name];
         if (thisName == null || thisName.length() == 0) {
@@ -230,14 +224,14 @@ public class GameManager {
         }
         //is an eligible Species
         int playerID = Integer.parseInt(playersInfo[player1][0]);
-        char thisPlayersSpeciesID =  playersInfo[player1][species].charAt(0);
+        char thisPlayersSpeciesID = playersInfo[player1][species].charAt(0);
         Especie thisPlayersSpecies = createAnimal(thisPlayersSpeciesID);
 
         //Adding the Player into the Tabuleiro
-        if (thisPlayersSpecies != null){
+        if (thisPlayersSpecies != null) {
             Jogador thisPlayerObject = new Jogador(playerID, thisName, thisPlayersSpecies);
             jogadores.add(thisPlayerObject);
-        }else {
+        } else {
             return new InitializationError("ILLEGALANIMAL");
         }
         if (hasTarzan && thisPlayersSpeciesID == 'Z') {
@@ -246,8 +240,8 @@ public class GameManager {
         return new InitializationError("GOODPLAYERATTRIBUTES");
     }
 
-    private Especie createAnimal(char id){
-        switch (id){
+    private Especie createAnimal(char id) {
+        switch (id) {
             case 'E':
                 Elefante e = new Elefante();
                 return e;
@@ -277,8 +271,8 @@ public class GameManager {
         }
     }
 
-    private Food foodFactory(char id){
-        switch (id){
+    private Food foodFactory(char id) {
+        switch (id) {
             case 'e':
                 Erva e = new Erva();
                 return e;
@@ -352,11 +346,11 @@ public class GameManager {
         String[] thisPlayer = new String[5];
         Jogador thisJogador = tabuleiro.getJogaresHS().get(playerId);
         if (tabuleiro != null && tabuleiro.getJogaresHS() != null && thisJogador != null) {
-                thisPlayer[0] = thisJogador.getId() + "";
-                thisPlayer[1] = thisJogador.getName();
-                thisPlayer[2] = thisJogador.getSpecies().getIdentifier() + "";
-                thisPlayer[3] = thisJogador.getEnergy() + "";
-                thisPlayer[4] = thisJogador.getSpecies().getMinSpeed() + ".." + thisJogador.getSpecies().getMaxSpeed();
+            thisPlayer[0] = thisJogador.getId() + "";
+            thisPlayer[1] = thisJogador.getName();
+            thisPlayer[2] = thisJogador.getSpecies().getIdentifier() + "";
+            thisPlayer[3] = thisJogador.getEnergy() + "";
+            thisPlayer[4] = thisJogador.getSpecies().getMinSpeed() + ".." + thisJogador.getSpecies().getMaxSpeed();
         } else {
             return null;
         }
@@ -394,39 +388,15 @@ public class GameManager {
         return thisResult;
     }
 
-    private int playersWithEnergy(){
-        int count = 0;
-        for(int i = 0; i < tabuleiro.getJogadores().size(); ++i){
-            //I put a 1 instead of a 0
-            if(tabuleiro.getJogadores().get(i).getEnergy() > 1){
-                count++;
-            }
-        }
-        return count;
-    }
-
     public String[] getWinnerInfo() {
 
-        if (!tabuleiro.getWinner() && playersWithEnergy() > 0) {
+        if (!tabuleiro.getWinner()) {
             return null;
         }
 
-        if(!tabuleiro.getWinner() && playersWithEnergy() == 0){
-            int max = tabuleiro.getJogadores().get(0).getPosition();
-            Jogador player = tabuleiro.getJogadores().get(0);
-
-            for(int i = 0; i < tabuleiro.getJogadores().size(); ++i){
-                if(tabuleiro.getJogadores().get(i).getPosition() > max){
-                    max = tabuleiro.getJogadores().get(i).getPosition();
-                    player = tabuleiro.getJogadores().get(i);
-                }
-            }
-            tabuleiro.setPlayerWin(player);
-        }
-
         return new String[]{
-                /*String.valueOf(tabuleiro.playerWin.id), tabuleiro.playerWin.name,
-                String.valueOf(tabuleiro.playerWin.getSpecies().getIdentifier()),String.valueOf(tabuleiro.playerWin.getEnergy())*/};
+                String.valueOf(tabuleiro.getPlayerWin().getId()), tabuleiro.getPlayerWin().getName(),
+                String.valueOf(tabuleiro.getPlayerWin().getSpecies().getIdentifier()), String.valueOf(tabuleiro.getPlayerWin().getEnergy())};
     }
 
     public ArrayList<String> getGameResults() {
@@ -437,7 +407,7 @@ public class GameManager {
             if (tabuleiro.getCasas()[i].getJogadores().size() != 0) {
                 for (int j = 0; j < tabuleiro.getCasas()[i].getJogadores().size(); ++j) {
                     Jogador player = tabuleiro.getCasas()[i].getJogadores().get(j);
-                    players.add("#" + counter + " " + player.getName() + ", " + player.getSpecies().getName() + ", " + String.valueOf(player.getPosition()+1));
+                    players.add("#" + counter + " " + player.getName() + ", " + player.getSpecies().getName() + ", " + String.valueOf(player.getPosition() + 1));
                     counter++;
                 }
             }
@@ -453,11 +423,11 @@ public class GameManager {
         return "Wrestling";
     }
 
-    public boolean saveGame(File file){
+    public boolean saveGame(File file) {
         return false;
     }
 
-    public boolean loadGame(File file){
+    public boolean loadGame(File file) {
         return false;
     }
 }
