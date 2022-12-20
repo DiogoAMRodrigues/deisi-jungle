@@ -118,9 +118,9 @@ public class GameManager {
                 char foodIdentifier = foodsInfo[i][0].charAt(0);
 
                 //Check if food array has the correct size
-                if (!(foodsInfo[i].length == 2)){
+                /*if (!(foodsInfo[i].length == 2)){
                     return new InitializationError("WRONGFOODARRAYDIMENSIONS");
-                }
+                }*/
                 //Check if the food is inside the board, can't be on starting pos or finish line
                 if (foodPosition > 0 && foodPosition < tabuleiro.getSize() - 1) {
                     Food food = foodFactory(foodIdentifier);
