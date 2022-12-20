@@ -25,7 +25,7 @@ public class Tabuleiro {
         jogaresHS = new HashMap<>();
         currentPlayerInt = 0;
         turns = 1;
-        Jogador[] twoBiggestPos = new Jogador[2];
+        twoBiggestPos = new Jogador[2];
     }
 
     public void addJogador(Jogador player){
@@ -102,7 +102,7 @@ public class Tabuleiro {
         }else{
             if ((twoBiggestPos[0].getPosition() < thisPlayer.getPosition()) && (twoBiggestPos[1].getId() != thisPlayer.getId())) {
                 twoBiggestPos[0] = thisPlayer;
-            }else if(twoBiggestPos[1].getPosition() < thisPlayer.getPosition()&& (twoBiggestPos[0].getId() != thisPlayer.getId())){
+            }else if((twoBiggestPos[1].getPosition() < thisPlayer.getPosition()) && (twoBiggestPos[0].getId() != thisPlayer.getId())){
                 twoBiggestPos[1] = thisPlayer;
             }
         }
