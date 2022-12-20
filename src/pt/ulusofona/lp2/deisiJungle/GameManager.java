@@ -113,24 +113,23 @@ public class GameManager {
     private InitializationError setFoodOnBoard(String[][] foodsInfo){
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
+                try{
+                    int foodPosition = Integer.parseInt(foodsInfo[i][1]) - 1; //ASSUMING THEY COUNT LIKE HUMANS
+                    char foodIdentifier = foodsInfo[i][0].charAt(0);
 
-                int foodPosition = Integer.parseInt(foodsInfo[i][1]) - 1; //ASSUMING THEY COUNT LIKE HUMANS
-                char foodIdentifier = foodsInfo[i][0].charAt(0);
-
-                //Check if food array has the correct size
-                /*if (!(foodsInfo[i].length == 2)){
-                    return new InitializationError("WRONGFOODARRAYDIMENSIONS");
-                }*/
-                //Check if the food is inside the board, can't be on starting pos or finish line
-                if (foodPosition > 0 && foodPosition < tabuleiro.getSize() - 1) {
-                    Food food = foodFactory(foodIdentifier);
-                    if (food != null){
-                        tabuleiro.getCasas()[foodPosition].addComida(food);
+                    //Check if the food is inside the board, can't be on starting pos or finish line
+                    if (foodPosition > 0 && foodPosition < tabuleiro.getSize() - 1) {
+                        Food food = foodFactory(foodIdentifier);
+                        if (food != null){
+                            tabuleiro.getCasas()[foodPosition].addComida(food);
+                        }else {
+                            return new InitializationError("ILLEGALFOOD");
+                        }
                     }else {
-                        return new InitializationError("ILLEGALFOOD");
+                        return new InitializationError("FOODOUTSIDETABULEIRO");
                     }
-                }else {
-                    return new InitializationError("FOODOUTSIDETABULEIRO");
+                }catch(NumberFormatException e){
+                    return new InitializationError("WRONGFOODFORMAT");
                 }
             }
         }else {

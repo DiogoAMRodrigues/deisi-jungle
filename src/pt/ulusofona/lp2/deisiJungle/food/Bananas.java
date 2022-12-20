@@ -43,6 +43,7 @@ public class Bananas extends Food {
             }
             bananaAmount--;
         }
+        tooltip = "Apanhou Bananas\n";
         return tooltip;
     }
 }

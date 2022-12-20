@@ -98,13 +98,13 @@ public class Jogador {
             }
             //Goes behind first house
             if (moveToPos < 0){
-                theResult = new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Illegal move behind");
+                theResult = new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
                 return theResult;
             }
             //Check if the movementspeed is legal
             if (!byPassValidations) {
                 if (!(mySpecies.getMinSpeed() <= Math.abs(nrSquares) && mySpecies.getMaxSpeed() >= Math.abs(nrSquares) || nrSquares == 0)) {
-                    theResult = new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Illegal movementSpeed");
+                    theResult = new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
                     return theResult;
                 }
             }
@@ -118,7 +118,7 @@ public class Jogador {
                 }
                 //Current energy needs to be bigger than energy usage while move
                 if (this.energy <= amountOfEnergyRequired ){
-                    theResult = new MovementResult(MovementResultCode.NO_ENERGY, "Not enough energy");
+                    theResult = new MovementResult(MovementResultCode.NO_ENERGY, null);
                     return theResult;
                 }
 
@@ -166,12 +166,12 @@ public class Jogador {
                 }
             }
         }else{
-            return new MovementResult(MovementResultCode.INVALID_MOVEMENT, "game done");
+            return new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
         }
 
         if (hasEaten){
             return new MovementResult(MovementResultCode.CAUGHT_FOOD, tooltip);
         }
-        return new MovementResult(MovementResultCode.VALID_MOVEMENT, "Worked");
+        return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
     }
 }
