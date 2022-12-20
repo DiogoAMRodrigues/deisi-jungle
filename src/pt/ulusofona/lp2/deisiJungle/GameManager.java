@@ -166,11 +166,12 @@ public class GameManager {
 
         for (int player1 = 0; player1 < playersInfo.length; player1++) {
 
-            String firstPlayerID = "";
-            if (playersInfo[player1] == null) {
+            if (playersInfo[player1] == null || playersInfo[player1][id] == null) {
                 return new InitializationError("THISPLAYERSINFOISNULL");
             }
-            firstPlayerID = playersInfo[player1][id];
+
+            String firstPlayerID = playersInfo[player1][id];
+
             InitializationError theCheck = playerAttributeChecksAndAdd(playersInfo, player1, name, firstPlayerID, id, species, hasTarzan, jogadores);
             if(!(theCheck.getMessage().equals("GOODPLAYERATTRIBUTES"))){
                 return theCheck;
