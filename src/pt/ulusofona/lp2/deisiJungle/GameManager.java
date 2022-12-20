@@ -124,9 +124,9 @@ public class GameManager {
                 //Check if the food is inside the board, can't be on starting pos or finish line
                 if (foodPosition > 0 && foodPosition < tabuleiro.getSize() - 1) {
                     Food food = foodFactory(foodIdentifier);
-                    if (food != null){/*
-                        tabuleiro.getCasas()[foodPosition].setComida(food);
-                    }else {*/
+                    if (food != null){
+                        tabuleiro.getCasas()[foodPosition].addComida(food);
+                    }else {
                         return new InitializationError("ILLEGALFOOD");
                     }
                 }else {
