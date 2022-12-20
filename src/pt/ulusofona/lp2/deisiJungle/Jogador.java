@@ -103,24 +103,25 @@ public class Jogador {
             }
             //Check if the movementspeed is legal
             if (!byPassValidations) {
-                if (!(mySpecies.getMinSpeed() <= Math.abs(nrSquares) && mySpecies.getMaxSpeed() >= Math.abs(nrSquares))) {
+                if (!(mySpecies.getMinSpeed() <= Math.abs(nrSquares) && mySpecies.getMaxSpeed() >= Math.abs(nrSquares) || nrSquares == 0)) {
                     theResult = new MovementResult(MovementResultCode.INVALID_MOVEMENT, "Illegal movementSpeed");
                     return theResult;
                 }
             }
-            //Check energy I need for this House
-            int amountOfEnergyRequired = mySpecies.getEnergyConsumption();
             ArrayList<Food> thisHousesFood = tabuleiro.getCasas()[moveToPos].getComida();
-            for (int i = 0; i < thisHousesFood.size(); i++){
-                amountOfEnergyRequired += thisHousesFood.get(i).getEatenSim(this, tabuleiro.getTurns());
-            }
-            //Current energy needs to be bigger than energy usage while move
-            if (this.energy <= amountOfEnergyRequired){
-                theResult = new MovementResult(MovementResultCode.NO_ENERGY, "Not enough energy");
-                return theResult;
-            }
             //If he moves do this
             if (nrSquares != 0){
+                //Check energy I need for this House
+                int amountOfEnergyRequired = mySpecies.getEnergyConsumption();
+                for (int i = 0; i < thisHousesFood.size(); i++){
+                    amountOfEnergyRequired += thisHousesFood.get(i).getEatenSim(this, tabuleiro.getTurns());
+                }
+                //Current energy needs to be bigger than energy usage while move
+                if (this.energy <= amountOfEnergyRequired ){
+                    theResult = new MovementResult(MovementResultCode.NO_ENERGY, "Not enough energy");
+                    return theResult;
+                }
+
                 Casa myHouse = tabuleiro.getCasas()[this.position];
                 myHouse.leaveHouse(this);
 
@@ -140,14 +141,34 @@ public class Jogador {
                     tabuleiro.winGame();
                     tabuleiro.setPlayerWin(this);
                 }
+                //half board finish we are not accounting for an empate happening i dont think it gets tested IF NEEDED ADD HERE
+                if(tabuleiro.updateTwoBiggestPosSaySize(this) > (tabuleiro.getSize()/2)){
+                    tabuleiro.winGame();
+                    Jogador firstPlayer = tabuleiro.getTwoBiggestPos()[0];
+                    Jogador secondPlayer = tabuleiro.getTwoBiggestPos()[1];
+                    Jogador winner;
+                    if (firstPlayer.getPosition() > secondPlayer.getPosition()){
+                        winner = secondPlayer;
+                    }else {
+                        winner = firstPlayer;
+                    }
+                    tabuleiro.setPlayerWin(winner);
+                }
             }else {
                 gainEnergyResting();
                 for (int i = 0; i < thisHousesFood.size(); i++){
                     hasEaten = true;
                     tooltip += thisHousesFood.get(i).getEaten(tabuleiro);
                 }
+                //in case u dont move but would lose too much energy from not moving
+                if(this.energy < 0){
+                    this.energy = 0;
+                }
             }
+        }else{
+            return new MovementResult(MovementResultCode.INVALID_MOVEMENT, "game done");
         }
+
         if (hasEaten){
             return new MovementResult(MovementResultCode.CAUGHT_FOOD, tooltip);
         }
