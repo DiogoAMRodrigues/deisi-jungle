@@ -49,4 +49,9 @@ public class Shrooms extends Food {
     public int getN() {
         return n;
     }
+
+    @Override
+    public String getToolTip(){
+        return "Cogumelo Magico: + " + n + "% energia";
+    }
 }

@@ -45,4 +45,9 @@ public class Carne extends Food {
         tooltip = "Apanhou Carne";
         return tooltip;
     }
+
+    @Override
+    public String getToolTip(){
+        return "Carne : + 50 energia : 0 jogadas";
+    }
 }

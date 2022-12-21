@@ -46,4 +46,9 @@ public class Bananas extends Food {
         tooltip = "Apanhou Bananas";
         return tooltip;
     }
+
+    @Override
+    public String getToolTip(){
+        return "Bananas : "+ bananaAmount +" : + 40 energia";
+    }
 }
