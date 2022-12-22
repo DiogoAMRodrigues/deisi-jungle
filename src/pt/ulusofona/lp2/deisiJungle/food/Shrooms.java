@@ -52,13 +52,6 @@ public class Shrooms extends Food {
 
     @Override
     public String getToolTip(Tabuleiro tabuleiro){
-        int turn = tabuleiro.getTurns();
-        String tooltip = "";
-        if (turn%2 == 0){
-            tooltip = "Cogumelo Magico: + " + n + "% energia";
-        }else {
-            tooltip = "Cogumelo Magico: - " + n + "% energia";
-        }
-        return tooltip;
+        return "Cogumelo Magico: +- " + n + "% energia";
     }
 }
