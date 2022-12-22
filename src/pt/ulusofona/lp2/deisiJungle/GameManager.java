@@ -331,8 +331,13 @@ public class GameManager {
                 casa[1] = "Meta";
             } else {
                 Food comida = tabuleiro.getCasas()[convertedSquare].getComida().get(0);
-                casa[0] = comida.getImg();
-                casa[1] = comida.getToolTip(tabuleiro);
+                if (comida != null){
+                    casa[0] = comida.getImg();
+                    casa[1] = comida.getToolTip(tabuleiro);
+                }else {
+                    casa[0] = "blank.png";
+                    casa[1] = "Vazio";
+                }
             }
             casa[2] = "";
             for (int i = 0; i < getPlayerIds(squareNr).length - 1; i++) {
