@@ -367,7 +367,7 @@ public class GameManager {
             thisPlayer[1] = thisJogador.getName();
             thisPlayer[2] = thisJogador.getSpecies().getIdentifier() + "";
             thisPlayer[3] = thisJogador.getEnergy() + "";
-            thisPlayer[4] = thisJogador.getSpecies().getMinSpeed() + ".." + thisJogador.getSpecies().getMaxSpeed();
+            thisPlayer[4] = thisJogador.getSpecies().getMinSpeed() + ".." + thisJogador.getSpecies().getMaxSpeed() ;
         } else {
             return null;
         }
