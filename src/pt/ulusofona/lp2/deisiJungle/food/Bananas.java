@@ -49,6 +49,6 @@ public class Bananas extends Food {
 
     @Override
     public String getToolTip(Tabuleiro tabuleiro){
-        return "Bananas : "+ bananaAmount +" : +- 40 energia";
+        return "Bananas : "+ bananaAmount +" : + 40 energia";
     }
 }
