@@ -330,10 +330,18 @@ public class GameManager {
                 casa[0] = "finish.png";
                 casa[1] = "Meta";
             } else {
-                Food comida = tabuleiro.getCasas()[convertedSquare].getComida().get(0);
-                if (comida != null){
-                    casa[0] = comida.getImg();
-                    casa[1] = comida.getToolTip(tabuleiro);
+
+                ArrayList<Food> comidas = tabuleiro.getCasas()[convertedSquare].getComida();
+
+                if (comidas != null && !comidas.isEmpty()){
+                    Food comida = comidas.get(0);
+                    if (comida != null){
+                        casa[0] = comida.getImg();
+                        casa[1] = comida.getToolTip(tabuleiro);
+                    }else {
+                        casa[0] = "blank.png";
+                        casa[1] = "Vazio";
+                    }
                 }else {
                     casa[0] = "blank.png";
                     casa[1] = "Vazio";
