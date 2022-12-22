@@ -332,7 +332,7 @@ public class GameManager {
             } else {
                 Food comida = tabuleiro.getCasas()[convertedSquare].getComida().get(0);
                 casa[0] = comida.getImg();
-                casa[1] = comida.getToolTip();
+                casa[1] = comida.getToolTip(tabuleiro);
             }
             casa[2] = "";
             for (int i = 0; i < getPlayerIds(squareNr).length - 1; i++) {

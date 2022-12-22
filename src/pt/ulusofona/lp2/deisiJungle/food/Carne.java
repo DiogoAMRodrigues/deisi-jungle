@@ -47,7 +47,14 @@ public class Carne extends Food {
     }
 
     @Override
-    public String getToolTip(){
-        return "Carne : + 50 energia : 0 jogadas";
+    public String getToolTip(Tabuleiro tabuleiro){
+        String tooltip = "";
+        int turns = tabuleiro.getTurns();
+        if (turns <= 12){
+            tooltip = "Carne : + 50 energia : "+ turns +" jogadas";
+        }else {
+            tooltip = "Carne : - 50 energia : Carne toxica jogadas";
+        }
+        return tooltip;
     }
 }

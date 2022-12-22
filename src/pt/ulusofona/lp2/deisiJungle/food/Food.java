@@ -15,5 +15,5 @@ public abstract class Food {
     public String getImg() {
         return img;
     }
-    public abstract String getToolTip();
+    public abstract String getToolTip(Tabuleiro tabuleiro);
 }

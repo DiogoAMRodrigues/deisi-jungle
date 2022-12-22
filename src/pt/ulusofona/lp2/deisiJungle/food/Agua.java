@@ -44,7 +44,7 @@ public class Agua extends Food {
     }
 
     @Override
-    public String getToolTip(){
+    public String getToolTip(Tabuleiro tabuleiro){
         return "Agua : + 15U|20% energia";
     }
 
