@@ -170,7 +170,9 @@ public class Jogador {
         }
 
         if (hasEaten){
-            return new MovementResult(MovementResultCode.CAUGHT_FOOD, tooltip);
+            if(!tooltip.equals("")){
+                return new MovementResult(MovementResultCode.CAUGHT_FOOD, tooltip);
+            }
         }
         return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
     }
