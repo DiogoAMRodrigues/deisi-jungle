@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class GameManager {
     private Tabuleiro tabuleiro;
@@ -431,14 +432,26 @@ public class GameManager {
         ArrayList<String> players = new ArrayList<>();
         int counter = 1;
 
-        for (int i = tabuleiro.getCasas().length - 1; i >= 0; --i) {
+        if (tabuleiro.getCasas()[tabuleiro.getCasas().length-1].getJogadores().size() != 0) {
+            Jogador player = tabuleiro.getPlayerWin();
+            players.add("#" + counter + " " + player.getName() + ", " + player.getSpecies().getName() + ", " +
+                    (player.getPosition() + 1) + ", " + player.getDistancia() + ", " + player.getNumAlimentos());
+        }
+
+        ArrayList<Jogador> sortedPlayers;
+
+        for (int i = tabuleiro.getCasas().length - 2; i >= 0; --i) {
             if (tabuleiro.getCasas()[i].getJogadores().size() != 0) {
-                for (int j = 0; j < tabuleiro.getCasas()[i].getJogadores().size(); ++j) {
-                    Jogador player = tabuleiro.getCasas()[i].getJogadores().get(j);
+                sortedPlayers = tabuleiro.getCasas()[i].getJogadores();
+                sortedPlayers.sort(Comparator.comparingInt(Jogador::getId));
+                for(Jogador player : sortedPlayers){
                     players.add("#" + counter + " " + player.getName() + ", " + player.getSpecies().getName() + ", " +
                             (player.getPosition() + 1) + ", " + player.getDistancia() + ", " + player.getNumAlimentos());
                     counter++;
                 }
+            }
+            if(counter >= tabuleiro.getJogadores().size()){
+                break;
             }
         }
         return players;

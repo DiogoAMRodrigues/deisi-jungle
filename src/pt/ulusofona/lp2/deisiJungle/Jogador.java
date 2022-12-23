@@ -136,7 +136,7 @@ public class Jogador {
 
                 Casa myHouse = tabuleiro.getCasas()[this.position];
                 myHouse.leaveHouse(this);
-                this.distancia += nrSquares;
+                this.distancia += Math.abs(nrSquares);
                 //Add to other house
                 Casa moveToHouse = tabuleiro.getCasas()[moveToPos];
                 moveToHouse.addJogadorCasa(this);
