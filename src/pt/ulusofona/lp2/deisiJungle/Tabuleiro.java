@@ -30,7 +30,7 @@ public class Tabuleiro {
 
     public void addJogador(Jogador player){
         jogadores.add(player);
-        jogaresHS.putIfAbsent(player.getId(), player);
+        jogaresHS.put(player.getId(), player);
 
         jogadores.sort(Comparator.comparingInt(Jogador::getId));
     }
