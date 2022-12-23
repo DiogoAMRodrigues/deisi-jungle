@@ -111,7 +111,7 @@ public class Jogador {
             //If he moves do this
             if (nrSquares != 0){
                 //Check energy I need for this House
-                int amountOfEnergyRequired = mySpecies.getEnergyConsumption() * (nrSquares-1);
+                int amountOfEnergyRequired = mySpecies.getEnergyConsumption() * (nrSquares);
                 for (int i = 0; i < thisHousesFood.size(); i++){
                     amountOfEnergyRequired += thisHousesFood.get(i).getEatenSim(this, tabuleiro.getTurns());
                 }
@@ -130,7 +130,7 @@ public class Jogador {
                 position = moveToPos;
 
                 //Lose energy
-                loseEnergyMovement(nrSquares-1);
+                loseEnergyMovement(nrSquares);
                 for (int i = 0; i < thisHousesFood.size(); i++){
                     hasEaten = true;
                     tooltip += thisHousesFood.get(i).getEaten(tabuleiro);
