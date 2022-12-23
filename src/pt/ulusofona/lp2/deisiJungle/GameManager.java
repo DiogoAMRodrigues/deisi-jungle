@@ -5,6 +5,8 @@ import pt.ulusofona.lp2.deisiJungle.species.*;
 
 import javax.swing.*;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GameManager {
@@ -433,7 +435,8 @@ public class GameManager {
             if (tabuleiro.getCasas()[i].getJogadores().size() != 0) {
                 for (int j = 0; j < tabuleiro.getCasas()[i].getJogadores().size(); ++j) {
                     Jogador player = tabuleiro.getCasas()[i].getJogadores().get(j);
-                    players.add("#" + counter + " " + player.getName() + ", " + player.getSpecies().getName() + ", " + (player.getPosition() + 1));
+                    players.add("#" + counter + " " + player.getName() + ", " + player.getSpecies().getName() + ", " +
+                            (player.getPosition() + 1) + ", " + player.getDistancia() + ", " + player.getNumAlimentos());
                     counter++;
                 }
             }
@@ -450,7 +453,21 @@ public class GameManager {
     }
 
     public boolean saveGame(File file) {
-        return false;
+        File players = new File("players.txt");
+        File board = new File("board.txt");
+
+        try{
+            FileWriter fw = new FileWriter(players);
+            for(int i = 0; i < tabuleiro.getJogadores().size(); ++i){
+                Jogador player = tabuleiro.getJogadores().get(i);
+                /*fw.write(player.getId()+","+player.getName()+","+player.getName()+","+player.getPosition()+
+                        player.getEnergy()+","+player.getHasEatenBanana()+","+player.getSpecies());*/
+            }
+
+        }catch(IOException e){
+            return false;
+        }
+        return true;
     }
 
     public boolean loadGame(File file) {

@@ -25,6 +25,7 @@ public class Shrooms extends Food {
             thisPlayersEnergy -= amount;
         }
         int lostEnergy = beginningEnergy - thisPlayersEnergy;
+
         return lostEnergy;
     }
 
@@ -52,6 +53,6 @@ public class Shrooms extends Food {
 
     @Override
     public String getToolTip(Tabuleiro tabuleiro){
-        return "Cogumelo Magico: +- " + n + "% energia";
+        return "Cogumelo Magico : +- " + n + "% energia";
     }
 }

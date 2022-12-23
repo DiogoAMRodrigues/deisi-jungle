@@ -485,6 +485,13 @@ public class Tests {
       g.moveCurrentPlayer(200, true);
       assertEquals(1, g.getTabuleiro().getJogadores().get(1).getPosition()+1);
 
+      g.moveCurrentPlayer(-200, true);
+      assertEquals(1, g.getTabuleiro().getJogadores().get(2).getPosition()+1);
+
+      g.moveCurrentPlayer(0, false);
+      assertEquals(1, g.getTabuleiro().getJogadores().get(3).getPosition()+1);
+
+
    }
 
    @Test

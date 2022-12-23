@@ -10,6 +10,8 @@ public class Jogador {
     private final Especie species;
     private int position;
     private int energy;
+    private int numAlimentos;
+    private int distancia;
     protected boolean hasEatenBanana;
 
     public Jogador(int id, String name, Especie species) {
@@ -19,6 +21,8 @@ public class Jogador {
         this.position = 0;
         energy = species.getStartEnergy();
         hasEatenBanana = false;
+        numAlimentos = 0;
+        distancia = 0;
     }
 
     public boolean getHasEatenBanana() {
@@ -83,6 +87,13 @@ public class Jogador {
         return energy;
     }
 
+    public int getNumAlimentos() {
+        return numAlimentos;
+    }
+
+    public int getDistancia() {
+        return distancia;
+    }
     public MovementResult theMovementPart(Tabuleiro tabuleiro, int nrSquares, boolean byPassValidations)  {
         MovementResult theResult = new MovementResult(MovementResultCode.VALID_MOVEMENT,"");
         Especie mySpecies = this.species;
@@ -125,7 +136,7 @@ public class Jogador {
 
                 Casa myHouse = tabuleiro.getCasas()[this.position];
                 myHouse.leaveHouse(this);
-
+                this.distancia += nrSquares;
                 //Add to other house
                 Casa moveToHouse = tabuleiro.getCasas()[moveToPos];
                 moveToHouse.addJogadorCasa(this);
@@ -133,9 +144,11 @@ public class Jogador {
 
                 //Lose energy
                 loseEnergyMovement(nrSquares);
+
                 for (int i = 0; i < thisHousesFood.size(); i++){
                     hasEaten = true;
                     tooltip += thisHousesFood.get(i).getEaten(tabuleiro);
+                    this.numAlimentos++;
                 }
                 //Check if he won
                 if (moveToPos == tabuleiro.getSize() - 1){
@@ -177,4 +190,6 @@ public class Jogador {
         }
         return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
     }
+
+
 }
