@@ -94,6 +94,8 @@ public class Jogador {
             int moveToPos = this.position + nrSquares;
             if (moveToPos >= tabuleiro.getSize()){
                 moveToPos = tabuleiro.getSize() - 1;
+                //testing diogo big brain
+                nrSquares = moveToPos - this.position;
             }
             //Goes behind first house
             if (moveToPos < 0){

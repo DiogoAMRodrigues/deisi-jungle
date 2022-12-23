@@ -453,8 +453,8 @@ public class Tests {
       players[3][2] = "P";
 
       g.createInitialJungle(20, players);
-      g.moveCurrentPlayer(4, false);
 
+      g.moveCurrentPlayer(4, false);
       assertEquals(5, g.getTabuleiro().getJogadores().get(0).getPosition()+1);
 
       g.moveCurrentPlayer(-4, false);
@@ -462,6 +462,15 @@ public class Tests {
 
       g.moveCurrentPlayer(500, false);
       assertEquals(1, g.getTabuleiro().getJogadores().get(2).getPosition()+1);
+
+      g.moveCurrentPlayer(-1, false);
+      assertEquals(1, g.getTabuleiro().getJogadores().get(3).getPosition()+1);
+
+      g.moveCurrentPlayer(-1, false);
+      assertEquals(4, g.getTabuleiro().getJogadores().get(0).getPosition()+1);
+
+      g.moveCurrentPlayer(200, true);
+      assertEquals(1, g.getTabuleiro().getJogadores().get(1).getPosition()+1);
 
    }
 
