@@ -427,6 +427,18 @@ public class Tests {
       assertEquals(theError, g.createInitialJungle(20, players).getMessage());
       g = new GameManager();
 
+      players[0][0] = "1";
+      players[0][2] = "";
+      theError = "ANIMALNOTPROVIDED";
+      assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      g = new GameManager();
+
+      players[0][0] = "1";
+      players[0][2] = null;
+      theError = "ANIMALNOTPROVIDED";
+      assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      g = new GameManager();
+
       players[0][2] = "Z";
       players[1][2] = "Z";
       theError = "TOOMANYTARZAN";

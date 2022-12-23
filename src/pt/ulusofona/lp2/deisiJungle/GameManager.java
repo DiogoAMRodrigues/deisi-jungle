@@ -224,13 +224,19 @@ public class GameManager {
         }
         //is an eligible Species
         int playerID = Integer.parseInt(playersInfo[player1][0]);
-        char thisPlayersSpeciesID = playersInfo[player1][species].charAt(0);
-        Especie thisPlayersSpecies = createAnimal(thisPlayersSpeciesID);
+        char thisPlayersSpeciesID;
+        Especie thisPlayersSpecies;
+        if (playersInfo[player1][species] != null && playersInfo[player1][species].length() > 0) {
+            thisPlayersSpeciesID = playersInfo[player1][species].charAt(0);
+            thisPlayersSpecies = createAnimal(thisPlayersSpeciesID);
+        } else {
+            return new InitializationError("ANIMALNOTPROVIDED");
+        }
 
         //Adding the Player into the Tabuleiro
         if (thisPlayersSpecies != null) {
             Jogador thisPlayerObject = new Jogador(playerID, thisName, thisPlayersSpecies);
-            if(thisPlayerObject.getSpecies() == null){
+            if (thisPlayerObject.getSpecies() == null) {
                 return new InitializationError("ILLEGALANIMAL");
             }
             jogadores.add(thisPlayerObject);
