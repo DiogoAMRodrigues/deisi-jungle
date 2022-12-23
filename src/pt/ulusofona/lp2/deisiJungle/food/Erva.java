@@ -41,4 +41,10 @@ public class Erva extends Food{
         tooltip = "Apanhou Erva";
         return tooltip;
     }
+
+    @Override
+    public String getToolTip(Tabuleiro tabuleiro){
+
+        return "Erva : +- 20 energia";
+    }
 }

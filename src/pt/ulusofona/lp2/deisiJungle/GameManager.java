@@ -330,8 +330,22 @@ public class GameManager {
                 casa[0] = "finish.png";
                 casa[1] = "Meta";
             } else {
-                casa[0] = "blank.png";
-                casa[1] = "Vazio";
+
+                ArrayList<Food> comidas = tabuleiro.getCasas()[convertedSquare].getComida();
+
+                if (comidas != null && !comidas.isEmpty()){
+                    Food comida = comidas.get(0);
+                    if (comida != null){
+                        casa[0] = comida.getImg();
+                        casa[1] = comida.getToolTip(tabuleiro);
+                    }else {
+                        casa[0] = "blank.png";
+                        casa[1] = "Vazio";
+                    }
+                }else {
+                    casa[0] = "blank.png";
+                    casa[1] = "Vazio";
+                }
             }
             casa[2] = "";
             for (int i = 0; i < getPlayerIds(squareNr).length - 1; i++) {
@@ -371,14 +385,16 @@ public class GameManager {
     }
 
     public String[][] getPlayersInfo() {
-        String[][] thesePlayers = new String[tabuleiro.getJogadores().size()][4];
+        String[][] thesePlayers = new String[tabuleiro.getJogadores().size()][5];
         if (tabuleiro != null) {
             for (int i = 0; i < tabuleiro.getJogadores().size(); i++) {
                 Jogador thisJogador = tabuleiro.getJogadores().get(i);
+                Especie thisSpecies = thisJogador.getSpecies();
                 thesePlayers[i][0] = thisJogador.getId() + "";
                 thesePlayers[i][1] = thisJogador.getName();
-                thesePlayers[i][2] = thisJogador.getSpecies().getIdentifier() + "";
+                thesePlayers[i][2] = thisSpecies.getIdentifier() + "";
                 thesePlayers[i][3] = thisJogador.getEnergy() + "";
+                thesePlayers[i][4] = thisSpecies.getMinSpeed() + ".." + thisSpecies.getMaxSpeed();
             }
             return thesePlayers;
         }
@@ -396,10 +412,11 @@ public class GameManager {
         if (!tabuleiro.getWinner()) {
             return null;
         }
-
+        Jogador winner = tabuleiro.getPlayerWin();
+        Especie species = winner.getSpecies();
         return new String[]{
-                String.valueOf(tabuleiro.getPlayerWin().getId()), tabuleiro.getPlayerWin().getName(),
-                String.valueOf(tabuleiro.getPlayerWin().getSpecies().getIdentifier()), String.valueOf(tabuleiro.getPlayerWin().getEnergy())};
+                winner.getId() + "", winner.getName(),
+                species.getIdentifier() + "", winner.getEnergy() + "", species.getMinSpeed() + ".." + species.getMaxSpeed()};
     }
 
     public ArrayList<String> getGameResults() {

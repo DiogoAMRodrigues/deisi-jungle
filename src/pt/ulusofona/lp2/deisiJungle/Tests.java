@@ -4,6 +4,8 @@ import org.junit.Test;
 import pt.ulusofona.lp2.deisiJungle.food.*;
 import pt.ulusofona.lp2.deisiJungle.species.*;
 
+import java.util.Arrays;
+
 import static junit.framework.TestCase.assertEquals;
 
 public class Tests {
@@ -454,8 +456,16 @@ public class Tests {
       g.moveCurrentPlayer(4, false);
    }
 
-   public void foodFactory_09(){
+   @Test
+   public void getPlayerInfo_09(){
+      GameManager g = new GameManager();
+      String[][] playersInfo = new String[1][4];
+      playersInfo[0][0] = "1";
+      playersInfo[0][1] = "Jeff";
+      playersInfo[0][2] = "E";
+      g.createInitialJungle(20, playersInfo);
 
-
+      String[] thisString = g.getPlayerInfo(1);
+      assertEquals(5, thisString.length);
    }
 }

@@ -24,7 +24,7 @@ public class Tabuleiro {
         jogadores = new ArrayList<>();
         jogaresHS = new HashMap<>();
         currentPlayerInt = 0;
-        turns = 1;
+        turns = 0;
         twoBiggestPos = new Jogador[2];
     }
 
@@ -36,12 +36,12 @@ public class Tabuleiro {
     }
 
     public void nextTurn(){
+        turns++;
         currentPlayerInt++;
         if (currentPlayerInt >= jogadores.size()){
             currentPlayerInt = 0;
         }
         currentPlayer = jogadores.get(currentPlayerInt);
-        turns++;
     }
 
     public int getTurns() {
