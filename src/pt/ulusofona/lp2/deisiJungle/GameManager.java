@@ -436,6 +436,7 @@ public class GameManager {
             Jogador player = tabuleiro.getPlayerWin();
             players.add("#" + counter + " " + player.getName() + ", " + player.getSpecies().getName() + ", " +
                     (player.getPosition() + 1) + ", " + player.getDistancia() + ", " + player.getNumAlimentos());
+            counter++;
         }
 
         ArrayList<Jogador> sortedPlayers;
