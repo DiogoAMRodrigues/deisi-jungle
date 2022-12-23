@@ -454,16 +454,19 @@ public class Tests {
       g.createInitialJungle(20, players);
       g.moveCurrentPlayer(4, false);
 
-      assertEquals(5, g.getTabuleiro().getJogadores().get(0).getPosition());
+      assertEquals(5, g.getTabuleiro().getJogadores().get(0).getPosition()+1);
    }
 
    @Test
    public void getPlayerInfo_09(){
       GameManager g = new GameManager();
-      String[][] playersInfo = new String[1][4];
+      String[][] playersInfo = new String[2][4];
       playersInfo[0][0] = "1";
       playersInfo[0][1] = "Jeff";
       playersInfo[0][2] = "E";
+      playersInfo[1][0] = "2";
+      playersInfo[1][1] = "Jefff";
+      playersInfo[1][2] = "L";
       g.createInitialJungle(20, playersInfo);
 
       String[] thisString = g.getPlayerInfo(1);

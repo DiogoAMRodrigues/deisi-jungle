@@ -31,7 +31,6 @@ public class Tabuleiro {
     public void addJogador(Jogador player){
         jogadores.add(player);
         jogaresHS.put(player.getId(), player);
-
         jogadores.sort(Comparator.comparingInt(Jogador::getId));
     }
 
