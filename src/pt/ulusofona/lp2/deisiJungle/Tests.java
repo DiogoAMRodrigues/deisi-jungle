@@ -483,4 +483,41 @@ public class Tests {
       assertNull(thisString);
    }
 
+   @Test
+   public void getCurrentPlayerInfo_10(){
+      GameManager g = new GameManager();
+      String[][] playersInfo = new String[2][4];
+      playersInfo[0][0] = "2";
+      playersInfo[0][1] = "Jeff";
+      playersInfo[0][2] = "E";
+      playersInfo[1][0] = "1";
+      playersInfo[1][1] = "Jefff";
+      playersInfo[1][2] = "L";
+      g.createInitialJungle(20, playersInfo);
+
+      String[] thisString = g.getCurrentPlayerInfo();
+
+      assertEquals("1", thisString[0]);
+      assertEquals("Jefff", thisString[1]);
+      assertEquals("L", thisString[2]);
+      assertEquals("80", thisString[3]);
+
+      g.moveCurrentPlayer(4, false);
+
+      thisString = g.getCurrentPlayerInfo();
+
+      assertEquals("2", thisString[0]);
+      assertEquals("Jeff", thisString[1]);
+      assertEquals("E", thisString[2]);
+      assertEquals("180", thisString[3]);
+
+      g.moveCurrentPlayer(4, false);
+
+      thisString = g.getCurrentPlayerInfo();
+
+      assertEquals("1", thisString[0]);
+      assertEquals("Jefff", thisString[1]);
+      assertEquals("L", thisString[2]);
+      assertEquals("72", thisString[3]);
+   }
 }
