@@ -41,8 +41,8 @@ public class Carne extends Food {
                 player.loseEnergy(thisPlayersEnergy/2);
                 tooltip = "Carne : - 50 energia : Carne toxica jogadas";
             }
+            tooltip = "Apanhou Carne";
         }
-        tooltip = "Apanhou Carne";
         return tooltip;
     }
 
