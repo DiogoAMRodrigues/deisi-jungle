@@ -39,7 +39,7 @@ public class Carne extends Food {
             }else {
                 int thisPlayersEnergy = player.getEnergy();
                 player.loseEnergy(thisPlayersEnergy/2);
-                tooltip = "Carne : - 50 energia : Carne toxica jogadas";
+                tooltip = "Carne toxica";
             }
             tooltip = "Apanhou Carne";
         }
@@ -53,7 +53,7 @@ public class Carne extends Food {
         if (turns <= 12){
             tooltip = "Carne : + 50 energia : "+ turns +" jogadas";
         }else {
-            tooltip = "Carne : - 50 energia : Carne toxica jogadas";
+            tooltip = "Carne toxica";
         }
         return tooltip;
     }
