@@ -83,7 +83,6 @@ public class Jogador {
         return energy;
     }
 
-
     public MovementResult theMovementPart(Tabuleiro tabuleiro, int nrSquares, boolean byPassValidations)  {
         MovementResult theResult = new MovementResult(MovementResultCode.VALID_MOVEMENT,"");
         Especie mySpecies = this.species;
@@ -112,7 +111,7 @@ public class Jogador {
             //If he moves do this
             if (nrSquares != 0){
                 //Check energy I need for this House
-                int amountOfEnergyRequired = mySpecies.getEnergyConsumption() * nrSquares;
+                int amountOfEnergyRequired = mySpecies.getEnergyConsumption() * (nrSquares-1);
                 for (int i = 0; i < thisHousesFood.size(); i++){
                     amountOfEnergyRequired += thisHousesFood.get(i).getEatenSim(this, tabuleiro.getTurns());
                 }
@@ -131,7 +130,7 @@ public class Jogador {
                 position = moveToPos;
 
                 //Lose energy
-                loseEnergyMovement(nrSquares);
+                loseEnergyMovement(nrSquares-1);
                 for (int i = 0; i < thisHousesFood.size(); i++){
                     hasEaten = true;
                     tooltip += thisHousesFood.get(i).getEaten(tabuleiro);

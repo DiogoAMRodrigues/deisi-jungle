@@ -452,8 +452,9 @@ public class Tests {
       players[3][2] = "P";
 
       g.createInitialJungle(20, players);
-      g.getTabuleiro().winGame();
       g.moveCurrentPlayer(4, false);
+
+      assertEquals(5, g.getTabuleiro().getJogadores().get(0).getPosition());
    }
 
    @Test
@@ -468,4 +469,5 @@ public class Tests {
       String[] thisString = g.getPlayerInfo(1);
       assertEquals(5, thisString.length);
    }
+
 }
