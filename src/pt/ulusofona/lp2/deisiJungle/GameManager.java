@@ -451,7 +451,7 @@ public class GameManager {
                     counter++;
                 }
             }
-            if(counter >= tabuleiro.getJogadores().size()){
+            if(counter > tabuleiro.getJogadores().size()){
                 break;
             }
         }
