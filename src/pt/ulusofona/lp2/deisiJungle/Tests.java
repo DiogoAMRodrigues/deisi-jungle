@@ -536,4 +536,29 @@ public class Tests {
       assertEquals("L", thisString[2]);
       assertEquals("72", thisString[3]);
    }
+
+   @Test
+   public  void getWinnerInfo_11(){
+      GameManager g = new GameManager();
+      String[][] playersInfo = new String[2][4];
+      playersInfo[0][0] = "2";
+      playersInfo[0][1] = "Jeff";
+      playersInfo[0][2] = "E";
+      playersInfo[1][0] = "1";
+      playersInfo[1][1] = "Jefff";
+      playersInfo[1][2] = "L";
+      g.createInitialJungle(20, playersInfo);
+
+      g.moveCurrentPlayer(8, true);
+      g.moveCurrentPlayer(8, true);
+      g.moveCurrentPlayer(6, true);
+      g.moveCurrentPlayer(20, true);
+
+      String[] thisString = g.getWinnerInfo();
+
+      assertEquals("2", thisString[0]);
+      assertEquals("Jeff", thisString[1]);
+      assertEquals("E", thisString[2]);
+      assertEquals("100", thisString[3]);
+   }
 }
