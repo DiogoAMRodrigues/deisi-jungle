@@ -4,6 +4,7 @@ import org.junit.Test;
 import pt.ulusofona.lp2.deisiJungle.food.*;
 import pt.ulusofona.lp2.deisiJungle.species.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static junit.framework.TestCase.assertEquals;
@@ -571,6 +572,33 @@ public class Tests {
       assertEquals("2", thisString[0]);
       assertEquals("Jeff", thisString[1]);
       assertEquals("E", thisString[2]);
-      assertEquals("100", thisString[3]);
+      assertEquals("104", thisString[3]);
+   }
+
+   @Test
+   public void getGameResults_12(){
+      GameManager g = new GameManager();
+      String[][] playersInfo = new String[2][4];
+      playersInfo[0][0] = "2";
+      playersInfo[0][1] = "Jeff";
+      playersInfo[0][2] = "E";
+      playersInfo[1][0] = "1";
+      playersInfo[1][1] = "Jefff";
+      playersInfo[1][2] = "L";
+      playersInfo[2][0] = "3";
+      playersInfo[2][1] = "Heinz";
+      playersInfo[2][2] = "L";
+      g.createInitialJungle(20, playersInfo);
+
+      g.moveCurrentPlayer(8, true);
+      g.moveCurrentPlayer(8, true);
+      g.moveCurrentPlayer(8, true);
+      g.moveCurrentPlayer(6, true);
+      g.moveCurrentPlayer(6, true);
+      g.moveCurrentPlayer(20, true);
+
+      ArrayList<String> thisString = g.getGameResults();
+
+      assertEquals("#1 Heinz, Leão, ");
    }
 }
