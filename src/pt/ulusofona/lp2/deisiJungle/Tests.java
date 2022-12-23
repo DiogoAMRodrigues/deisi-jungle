@@ -7,7 +7,6 @@ import pt.ulusofona.lp2.deisiJungle.species.*;
 import java.util.Arrays;
 
 import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNull;
 
 public class Tests {
    @Test
@@ -453,8 +452,9 @@ public class Tests {
       players[3][2] = "P";
 
       g.createInitialJungle(20, players);
-      g.getTabuleiro().winGame();
       g.moveCurrentPlayer(4, false);
+
+      assertEquals(5, g.getTabuleiro().getJogadores().get(0).getPosition());
    }
 
    @Test
@@ -464,23 +464,10 @@ public class Tests {
       playersInfo[0][0] = "1";
       playersInfo[0][1] = "Jeff";
       playersInfo[0][2] = "E";
-      playersInfo[1][0] = "2";
-      playersInfo[1][1] = "Kennedy";
-      playersInfo[1][2] = "C";
       g.createInitialJungle(20, playersInfo);
 
       String[] thisString = g.getPlayerInfo(1);
       assertEquals(5, thisString.length);
-
-      assertEquals("1", thisString[0]);
-      assertEquals("Jeff", thisString[1]);
-      assertEquals("E", thisString[2]);
-      assertEquals("180", thisString[3]);
-      assertEquals( "1..6", thisString[4]);
-
-      thisString = g.getPlayerInfo(2);
-      assertNull(thisString);
    }
-
 
 }
