@@ -585,7 +585,7 @@ public class Tests {
    @Test
    public void getGameResults_12(){
       GameManager g = new GameManager();
-      String[][] playersInfo = new String[2][4];
+      String[][] playersInfo = new String[3][4];
       playersInfo[0][0] = "2";
       playersInfo[0][1] = "Jeff";
       playersInfo[0][2] = "E";
@@ -606,6 +606,9 @@ public class Tests {
 
       ArrayList<String> thisString = g.getGameResults();
 
-      assertEquals("#1 Heinz, Leão, ");
+      assertEquals("#1 Heinz, Leão, 20, 19, 0", thisString.get(0));
+      assertEquals("#2 Jefff, Leão, 15, 14, 0", thisString.get(1));
+      assertEquals("#3 Jeff, Elefante, 15, 14, 0", thisString.get(2));
+
    }
 }
