@@ -611,4 +611,41 @@ public class Tests {
       assertEquals("#3 Jeff, Elefante, 15, 14, 0", thisString.get(2));
 
    }
+
+   @Test
+   public void enunciadoExample_13(){
+      GameManager g = new GameManager();
+      String[][] players = new String[2][3];
+      players[0][0] = "1";
+      players[0][1] = "tarz";
+      players[0][2] = "Z";
+      players[1][0] = "2";
+      players[1][1] = "lion";
+      players[1][2] = "L";
+
+      String[][] thisWater = new String[1][2];
+      thisWater[0][0] = "a";
+      thisWater[0][1] = "3";
+      g.createInitialJungle(10, players, thisWater);
+
+      Jogador tarz = g.getTabuleiro().getCurrentPlayer();
+      g.moveCurrentPlayer(3, false);
+      Jogador lion = g.getTabuleiro().getCurrentPlayer();
+
+      //lose energy from moving
+      assertEquals(64, tarz.getEnergy());
+
+      g.moveCurrentPlayer(5, false);
+      assertEquals(70, lion.getEnergy());
+
+      //gain 20 from relaxing and +20% from drinking water
+      g.moveCurrentPlayer(0, false);
+      assertEquals(115, tarz.getEnergy());
+
+      g.moveCurrentPlayer(4, false);
+
+      assertEquals(62, lion.getEnergy());
+
+      assertEquals(2, g.getTabuleiro().getPlayerWin().getId());
+   }
 }
