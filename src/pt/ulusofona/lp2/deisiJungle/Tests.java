@@ -625,15 +625,21 @@ public class Tests {
 
       String[][] thisWater = new String[1][2];
       thisWater[0][0] = "a";
-      thisWater[0][1] = "3";
+      thisWater[0][1] = "4";
       g.createInitialJungle(10, players, thisWater);
+
+      for(int i = 0; i < g.getTabuleiro().getCasas().length; i++){
+         if (!g.getTabuleiro().getCasas()[i].getComida().isEmpty()){
+            assertEquals(3, i);
+         }
+      }
 
       Jogador tarz = g.getTabuleiro().getCurrentPlayer();
       g.moveCurrentPlayer(3, false);
       Jogador lion = g.getTabuleiro().getCurrentPlayer();
 
-      //lose energy from moving
-      assertEquals(64, tarz.getEnergy());
+      //lose energy from moving but drinks water
+      assertEquals(76, tarz.getEnergy());
 
       g.moveCurrentPlayer(5, false);
       assertEquals(70, lion.getEnergy());

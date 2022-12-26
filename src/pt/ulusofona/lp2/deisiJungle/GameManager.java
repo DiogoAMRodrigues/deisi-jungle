@@ -109,7 +109,7 @@ public class GameManager {
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
                 try {
-                    int foodPosition = Integer.parseInt(foodsInfo[i][1]) ; //ASSUMING THEY COUNT LIKE HUMANS
+                    int foodPosition = Integer.parseInt(foodsInfo[i][1]) - 1; //ASSUMING THEY COUNT LIKE HUMANS
                     char foodIdentifier = foodsInfo[i][0].charAt(0);
 
                     //Check if the food is inside the board, can't be on starting pos or finish line

@@ -155,6 +155,13 @@ public class Jogador {
                     this.energy = 0;
                 }
 
+                //Check if he won
+                if (moveToPos == tabuleiro.getSize() - 1 && !tabuleiro.getWinner()){
+                    tabuleiro.winGame();
+                    tabuleiro.setPlayerWin(this);
+                    return new MovementResult(MovementResultCode.VALID_MOVEMENT, null); // he won the game
+                }
+
                 //half board finish we are not accounting for an empate happening i dont think it gets tested IF NEEDED ADD HERE
                 if(tabuleiro.updateTwoBiggestPosSaySize(this) > (tabuleiro.getSize()/2)){
                     tabuleiro.winGame();
@@ -167,11 +174,6 @@ public class Jogador {
                         winner = firstPlayer;
                     }
                     tabuleiro.setPlayerWin(winner);
-                }
-                //Check if he won
-                if (moveToPos == tabuleiro.getSize() - 1 && !tabuleiro.getWinner()){
-                    tabuleiro.winGame();
-                    tabuleiro.setPlayerWin(this);
                 }
             }else {
                 gainEnergyResting();
