@@ -128,11 +128,11 @@ public class Jogador {
                 for (int i = 0; i < thisHousesFood.size(); i++){
                     amountOfEnergyRequired += thisHousesFood.get(i).getEatenSim(this, tabuleiro.getTurns());
                 }
-                /*//Current energy needs to be bigger than energy usage while move
+                //Current energy needs to be bigger than energy usage while move
                 if (this.energy < amountOfEnergyRequired){
                     theResult = new MovementResult(MovementResultCode.NO_ENERGY, null);
                     return theResult;
-                }*/
+                }
 
                 Casa myHouse = tabuleiro.getCasas()[this.position];
                 myHouse.leaveHouse(this);
