@@ -10,7 +10,8 @@ public class Shrooms extends Food {
     public Shrooms() {
         id = 'm';
         img = "mushroom.png";
-        n = new Random().nextInt(10,51);
+        Random random = new Random();
+        n = random.nextInt(41) + 10;
     }
 
     @Override
