@@ -180,7 +180,7 @@ public class Jogador {
                 }
             }
         }else{
-            return new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
+            return new MovementResult(MovementResultCode.NO_ENERGY, null);
         }
 
         if (hasEaten){
