@@ -4,9 +4,7 @@ import pt.ulusofona.lp2.deisiJungle.food.*;
 import pt.ulusofona.lp2.deisiJungle.species.*;
 
 import javax.swing.*;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -469,32 +467,57 @@ public class GameManager {
     public boolean saveGame(File file) {
         try{
             FileWriter fwp = new FileWriter(file);
-            for(int i = 0; i < tabuleiro.getJogadores().size(); ++i){
-                Jogador player = tabuleiro.getJogadores().get(i);
-                fwp.write(player.getId()+","+player.getName()+","+player.getNumAlimentos()+","+player.getPosition()+
-                        ","+player.getEnergy()+","+player.getHasEatenBanana()+","+player.getSpecies().getIdentifier());
-            }
-            fwp.write("|");
+            fwp.write(tabuleiro.getSize()+","+tabuleiro.getJogadores().size()+"\n");
             for (int i = 0; i < tabuleiro.getCasas().length; i++) {
                 Casa casa = tabuleiro.getCasas()[i];
                 for(int j = 0; j < casa.getJogadores().size(); ++j){
-                    fwp.write(i+","+casa.getJogadores().get(j).getId());
+                    Jogador player = casa.getJogadores().get(j);
+                    fwp.write(player.getId()+","+player.getName()+","+player.getNumAlimentos()+","+player.getPosition()+
+                            ","+player.getEnergy()+","+player.getHasEatenBanana()+","+player.getSpecies().getIdentifier());
                 }
+                fwp.write("|");
                 for(int k = 0; k < casa.getComida().size(); ++k){
                     Food comida = casa.getComida().get(k);
-                    fwp.write(","+comida.getId()+",");
+                    if(k < casa.getComida().size() - 1){
+                        fwp.write(comida.getId()+",");
+                    }else{
+                        fwp.write(comida.getId());
+                    }
                 }
-
+                fwp.write("\n");
             }
             fwp.close();
         }catch(IOException e){
             return false;
         }
-
         return true;
     }
 
     public boolean loadGame(File file) {
-        return false;
+        try{
+            BufferedReader bf = new BufferedReader(new FileReader(file));
+            String read;
+            int i = 0;
+            String size;
+            int jogadoresSize;
+            String[][] players;
+            while((read = bf.readLine()) != null){
+                if(i == 0){
+                    size = read.split(",")[0];
+                    jogadoresSize = Integer.parseInt(read.split(",")[1]);
+                    players = new String[jogadoresSize][3];
+                    //create important variables
+                }else{
+                    //Insert players into array
+
+                }
+                i++;
+                String[] content = read.split("|");
+
+            }
+        }catch(IOException e){
+            return false;
+        }
+        return true;
     }
 }
