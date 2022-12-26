@@ -125,16 +125,14 @@ public class Jogador {
             if (nrSquares != 0){
                 //Check energy I need for this House
                 int amountOfEnergyRequired = mySpecies.getEnergyConsumption() * (nrSquares);
-
+                for (int i = 0; i < thisHousesFood.size(); i++){
+                    amountOfEnergyRequired += thisHousesFood.get(i).getEatenSim(this, tabuleiro.getTurns());
+                }
                 //Current energy needs to be bigger than energy usage while move
                 if (this.energy < amountOfEnergyRequired){
                     theResult = new MovementResult(MovementResultCode.NO_ENERGY, null);
                     return theResult;
                 }
-                /*
-                for (int i = 0; i < thisHousesFood.size(); i++){
-                    amountOfEnergyRequired += thisHousesFood.get(i).getEatenSim(this, tabuleiro.getTurns());
-                }*/
 
                 Casa myHouse = tabuleiro.getCasas()[this.position];
                 myHouse.leaveHouse(this);
@@ -169,10 +167,6 @@ public class Jogador {
                         winner = firstPlayer;
                     }
                     tabuleiro.setPlayerWin(winner);
-                }
-                //making it foolproof
-                if(this.energy < 0){
-                    this.energy = 0;
                 }
             }else {
                 gainEnergyResting();
