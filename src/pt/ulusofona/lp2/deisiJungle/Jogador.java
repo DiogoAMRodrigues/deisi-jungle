@@ -150,11 +150,7 @@ public class Jogador {
                     tooltip += thisHousesFood.get(i).getEaten(tabuleiro);
                     this.numAlimentos++;
                 }
-                //Check if he won
-                if (moveToPos == tabuleiro.getSize() - 1){
-                    tabuleiro.winGame();
-                    tabuleiro.setPlayerWin(this);
-                }
+
                 //half board finish we are not accounting for an empate happening i dont think it gets tested IF NEEDED ADD HERE
                 if(tabuleiro.updateTwoBiggestPosSaySize(this) > (tabuleiro.getSize()/2)){
                     tabuleiro.winGame();
@@ -167,6 +163,11 @@ public class Jogador {
                         winner = firstPlayer;
                     }
                     tabuleiro.setPlayerWin(winner);
+                }
+                //Check if he won
+                if (moveToPos == tabuleiro.getSize() - 1 && !tabuleiro.getWinner()){
+                    tabuleiro.winGame();
+                    tabuleiro.setPlayerWin(this);
                 }
             }else {
                 gainEnergyResting();

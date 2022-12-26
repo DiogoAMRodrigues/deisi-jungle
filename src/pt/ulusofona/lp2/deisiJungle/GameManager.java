@@ -471,11 +471,24 @@ public class GameManager {
         File board = new File("board.txt");
 
         try{
-            FileWriter fw = new FileWriter(players);
+            FileWriter fwp = new FileWriter(players);
+            FileWriter fwb = new FileWriter(board);
             for(int i = 0; i < tabuleiro.getJogadores().size(); ++i){
                 Jogador player = tabuleiro.getJogadores().get(i);
-                /*fw.write(player.getId()+","+player.getName()+","+player.getName()+","+player.getPosition()+
-                        player.getEnergy()+","+player.getHasEatenBanana()+","+player.getSpecies());*/
+                fwp.write(player.getId()+","+player.getName()+","+player.getNumAlimentos()+","+player.getPosition()+
+                        player.getEnergy()+","+player.getHasEatenBanana()+","+player.getSpecies().getIdentifier()+"\n");
+            }
+
+            for (int i = 0; i < tabuleiro.getCasas().length; i++) {
+                Casa casa = tabuleiro.getCasas()[i];
+                for(int j = 0; j < casa.getJogadores().size(); ++j){
+                    fwb.write(casa.getJogadores().get(j).getId());
+                }
+                for(int k = 0; k < casa.getComida().size(); ++k){
+                    Food comida = casa.getComida().get(k);
+                    fwb.write(","+comida.getId());
+                }
+                fwb.write("\n");
             }
 
         }catch(IOException e){
