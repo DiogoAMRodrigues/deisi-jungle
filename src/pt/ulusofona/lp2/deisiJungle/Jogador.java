@@ -131,10 +131,10 @@ public class Jogador {
                     theResult = new MovementResult(MovementResultCode.NO_ENERGY, null);
                     return theResult;
                 }
-
+                /*
                 for (int i = 0; i < thisHousesFood.size(); i++){
                     amountOfEnergyRequired += thisHousesFood.get(i).getEatenSim(this, tabuleiro.getTurns());
-                }
+                }*/
 
                 Casa myHouse = tabuleiro.getCasas()[this.position];
                 myHouse.leaveHouse(this);
@@ -169,6 +169,10 @@ public class Jogador {
                         winner = firstPlayer;
                     }
                     tabuleiro.setPlayerWin(winner);
+                }
+                //making it foolproof
+                if(this.energy < 0){
+                    this.energy = 0;
                 }
             }else {
                 gainEnergyResting();
