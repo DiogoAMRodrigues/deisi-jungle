@@ -1,13 +1,13 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-import pt.ulusofona.lp2.deisiJungle.species.Leao;
-
-import java.util.Arrays;
+import java.io.File;
 
 public class Main {
     public static void main(String[] args) {
-        Jogador asd = new Jogador(1, "tiago", new Leao());
-        System.out.println(asd.toString());
+        GameManager g = new GameManager();
+        g.createInitialJungle(12, new String[][]{{"1", "Tiago", "E"}, {"2", "Tiadd", "L"}},
+                new String[][]{{"a", "3"}});
+        g.saveGame(new File("yes.txt"));
     }
 }
 
