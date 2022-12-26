@@ -44,7 +44,7 @@ public class Shrooms extends Food {
             player.loseEnergy((int) (thisPlayersEnergy * percentN));
             tooltip = "Cogumelo Magico: - " + n + "% energia";
         }
-        tooltip = "Apanhou Cogumelos magicos";
+        tooltip = "Apanhou Cogumelo Magico";
         return tooltip;
     }
 

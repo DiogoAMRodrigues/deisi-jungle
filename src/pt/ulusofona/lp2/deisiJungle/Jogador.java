@@ -150,6 +150,10 @@ public class Jogador {
                     tooltip += thisHousesFood.get(i).getEaten(tabuleiro);
                     this.numAlimentos++;
                 }
+                //Fix energy losses
+                if(this.energy < 0){
+                    this.energy = 0;
+                }
 
                 //half board finish we are not accounting for an empate happening i dont think it gets tested IF NEEDED ADD HERE
                 if(tabuleiro.updateTwoBiggestPosSaySize(this) > (tabuleiro.getSize()/2)){
