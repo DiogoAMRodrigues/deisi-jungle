@@ -782,4 +782,38 @@ public class Tests {
       assertEquals(84, tarz.getEnergy());
 
    }
+
+   @Test
+   public void missingShroomTest_14(){
+      GameManager g = new GameManager();
+      String[][] players = new String[2][3];
+      players[0][0] = "1";
+      players[0][1] = "tarz";
+      players[0][2] = "Z";
+      players[1][0] = "2";
+      players[1][1] = "lion";
+      players[1][2] = "L";
+
+      g.createInitialJungle(10, players);
+      //force N to be 10
+      Shrooms thisShroom = new Shrooms();
+      thisShroom.setN(10);
+      g.getTabuleiro().getCasas()[3].addComida(thisShroom);
+
+      assertEquals(10, thisShroom.getN());
+
+      Jogador tarz = g.getTabuleiro().getCurrentPlayer();
+
+      g.moveCurrentPlayer(3, true);
+
+      assertEquals("Cogumelo Magico : +- 10% energia", g.getTabuleiro().getCasas()[3].getComida().get(0).getToolTip(g.getTabuleiro()));
+
+      Jogador lion = g.getTabuleiro().getCurrentPlayer();
+
+      assertEquals(70, tarz.getEnergy());
+
+      g.moveCurrentPlayer(3, true);
+
+      assertEquals(67, lion.getEnergy());
+   }
 }
