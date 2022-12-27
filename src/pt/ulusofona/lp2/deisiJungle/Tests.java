@@ -656,7 +656,7 @@ public class Tests {
    }
 
    @Test
-   public void missingWaterTest_14(){
+   public void missingWaterTest_15(){
       GameManager g = new GameManager();
       String[][] players = new String[2][3];
       players[0][0] = "2";
@@ -680,7 +680,7 @@ public class Tests {
    }
 
    @Test
-   public void missingFoodTest_14(){
+   public void missingFoodTest_16(){
       ArrayList<Food> thisFood = new ArrayList<>();
       thisFood.add(new Agua());
 
@@ -689,7 +689,7 @@ public class Tests {
    }
 
    @Test
-   public void missingMeatTest_14(){
+   public void missingMeatTest_17(){
       GameManager g = new GameManager();
       String[][] players = new String[2][3];
       players[0][0] = "2";
@@ -720,7 +720,7 @@ public class Tests {
    }
 
    @Test
-   public void missingErvaTest_14(){
+   public void missingErvaTest_18(){
       GameManager g = new GameManager();
       String[][] players = new String[2][3];
       players[0][0] = "2";
@@ -751,7 +751,7 @@ public class Tests {
    }
 
    @Test
-   public void missingBananaTest_14(){
+   public void missingBananaTest_19(){
       GameManager g = new GameManager();
       String[][] players = new String[2][3];
       players[0][0] = "1";
@@ -784,7 +784,7 @@ public class Tests {
    }
 
    @Test
-   public void missingShroomTest_14(){
+   public void missingShroomTest_20(){
       GameManager g = new GameManager();
       String[][] players = new String[2][3];
       players[0][0] = "1";
@@ -815,5 +815,57 @@ public class Tests {
       g.moveCurrentPlayer(3, true);
 
       assertEquals(67, lion.getEnergy());
+   }
+
+   @Test
+   public void missingCasaTest_21(){
+      GameManager g = new GameManager();
+      String[][] players = new String[2][3];
+      players[0][0] = "1";
+      players[0][1] = "tarz";
+      players[0][2] = "Z";
+      players[1][0] = "2";
+      players[1][1] = "lion";
+      players[1][2] = "L";
+
+      g.createInitialJungle(10, players);
+
+      assertEquals(false, g.getTabuleiro().getCasas()[2].addComida(null));
+
+      assertEquals(false, g.getTabuleiro().getCasas()[1].isOccupied());
+      assertEquals(true, g.getTabuleiro().getCasas()[0].isOccupied());
+
+   }
+
+
+   @Test
+   public void missingTabuleiroTest_22(){
+      GameManager g = new GameManager();
+      String[][] players = new String[3][3];
+      players[0][0] = "1";
+      players[0][1] = "tarz";
+      players[0][2] = "Z";
+      players[1][0] = "2";
+      players[1][1] = "lion";
+      players[1][2] = "L";
+      players[2][0] = "3";
+      players[2][1] = "lion2";
+      players[2][2] = "L";
+
+      g.createInitialJungle(10, players);
+
+      g.moveCurrentPlayer(2, true);
+      g.moveCurrentPlayer(3, true);
+
+      Jogador[] thesePlayers = g.getTabuleiro().getTwoBiggestPos();
+
+      assertEquals(2, thesePlayers[0].getPosition());
+      assertEquals(3, thesePlayers[1].getPosition());
+
+      g.moveCurrentPlayer(5, true);
+      g.moveCurrentPlayer(2, true);
+
+      assertEquals(5, thesePlayers[0].getPosition());
+      assertEquals(4, thesePlayers[1].getPosition());
    }
 }

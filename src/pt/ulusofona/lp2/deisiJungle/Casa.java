@@ -15,10 +15,7 @@ public class Casa {
         comida = new ArrayList<>();
     }
     public boolean isOccupied() {
-        if (jogadores.isEmpty()) {
-            return this.occupied = jogadores.size() > 0;
-        }
-        return false;
+        return this.occupied = jogadores.size() > 0;
     }
 
     public void leaveHouse(Jogador player){
