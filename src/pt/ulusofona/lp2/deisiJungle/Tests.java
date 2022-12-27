@@ -810,11 +810,11 @@ public class Tests {
 
       Jogador lion = g.getTabuleiro().getCurrentPlayer();
 
-      assertEquals(70, tarz.getEnergy());
+      assertEquals(58, tarz.getEnergy());
 
       g.moveCurrentPlayer(3, true);
 
-      assertEquals(67, lion.getEnergy());
+      assertEquals(81, lion.getEnergy());
    }
 
    @Test

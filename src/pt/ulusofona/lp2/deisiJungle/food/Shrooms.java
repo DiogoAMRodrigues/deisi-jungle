@@ -37,7 +37,7 @@ public class Shrooms extends Food {
         double percentN =(double) n / 100;
         int turn = tabuleiro.getTurns();
         String tooltip = "";
-        if (turn%2 == 0){
+        if (turn%2 != 0){
             player.gainEnergy((int) (thisPlayersEnergy * percentN));
             tooltip = "Cogumelo Magico: + " + n + "% energia";
         }else {
