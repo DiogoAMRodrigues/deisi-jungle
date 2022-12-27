@@ -382,12 +382,14 @@ public class GameManager {
     }
 
     public String[] getCurrentPlayerInfo() {
-        String[] thisPlayer = new String[4];
+        String[] thisPlayer = new String[5];
         Jogador thisJogador = tabuleiro.getCurrentPlayer();
         thisPlayer[0] = thisJogador.getId() + "";
         thisPlayer[1] = thisJogador.getName();
         thisPlayer[2] = thisJogador.getSpecies().getIdentifier() + "";
         thisPlayer[3] = thisJogador.getEnergy() + "";
+        thisPlayer[4] = thisJogador.getSpecies().getMinSpeed() + ".." + thisJogador.getSpecies().getMaxSpeed();
+
         return thisPlayer;
     }
 
