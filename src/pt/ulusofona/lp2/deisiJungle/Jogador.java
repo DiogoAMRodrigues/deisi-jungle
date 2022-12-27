@@ -105,7 +105,7 @@ public class Jogador {
             int moveToPos = this.position + nrSquares;
             if (moveToPos >= tabuleiro.getSize()){
                 moveToPos = tabuleiro.getSize() - 1;
-                //testing diogo big brain
+                //Correcting the amount of squares he actually walks, in case its out of the board
                 nrSquares = moveToPos - this.position;
             }
             //Goes behind first house

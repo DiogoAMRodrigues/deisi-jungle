@@ -654,4 +654,131 @@ public class Tests {
 
       assertEquals(2, g.getTabuleiro().getPlayerWin().getId());
    }
+
+   @Test
+   public void missingWaterTest_14(){
+      GameManager g = new GameManager();
+      String[][] players = new String[2][3];
+      players[0][0] = "2";
+      players[0][1] = "tarz";
+      players[0][2] = "Z";
+      players[1][0] = "1";
+      players[1][1] = "lion";
+      players[1][2] = "L";
+
+      String[][] thisWater = new String[1][2];
+      thisWater[0][0] = "a";
+      thisWater[0][1] = "4";
+      g.createInitialJungle(10, players, thisWater);
+
+      Jogador lion = g.getTabuleiro().getCurrentPlayer();
+      g.moveCurrentPlayer(3, true);
+
+      assertEquals("Agua : + 15U|20% energia", g.getTabuleiro().getCasas()[3].getComida().get(0).getToolTip(g.getTabuleiro()));
+
+      assertEquals(89, lion.getEnergy());
+   }
+
+   @Test
+   public void missingFoodTest_14(){
+      ArrayList<Food> thisFood = new ArrayList<>();
+      thisFood.add(new Agua());
+
+      assertEquals('a', thisFood.get(0).getId());
+      assertEquals("water.png", thisFood.get(0).getImg());
+   }
+
+   @Test
+   public void missingMeatTest_14(){
+      GameManager g = new GameManager();
+      String[][] players = new String[2][3];
+      players[0][0] = "2";
+      players[0][1] = "tarz";
+      players[0][2] = "Z";
+      players[1][0] = "1";
+      players[1][1] = "lion";
+      players[1][2] = "L";
+
+      String[][] thisMeat = new String[1][2];
+      thisMeat[0][0] = "c";
+      thisMeat[0][1] = "4";
+      g.createInitialJungle(10, players, thisMeat);
+
+      Jogador lion = g.getTabuleiro().getCurrentPlayer();
+
+      g.moveCurrentPlayer(3, true);
+      assertEquals("Carne : + 50 energia : 1 jogadas",g.getTabuleiro().getCasas()[3].getComida().get(0).getToolTip(g.getTabuleiro()));
+      assertEquals(124, lion.getEnergy());
+
+
+      Jogador tarz = g.getTabuleiro().getCurrentPlayer();
+      for(int i = 0; i < 14; i++) {
+         g.moveCurrentPlayer(0, false);
+      }
+      assertEquals(100, lion.getEnergy());
+      assertEquals("Carne toxica",g.getTabuleiro().getCasas()[3].getComida().get(0).getToolTip(g.getTabuleiro()));
+   }
+
+   @Test
+   public void missingErvaTest_14(){
+      GameManager g = new GameManager();
+      String[][] players = new String[2][3];
+      players[0][0] = "2";
+      players[0][1] = "tarz";
+      players[0][2] = "Z";
+      players[1][0] = "1";
+      players[1][1] = "lion";
+      players[1][2] = "L";
+
+      String[][] thisErva = new String[1][2];
+      thisErva[0][0] = "e";
+      thisErva[0][1] = "4";
+      g.createInitialJungle(10, players, thisErva);
+
+      Jogador lion = g.getTabuleiro().getCurrentPlayer();
+
+      g.moveCurrentPlayer(3, true);
+
+      assertEquals("Erva : +- 20 energia", g.getTabuleiro().getCasas()[3].getComida().get(0).getToolTip(g.getTabuleiro()));
+
+      assertEquals(54, lion.getEnergy());
+
+      Jogador tarz = g.getTabuleiro().getCurrentPlayer();
+
+      g.moveCurrentPlayer(3, true);
+
+      assertEquals(84, tarz.getEnergy());
+   }
+
+   @Test
+   public void missingBananaTest_14(){
+      GameManager g = new GameManager();
+      String[][] players = new String[2][3];
+      players[0][0] = "1";
+      players[0][1] = "tarz";
+      players[0][2] = "Z";
+      players[1][0] = "2";
+      players[1][1] = "lion";
+      players[1][2] = "L";
+
+      String[][] thisErva = new String[1][2];
+      thisErva[0][0] = "b";
+      thisErva[0][1] = "4";
+      g.createInitialJungle(10, players, thisErva);
+
+      Jogador tarz = g.getTabuleiro().getCurrentPlayer();
+
+      g.moveCurrentPlayer(3, true);
+
+      assertEquals("Bananas : 2 : + 40 energia", g.getTabuleiro().getCasas()[3].getComida().get(0).getToolTip(g.getTabuleiro()));
+      assertEquals(104, tarz.getEnergy());
+
+      Jogador lion = g.getTabuleiro().getCurrentPlayer();
+
+      assertEquals(true, tarz.getHasEatenBanana());
+
+      g.moveCurrentPlayer(3, true);
+
+      assertEquals(84, tarz.getEnergy());
+   }
 }
