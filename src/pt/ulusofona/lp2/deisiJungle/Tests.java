@@ -780,5 +780,6 @@ public class Tests {
       g.moveCurrentPlayer(3, true);
 
       assertEquals(84, tarz.getEnergy());
+
    }
 }
