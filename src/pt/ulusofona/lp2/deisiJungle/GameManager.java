@@ -549,6 +549,7 @@ public class GameManager {
                 for(int m = 0; m < energia.size(); ++m){
                     if(tabuleiro.getJogadores().get(l).getId() == Integer.parseInt(energia.get(m).split(" ")[0])){
                         tabuleiro.getJogadores().get(l).setEnergy(Integer.parseInt(energia.get(m).split(" ")[1]));
+
                     }
                 }
             }
