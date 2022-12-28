@@ -478,7 +478,7 @@ public class GameManager {
                     fwp.write(player.getId()+","+player.getName()+","+player.getNumAlimentos()+","+player.getPosition()+
                             ","+player.getEnergy()+","+player.getHasEatenBanana()+","+player.getSpecies().getIdentifier());
                 }
-                fwp.write("|");
+                fwp.write("/");
                 for(int k = 0; k < casa.getComida().size(); ++k){
                     Food comida = casa.getComida().get(k);
                     if(k < casa.getComida().size() - 1){
@@ -518,22 +518,28 @@ public class GameManager {
                     if(read.split(",").length > 6){
                         players[i-1][0] = read.split(",")[0];
                         players[i-1][1] = read.split(",")[1];
-                        players[i-1][2] = read.split(",")[6];
+                        players[i-1][2] = read.split(",")[6].replace("/","");
                         i++;
                     }
                 }
 
-                String[] content = read.split("|");
-                System.out.println(content.length);
-                if(content.length > 1 && content[1].split(",").length > 1){
-                    System.out.println("- "+i);
+                String[] content = read.split("/");
+                if(content.length > 1){
                     for(int j = 0; j < content[1].split(",").length; ++j){
-                        comida.add(i + " " + content[1].split(",")[j]);
+                        comida.add(a + " " + content[1].split(",")[j]);
                     }
                 }
+                a++;
             }
-            System.out.println(comida);
-            //createInitialJungle(Integer.parseInt(size), players, comida);
+
+            String[][] foodArray = new String[comida.size()][2];
+
+            for(int k = 0; k < foodArray.length; k++){
+                foodArray[k][0] = comida.get(k).split(" ")[1];
+                foodArray[k][1] = comida.get(k).split(" ")[0];
+            }
+
+            createInitialJungle(Integer.parseInt(size), players, foodArray);
         }catch(IOException e){
             return false;
         }
