@@ -87,6 +87,10 @@ public class Jogador {
         return energy;
     }
 
+    public void setEnergy(int num){
+        this.energy = num;
+    }
+
     public int getNumAlimentos() {
         return numAlimentos;
     }

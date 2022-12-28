@@ -470,7 +470,7 @@ public class GameManager {
     public boolean saveGame(File file) {
         try{
             FileWriter fwp = new FileWriter(file);
-            fwp.write(tabuleiro.getSize()+","+tabuleiro.getJogadores().size()+"\n");
+            fwp.write(tabuleiro.getSize()+","+tabuleiro.getJogadores().size()+","+tabuleiro.getCurrentPlayer().getId()+"\n");
             for (int i = 0; i < tabuleiro.getCasas().length; i++) {
                 Casa casa = tabuleiro.getCasas()[i];
                 for(int j = 0; j < casa.getJogadores().size(); ++j){
@@ -504,20 +504,24 @@ public class GameManager {
             int a = 0;
             String size = "";
             int jogadoresSize;
+            int currentPlayerId = 0;
             String[][] players = null;
             ArrayList<String> comida = new ArrayList<>();
+            ArrayList<String> energia = new ArrayList<>();
 
             while((read = bf.readLine()) != null){
                 if(i == 0){
                     size = read.split(",")[0];
                     jogadoresSize = Integer.parseInt(read.split(",")[1]);
                     players = new String[jogadoresSize][3];
+                    currentPlayerId = Integer.parseInt(read.split(" ")[2]);
                     //create important variables
                     i++;
                 }else{
                     if(read.split(",").length > 6){
                         players[i-1][0] = read.split(",")[0];
                         players[i-1][1] = read.split(",")[1];
+                        energia.add(read.split(",")[0] + " " + read.split(",")[4]);
                         players[i-1][2] = read.split(",")[6].replace("/","");
                         i++;
                     }
@@ -540,6 +544,23 @@ public class GameManager {
             }
 
             createInitialJungle(Integer.parseInt(size), players, foodArray);
+
+            for(int l = 0; l < tabuleiro.getJogadores().size(); ++l){
+                for(int m = 0; m < energia.size(); ++m){
+                    if(tabuleiro.getJogadores().get(l).getId() == Integer.parseInt(energia.get(m).split(" ")[0])){
+                        tabuleiro.getJogadores().get(l).setEnergy(Integer.parseInt(energia.get(m).split(" ")[1]));
+                    }
+                }
+            }
+
+            for(int l = 0; l < tabuleiro.getJogadores().size(); ++l){
+                for(int m = 0; m < energia.size(); ++m){
+                    if(tabuleiro.getJogadores().get(l).getId() == currentPlayerId){
+                        tabuleiro.setCurrentPlayer(tabuleiro.getJogadores().get(l));
+                    }
+                }
+            }
+
         }catch(IOException e){
             return false;
         }
