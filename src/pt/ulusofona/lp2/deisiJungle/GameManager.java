@@ -6,6 +6,7 @@ import pt.ulusofona.lp2.deisiJungle.species.*;
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 
 public class GameManager {
@@ -500,23 +501,40 @@ public class GameManager {
             BufferedReader bf = new BufferedReader(new FileReader(file));
             String read;
             int i = 0;
-            String size;
+            int a = 0;
+            String size = "";
             int jogadoresSize;
-            String[][] players;
+            String[][] players = null;
+            ArrayList<String> comida = new ArrayList<>();
+
             while((read = bf.readLine()) != null){
                 if(i == 0){
                     size = read.split(",")[0];
                     jogadoresSize = Integer.parseInt(read.split(",")[1]);
                     players = new String[jogadoresSize][3];
                     //create important variables
+                    i++;
                 }else{
-                    //Insert players into array
-
+                    if(read.split(",").length > 6){
+                        players[i-1][0] = read.split(",")[0];
+                        players[i-1][1] = read.split(",")[1];
+                        players[i-1][2] = read.split(",")[6];
+                        i++;
+                    }
                 }
-                i++;
-                String[] content = read.split("|");
 
+                String[] content = read.split("|");
+                System.out.println(content.length);
+                if(content.length > 1 && content[1].split(",").length > 1){
+                    System.out.println("- "+i);
+                    for(int j = 0; j < content[1].split(",").length; ++j){
+                        comida.add(i + " " + content[1].split(",")[j]);
+
+                    }
+                }
             }
+            System.out.println(comida);
+            //createInitialJungle(Integer.parseInt(size), players, comida);
         }catch(IOException e){
             return false;
         }

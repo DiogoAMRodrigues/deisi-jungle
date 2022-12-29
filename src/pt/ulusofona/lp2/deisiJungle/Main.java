@@ -11,6 +11,7 @@ public class Main {
         g.moveCurrentPlayer(3, false);
 
         g.saveGame(new File("yes.txt"));
+        g.loadGame(new File("yes.txt"));
     }
 }
 

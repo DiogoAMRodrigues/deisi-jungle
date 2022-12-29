@@ -16,7 +16,7 @@ public class Agua extends Food {
         int beginningEnergy = thisPlayersEnergy;
         if(tipo == AnimalType.CARNIVORO || tipo == AnimalType.HERBIVORO){
             thisPlayersEnergy += 15;
-        }
+        }   
         else{
             thisPlayersEnergy += (int) (thisPlayersEnergy * 0.2);
         }
