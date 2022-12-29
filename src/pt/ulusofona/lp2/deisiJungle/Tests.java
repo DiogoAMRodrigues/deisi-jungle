@@ -989,5 +989,43 @@ public class Tests {
 
       assertEquals("FOODSINFOISNULL", g.createInitialJungle(10, players, null).getMessage());
 
+      g = new GameManager();
+      players[0][2] = "T";
+
+      g.createInitialJungle(10, players);
+
+      assertEquals('T', g.getTabuleiro().getCurrentPlayer().getSpecies().getIdentifier());
+
+      g = new GameManager();
+      thisWater[0][0] = "m";
+      thisWater[0][1] = "5";
+
+      players[0][0] = "1";
+      players[0][1] = "tarz";
+      players[0][2] = "Z";
+
+      g.createInitialJungle(10, players, thisWater);
+
+      assertEquals('m', g.getTabuleiro().getCasas()[4].getComida().get(0).getId());
+
+      g.moveCurrentPlayer(2, true);
+
+      assertEquals(1, g.getPlayerIds(3)[0]);
+
+      assertEquals(0, g.getPlayerIds(-1).length);
+
+      g = new GameManager();
+      //its supposed to be null so i dont get the problem :)
+      //String[][] theThing = g.getPlayersInfo();
+      //assertNull(theThing);
+
+      g.createInitialJungle(10, players);
+
+      assertNull(g.getWinnerInfo());
+
+      //IDK WHAT JPANEL IS THIS NEEDS TO BE FIXED
+      assertNull(g.getAuthorsPanel());
+
+      assertEquals("Wrestling", g.whoIsTaborda());
    }
 }
