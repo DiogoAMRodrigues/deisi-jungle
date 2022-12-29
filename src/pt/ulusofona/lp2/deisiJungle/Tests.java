@@ -31,7 +31,6 @@ public class Tests {
       assertEquals(1, minSpeed);
       assertEquals(6, maxSpeed);
 
-
       Leao l = new Leao();
       identifier = l.getIdentifier();
       name = l.getName();
