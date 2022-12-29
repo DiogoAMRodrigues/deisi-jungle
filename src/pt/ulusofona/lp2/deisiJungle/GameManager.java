@@ -536,6 +536,7 @@ public class GameManager {
                 a++;
             }
 
+
             String[][] foodArray = new String[comida.size()][2];
 
             for(int k = 0; k < foodArray.length; k++){
