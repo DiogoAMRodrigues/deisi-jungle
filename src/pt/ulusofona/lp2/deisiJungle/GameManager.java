@@ -549,12 +549,16 @@ public class GameManager {
                 foodArray[k][1] = comida.get(k).split(" ")[0];
             }
 
-            createInitialJungle(Integer.parseInt(size), players, foodArray);
+            tabuleiro = new Tabuleiro(Integer.parseInt(size));
 
-            /*for(int k = 0; k < players.length; ++k){
-                tabuleiro.getCasas()[Integer.parseInt(playersAux[k])].addJogadorCasa(new Jogador(
-                        Integer.parseInt(players[k][0]), players[k][1], createAnimal(players[k][2].charAt(0))));
-            }*/
+            createInitialJungle(Integer.parseInt(size), new String[][]{}, foodArray);
+
+            for(int k = 0; k < players.length; ++k){
+                Jogador jogador = new Jogador(Integer.parseInt(players[k][0]), players[k][1], createAnimal(players[k][2].charAt(0)));
+                tabuleiro.addJogador(jogador);
+                jogador.setPosition(Integer.parseInt(playersAux[k]));
+                tabuleiro.getCasas()[Integer.parseInt(playersAux[k])].addJogadorCasa(jogador);
+            }
 
             for(int l = 0; l < tabuleiro.getJogadores().size(); ++l){
                 for(int m = 0; m < energia.size(); ++m){
@@ -564,7 +568,6 @@ public class GameManager {
                 }
             }
 
-            System.out.println(tabuleiro.getJogadores().size());
             for(int l = 0; l < tabuleiro.getJogadores().size(); ++l){
                 if(tabuleiro.getJogadores().get(l).getId() == currentPlayerId) {
                     tabuleiro.setCurrentPlayer(tabuleiro.getJogadores().get(l));
