@@ -529,7 +529,6 @@ public class GameManager {
                     System.out.println("- "+i);
                     for(int j = 0; j < content[1].split(",").length; ++j){
                         comida.add(i + " " + content[1].split(",")[j]);
-
                     }
                 }
             }
