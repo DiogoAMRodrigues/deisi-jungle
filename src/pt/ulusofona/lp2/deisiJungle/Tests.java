@@ -939,7 +939,7 @@ public class Tests {
       //Dont move, and then make it so my energy goes under 0 cuz of a fruit im standing on
    }
 
-   @Test
+   @Test //need to add stuff on this one that is commented
    public void missingGameManagerTest_24(){
       GameManager g = new GameManager();
       String[][] players = new String[3][3];
@@ -1028,4 +1028,11 @@ public class Tests {
 
       assertEquals("Wrestling", g.whoIsTaborda());
    }
+
+   @Test
+   public void missingSaveTest_25(){
+
+   }
 }
+
+
