@@ -504,6 +504,7 @@ public class GameManager {
             int a = 0;
             String size = "";
             int jogadoresSize;
+
             int currentPlayerId = 0;
             String[][] players = null;
             ArrayList<String> comida = new ArrayList<>();
