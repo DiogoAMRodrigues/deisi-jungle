@@ -94,10 +94,8 @@ public class Tabuleiro {
     public int updateTwoBiggestPosSaySize(Jogador thisPlayer) {
         if(twoBiggestPos[0] == null) {
             twoBiggestPos[0] = thisPlayer;
-            return 0;
         } else if(twoBiggestPos[1] == null){
             twoBiggestPos[1] = thisPlayer;
-            return 0;
         }else{
             if ((twoBiggestPos[0].getPosition() < thisPlayer.getPosition()) && (twoBiggestPos[1].getId() != thisPlayer.getId())) {
                 twoBiggestPos[0] = thisPlayer;
@@ -105,8 +103,10 @@ public class Tabuleiro {
                 twoBiggestPos[1] = thisPlayer;
             }
         }
+
         if (twoBiggestPos[0] != null && twoBiggestPos[1] != null){
             int difference = Math.abs(twoBiggestPos[0].getPosition() - twoBiggestPos[1].getPosition());
+            return difference;
         }
         return 0;
     }

@@ -468,7 +468,7 @@ public class GameManager {
     }
 
     public boolean saveGame(File file) {
-        /*
+
         try{
             FileWriter fwp = new FileWriter(file);
             fwp.write(tabuleiro.getSize()+","+tabuleiro.getJogadores().size()+","+tabuleiro.getCurrentPlayer().getId()+"\n");
@@ -494,12 +494,11 @@ public class GameManager {
         }catch(IOException e){
             return false;
         }
-        return true;*/
-        return false;
+        return true;
     }
 
     public boolean loadGame(File file) {
-        /*
+
         try{
             BufferedReader bf = new BufferedReader(new FileReader(file));
             String read;
@@ -509,6 +508,7 @@ public class GameManager {
             int jogadoresSize;
             int currentPlayerId = 0;
             String[][] players = null;
+            String[] playersAux = null;
             ArrayList<String> comida = new ArrayList<>();
             ArrayList<String> energia = new ArrayList<>();
 
@@ -517,6 +517,7 @@ public class GameManager {
                     size = read.split(",")[0];
                     jogadoresSize = Integer.parseInt(read.split(",")[1]);
                     players = new String[jogadoresSize][3];
+                    playersAux = new String[jogadoresSize];
                     currentPlayerId = Integer.parseInt(read.split(",")[2]);
                     //create important variables
                     i++;
@@ -526,8 +527,7 @@ public class GameManager {
                         players[i-1][1] = read.split(",")[1];
                         energia.add(read.split(",")[0] + " " + read.split(",")[4]);
                         players[i-1][2] = read.split(",")[6].replace("/","");
-                        tabuleiro.getCasas()[Integer.parseInt(read.split(",")[3])].addJogadorCasa(new Jogador(
-                                Integer.parseInt(players[i-1][0]), players[i-1][1], createAnimal(players[i-1][2].charAt(0))));
+                        playersAux[i-1] = read.split(",")[3];
                         //Adicionar o jogador á respetiva casa no createInitialJungle
                         i++;
                     }
@@ -551,6 +551,11 @@ public class GameManager {
 
             createInitialJungle(Integer.parseInt(size), players, foodArray);
 
+            /*for(int k = 0; k < players.length; ++k){
+                tabuleiro.getCasas()[Integer.parseInt(playersAux[k])].addJogadorCasa(new Jogador(
+                        Integer.parseInt(players[k][0]), players[k][1], createAnimal(players[k][2].charAt(0))));
+            }*/
+
             for(int l = 0; l < tabuleiro.getJogadores().size(); ++l){
                 for(int m = 0; m < energia.size(); ++m){
                     if(tabuleiro.getJogadores().get(l).getId() == Integer.parseInt(energia.get(m).split(" ")[0])){
@@ -559,11 +564,10 @@ public class GameManager {
                 }
             }
 
+            System.out.println(tabuleiro.getJogadores().size());
             for(int l = 0; l < tabuleiro.getJogadores().size(); ++l){
-                for(int m = 0; m < energia.size(); ++m){
-                    if(tabuleiro.getJogadores().get(l).getId() == currentPlayerId){
-                        tabuleiro.setCurrentPlayer(tabuleiro.getJogadores().get(l));
-                    }
+                if(tabuleiro.getJogadores().get(l).getId() == currentPlayerId) {
+                    tabuleiro.setCurrentPlayer(tabuleiro.getJogadores().get(l));
                 }
             }
 
@@ -571,7 +575,6 @@ public class GameManager {
 
             return false;
         }
-        return true;*/
-        return false;
+        return true;
     }
 }

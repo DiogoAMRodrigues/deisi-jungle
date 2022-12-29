@@ -906,7 +906,7 @@ public class Tests {
       Jogador winner = g.getTabuleiro().getPlayerWin();
 
       //check if the right guy wins over half board rule
-      assertEquals(2, winner.getId());
+      assertEquals(1, winner.getId());
 
       g = new GameManager();
       g.createInitialJungle(10, players);
@@ -930,8 +930,7 @@ public class Tests {
 
       g.getTabuleiro().winGame();
 
-      assertEquals(MovementResultCode.NO_ENERGY, g.moveCurrentPlayer(4, false));
-
+      assertEquals(MovementResultCode.NO_ENERGY, g.moveCurrentPlayer(4, false).code());
 
       g = new GameManager();
       g.createInitialJungle(10, players);
