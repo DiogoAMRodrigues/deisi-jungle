@@ -514,7 +514,7 @@ public class GameManager {
                     size = read.split(",")[0];
                     jogadoresSize = Integer.parseInt(read.split(",")[1]);
                     players = new String[jogadoresSize][3];
-                    currentPlayerId = Integer.parseInt(read.split(" ")[2]);
+                    currentPlayerId = Integer.parseInt(read.split(",")[2]);
                     //create important variables
                     i++;
                 }else{
