@@ -502,7 +502,6 @@ public class GameManager {
     }
 
     public boolean loadGame(File file) {
-
         try{
             BufferedReader bf = new BufferedReader(new FileReader(file));
             String read;
@@ -606,10 +605,11 @@ public class GameManager {
                 }
             }
 
+            tabuleiro.nextTurn();
+
             for(int l = 0; l < tabuleiro.getJogadores().size(); ++l){
                 if(tabuleiro.getJogadores().get(l).getId() == currentPlayerId) {
                     tabuleiro.setCurrentPlayer(tabuleiro.getJogadores().get(l));
-                    tabuleiro.nextTurn();
                 }
             }
 

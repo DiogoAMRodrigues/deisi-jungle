@@ -11,14 +11,20 @@ public class Main {
 
         g.moveCurrentPlayer(3, true);
 
+        g.moveCurrentPlayer(3, true);
 
         g.saveGame(new File("yes.txt"));
         g.loadGame(new File("yes.txt"));
-
         g.moveCurrentPlayer(3, true);
         g.moveCurrentPlayer(3, true);
 
-        System.out.println(Arrays.toString(g.getSquareInfo(4)));
+        g.moveCurrentPlayer(3, true);
+
+
+
+        for(int i = 0; i < g.getTabuleiro().getJogadores().size(); ++i){
+            System.out.println(g.getTabuleiro().getJogadores().get(i).getPosition());
+        }
     }
 }
 
