@@ -241,6 +241,7 @@ public class GameManager {
             /*if (thisPlayerObject.getSpecies() == null) {
                 return new InitializationError("ILLEGALANIMAL");
             }*/
+
             jogadores.add(thisPlayerObject);
         } else {
             return new InitializationError("ILLEGALANIMAL");
