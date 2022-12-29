@@ -151,6 +151,7 @@ public class GameManager {
         }
         //Player amount check
         if (playersInfo.length < 2 || playersInfo.length > 4) {
+
             return new InitializationError("WRONGPLAYERAMOUNT");
         }
 
@@ -195,7 +196,6 @@ public class GameManager {
         if (createJungle != null) {
             return createJungle;
         }
-
         InitializationError food = setFoodOnBoard(foodsInfo);
         return food;
     }
@@ -468,16 +468,20 @@ public class GameManager {
     }
 
     public boolean saveGame(File file) {
-
         try{
             FileWriter fwp = new FileWriter(file);
-            fwp.write(tabuleiro.getSize()+","+tabuleiro.getJogadores().size()+","+tabuleiro.getCurrentPlayer().getId()+"\n");
+            fwp.write(tabuleiro.getSize()+","+tabuleiro.getJogadores().size()+","+tabuleiro.getCurrentPlayer().getId()+","+tabuleiro.getTurns()+"\n");
             for (int i = 0; i < tabuleiro.getCasas().length; i++) {
                 Casa casa = tabuleiro.getCasas()[i];
+                String toAdd = "";
                 for(int j = 0; j < casa.getJogadores().size(); ++j){
                     Jogador player = casa.getJogadores().get(j);
-                    fwp.write(player.getId()+","+player.getName()+","+player.getNumAlimentos()+","+player.getPosition()+
-                            ","+player.getEnergy()+","+player.getHasEatenBanana()+","+player.getSpecies().getIdentifier());
+                    toAdd += player.getId()+","+player.getName()+","+player.getNumAlimentos()+","+player.getPosition()+
+                            ","+player.getEnergy()+","+player.getHasEatenBanana()+","+player.getSpecies().getIdentifier()+","+player.getDistancia()+"~";
+                }
+                if(toAdd.length() > 0){
+                    toAdd = toAdd.substring(0, toAdd.length()-1);
+                    fwp.write(toAdd);
                 }
                 fwp.write("/");
                 for(int k = 0; k < casa.getComida().size(); ++k){
@@ -508,7 +512,8 @@ public class GameManager {
             int jogadoresSize;
             int currentPlayerId = 0;
             String[][] players = null;
-            String[] playersAux = null;
+            String[] playersHouse = null;
+            String[] playersDistance = null;
             ArrayList<String> comida = new ArrayList<>();
             ArrayList<String> energia = new ArrayList<>();
 
@@ -517,19 +522,46 @@ public class GameManager {
                     size = read.split(",")[0];
                     jogadoresSize = Integer.parseInt(read.split(",")[1]);
                     players = new String[jogadoresSize][3];
-                    playersAux = new String[jogadoresSize];
+                    playersHouse = new String[jogadoresSize];
+                    playersDistance = new String[jogadoresSize];
                     currentPlayerId = Integer.parseInt(read.split(",")[2]);
                     //create important variables
                     i++;
                 }else{
                     if(read.split(",").length > 6){
-                        players[i-1][0] = read.split(",")[0];
-                        players[i-1][1] = read.split(",")[1];
-                        energia.add(read.split(",")[0] + " " + read.split(",")[4]);
-                        players[i-1][2] = read.split(",")[6].replace("/","");
-                        playersAux[i-1] = read.split(",")[3];
-                        //Adicionar o jogador á respetiva casa no createInitialJungle
-                        i++;
+                        if(read.contains("~")){
+                            for(int v = 0; v < read.split("~").length; ++v){
+                                String text = read.split("~")[v];
+
+                                players[i-1][0] = text.split(",")[0];
+                                players[i-1][1] = text.split(",")[1];
+                                players[i-1][2] = text.split(",")[6];
+
+                                energia.add(text.split(",")[0] + " " + text.split(",")[4]);
+
+                                playersHouse[i-1] = text.split(",")[3];
+
+                                if(v != read.split("~").length-1) {
+                                    playersDistance[i-1] = text.split(",")[7];
+                                }else{
+                                    playersDistance[i-1] = text.split(",")[7].substring(0, text.split(",")[7].indexOf("/"));
+                                }
+
+                                i++;
+                            }
+                        }else{
+                            players[i-1][0] = read.split(",")[0];
+                            players[i-1][1] = read.split(",")[1];
+                            players[i-1][2] = read.split(",")[6];
+
+                            energia.add(read.split(",")[0] + " " + read.split(",")[4]);
+
+                            playersHouse[i-1] = read.split(",")[3];
+
+                            playersDistance[i-1] = read.split(",")[7].substring(0, read.split(",")[7].indexOf("/"));
+
+                            i++;
+                        }
                     }
                 }
 
@@ -551,13 +583,19 @@ public class GameManager {
 
             tabuleiro = new Tabuleiro(Integer.parseInt(size));
 
-            createInitialJungle(Integer.parseInt(size), new String[][]{}, foodArray);
+            createInitialJungle(Integer.parseInt(size), players, foodArray);
 
-            for(int k = 0; k < players.length; ++k){
-                Jogador jogador = new Jogador(Integer.parseInt(players[k][0]), players[k][1], createAnimal(players[k][2].charAt(0)));
-                tabuleiro.addJogador(jogador);
-                jogador.setPosition(Integer.parseInt(playersAux[k]));
-                tabuleiro.getCasas()[Integer.parseInt(playersAux[k])].addJogadorCasa(jogador);
+            Jogador player = tabuleiro.getCurrentPlayer();
+
+            for(int k = 0; k < tabuleiro.getJogadores().size(); ++k){
+                for(int b = 0; b < players.length; ++b){
+                    if(players[b][0].equals(tabuleiro.getJogadores().get(k).getId()+"")){
+                        moveCurrentPlayer(Integer.parseInt(playersHouse[b]) ,true);
+                        player.setDistancia(Integer.parseInt(playersDistance[b]));
+                        tabuleiro.decreaseTurn();
+                        break;
+                    }
+                }
             }
 
             for(int l = 0; l < tabuleiro.getJogadores().size(); ++l){
@@ -571,6 +609,7 @@ public class GameManager {
             for(int l = 0; l < tabuleiro.getJogadores().size(); ++l){
                 if(tabuleiro.getJogadores().get(l).getId() == currentPlayerId) {
                     tabuleiro.setCurrentPlayer(tabuleiro.getJogadores().get(l));
+                    tabuleiro.nextTurn();
                 }
             }
 

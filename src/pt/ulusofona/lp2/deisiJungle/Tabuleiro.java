@@ -91,6 +91,10 @@ public class Tabuleiro {
         return twoBiggestPos;
     }
 
+    public void decreaseTurn(){
+        this.turns--;
+    }
+
     public int updateTwoBiggestPosSaySize(Jogador thisPlayer) {
         if(twoBiggestPos[0] == null) {
             twoBiggestPos[0] = thisPlayer;

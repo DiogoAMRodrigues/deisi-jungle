@@ -102,6 +102,10 @@ public class Jogador {
     public int getDistancia() {
         return distancia;
     }
+    public void setDistancia(int num){
+        this.distancia = num;
+    }
+
     public MovementResult theMovementPart(Tabuleiro tabuleiro, int nrSquares, boolean byPassValidations)  {
         MovementResult theResult = new MovementResult(MovementResultCode.VALID_MOVEMENT,"");
         Especie mySpecies = this.species;
