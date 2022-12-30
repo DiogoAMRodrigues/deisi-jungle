@@ -767,10 +767,11 @@ public class Tests {
       g.createInitialJungle(10, players, thisErva);
 
       Jogador tarz = g.getTabuleiro().getCurrentPlayer();
-
+      //starts at 70 and loses 3*2 energy from moving
       g.moveCurrentPlayer(3, true);
-
+      //is at 64 energy
       assertEquals("Bananas : 2 : + 40 energia", g.getTabuleiro().getCasas()[3].getComida().get(0).getToolTip(g.getTabuleiro()));
+      //gains 40 energy from eating a banana and ends at 104
       assertEquals(104, tarz.getEnergy());
 
       Jogador lion = g.getTabuleiro().getCurrentPlayer();
@@ -778,7 +779,7 @@ public class Tests {
       assertEquals(true, tarz.getHasEatenBanana());
 
       g.moveCurrentPlayer(3, true);
-
+      g.moveCurrentPlayer(0, true);
       assertEquals(84, tarz.getEnergy());
 
    }
@@ -868,4 +869,170 @@ public class Tests {
       assertEquals(5, thesePlayers[0].getPosition());
       assertEquals(4, thesePlayers[1].getPosition());
    }
+
+   @Test
+   public void missingJogadorTest_23(){
+      GameManager g = new GameManager();
+      String[][] players = new String[3][3];
+      players[0][0] = "1";
+      players[0][1] = "tarz";
+      players[0][2] = "Z";
+      players[1][0] = "2";
+      players[1][1] = "lion";
+      players[1][2] = "L";
+      players[2][0] = "3";
+      players[2][1] = "lion2";
+      players[2][2] = "L";
+
+      g.createInitialJungle(10, players);
+
+      g.getTabuleiro().getCurrentPlayer().loseEnergy(100);
+
+      assertEquals(0, g.getTabuleiro().getCurrentPlayer().getEnergy());
+
+      assertEquals(false, g.getTabuleiro().getCurrentPlayer().loseEnergyMovement(3));
+
+      g.getTabuleiro().getCurrentPlayer().setEnergy(50);
+      assertEquals(50, g.getTabuleiro().getCurrentPlayer().getEnergy());
+
+      Jogador player1 = g.getTabuleiro().getCurrentPlayer();
+
+      g.moveCurrentPlayer(1, true);
+
+      Jogador player2 = g.getTabuleiro().getCurrentPlayer();
+
+      g.moveCurrentPlayer(8, true);
+
+      Jogador winner = g.getTabuleiro().getPlayerWin();
+
+      //check if the right guy wins over half board rule
+      assertEquals(2, winner.getId());
+
+      g = new GameManager();
+      g.createInitialJungle(10, players);
+
+      g.moveCurrentPlayer(1, true);
+
+      //getting the else side
+      g.moveCurrentPlayer(0, true);
+      g.moveCurrentPlayer(0, true);
+      g.moveCurrentPlayer(0, true);
+
+      g.moveCurrentPlayer(8, true);
+
+      winner = g.getTabuleiro().getPlayerWin();
+
+      //check if the right guy wins over half board rule
+      assertEquals(1, winner.getId());
+
+      g = new GameManager();
+      g.createInitialJungle(10, players);
+
+      g.getTabuleiro().winGame();
+
+      assertEquals(MovementResultCode.NO_ENERGY, g.moveCurrentPlayer(4, false));
+
+
+      g = new GameManager();
+      g.createInitialJungle(10, players);
+
+      //Dont move, and then make it so my energy goes under 0 cuz of a fruit im standing on
+   }
+
+   @Test //need to add stuff on this one that is commented
+   public void missingGameManagerTest_24(){
+      GameManager g = new GameManager();
+      String[][] players = new String[3][3];
+      players[0][0] = "1";
+      players[0][1] = "tarz";
+      players[0][2] = "Z";
+      players[1][0] = "2";
+      players[1][1] = "lion";
+      players[1][2] = "L";
+      players[2][0] = "3";
+      players[2][1] = "lion2";
+      players[2][2] = "L";
+
+      String[][] thisWater = new String[1][2];
+      thisWater[0][0] = "a";
+      thisWater[0][1] = "2";
+
+      g.createInitialJungle(10, players);
+
+      String[] stuff = g.getCurrentPlayerEnergyInfo(2);
+
+      assertEquals("4", stuff[0]);
+      assertEquals("20", stuff[1]);
+
+      g = new GameManager();
+
+      assertEquals("WRONGJUNGLESIZE", g.createInitialJungle(3, players, thisWater).getMessage());
+
+      g = new GameManager();
+
+      thisWater[0][0] = "y";
+      assertEquals("ILLEGALFOOD", g.createInitialJungle(10, players, thisWater).getMessage());
+
+      g = new GameManager();
+
+      thisWater[0][0] = "a";
+      thisWater[0][1] = "20";
+
+      assertEquals("FOODOUTSIDETABULEIRO", g.createInitialJungle(10, players, thisWater).getMessage());
+
+      g = new GameManager();
+      thisWater[0][1] = "z";
+
+      assertEquals("WRONGFOODFORMAT", g.createInitialJungle(10, players, thisWater).getMessage());
+
+      g = new GameManager();
+
+      assertEquals("FOODSINFOISNULL", g.createInitialJungle(10, players, null).getMessage());
+
+      g = new GameManager();
+      players[0][2] = "T";
+
+      g.createInitialJungle(10, players);
+
+      assertEquals('T', g.getTabuleiro().getCurrentPlayer().getSpecies().getIdentifier());
+
+      g = new GameManager();
+      thisWater[0][0] = "m";
+      thisWater[0][1] = "5";
+
+      players[0][0] = "1";
+      players[0][1] = "tarz";
+      players[0][2] = "Z";
+
+      g.createInitialJungle(10, players, thisWater);
+
+      assertEquals('m', g.getTabuleiro().getCasas()[4].getComida().get(0).getId());
+
+      g.moveCurrentPlayer(2, true);
+
+      assertEquals(1, g.getPlayerIds(3)[0]);
+
+      assertEquals(0, g.getPlayerIds(-1).length);
+
+      g = new GameManager();
+      //its supposed to be null so i dont get the problem :)
+      //String[][] theThing = g.getPlayersInfo();
+      //assertNull(theThing);
+
+      g.createInitialJungle(10, players);
+
+      assertNull(g.getWinnerInfo());
+
+      //IDK WHAT JPANEL IS THIS NEEDS TO BE FIXED
+      assertNull(g.getAuthorsPanel());
+
+      assertEquals("Wrestling", g.whoIsTaborda());
+   }
+
+   @Test
+   public void missingSaveTest_25(){
+
+   }
 }
+
+

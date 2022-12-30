@@ -238,9 +238,9 @@ public class GameManager {
         //Adding the Player into the Tabuleiro
         if (thisPlayersSpecies != null) {
             Jogador thisPlayerObject = new Jogador(playerID, thisName, thisPlayersSpecies);
-            if (thisPlayerObject.getSpecies() == null) {
+            /*if (thisPlayerObject.getSpecies() == null) {
                 return new InitializationError("ILLEGALANIMAL");
-            }
+            }*/
             jogadores.add(thisPlayerObject);
         } else {
             return new InitializationError("ILLEGALANIMAL");
