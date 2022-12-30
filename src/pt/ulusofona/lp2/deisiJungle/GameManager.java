@@ -468,6 +468,7 @@ public class GameManager {
     }
 
     public boolean saveGame(File file) {
+        /*
         try{
             FileWriter fwp = new FileWriter(file);
             fwp.write(tabuleiro.getSize()+","+tabuleiro.getJogadores().size()+","+tabuleiro.getCurrentPlayer().getId()+"\n");
@@ -493,10 +494,12 @@ public class GameManager {
         }catch(IOException e){
             return false;
         }
-        return true;
+        return true;*/
+        return false;
     }
 
     public boolean loadGame(File file) {
+        /*
         try{
             BufferedReader bf = new BufferedReader(new FileReader(file));
             String read;
@@ -567,6 +570,7 @@ public class GameManager {
         }catch(IOException e){
             return false;
         }
-        return true;
+        return true;*/
+        return false;
     }
 }
