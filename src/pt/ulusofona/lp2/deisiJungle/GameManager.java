@@ -515,6 +515,7 @@ public class GameManager {
             String[] playersDistance = null;
             ArrayList<String> comida = new ArrayList<>();
             ArrayList<String> energia = new ArrayList<>();
+            int turn = 0;
 
             while((read = bf.readLine()) != null){
                 if(i == 0){
@@ -524,6 +525,7 @@ public class GameManager {
                     playersHouse = new String[jogadoresSize];
                     playersDistance = new String[jogadoresSize];
                     currentPlayerId = Integer.parseInt(read.split(",")[2]);
+                    turn = Integer.parseInt(read.split(",")[3]);
                     //create important variables
                     i++;
                 }else{
@@ -605,6 +607,7 @@ public class GameManager {
                 }
             }
 
+            tabuleiro.setTurn(turn);
             tabuleiro.nextTurn();
 
             for(int l = 0; l < tabuleiro.getJogadores().size(); ++l){

@@ -47,6 +47,10 @@ public class Tabuleiro {
         return turns;
     }
 
+    public void setTurn(int num){
+        this.turns = num;
+    }
+
     public Casa[] getCasas() {
         return casas;
     }
