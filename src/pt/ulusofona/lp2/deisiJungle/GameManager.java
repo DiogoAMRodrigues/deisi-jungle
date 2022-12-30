@@ -584,7 +584,11 @@ public class GameManager {
 
             tabuleiro = new Tabuleiro(Integer.parseInt(size));
 
-            createInitialJungle(Integer.parseInt(size), players, foodArray);
+            InitializationError result = createInitialJungle(Integer.parseInt(size), players, foodArray);
+
+            if(result != null){
+                return false;
+            }
 
             Jogador player = tabuleiro.getCurrentPlayer();
 
