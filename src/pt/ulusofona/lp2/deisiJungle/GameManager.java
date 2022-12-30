@@ -8,6 +8,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 
 public class GameManager {
     private Tabuleiro tabuleiro;
@@ -468,7 +469,7 @@ public class GameManager {
     }
 
     public boolean saveGame(File file) {
-        /*
+
         try{
             FileWriter fwp = new FileWriter(file);
             fwp.write(tabuleiro.getSize()+","+tabuleiro.getJogadores().size()+","+tabuleiro.getCurrentPlayer().getId()+"\n");
@@ -494,12 +495,11 @@ public class GameManager {
         }catch(IOException e){
             return false;
         }
-        return true;*/
-        return false;
+        return true;
     }
 
     public boolean loadGame(File file) {
-        /*
+
         try{
             BufferedReader bf = new BufferedReader(new FileReader(file));
             String read;
@@ -511,6 +511,7 @@ public class GameManager {
             String[][] players = null;
             ArrayList<String> comida = new ArrayList<>();
             ArrayList<String> energia = new ArrayList<>();
+            HashMap<Jogador, Integer> position = new HashMap<>();
 
             while((read = bf.readLine()) != null){
                 if(i == 0){
@@ -526,9 +527,10 @@ public class GameManager {
                         players[i-1][1] = read.split(",")[1];
                         energia.add(read.split(",")[0] + " " + read.split(",")[4]);
                         players[i-1][2] = read.split(",")[6].replace("/","");
-                        tabuleiro.getCasas()[Integer.parseInt(read.split(",")[3])].addJogadorCasa(new Jogador(
-                                Integer.parseInt(players[i-1][0]), players[i-1][1], createAnimal(players[i-1][2].charAt(0))));
                         //Adicionar o jogador á respetiva casa no createInitialJungle
+                        position.putIfAbsent(new Jogador(
+                                Integer.parseInt(players[i-1][0]), players[i-1][1],
+                                createAnimal(players[i-1][2].charAt(0))), Integer.parseInt(read.split(",")[3]));
                         i++;
                     }
                 }
@@ -552,6 +554,7 @@ public class GameManager {
             createInitialJungle(Integer.parseInt(size), players, foodArray);
 
             for(int l = 0; l < tabuleiro.getJogadores().size(); ++l){
+
                 for(int m = 0; m < energia.size(); ++m){
                     if(tabuleiro.getJogadores().get(l).getId() == Integer.parseInt(energia.get(m).split(" ")[0])){
                         tabuleiro.getJogadores().get(l).setEnergy(Integer.parseInt(energia.get(m).split(" ")[1]));
@@ -570,7 +573,6 @@ public class GameManager {
         }catch(IOException e){
             return false;
         }
-        return true;*/
-        return false;
+        return true;
     }
 }

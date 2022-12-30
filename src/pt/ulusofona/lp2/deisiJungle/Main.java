@@ -13,9 +13,9 @@ public class Main {
         g.saveGame(new File("yes.txt"));
         g.loadGame(new File("yes.txt"));
 
-        /*for(int i = 0; i < g.getTabuleiro().getSize(); ++i){
+        for(int i = 0; i < g.getTabuleiro().getSize(); ++i){
             System.out.println(g.getTabuleiro().getCasas()[i].getJogadores().size());
-        }*/
+        }
     }
 }
 
