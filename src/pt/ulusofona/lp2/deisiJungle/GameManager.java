@@ -523,6 +523,9 @@ public class GameManager {
                         players[i-1][1] = read.split(",")[1];
                         energia.add(read.split(",")[0] + " " + read.split(",")[4]);
                         players[i-1][2] = read.split(",")[6].replace("/","");
+                        tabuleiro.getCasas()[Integer.parseInt(read.split(",")[3])].addJogadorCasa(new Jogador(
+                                Integer.parseInt(players[i-1][0]), players[i-1][1], createAnimal(players[i-1][2].charAt(0))));
+                        //Adicionar o jogador á respetiva casa no createInitialJungle
                         i++;
                     }
                 }
@@ -535,7 +538,6 @@ public class GameManager {
                 }
                 a++;
             }
-
 
             String[][] foodArray = new String[comida.size()][2];
 
@@ -550,7 +552,6 @@ public class GameManager {
                 for(int m = 0; m < energia.size(); ++m){
                     if(tabuleiro.getJogadores().get(l).getId() == Integer.parseInt(energia.get(m).split(" ")[0])){
                         tabuleiro.getJogadores().get(l).setEnergy(Integer.parseInt(energia.get(m).split(" ")[1]));
-
                     }
                 }
             }
