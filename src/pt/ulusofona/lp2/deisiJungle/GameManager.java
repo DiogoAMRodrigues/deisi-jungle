@@ -607,7 +607,7 @@ public class GameManager {
                 }
             }
 
-            tabuleiro.setTurn(turn);
+            tabuleiro.setTurn(turn-1);
             tabuleiro.nextTurn();
 
             for(int l = 0; l < tabuleiro.getJogadores().size(); ++l){
