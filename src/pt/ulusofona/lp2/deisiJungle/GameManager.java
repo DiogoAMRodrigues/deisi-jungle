@@ -501,6 +501,39 @@ public class GameManager {
         return true;
     }
 
+    public void setPlayersPositions(String[][] players, String[] playersHouse, String[] playersDistance){
+        Jogador player = tabuleiro.getCurrentPlayer();
+        for(int k = 0; k < tabuleiro.getJogadores().size(); ++k){
+            for(int b = 0; b < players.length; ++b){
+                if(players[b][0].equals(tabuleiro.getJogadores().get(k).getId()+"")){
+                    moveCurrentPlayer(Integer.parseInt(playersHouse[b]) ,true);
+                    player.setDistancia(Integer.parseInt(playersDistance[b]));
+                    tabuleiro.decreaseTurn();
+                    break;
+                }
+            }
+        }
+    }
+
+    public void setPlayersEnergy(ArrayList<String> energia){
+        for(int l = 0; l < tabuleiro.getJogadores().size(); ++l){
+            for(int m = 0; m < energia.size(); ++m){
+                if(tabuleiro.getJogadores().get(l).getId() == Integer.parseInt(energia.get(m).split(" ")[0])){
+                    tabuleiro.getJogadores().get(l).setEnergy(Integer.parseInt(energia.get(m).split(" ")[1]));
+                }
+            }
+        }
+    }
+
+    public void setCurrentPlayer(int turn, int currentPlayerId){
+        tabuleiro.setTurn(turn-1);
+        tabuleiro.nextTurn();
+        for(int l = 0; l < tabuleiro.getJogadores().size(); ++l){
+            if(tabuleiro.getJogadores().get(l).getId() == currentPlayerId) {
+                tabuleiro.setCurrentPlayer(tabuleiro.getJogadores().get(l));
+            }
+        }
+    }
     public boolean loadGame(File file) {
         try{
             BufferedReader bf = new BufferedReader(new FileReader(file));
@@ -561,34 +594,13 @@ public class GameManager {
                 foodArray[k][1] = comida.get(k).split(" ")[0];
             }
             tabuleiro = new Tabuleiro(Integer.parseInt(size));
-            InitializationError result = createInitialJungle(Integer.parseInt(size), players, foodArray);
-            if(result != null){
+            if(createInitialJungle(Integer.parseInt(size), players, foodArray) != null){
                 return false;
             }
-            Jogador player = tabuleiro.getCurrentPlayer();
-            tabuleiro.setTurn(turn-1);
-            tabuleiro.nextTurn();
-            for(int k = 0; k < tabuleiro.getJogadores().size(); ++k){
-                for(int b = 0; b < players.length; ++b){
-                    if(players[b][0].equals(tabuleiro.getJogadores().get(k).getId()+"")){
-                        moveCurrentPlayer(Integer.parseInt(playersHouse[b]) ,true);
-                        player.setDistancia(Integer.parseInt(playersDistance[b]));
-                        tabuleiro.decreaseTurn();
-                        break;
-                    }
-                }
-                for(int m = 0; m < energia.size(); ++m){
-                    if(tabuleiro.getJogadores().get(k).getId() == Integer.parseInt(energia.get(m).split(" ")[0])){
-                        tabuleiro.getJogadores().get(k).setEnergy(Integer.parseInt(energia.get(m).split(" ")[1]));
-                    }
-                }
-                if(tabuleiro.getJogadores().get(k).getId() == currentPlayerId) {
-                    tabuleiro.setCurrentPlayer(tabuleiro.getJogadores().get(k));
-                }
-            }
-        }catch(IOException e){
-            return false;
-        }
+            setPlayersPositions(players, playersHouse, playersDistance);
+            setPlayersEnergy(energia);
+            setCurrentPlayer(turn, currentPlayerId);
+        }catch(IOException ignored){}
         return true;
     }
 }
