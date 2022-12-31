@@ -564,26 +564,24 @@ public class GameManager {
                                 playersHouse[i-1] = text.split(",")[3];
                                 if(v != read.split("~").length-1) {
                                     playersDistance[i-1] = text.split(",")[7];
-                                }else{
-                                    playersDistance[i-1] = text.split(",")[7].substring(0, text.split(",")[7].indexOf("/"));
                                 }
                                 i++;
                             }
+                            continue;
                         }else{
                             players[i-1][0] = read.split(",")[0];
                             players[i-1][1] = read.split(",")[1];
                             players[i-1][2] = read.split(",")[6];
                             energia.add(read.split(",")[0] + " " + read.split(",")[4]);
                             playersHouse[i-1] = read.split(",")[3];
-                            playersDistance[i-1] = read.split(",")[7].substring(0, read.split(",")[7].indexOf("/"));
                             i++;
                         }
+                        playersDistance[i-1] = read.split(",")[7].substring(0, read.split(",")[7].indexOf("/"));
                     }
                 }
-                String[] content = read.split("/");
-                if(content.length > 1){
-                    for(int j = 0; j < content[1].split(",").length; ++j){
-                        comida.add(a + " " + content[1].split(",")[j]);
+                if(read.split("/").length > 1){
+                    for(int j = 0; j < read.split("/")[1].split(",").length; ++j){
+                        comida.add(a + " " + read.split("/")[1].split(",")[j]);
                     }
                 }
                 a++;
@@ -600,7 +598,9 @@ public class GameManager {
             setPlayersPositions(players, playersHouse, playersDistance);
             setPlayersEnergy(energia);
             setCurrentPlayer(turn, currentPlayerId);
-        }catch(IOException ignored){}
+        }catch(IOException e){
+            return false;
+        }
         return true;
     }
 }
