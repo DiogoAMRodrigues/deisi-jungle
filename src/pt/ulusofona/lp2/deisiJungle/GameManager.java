@@ -504,18 +504,11 @@ public class GameManager {
     public boolean loadGame(File file) {
         try{
             BufferedReader bf = new BufferedReader(new FileReader(file));
-            String read;
-            int i = 0;
-            int a = 0;
-            String size = "";
-            int jogadoresSize;
-            int currentPlayerId = 0;
+            String read, size = "";
+            int i = 0, a = 0, jogadoresSize, currentPlayerId = 0, turn = 0;
             String[][] players = null;
-            String[] playersHouse = null;
-            String[] playersDistance = null;
-            ArrayList<String> comida = new ArrayList<>();
-            ArrayList<String> energia = new ArrayList<>();
-            int turn = 0;
+            String[] playersHouse = null, playersDistance = null;
+            ArrayList<String> comida = new ArrayList<>(), energia = new ArrayList<>();
             while((read = bf.readLine()) != null){
                 if(i == 0){
                     size = read.split(",")[0];
@@ -525,22 +518,17 @@ public class GameManager {
                     playersDistance = new String[jogadoresSize];
                     currentPlayerId = Integer.parseInt(read.split(",")[2]);
                     turn = Integer.parseInt(read.split(",")[3]);
-                    //create important variables
                     i++;
                 }else{
                     if(read.split(",").length > 6){
                         if(read.contains("~")){
                             for(int v = 0; v < read.split("~").length; ++v){
                                 String text = read.split("~")[v];
-
                                 players[i-1][0] = text.split(",")[0];
                                 players[i-1][1] = text.split(",")[1];
                                 players[i-1][2] = text.split(",")[6];
-
                                 energia.add(text.split(",")[0] + " " + text.split(",")[4]);
-
                                 playersHouse[i-1] = text.split(",")[3];
-
                                 if(v != read.split("~").length-1) {
                                     playersDistance[i-1] = text.split(",")[7];
                                 }else{
@@ -552,18 +540,13 @@ public class GameManager {
                             players[i-1][0] = read.split(",")[0];
                             players[i-1][1] = read.split(",")[1];
                             players[i-1][2] = read.split(",")[6];
-
                             energia.add(read.split(",")[0] + " " + read.split(",")[4]);
-
                             playersHouse[i-1] = read.split(",")[3];
-
                             playersDistance[i-1] = read.split(",")[7].substring(0, read.split(",")[7].indexOf("/"));
-
                             i++;
                         }
                     }
                 }
-
                 String[] content = read.split("/");
                 if(content.length > 1){
                     for(int j = 0; j < content[1].split(",").length; ++j){
@@ -572,24 +555,19 @@ public class GameManager {
                 }
                 a++;
             }
-
             String[][] foodArray = new String[comida.size()][2];
-
             for(int k = 0; k < foodArray.length; k++){
                 foodArray[k][0] = comida.get(k).split(" ")[1];
                 foodArray[k][1] = comida.get(k).split(" ")[0];
             }
-
             tabuleiro = new Tabuleiro(Integer.parseInt(size));
-
             InitializationError result = createInitialJungle(Integer.parseInt(size), players, foodArray);
-
             if(result != null){
                 return false;
             }
-
             Jogador player = tabuleiro.getCurrentPlayer();
-
+            tabuleiro.setTurn(turn-1);
+            tabuleiro.nextTurn();
             for(int k = 0; k < tabuleiro.getJogadores().size(); ++k){
                 for(int b = 0; b < players.length; ++b){
                     if(players[b][0].equals(tabuleiro.getJogadores().get(k).getId()+"")){
@@ -599,27 +577,16 @@ public class GameManager {
                         break;
                     }
                 }
-            }
-
-            for(int l = 0; l < tabuleiro.getJogadores().size(); ++l){
                 for(int m = 0; m < energia.size(); ++m){
-                    if(tabuleiro.getJogadores().get(l).getId() == Integer.parseInt(energia.get(m).split(" ")[0])){
-                        tabuleiro.getJogadores().get(l).setEnergy(Integer.parseInt(energia.get(m).split(" ")[1]));
+                    if(tabuleiro.getJogadores().get(k).getId() == Integer.parseInt(energia.get(m).split(" ")[0])){
+                        tabuleiro.getJogadores().get(k).setEnergy(Integer.parseInt(energia.get(m).split(" ")[1]));
                     }
                 }
-            }
-
-            tabuleiro.setTurn(turn-1);
-            tabuleiro.nextTurn();
-
-            for(int l = 0; l < tabuleiro.getJogadores().size(); ++l){
-                if(tabuleiro.getJogadores().get(l).getId() == currentPlayerId) {
-                    tabuleiro.setCurrentPlayer(tabuleiro.getJogadores().get(l));
+                if(tabuleiro.getJogadores().get(k).getId() == currentPlayerId) {
+                    tabuleiro.setCurrentPlayer(tabuleiro.getJogadores().get(k));
                 }
             }
-
         }catch(IOException e){
-
             return false;
         }
         return true;
