@@ -546,7 +546,6 @@ public class GameManager {
                                 }else{
                                     playersDistance[i-1] = text.split(",")[7].substring(0, text.split(",")[7].indexOf("/"));
                                 }
-
                                 i++;
                             }
                         }else{
