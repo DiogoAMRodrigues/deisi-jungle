@@ -534,6 +534,23 @@ public class GameManager {
             }
         }
     }
+
+    public void addMultiplePlayers(String[][] players, String text, int i, ArrayList<String> energia, String[] playersHouse){
+        players[i-1][0] = text.split(",")[0];
+        players[i-1][1] = text.split(",")[1];
+        players[i-1][2] = text.split(",")[6];
+        energia.add(text.split(",")[0] + " " + text.split(",")[4]);
+        playersHouse[i-1] = text.split(",")[3];
+    }
+
+    public void addSinglePlayer(String[][] players, String read, int i, ArrayList<String> energia, String[] playersHouse, String[] playersDistance){
+        players[i-1][0] = read.split(",")[0];
+        players[i-1][1] = read.split(",")[1];
+        players[i-1][2] = read.split(",")[6];
+        energia.add(read.split(",")[0] + " " + read.split(",")[4]);
+        playersHouse[i-1] = read.split(",")[3];
+        playersDistance[i-1] = read.split(",")[7].substring(0, read.split(",")[7].indexOf("/"));
+    }
     public boolean loadGame(File file) {
         try{
             BufferedReader bf = new BufferedReader(new FileReader(file));
@@ -557,26 +574,18 @@ public class GameManager {
                         if(read.contains("~")){
                             for(int v = 0; v < read.split("~").length; ++v){
                                 String text = read.split("~")[v];
-                                players[i-1][0] = text.split(",")[0];
-                                players[i-1][1] = text.split(",")[1];
-                                players[i-1][2] = text.split(",")[6];
-                                energia.add(text.split(",")[0] + " " + text.split(",")[4]);
-                                playersHouse[i-1] = text.split(",")[3];
+                                addMultiplePlayers(players, text, i, energia, playersHouse);
                                 if(v != read.split("~").length-1) {
                                     playersDistance[i-1] = text.split(",")[7];
+                                }else{
+                                    playersDistance[i-1] = text.split(",")[7].substring(0, text.split(",")[7].indexOf("/"));
                                 }
                                 i++;
                             }
-                            continue;
                         }else{
-                            players[i-1][0] = read.split(",")[0];
-                            players[i-1][1] = read.split(",")[1];
-                            players[i-1][2] = read.split(",")[6];
-                            energia.add(read.split(",")[0] + " " + read.split(",")[4]);
-                            playersHouse[i-1] = read.split(",")[3];
+                            addSinglePlayer(players, read, i, energia, playersHouse, playersDistance);
                             i++;
                         }
-                        playersDistance[i-1] = read.split(",")[7].substring(0, read.split(",")[7].indexOf("/"));
                     }
                 }
                 if(read.split("/").length > 1){

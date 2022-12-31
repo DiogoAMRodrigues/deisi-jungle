@@ -20,6 +20,10 @@ public class Main {
 
         g.moveCurrentPlayer(3, true);
 
+        for (int i = 0; i < g.getTabuleiro().getJogadores().size(); ++i){
+            System.out.println(g.getTabuleiro().getJogadores().get(i).getPosition());
+        }
+
     }
 }
 
