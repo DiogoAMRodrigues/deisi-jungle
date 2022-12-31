@@ -515,7 +515,6 @@ public class GameManager {
             String[] playersDistance = null;
             ArrayList<String> comida = new ArrayList<>();
             ArrayList<String> energia = new ArrayList<>();
-
             while((read = bf.readLine()) != null){
                 if(i == 0){
                     size = read.split(",")[0];
