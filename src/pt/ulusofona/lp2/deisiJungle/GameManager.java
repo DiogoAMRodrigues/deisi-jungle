@@ -572,7 +572,7 @@ public class GameManager {
                 }else{
                     if(read.split(",").length > 6){
                         if(read.contains("~")){
-                            for(int v = 0; v < read.split("~").length; ++v){
+                            for(int v = 0; v < read.split("~").length; ++v, ++i){
                                 String text = read.split("~")[v];
                                 addMultiplePlayers(players, text, i, energia, playersHouse);
                                 if(v != read.split("~").length-1) {
@@ -580,7 +580,6 @@ public class GameManager {
                                 }else{
                                     playersDistance[i-1] = text.split(",")[7].substring(0, text.split(",")[7].indexOf("/"));
                                 }
-                                i++;
                             }
                         }else{
                             addSinglePlayer(players, read, i, energia, playersHouse, playersDistance);
