@@ -516,7 +516,6 @@ public class GameManager {
             ArrayList<String> comida = new ArrayList<>();
             ArrayList<String> energia = new ArrayList<>();
             int turn = 0;
-
             while((read = bf.readLine()) != null){
                 if(i == 0){
                     size = read.split(",")[0];
