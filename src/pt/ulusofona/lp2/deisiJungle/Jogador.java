@@ -166,6 +166,7 @@ public class Jogador {
                 }
                 //Fix energy losses
                 this.energy = (this.energy < 0) ? 0 : this.energy;
+
                 //Check if he won
                 if (moveToPos == tabuleiro.getSize() - 1 && !tabuleiro.getWinner()){
                     gameWin(tabuleiro);
