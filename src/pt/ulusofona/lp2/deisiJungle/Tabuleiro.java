@@ -15,7 +15,6 @@ public class Tabuleiro {
     private Jogador playerWin;
     private int turns;
     private Jogador[] twoBiggestPos;
-
     public Tabuleiro(int size) {
         this.size = size;
         casas = new Casa[size];
