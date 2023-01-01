@@ -11,14 +11,11 @@ import java.util.Comparator;
 
 public class GameManager {
     private Tabuleiro tabuleiro;
-
     public Tabuleiro getTabuleiro() {
         return tabuleiro;
     }
-
     public GameManager() {
     }
-
     public String[][] getSpecies() {
         String[][] species = new String[6][7];
         species[0][0] = "E";
@@ -71,7 +68,6 @@ public class GameManager {
 
         return species;
     }
-
     public String[] getCurrentPlayerEnergyInfo(int nrPositions) {
         String[] info = new String[2];
 
@@ -80,7 +76,6 @@ public class GameManager {
 
         return info;
     }
-
     public String[][] getFoodTypes() {
         String[][] foodTypes = new String[5][3];
         foodTypes[0][0] = "e";
@@ -105,7 +100,6 @@ public class GameManager {
 
         return foodTypes;
     }
-
     private InitializationError setFoodOnBoard(String[][] foodsInfo) {
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
@@ -133,7 +127,6 @@ public class GameManager {
         }
         return null;
     }
-
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo) {
         //assuming the start and finishlines count for the amount of houses
         int id = 0;
@@ -189,7 +182,6 @@ public class GameManager {
 
         return null;
     }
-
     public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo) {
         InitializationError createJungle = createInitialJungle(jungleSize, playersInfo);
 
@@ -199,9 +191,7 @@ public class GameManager {
         InitializationError food = setFoodOnBoard(foodsInfo);
         return food;
     }
-
-    private InitializationError playerAttributeChecksAndAdd(String[][] playersInfo, int player1, int name, String firstPlayerID, int id,
-                                                            int species, boolean hasTarzan, ArrayList<Jogador> jogadores) {
+    private InitializationError playerAttributeChecksAndAdd(String[][] playersInfo, int player1, int name, String firstPlayerID, int id, int species, boolean hasTarzan, ArrayList<Jogador> jogadores) {
         //name is well-made
         String thisName = playersInfo[player1][name];
         if (thisName == null || thisName.length() == 0) {
@@ -250,7 +240,6 @@ public class GameManager {
         }
         return new InitializationError("GOODPLAYERATTRIBUTES");
     }
-
     private Especie createAnimal(char id) {
         switch (id) {
             case 'E':
@@ -281,7 +270,6 @@ public class GameManager {
                 return null;
         }
     }
-
     private Food foodFactory(char id) {
         switch (id) {
             case 'e':
@@ -308,7 +296,6 @@ public class GameManager {
                 return null;
         }
     }
-
     public int[] getPlayerIds(int squareNr) {
         int[] playerIDs;
         if (tabuleiro != null) {
@@ -326,7 +313,6 @@ public class GameManager {
         playerIDs = new int[0];
         return playerIDs;
     }
-
     public String[] getSquareInfo(int squareNr) {
         int convertedSquare = squareNr - 1;
         String[] casa = new String[3];
@@ -366,7 +352,6 @@ public class GameManager {
 
         return casa;
     }
-
     public String[] getPlayerInfo(int playerId) {
         String[] thisPlayer = new String[5];
         Jogador thisJogador = tabuleiro.getJogaresHS().get(playerId);
@@ -381,7 +366,6 @@ public class GameManager {
         }
         return thisPlayer;
     }
-
     public String[] getCurrentPlayerInfo() {
         String[] thisPlayer = new String[5];
         Jogador thisJogador = tabuleiro.getCurrentPlayer();
@@ -393,7 +377,6 @@ public class GameManager {
 
         return thisPlayer;
     }
-
     public String[][] getPlayersInfo() {
         String[][] thesePlayers = new String[tabuleiro.getJogadores().size()][5];
         for (int i = 0; i < tabuleiro.getJogadores().size(); i++) {
@@ -407,13 +390,11 @@ public class GameManager {
         }
         return thesePlayers;
     }
-
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations) {
         MovementResult thisResult = tabuleiro.getCurrentPlayer().theMovementPart(tabuleiro, nrSquares, bypassValidations);
         tabuleiro.nextTurn();
         return thisResult;
     }
-
     public String[] getWinnerInfo() {
 
         if (!tabuleiro.getWinner()) {
@@ -425,7 +406,6 @@ public class GameManager {
                 winner.getId() + "", winner.getName(),
                 species.getIdentifier() + "", winner.getEnergy() + "", species.getMinSpeed() + ".." + species.getMaxSpeed()};
     }
-
     public ArrayList<String> getGameResults() {
         ArrayList<String> players = new ArrayList<>();
         int counter = 1;
@@ -455,15 +435,12 @@ public class GameManager {
         }
         return players;
     }
-
     public JPanel getAuthorsPanel() {
         return null;
     }
-
     public String whoIsTaborda() {
         return "Wrestling";
     }
-
     public boolean saveGame(File file) {
         try{
             FileWriter fwp = new FileWriter(file);
@@ -497,7 +474,6 @@ public class GameManager {
         }
         return true;
     }
-
     public void setPlayersPositions(String[][] players, String[] playersHouse, String[] playersDistance){
         Jogador player = tabuleiro.getCurrentPlayer();
         for(int k = 0; k < tabuleiro.getJogadores().size(); ++k){
@@ -511,7 +487,6 @@ public class GameManager {
             }
         }
     }
-
     public void setPlayersEnergy(ArrayList<String> energia){
         for(int l = 0; l < tabuleiro.getJogadores().size(); ++l){
             for(int m = 0; m < energia.size(); ++m){
@@ -521,7 +496,6 @@ public class GameManager {
             }
         }
     }
-
     public void setCurrentPlayer(int turn, int currentPlayerId){
         tabuleiro.setTurn(turn-1);
         tabuleiro.nextTurn();
@@ -531,7 +505,6 @@ public class GameManager {
             }
         }
     }
-
     public void addMultiplePlayers(String[][] players, String text, int i, ArrayList<String> energia, String[] playersHouse){
         players[i-1][0] = text.split(",")[0];
         players[i-1][1] = text.split(",")[1];
@@ -539,7 +512,6 @@ public class GameManager {
         energia.add(text.split(",")[0] + " " + text.split(",")[4]);
         playersHouse[i-1] = text.split(",")[3];
     }
-
     public void addSinglePlayer(String[][] players, String read, int i, ArrayList<String> energia, String[] playersHouse, String[] playersDistance){
         players[i-1][0] = read.split(",")[0];
         players[i-1][1] = read.split(",")[1];

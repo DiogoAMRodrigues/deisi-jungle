@@ -886,11 +886,8 @@ public class Tests {
 
       g.moveCurrentPlayer(4, true);
       g.moveCurrentPlayer(1, true);
-      assertEquals(1, g.getTabuleiro().getTwoBiggestPos()[0].getPosition());
-      assertEquals(4, g.getTabuleiro().getTwoBiggestPos()[1].getPosition());
-
-
-
+      assertEquals(4, g.getTabuleiro().getTwoBiggestPos()[0].getPosition());
+      assertEquals(1, g.getTabuleiro().getTwoBiggestPos()[1].getPosition());
 
    }
 
@@ -1158,6 +1155,18 @@ public class Tests {
       expectedPos = 4;
 
       assertEquals(expectedPos, g.getTabuleiro().getJogadores().get(1).getPosition());
+
+      g = new GameManager();
+      g.createInitialJungle(12, new String[][]{{"1", "Tiago", "E"}, {"2", "Tiadd", "L"}},
+              new String[][]{{"a", "3"}, {"a", "4"}, {"e", "9"}});
+
+      g.moveCurrentPlayer(3, true);
+
+      g.moveCurrentPlayer(4, true);
+
+      g.saveGame(new File("yes.txt"));
+
+      assertEquals(false, g.loadGame(new File("yess.txt")));
    }
 
    @Test
