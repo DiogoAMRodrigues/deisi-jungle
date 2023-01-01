@@ -102,6 +102,13 @@ public class Jogador {
         this.distancia = num;
     }
 
+    public void setWinnerMovementHalfBoard(Tabuleiro tabuleiro){
+        tabuleiro.winGame();
+        Jogador firstPlayer = tabuleiro.getTwoBiggestPos()[0], secondPlayer = tabuleiro.getTwoBiggestPos()[1], winner;
+        winner = (firstPlayer.getDistancia() > secondPlayer.getPosition()) ? secondPlayer : firstPlayer;
+        tabuleiro.setPlayerWin(winner);
+    }
+
     public void gameWin(Tabuleiro tabuleiro){
         tabuleiro.winGame();
         tabuleiro.setPlayerWin(this);
@@ -159,17 +166,15 @@ public class Jogador {
                 }
                 //Fix energy losses
                 this.energy = (this.energy < 0) ? 0 : this.energy;
-
                 //Check if he won
                 if (moveToPos == tabuleiro.getSize() - 1 && !tabuleiro.getWinner()){
                     gameWin(tabuleiro);
                     return new MovementResult(MovementResultCode.VALID_MOVEMENT, null); // he won the game
                 }
                 //half board finish we are not accounting for an empate happening i dont think it gets tested IF NEEDED ADD HERE
-                if(tabuleiro.updateTwoBiggestPosSaySize() != null){
-                    tabuleiro.setPlayerWin(tabuleiro.updateTwoBiggestPosSaySize());
+                if(tabuleiro.updateTwoBiggestPosSaySize(this) > (tabuleiro.getSize()/2)){
+                    setWinnerMovementHalfBoard(tabuleiro);
                 }
-
             }else {
                 gainEnergyResting();
                 for (int i = 0; i < thisHousesFood.size(); i++){
