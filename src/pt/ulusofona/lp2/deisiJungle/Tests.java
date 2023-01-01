@@ -4,6 +4,7 @@ import org.junit.Test;
 import pt.ulusofona.lp2.deisiJungle.food.*;
 import pt.ulusofona.lp2.deisiJungle.species.*;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -1037,8 +1038,114 @@ public class Tests {
    }
 
    @Test
-   public void saveLoadTest_25(){
+   public void saveLoadTest_25() throws IOException {
+      GameManager g = new GameManager();
+      g.createInitialJungle(12, new String[][]{{"1", "Tiago", "E"}, {"2", "Tiadd", "L"}},
+              new String[][]{{"a", "3"}, {"a", "4"}, {"e", "9"}});
 
+      g.moveCurrentPlayer(3, true);
+
+      g.moveCurrentPlayer(3, true);
+
+      String expected = "12,2,1,2\n" +
+              "/\n" +
+              "/\n" +
+              "/a\n" +
+              "1,Tiago,1,3,183,false,E,3~2,Tiadd,1,3,89,false,L,3/a\n" +
+              "/\n" +
+              "/\n" +
+              "/\n" +
+              "/\n" +
+              "/e\n" +
+              "/\n" +
+              "/\n" +
+              "/";
+
+      g.saveGame(new File("yes.txt"));
+
+      BufferedReader br = new BufferedReader(new FileReader("yes.txt"));
+
+      String read, result = "";
+      while((read = br.readLine()) != null){
+         result += read+"\n";
+      }
+
+      result = result.substring(0, result.lastIndexOf("\n"));
+
+      assertEquals(expected, result);
+
+      g = new GameManager();
+      g.createInitialJungle(12, new String[][]{{"1", "Tiago", "E"}, {"2", "Tiadd", "L"}},
+              new String[][]{{"a", "3"}, {"a", "4"}, {"e", "9"}});
+
+      g.moveCurrentPlayer(3, true);
+
+      g.moveCurrentPlayer(4, true);
+
+      g.saveGame(new File("yes.txt"));
+
+      expected = "12,2,1,2\n" +
+              "/\n" +
+              "/\n" +
+              "/a\n" +
+              "1,Tiago,1,3,183,false,E,3/a\n" +
+              "2,Tiadd,0,4,72,false,L,4/\n" +
+              "/\n" +
+              "/\n" +
+              "/\n" +
+              "/e\n" +
+              "/\n" +
+              "/\n" +
+              "/";
+
+      br = new BufferedReader(new FileReader("yes.txt"));
+
+      result = "";
+      while((read = br.readLine()) != null){
+         result += read+"\n";
+      }
+
+      result = result.substring(0, result.lastIndexOf("\n"));
+
+      assertEquals(expected, result);
+
+      g = new GameManager();
+      g.createInitialJungle(12, new String[][]{{"1", "Tiago", "E"}, {"2", "Tiadd", "L"}},
+              new String[][]{{"a", "3"}, {"a", "4"}, {"e", "9"}});
+
+      g.moveCurrentPlayer(3, true);
+
+      g.moveCurrentPlayer(3, true);
+
+      g.saveGame(new File("yes.txt"));
+      g.loadGame(new File("yes.txt"));
+
+      int expectedPos = 3;
+
+      assertEquals(expectedPos, g.getTabuleiro().getJogadores().get(0).getPosition());
+
+      expectedPos = 3;
+
+      assertEquals(expectedPos, g.getTabuleiro().getJogadores().get(1).getPosition());
+
+      g = new GameManager();
+      g.createInitialJungle(12, new String[][]{{"1", "Tiago", "E"}, {"2", "Tiadd", "L"}},
+              new String[][]{{"a", "3"}, {"a", "4"}, {"e", "9"}});
+
+      g.moveCurrentPlayer(3, true);
+
+      g.moveCurrentPlayer(4, true);
+
+      g.saveGame(new File("yes.txt"));
+      g.loadGame(new File("yes.txt"));
+
+      expectedPos = 3;
+
+      assertEquals(expectedPos, g.getTabuleiro().getJogadores().get(0).getPosition());
+
+      expectedPos = 4;
+
+      assertEquals(expectedPos, g.getTabuleiro().getJogadores().get(1).getPosition());
    }
 
    @Test
