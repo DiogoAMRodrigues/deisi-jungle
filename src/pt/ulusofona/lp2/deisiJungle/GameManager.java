@@ -396,19 +396,16 @@ public class GameManager {
 
     public String[][] getPlayersInfo() {
         String[][] thesePlayers = new String[tabuleiro.getJogadores().size()][5];
-        if (tabuleiro != null) {
-            for (int i = 0; i < tabuleiro.getJogadores().size(); i++) {
-                Jogador thisJogador = tabuleiro.getJogadores().get(i);
-                Especie thisSpecies = thisJogador.getSpecies();
-                thesePlayers[i][0] = thisJogador.getId() + "";
-                thesePlayers[i][1] = thisJogador.getName();
-                thesePlayers[i][2] = thisSpecies.getIdentifier() + "";
-                thesePlayers[i][3] = thisJogador.getEnergy() + "";
-                thesePlayers[i][4] = thisSpecies.getMinSpeed() + ".." + thisSpecies.getMaxSpeed();
-            }
-            return thesePlayers;
+        for (int i = 0; i < tabuleiro.getJogadores().size(); i++) {
+            Jogador thisJogador = tabuleiro.getJogadores().get(i);
+            Especie thisSpecies = thisJogador.getSpecies();
+            thesePlayers[i][0] = thisJogador.getId() + "";
+            thesePlayers[i][1] = thisJogador.getName();
+            thesePlayers[i][2] = thisSpecies.getIdentifier() + "";
+            thesePlayers[i][3] = thisJogador.getEnergy() + "";
+            thesePlayers[i][4] = thisSpecies.getMinSpeed() + ".." + thisSpecies.getMaxSpeed();
         }
-        return null;
+        return thesePlayers;
     }
 
     public MovementResult moveCurrentPlayer(int nrSquares, boolean bypassValidations) {

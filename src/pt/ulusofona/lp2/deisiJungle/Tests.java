@@ -330,6 +330,8 @@ public class Tests {
       assertEquals("Kennedy", g.getPlayersInfo()[1][1]);
       assertEquals("C", g.getPlayersInfo()[1][2]);
       assertEquals("100", g.getPlayersInfo()[1][3]);
+
+
    }
 
    @Test
