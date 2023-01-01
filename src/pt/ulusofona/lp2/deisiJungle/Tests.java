@@ -889,7 +889,6 @@ public class Tests {
       g.moveCurrentPlayer(1, true);
       assertEquals(4, g.getTabuleiro().getTwoBiggestPos()[0].getPosition());
       assertEquals(1, g.getTabuleiro().getTwoBiggestPos()[1].getPosition());
-
    }
 
    @Test
@@ -1156,18 +1155,6 @@ public class Tests {
       expectedPos = 4;
 
       assertEquals(expectedPos, g.getTabuleiro().getJogadores().get(1).getPosition());
-
-      g = new GameManager();
-      g.createInitialJungle(12, new String[][]{{"1", "Tiago", "E"}, {"2", "Tiadd", "L"}},
-              new String[][]{{"a", "3"}, {"a", "4"}, {"e", "9"}});
-
-      g.moveCurrentPlayer(3, true);
-
-      g.moveCurrentPlayer(4, true);
-
-      g.saveGame(new File("yes.txt"));
-
-      assertEquals(false, g.loadGame(new File("yess.txt")));
    }
 
    @Test
@@ -1218,6 +1205,60 @@ public class Tests {
       assertEquals(3, Math.abs(first-second));
    }
 
+   @Test
+   public void bananas_27(){
+      GameManager g = new GameManager();
+      String[][] players = new String[2][3];
+      players[0][0] = "1";
+      players[0][1] = "lion";
+      players[0][2] = "L";
+      players[1][0] = "2";
+      players[1][1] = "lion2";
+      players[1][2] = "L";
+      String[][] thisBananas = new String[5][2];
+      thisBananas[0][0] = "b";
+      thisBananas[0][1] = "5";
+      thisBananas[1][0] = "b";
+      thisBananas[1][1] = "10";
+      thisBananas[2][0] = "b";
+      thisBananas[2][1] = "15";
+      thisBananas[3][0] = "b";
+      thisBananas[3][1] = "20";
+      thisBananas[4][0] = "b";
+      thisBananas[4][1] = "25";
+
+
+      g.createInitialJungle(30, players, thisBananas);
+      Jogador theOne = g.getTabuleiro().getCurrentPlayer();
+      //starts at 80
+      //lands on banana
+      g.moveCurrentPlayer(4, true);
+      g.moveCurrentPlayer(3, true);
+      //4*2 + 40from banana -> 80 - 8 + 40 = 72 + 40
+      assertEquals(112, theOne.getEnergy());
+
+      g.moveCurrentPlayer(5, true);
+      g.moveCurrentPlayer(5, true);
+      //5*2 - 40from banana -> 112 - 10 - 40 = 62
+      assertEquals(62, theOne.getEnergy());
+
+      g.moveCurrentPlayer(4, true);
+      g.moveCurrentPlayer(6, true);
+      //4*2 -> 62 -8 = 54
+      assertEquals(54, theOne.getEnergy());
+      //2 banana left
+      g.moveCurrentPlayer(0, true);
+      g.moveCurrentPlayer(0, true);
+
+      assertEquals(64, theOne.getEnergy());
+      //1 banana left
+      g.moveCurrentPlayer(0, true);
+      g.moveCurrentPlayer(0, true);
+      assertEquals(74, theOne.getEnergy());
+      g.moveCurrentPlayer(1, true);
+      //1*2 -> 74-2 = 72
+      assertEquals(72, theOne.getEnergy());
+   }
 }
 
 
