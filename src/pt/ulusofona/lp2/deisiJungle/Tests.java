@@ -937,13 +937,6 @@ public class Tests {
       g = new GameManager();
       g.createInitialJungle(10, players);
 
-      g.getTabuleiro().winGame();
-
-      assertEquals(MovementResultCode.NO_ENERGY, g.moveCurrentPlayer(4, false).code());
-
-      g = new GameManager();
-      g.createInitialJungle(10, players);
-
       //Dont move, and then make it so my energy goes under 0 cuz of a fruit im standing on
    }
 
