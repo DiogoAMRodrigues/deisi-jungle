@@ -166,7 +166,7 @@ public class Tests {
       species[4][5] = "20";
       species[4][6] = "1..6";
 
-      species[5][0] = "S";
+      species[5][0] = "C";
       species[5][1] = "Cobra";
       species[5][2] = "snake.png";
       species[5][3] = "100";
@@ -859,7 +859,7 @@ public class Tests {
       g.moveCurrentPlayer(2, true);
       g.moveCurrentPlayer(3, true);
 
-      /*Jogador[] thesePlayers = g.getTabuleiro().getTwoBiggestPos();
+      Jogador[] thesePlayers = g.getTabuleiro().getTwoBiggestPos();
 
       assertEquals(2, thesePlayers[0].getPosition());
       assertEquals(3, thesePlayers[1].getPosition());
@@ -867,8 +867,8 @@ public class Tests {
       g.moveCurrentPlayer(5, true);
       g.moveCurrentPlayer(2, true);
 
-      assertEquals(5, thesePlayers[0].getPosition());
-      assertEquals(4, thesePlayers[1].getPosition());*/
+      assertEquals(4, thesePlayers[0].getPosition());
+      assertEquals(5, thesePlayers[1].getPosition());
 
       g.createInitialJungle(10, players);
       g.moveCurrentPlayer(5, true);

@@ -6,22 +6,14 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         GameManager g = new GameManager();
-        g.createInitialJungle(12, new String[][]{{"1", "Tiago", "E"}, {"2", "Tiadd", "L"}},
-                new String[][]{{"a", "3"}, {"a", "4"}, {"e", "9"}});
+        g.createInitialJungle(12, new String[][]{{"1", "Tiago", "E"}, {"2", "Tiadd", "L"}});
 
-        g.moveCurrentPlayer(3, true);
+        g.moveCurrentPlayer(4, true);
 
-        g.moveCurrentPlayer(3, true);
+        g.moveCurrentPlayer(4, true);
 
-        g.saveGame(new File("yes.txt"));
-        g.loadGame(new File("yes.txt"));
-        g.moveCurrentPlayer(3, true);
-        g.moveCurrentPlayer(3, true);
-
-        g.moveCurrentPlayer(3, true);
-
-        for (int i = 0; i < g.getTabuleiro().getJogadores().size(); ++i){
-            System.out.println(g.getTabuleiro().getJogadores().get(i).getPosition());
+        for(int i = 0; i < g.getTabuleiro().getJogadores().size(); ++i){
+            System.out.println(g.getTabuleiro().getJogadores().get(i).getEnergy());
         }
 
     }
