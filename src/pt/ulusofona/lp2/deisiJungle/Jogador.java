@@ -126,11 +126,9 @@ public class Jogador {
                 return theResult;
             }
             //Check if the movementspeed is legal
-            if (!byPassValidations) {
-                if (!(mySpecies.getMinSpeed() <= Math.abs(nrSquares) && mySpecies.getMaxSpeed() >= Math.abs(nrSquares) || nrSquares == 0)) {
-                    theResult = new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
-                    return theResult;
-                }
+            if (!byPassValidations && !(mySpecies.getMinSpeed() <= Math.abs(nrSquares) && mySpecies.getMaxSpeed() >= Math.abs(nrSquares) || nrSquares == 0)) {
+                theResult = new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
+                return theResult;
             }
             ArrayList<Food> thisHousesFood = tabuleiro.getCasas()[moveToPos].getComida();
             //If he moves do this
@@ -160,9 +158,7 @@ public class Jogador {
                     this.numAlimentos++;
                 }
                 //Fix energy losses
-                if(this.energy < 0){
-                    this.energy = 0;
-                }
+                this.energy = (this.energy < 0) ? 0 : this.energy;
                 //Check if he won
                 if (moveToPos == tabuleiro.getSize() - 1 && !tabuleiro.getWinner()){
                     tabuleiro.winGame();
@@ -173,11 +169,7 @@ public class Jogador {
                 if(tabuleiro.updateTwoBiggestPosSaySize(this) > (tabuleiro.getSize()/2)){
                     tabuleiro.winGame();
                     Jogador firstPlayer = tabuleiro.getTwoBiggestPos()[0], secondPlayer = tabuleiro.getTwoBiggestPos()[1], winner;
-                    if (firstPlayer.getPosition() > secondPlayer.getPosition()){
-                        winner = secondPlayer;
-                    }else {
-                        winner = firstPlayer;
-                    }
+                    winner = (firstPlayer.getDistancia() > secondPlayer.getPosition()) ? secondPlayer : firstPlayer;
                     tabuleiro.setPlayerWin(winner);
                 }
             }else {
@@ -194,13 +186,6 @@ public class Jogador {
         }else{
             return new MovementResult(MovementResultCode.NO_ENERGY, null);
         }
-        if (hasEaten){
-            if(!tooltip.equals("")){
-                return new MovementResult(MovementResultCode.CAUGHT_FOOD, tooltip);
-            }
-        }
-        return new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
+        return (hasEaten && !tooltip.equals("")) ? new MovementResult(MovementResultCode.CAUGHT_FOOD, tooltip) : new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
     }
-
-
 }
