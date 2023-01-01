@@ -102,13 +102,6 @@ public class Jogador {
         this.distancia = num;
     }
 
-    public void setWinnerMovementHalfBoard(Tabuleiro tabuleiro){
-        tabuleiro.winGame();
-        Jogador firstPlayer = tabuleiro.getTwoBiggestPos()[0], secondPlayer = tabuleiro.getTwoBiggestPos()[1], winner;
-        winner = (firstPlayer.getDistancia() > secondPlayer.getPosition()) ? secondPlayer : firstPlayer;
-        tabuleiro.setPlayerWin(winner);
-    }
-
     public void gameWin(Tabuleiro tabuleiro){
         tabuleiro.winGame();
         tabuleiro.setPlayerWin(this);
@@ -150,7 +143,9 @@ public class Jogador {
             if (nrSquares != 0){
                 //Check energy I need for this House
                 int amountOfEnergyRequired = mySpecies.getEnergyConsumption() * (nrSquares);
-
+                /*for (int i = 0; i < thisHousesFood.size(); i++){
+                    amountOfEnergyRequired += thisHousesFood.get(i).getEatenSim(this, tabuleiro.getTurns());
+                }*/
                 //Current energy needs to be bigger than energy usage while move
                 if (this.energy < amountOfEnergyRequired){
                     return new MovementResult(MovementResultCode.NO_ENERGY, null);
@@ -173,9 +168,10 @@ public class Jogador {
                     return new MovementResult(MovementResultCode.VALID_MOVEMENT, null); // he won the game
                 }
                 //half board finish we are not accounting for an empate happening i dont think it gets tested IF NEEDED ADD HERE
-                if(tabuleiro.updateTwoBiggestPosSaySize(this) > (tabuleiro.getSize()/2)){
-                    setWinnerMovementHalfBoard(tabuleiro);
+                if(tabuleiro.updateTwoBiggestPosSaySize() != null){
+                    tabuleiro.setPlayerWin(tabuleiro.updateTwoBiggestPosSaySize());
                 }
+
             }else {
                 gainEnergyResting();
                 for (int i = 0; i < thisHousesFood.size(); i++){
@@ -188,6 +184,6 @@ public class Jogador {
                 }
             }
         }
-        return (hasEaten) ? new MovementResult(MovementResultCode.CAUGHT_FOOD, tooltip) : new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
+        return (hasEaten && !tooltip.equals("")) ? new MovementResult(MovementResultCode.CAUGHT_FOOD, tooltip) : new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
     }
 }
