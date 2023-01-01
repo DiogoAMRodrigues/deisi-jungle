@@ -106,6 +106,25 @@ public class Jogador {
         this.distancia = num;
     }
 
+    public void setWinnerMovementHalfBoard(Tabuleiro tabuleiro){
+        tabuleiro.winGame();
+        Jogador firstPlayer = tabuleiro.getTwoBiggestPos()[0], secondPlayer = tabuleiro.getTwoBiggestPos()[1], winner;
+        winner = (firstPlayer.getDistancia() > secondPlayer.getPosition()) ? secondPlayer : firstPlayer;
+        tabuleiro.setPlayerWin(winner);
+    }
+
+    public void gameWin(Tabuleiro tabuleiro){
+        tabuleiro.winGame();
+        tabuleiro.setPlayerWin(this);
+    }
+
+    public void add_removeHouse(Casa myHouse, Casa moveToHouse, int nrSquares, int moveToPos){
+        myHouse.leaveHouse(this);
+        this.distancia += Math.abs(nrSquares);
+        moveToHouse.addJogadorCasa(this);
+        position = moveToPos;
+    }
+
     public MovementResult theMovementPart(Tabuleiro tabuleiro, int nrSquares, boolean byPassValidations)  {
         MovementResult theResult = new MovementResult(MovementResultCode.VALID_MOVEMENT,"");
         Especie mySpecies = this.species;
@@ -140,37 +159,27 @@ public class Jogador {
                 }*/
                 //Current energy needs to be bigger than energy usage while move
                 if (this.energy < amountOfEnergyRequired){
-                    theResult = new MovementResult(MovementResultCode.NO_ENERGY, null);
-                    return theResult;
+                    return new MovementResult(MovementResultCode.NO_ENERGY, null);
                 }
-                Casa myHouse = tabuleiro.getCasas()[this.position];
-                myHouse.leaveHouse(this);
-                this.distancia += Math.abs(nrSquares);
+                Casa myHouse = tabuleiro.getCasas()[this.position], moveToHouse = tabuleiro.getCasas()[moveToPos];
                 //Add to other house
-                Casa moveToHouse = tabuleiro.getCasas()[moveToPos];
-                moveToHouse.addJogadorCasa(this);
-                position = moveToPos;
+                add_removeHouse(myHouse, moveToHouse, nrSquares, moveToPos);
                 //Lose energy
                 loseEnergyMovement(nrSquares);
-                for (int i = 0; i < thisHousesFood.size(); i++){
+                for (int i = 0; i < thisHousesFood.size(); i++, this.numAlimentos++){
                     hasEaten = true;
                     tooltip += thisHousesFood.get(i).getEaten(tabuleiro);
-                    this.numAlimentos++;
                 }
                 //Fix energy losses
                 this.energy = (this.energy < 0) ? 0 : this.energy;
                 //Check if he won
                 if (moveToPos == tabuleiro.getSize() - 1 && !tabuleiro.getWinner()){
-                    tabuleiro.winGame();
-                    tabuleiro.setPlayerWin(this);
+                    gameWin(tabuleiro);
                     return new MovementResult(MovementResultCode.VALID_MOVEMENT, null); // he won the game
                 }
                 //half board finish we are not accounting for an empate happening i dont think it gets tested IF NEEDED ADD HERE
                 if(tabuleiro.updateTwoBiggestPosSaySize(this) > (tabuleiro.getSize()/2)){
-                    tabuleiro.winGame();
-                    Jogador firstPlayer = tabuleiro.getTwoBiggestPos()[0], secondPlayer = tabuleiro.getTwoBiggestPos()[1], winner;
-                    winner = (firstPlayer.getDistancia() > secondPlayer.getPosition()) ? secondPlayer : firstPlayer;
-                    tabuleiro.setPlayerWin(winner);
+                    setWinnerMovementHalfBoard(tabuleiro);
                 }
             }else {
                 gainEnergyResting();
