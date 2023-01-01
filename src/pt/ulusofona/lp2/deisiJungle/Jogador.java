@@ -171,9 +171,9 @@ public class Jogador {
                     return new MovementResult(MovementResultCode.VALID_MOVEMENT, null); // he won the game
                 }
                 //half board finish we are not accounting for an empate happening i dont think it gets tested IF NEEDED ADD HERE
-                if(tabuleiro.updateTwoBiggestPosSaySize(this) > (tabuleiro.getSize()/2)){
+                /*if(tabuleiro.updateTwoBiggestPosSaySize(this) > (tabuleiro.getSize()/2)){
                     setWinnerMovementHalfBoard(tabuleiro);
-                }
+                }*/
             }else {
                 gainEnergyResting();
                 for (int i = 0; i < thisHousesFood.size(); i++){
