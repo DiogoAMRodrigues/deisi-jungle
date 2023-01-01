@@ -443,32 +443,34 @@ public class GameManager {
     }
     public boolean saveGame(File file) {
         try{
-            FileWriter fwp = new FileWriter(file);
-            fwp.write(tabuleiro.getSize()+","+tabuleiro.getJogadores().size()+","+tabuleiro.getCurrentPlayer().getId()+","+tabuleiro.getTurns()+"\n");
-            for (int i = 0; i < tabuleiro.getCasas().length; i++) {
-                Casa casa = tabuleiro.getCasas()[i];
-                String toAdd = "";
-                for(int j = 0; j < casa.getJogadores().size(); ++j){
-                    Jogador player = casa.getJogadores().get(j);
-                    toAdd += player.getId()+","+player.getName()+","+player.getNumAlimentos()+","+player.getPosition()+
-                            ","+player.getEnergy()+","+player.getHasEatenBanana()+","+player.getSpecies().getIdentifier()+","+player.getDistancia()+"~";
-                }
-                if(toAdd.length() > 0){
-                    toAdd = toAdd.substring(0, toAdd.length()-1);
-                    fwp.write(toAdd);
-                }
-                fwp.write("/");
-                for(int k = 0; k < casa.getComida().size(); ++k){
-                    Food comida = casa.getComida().get(k);
-                    if(k < casa.getComida().size() - 1){
-                        fwp.write(comida.getId()+",");
-                    }else{
-                        fwp.write(comida.getId());
+            if(tabuleiro.getCurrentPlayer() != null){
+                FileWriter fwp = new FileWriter(file);
+                fwp.write(tabuleiro.getSize()+","+tabuleiro.getJogadores().size()+","+tabuleiro.getCurrentPlayer().getId()+","+tabuleiro.getTurns()+"\n");
+                for (int i = 0; i < tabuleiro.getCasas().length; i++) {
+                    Casa casa = tabuleiro.getCasas()[i];
+                    String toAdd = "";
+                    for(int j = 0; j < casa.getJogadores().size(); ++j){
+                        Jogador player = casa.getJogadores().get(j);
+                        toAdd += player.getId()+","+player.getName()+","+player.getNumAlimentos()+","+player.getPosition()+
+                                ","+player.getEnergy()+","+player.getHasEatenBanana()+","+player.getSpecies().getIdentifier()+","+player.getDistancia()+"~";
                     }
+                    if(toAdd.length() > 0){
+                        toAdd = toAdd.substring(0, toAdd.length()-1);
+                        fwp.write(toAdd);
+                    }
+                    fwp.write("/");
+                    for(int k = 0; k < casa.getComida().size(); ++k){
+                        Food comida = casa.getComida().get(k);
+                        if(k < casa.getComida().size() - 1){
+                            fwp.write(comida.getId()+",");
+                        }else{
+                            fwp.write(comida.getId());
+                        }
+                    }
+                    fwp.write("\n");
                 }
-                fwp.write("\n");
+                fwp.close();
             }
-            fwp.close();
         }catch(IOException e){
             return false;
         }
