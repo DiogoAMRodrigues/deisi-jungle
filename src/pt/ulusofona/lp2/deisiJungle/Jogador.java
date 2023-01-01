@@ -52,7 +52,7 @@ public class Jogador {
 
     public void loseEnergy(int amount){
         if (this.energy >= amount){
-            this.energy -= amount;
+            this.energy -= (amount + 2);
         }else{
             this.energy = 0;
         }
