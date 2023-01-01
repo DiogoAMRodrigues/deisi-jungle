@@ -1175,6 +1175,14 @@ public class Tests {
       g.saveGame(new File("yes.txt"));
 
       assertTrue(g.loadGame(new File("yes.txt")));
+
+      g = new GameManager();
+      g.createInitialJungle(12, new String[][]{{"2", "Tiadd", "L"}},
+              new String[][]{{"a", "3"}, {"e", "3"}, {"e", "9"}});
+
+      g.saveGame(new File("yes.txt"));
+
+      assertTrue(g.loadGame(new File("yes.txt")));
    }
 
    @Test
