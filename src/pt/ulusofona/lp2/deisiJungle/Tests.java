@@ -885,8 +885,8 @@ public class Tests {
 
       g.moveCurrentPlayer(4, true);
       g.moveCurrentPlayer(1, true);
-      assertEquals(4, g.getTabuleiro().getTwoBiggestPos()[0].getPosition());
-      assertEquals(1, g.getTabuleiro().getTwoBiggestPos()[1].getPosition());
+      assertEquals(1, g.getTabuleiro().getTwoBiggestPos()[0].getPosition());
+      assertEquals(4, g.getTabuleiro().getTwoBiggestPos()[1].getPosition());
 
 
 

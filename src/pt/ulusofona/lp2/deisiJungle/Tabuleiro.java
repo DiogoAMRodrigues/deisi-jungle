@@ -110,13 +110,14 @@ public class Tabuleiro {
             }else if((twoBiggestPos[1].getPosition() < thisPlayer.getPosition()) && (twoBiggestPos[0].getId() != thisPlayer.getId())){
                 twoBiggestPos[1] = thisPlayer;
             }
+            //reorder, so it keeps changing the smallest one of the two out
+            if (twoBiggestPos[0].getPosition() > twoBiggestPos[1].getPosition()){
+                Jogador placeholder = twoBiggestPos[0];
+                twoBiggestPos[0] = twoBiggestPos[1];
+                twoBiggestPos[1] = placeholder;
+            }
         }
-        //reorder, so it keeps changing the smallest one of the two out
-        if (twoBiggestPos[0].getPosition() > twoBiggestPos[1].getPosition()){
-            Jogador placeholder = twoBiggestPos[0];
-            twoBiggestPos[0] = twoBiggestPos[1];
-            twoBiggestPos[1] = placeholder;
-        }
+
         if (twoBiggestPos[0] != null && twoBiggestPos[1] != null){
             int difference = Math.abs(twoBiggestPos[0].getPosition() - twoBiggestPos[1].getPosition());
             return difference;
