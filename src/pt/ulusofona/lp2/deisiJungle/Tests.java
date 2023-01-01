@@ -1025,6 +1025,9 @@ public class Tests {
       assertNull(g.getAuthorsPanel());
 
       assertEquals("Wrestling", g.whoIsTaborda());
+
+      g = new GameManager();
+
    }
 
    @Test
