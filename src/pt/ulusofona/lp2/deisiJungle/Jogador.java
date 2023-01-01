@@ -145,7 +145,6 @@ public class Jogador {
                     theResult = new MovementResult(MovementResultCode.NO_ENERGY, null);
                     return theResult;
                 }
-
                 Casa myHouse = tabuleiro.getCasas()[this.position];
                 myHouse.leaveHouse(this);
                 this.distancia += Math.abs(nrSquares);
@@ -153,10 +152,8 @@ public class Jogador {
                 Casa moveToHouse = tabuleiro.getCasas()[moveToPos];
                 moveToHouse.addJogadorCasa(this);
                 position = moveToPos;
-
                 //Lose energy
                 loseEnergyMovement(nrSquares);
-
                 for (int i = 0; i < thisHousesFood.size(); i++){
                     hasEaten = true;
                     tooltip += thisHousesFood.get(i).getEaten(tabuleiro);
@@ -166,20 +163,16 @@ public class Jogador {
                 if(this.energy < 0){
                     this.energy = 0;
                 }
-
                 //Check if he won
                 if (moveToPos == tabuleiro.getSize() - 1 && !tabuleiro.getWinner()){
                     tabuleiro.winGame();
                     tabuleiro.setPlayerWin(this);
                     return new MovementResult(MovementResultCode.VALID_MOVEMENT, null); // he won the game
                 }
-
                 //half board finish we are not accounting for an empate happening i dont think it gets tested IF NEEDED ADD HERE
                 if(tabuleiro.updateTwoBiggestPosSaySize(this) > (tabuleiro.getSize()/2)){
                     tabuleiro.winGame();
-                    Jogador firstPlayer = tabuleiro.getTwoBiggestPos()[0];
-                    Jogador secondPlayer = tabuleiro.getTwoBiggestPos()[1];
-                    Jogador winner;
+                    Jogador firstPlayer = tabuleiro.getTwoBiggestPos()[0], secondPlayer = tabuleiro.getTwoBiggestPos()[1], winner;
                     if (firstPlayer.getPosition() > secondPlayer.getPosition()){
                         winner = secondPlayer;
                     }else {
@@ -201,7 +194,6 @@ public class Jogador {
         }else{
             return new MovementResult(MovementResultCode.NO_ENERGY, null);
         }
-
         if (hasEaten){
             if(!tooltip.equals("")){
                 return new MovementResult(MovementResultCode.CAUGHT_FOOD, tooltip);
