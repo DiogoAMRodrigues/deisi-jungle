@@ -83,10 +83,6 @@ public class Jogador {
         return position;
     }
 
-    public void setPosition(int num){
-        this.position = num;
-    }
-
     public int getEnergy() {
         return energy;
     }
