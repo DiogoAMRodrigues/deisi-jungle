@@ -867,6 +867,16 @@ public class Tests {
 
       assertEquals(5, thesePlayers[0].getPosition());
       assertEquals(4, thesePlayers[1].getPosition());
+
+      g.createInitialJungle(10, players);
+      g.moveCurrentPlayer(5, true);
+      assertEquals(1, g.getTabuleiro().getTurns());
+
+      g.getTabuleiro().setTurn(12);
+      assertEquals(12, g.getTabuleiro().getTurns());
+
+      g.getTabuleiro().decreaseTurn();
+      assertEquals(11, g.getTabuleiro().getTurns());
    }
 
    @Test
@@ -1027,6 +1037,7 @@ public class Tests {
       assertEquals("Wrestling", g.whoIsTaborda());
 
       g = new GameManager();
+
 
    }
 
