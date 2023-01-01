@@ -8,8 +8,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNull;
+import static junit.framework.TestCase.*;
 
 public class Tests {
 
@@ -1168,6 +1167,14 @@ public class Tests {
       g.saveGame(new File("yes.txt"));
 
       assertEquals(false, g.loadGame(new File("yess.txt")));
+
+      g = new GameManager();
+      g.createInitialJungle(12, new String[][]{{"2", "Tiadd", "L"}},
+              new String[][]{{"a", "3"}, {"a", "4"}, {"e", "9"}});
+
+      g.saveGame(new File("yes.txt"));
+
+      System.out.println(g.loadGame(new File("yes.txt")));
    }
 
    @Test
