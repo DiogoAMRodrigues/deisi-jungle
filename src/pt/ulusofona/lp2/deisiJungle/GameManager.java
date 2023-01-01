@@ -98,9 +98,9 @@ public class GameManager {
         foodTypes[4][1] = "Cogumelos magicos";
         foodTypes[4][2] = "mushroom.png";
 
-        foodTypes[4][0] = "p";
-        foodTypes[4][1] = "Poisonous Berry";
-        foodTypes[4][2] = "poisonousBerry.png";
+        foodTypes[5][0] = "p";
+        foodTypes[5][1] = "Poisonous Berry";
+        foodTypes[5][2] = "poisonousBerry.png";
 
         return foodTypes;
     }
@@ -295,6 +295,10 @@ public class GameManager {
             case 'm':
                 Shrooms m = new Shrooms();
                 return m;
+
+            case 'p':
+                PoisonBerry p = new PoisonBerry();
+                return p;
 
             default:
                 return null;

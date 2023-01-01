@@ -8,10 +8,11 @@ public class PoisonBerry extends Food {
 
     /*These Berries fall from trees and burn your skin, if eaten they will leave you
     with 10Hp, Omnivores will eat them only on odd turns*/
-
+    private String amount;
     public PoisonBerry(){
         id = 'p';
         img = "poisonBerry.png";
+        amount = "";
     }
 
     @Override
@@ -34,7 +35,6 @@ public class PoisonBerry extends Food {
     public String getEaten(Tabuleiro tabuleiro){
         Jogador thisPlayer = tabuleiro.getCurrentPlayer();
         AnimalType tipo = thisPlayer.getSpecies().getTipoAnimal();
-        String amount = "";
         if (tipo == AnimalType.CARNIVORO){
             thisPlayer.loseEnergy(15);
             amount = "15";
@@ -48,11 +48,17 @@ public class PoisonBerry extends Food {
             thisPlayer.loseEnergy(15);
             amount = "15";
         }
-        return "This poisonous berry dealt " + amount + " of damage" ;
+        return "This one will sting!";
+
     }
+
 
     @Override
     public String getToolTip(Tabuleiro tabuleiro){
-        return "Poison Berry: This one will sting!";
+        return "This poisonous berry dealt " + amount + " of damage" ;
+    }
+
+    public String getAmount() {
+        return amount;
     }
 }

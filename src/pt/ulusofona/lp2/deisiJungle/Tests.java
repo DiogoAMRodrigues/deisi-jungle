@@ -196,7 +196,7 @@ public class Tests {
    @Test
    public void getFoodTypes_03(){
       GameManager gameManager = new GameManager();
-      String[][] foodTypes = new String[5][3];
+      String[][] foodTypes = new String[6][3];
       foodTypes[0][0] = "e";
       foodTypes[0][1] = "Erva";
       foodTypes[0][2] = "grass.png";
@@ -216,6 +216,10 @@ public class Tests {
       foodTypes[4][0] = "m";
       foodTypes[4][1] = "Cogumelos magicos";
       foodTypes[4][2] = "mushroom.png";
+
+      foodTypes[5][0] = "p";
+      foodTypes[5][1] = "Poisonous Berry";
+      foodTypes[5][2] = "poisonousBerry.png";
 
       String expected = "";
       for(int i = 0; i < foodTypes.length; i++){
