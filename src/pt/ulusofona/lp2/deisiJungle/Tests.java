@@ -880,6 +880,18 @@ public class Tests {
 
       g.getTabuleiro().decreaseTurn();
       assertEquals(11, g.getTabuleiro().getTurns());
+
+      g = new GameManager();
+      g.createInitialJungle(20, players);
+
+      g.moveCurrentPlayer(4, true);
+      g.moveCurrentPlayer(1, true);
+      assertEquals(1, g.getTabuleiro().getTwoBiggestPos()[0].getPosition());
+      assertEquals(4, g.getTabuleiro().getTwoBiggestPos()[1].getPosition());
+
+
+
+
    }
 
    @Test
