@@ -192,8 +192,6 @@ public class Jogador {
                     this.energy = 0;
                 }
             }
-        }else{
-            return new MovementResult(MovementResultCode.NO_ENERGY, null);
         }
         return (hasEaten && !tooltip.equals("")) ? new MovementResult(MovementResultCode.CAUGHT_FOOD, tooltip) : new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
     }
