@@ -1,6 +1,6 @@
 package pt.ulusofona.lp2.deisiJungle;
 
-class InitializationError{
+public class InitializationError{
     private String message;
 
     public InitializationError(String message){

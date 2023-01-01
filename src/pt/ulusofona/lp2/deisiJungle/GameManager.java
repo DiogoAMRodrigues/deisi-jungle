@@ -61,7 +61,7 @@ public class GameManager {
         species[4][5] = "20";
         species[4][6] = "1..6";
 
-        species[5][0] = "S";
+        species[5][0] = "C";
         species[5][1] = "Cobra";
         species[5][2] = "snake.png";
         species[5][3] = "100";
