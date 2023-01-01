@@ -1041,6 +1041,53 @@ public class Tests {
 
    }
 
+   @Test
+   public void unsureWhatImTesting_26(){
+      GameManager g = new GameManager();
+      String[][] players = new String[3][3];
+      players[0][0] = "1";
+      players[0][1] = "tarz";
+      players[0][2] = "Z";
+      players[1][0] = "2";
+      players[1][1] = "lion";
+      players[1][2] = "L";
+      players[2][0] = "3";
+      players[2][1] = "lion2";
+      players[2][2] = "L";
+
+      g.createInitialJungle(15, players);
+
+      g.moveCurrentPlayer(3, true);
+      g.moveCurrentPlayer(4, true);
+      g.moveCurrentPlayer(1, true);
+      int first = g.getTabuleiro().getTwoBiggestPos()[0].getPosition();
+      int second = g.getTabuleiro().getTwoBiggestPos()[1].getPosition();
+
+      assertEquals(1, Math.abs(first-second));
+
+      g.moveCurrentPlayer(3, true);
+      g.moveCurrentPlayer(4, true);
+      g.moveCurrentPlayer(1, true);
+
+      first = g.getTabuleiro().getTwoBiggestPos()[0].getPosition();
+      second = g.getTabuleiro().getTwoBiggestPos()[1].getPosition();
+
+      assertEquals(2, Math.abs(first-second));
+      g.moveCurrentPlayer(1, true);
+      g.moveCurrentPlayer(1, true);
+
+      first = g.getTabuleiro().getTwoBiggestPos()[0].getPosition();
+      second = g.getTabuleiro().getTwoBiggestPos()[1].getPosition();
+
+      assertEquals(2, Math.abs(first-second));
+
+      g.moveCurrentPlayer(10, true);
+
+      first = g.getTabuleiro().getTwoBiggestPos()[0].getPosition();
+      second = g.getTabuleiro().getTwoBiggestPos()[1].getPosition();
+
+      assertEquals(3, Math.abs(first-second));
+   }
 }
 
 
