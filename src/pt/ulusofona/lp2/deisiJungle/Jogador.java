@@ -59,7 +59,7 @@ public class Jogador {
     }
 
     public boolean loseEnergyMovement(int nrHouses){
-        int amount = this.getSpecies().getEnergyConsumption() * Math.abs(nrHouses + 1);
+        int amount = this.getSpecies().getEnergyConsumption() * Math.abs(nrHouses);
         if(this.energy >= amount){
             this.energy -= amount;
             return true;
