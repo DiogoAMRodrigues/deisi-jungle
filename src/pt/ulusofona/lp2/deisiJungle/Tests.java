@@ -1174,7 +1174,7 @@ public class Tests {
 
       g.saveGame(new File("yes.txt"));
 
-      System.out.println(g.loadGame(new File("yes.txt")));
+      assertTrue(g.loadGame(new File("yes.txt")));
    }
 
    @Test
