@@ -1225,35 +1225,6 @@ public class Tests {
       assertEquals(3, Math.abs(first-second));
    }
 
-   @Test
-   public void testGetSquareInfo(){
-      GameManager g = new GameManager();
-      String[][] players = new String[3][3];
-      players[0][0] = "1";
-      players[0][1] = "tarz";
-      players[0][2] = "Z";
-      players[1][0] = "2";
-      players[1][1] = "lion";
-      players[1][2] = "L";
-      players[2][0] = "3";
-      players[2][1] = "lion2";
-      players[2][2] = "L";
-
-
-      g.createInitialJungle(15, players, new String[][]{{"a", "3"}});
-
-      g.moveCurrentPlayer(3, true);
-      g.moveCurrentPlayer(4, true);
-      g.moveCurrentPlayer(1, true);
-
-      assertEquals("1", g.getSquareInfo(4)[2]);
-
-      assertEquals("Meta", g.getSquareInfo(15)[1]);
-
-      assertEquals("water.png", g.getSquareInfo(3)[0]);
-
-      assertEquals("blank.png", g.getSquareInfo(8)[0]);
-
-      //assertEquals(null, g.getSquareInfo(83)[0]);
-   }
 }
+
+

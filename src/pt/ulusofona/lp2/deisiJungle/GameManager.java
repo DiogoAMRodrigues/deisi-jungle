@@ -77,7 +77,7 @@ public class GameManager {
         return info;
     }
     public String[][] getFoodTypes() {
-        String[][] foodTypes = new String[5][3];
+        String[][] foodTypes = new String[6][3];
         foodTypes[0][0] = "e";
         foodTypes[0][1] = "Erva";
         foodTypes[0][2] = "grass.png";
@@ -97,6 +97,10 @@ public class GameManager {
         foodTypes[4][0] = "m";
         foodTypes[4][1] = "Cogumelos magicos";
         foodTypes[4][2] = "mushroom.png";
+
+        foodTypes[4][0] = "p";
+        foodTypes[4][1] = "Poisonous Berry";
+        foodTypes[4][2] = "poisonousBerry.png";
 
         return foodTypes;
     }
