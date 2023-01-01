@@ -117,8 +117,6 @@ public class Tabuleiro {
             }
         }
 
-
-
         if (twoBiggestPos[0] != null && twoBiggestPos[1] != null){
             int difference = Math.abs(twoBiggestPos[0].getPosition() - twoBiggestPos[1].getPosition());
             return difference;
