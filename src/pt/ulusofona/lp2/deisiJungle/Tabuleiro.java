@@ -101,27 +101,8 @@ public class Tabuleiro {
     }
 
     public int updateTwoBiggestPosSaySize() {
-        Jogador[] players = new Jogador[jogadores.size()];
         twoBiggestPos = jogadores;
-        for (int i = 0; i < twoBiggestPos.size(); i++){
-            players[i] = twoBiggestPos.get(i);
-        }
-        for (int i = 0; i < players.length - 1; i++){
-            for (int j = i + 1; j < players.length; j++){
-                if (players[i].getPosition() < players[j].getPosition()){
-                    Jogador placeHolder = players[i];
-                    players[i] = players[j];
-                    players[j] = placeHolder;
-                }else if(players[i].getId() > players[j].getId()){
-                    Jogador placeHolder = players[i];
-                    players[i] = players[j];
-                    players[j] = placeHolder;
-                }
-
-            }
-        }
-        twoBiggestPos = new ArrayList<>();
-        twoBiggestPos.addAll(Arrays.asList(players));
+        twoBiggestPos.sort(Comparator.comparingInt(Jogador::getPosition).reversed());
 
         return twoBiggestPos.get(0).getPosition() - twoBiggestPos.get(1).getPosition();
     }
