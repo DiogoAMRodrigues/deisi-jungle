@@ -3,3 +3,4 @@ Adicionamos uma espécie que se chama "Cobra" e tem uma imagem que se chama "sna
 Também foi mudada a página dos créditos.
 
 ![UML](UML.png)
+
