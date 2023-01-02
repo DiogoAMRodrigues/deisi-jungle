@@ -592,10 +592,10 @@ public class Tests {
    public void getGameResults_12(){
       GameManager g = new GameManager();
       String[][] playersInfo = new String[3][4];
-      playersInfo[0][0] = "2";
+      playersInfo[0][0] = "1";
       playersInfo[0][1] = "Jeff";
       playersInfo[0][2] = "E";
-      playersInfo[1][0] = "1";
+      playersInfo[1][0] = "2";
       playersInfo[1][1] = "Jefff";
       playersInfo[1][2] = "L";
       playersInfo[2][0] = "3";
@@ -608,13 +608,13 @@ public class Tests {
       g.moveCurrentPlayer(8, true);
       g.moveCurrentPlayer(6, true);
       g.moveCurrentPlayer(6, true);
-      g.moveCurrentPlayer(20, true);
+      g.moveCurrentPlayer(9, true);
 
       ArrayList<String> thisString = g.getGameResults();
 
-      assertEquals("#1 Heinz, Leão, 20, 19, 0", thisString.get(0));
-      assertEquals("#2 Jefff, Leão, 15, 14, 0", thisString.get(1));
-      assertEquals("#3 Jeff, Elefante, 15, 14, 0", thisString.get(2));
+      assertEquals("#1 Heinz, Leão, 18, 17, 0", thisString.get(0));
+      assertEquals("#1 Jeff, Elefante, 15, 14, 0", thisString.get(1));
+      assertEquals("#1 Jefff, Leão, 15, 14, 0", thisString.get(2));
 
    }
 
@@ -1227,6 +1227,34 @@ public class Tests {
 
       assertEquals(3, Math.abs(first-second));
    }
+
+   @Test
+   public void berries_27(){
+      GameManager g = new GameManager();
+      String[][] players = new String[3][3];
+      players[0][0] = "1";
+      players[0][1] = "tarz";
+      players[0][2] = "Z";
+      players[1][0] = "2";
+      players[1][1] = "lion";
+      players[1][2] = "L";
+      players[2][0] = "2";
+      players[2][1] = "lion";
+      players[2][2] = "E";
+
+      String[][] thisBerry = new String[1][2];
+      thisBerry[0][0] = "p";
+      thisBerry[0][1] = "3";
+
+      g.createInitialJungle(10, players, thisBerry);
+      g.moveCurrentPlayer(2, true);
+
+      g.moveCurrentPlayer(2, true);
+      g.moveCurrentPlayer(2, true);
+
+
+
+   }//UNFINISHED-
 
 }
 

@@ -418,28 +418,10 @@ public class GameManager {
         ArrayList<String> players = new ArrayList<>();
         int counter = 1;
 
-        if (tabuleiro.getCasas()[tabuleiro.getCasas().length-1].getJogadores().size() != 0) {
-            Jogador player = tabuleiro.getPlayerWin();
+        for (int i = 0; i < tabuleiro.getTwoBiggestPos().size(); i++){
+            Jogador player = tabuleiro.getTwoBiggestPos().get(i);
             players.add("#" + counter + " " + player.getName() + ", " + player.getSpecies().getName() + ", " +
                     (player.getPosition() + 1) + ", " + player.getDistancia() + ", " + player.getNumAlimentos());
-            counter++;
-        }
-
-        ArrayList<Jogador> sortedPlayers;
-
-        for (int i = tabuleiro.getCasas().length - 2; i >= 0; --i) {
-            if (tabuleiro.getCasas()[i].getJogadores().size() != 0) {
-                sortedPlayers = tabuleiro.getCasas()[i].getJogadores();
-                sortedPlayers.sort(Comparator.comparingInt(Jogador::getId));
-                for(Jogador player : sortedPlayers){
-                    players.add("#" + counter + " " + player.getName() + ", " + player.getSpecies().getName() + ", " +
-                            (player.getPosition() + 1) + ", " + player.getDistancia() + ", " + player.getNumAlimentos());
-                    counter++;
-                }
-            }
-            if(counter > tabuleiro.getJogadores().size()){
-                break;
-            }
         }
         return players;
     }

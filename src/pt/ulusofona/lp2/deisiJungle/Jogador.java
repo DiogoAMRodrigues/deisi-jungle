@@ -127,63 +127,62 @@ public class Jogador {
         boolean hasEaten = false;
         String tooltip = "";
         //Refuse to let em move if there is already a winner
-        if (!tabuleiro.getWinner()){
-            //Is position in board if not go to last postion
-            int moveToPos = this.position + nrSquares;
-            if (moveToPos >= tabuleiro.getSize()){
-                moveToPos = tabuleiro.getSize() - 1;
-                //Correcting the amount of squares he actually walks, in case its out of the board
-                nrSquares = moveToPos - this.position;
+
+        //Is position in board if not go to last postion
+        int moveToPos = this.position + nrSquares;
+        if (moveToPos >= tabuleiro.getSize()){
+            moveToPos = tabuleiro.getSize() - 1;
+            //Correcting the amount of squares he actually walks, in case its out of the board
+            nrSquares = moveToPos - this.position;
+        }
+        //Goes behind first house
+        if (moveToPos < 0){
+            theResult = new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
+            return theResult;
+        }
+        //Check if the movementspeed is legal
+        if (!byPassValidations && !(mySpecies.getMinSpeed() <= Math.abs(nrSquares) && mySpecies.getMaxSpeed() >= Math.abs(nrSquares) || nrSquares == 0)) {
+            theResult = new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
+            return theResult;
+        }
+        ArrayList<Food> thisHousesFood = tabuleiro.getCasas()[moveToPos].getComida();
+        //If he moves do this
+        if (nrSquares != 0){
+            //Check energy I need for this House
+            int amountOfEnergyRequired = mySpecies.getEnergyConsumption() * (nrSquares);
+            //Current energy needs to be bigger than energy usage while move
+            if (this.energy < amountOfEnergyRequired){
+                return new MovementResult(MovementResultCode.NO_ENERGY, null);
             }
-            //Goes behind first house
-            if (moveToPos < 0){
-                theResult = new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
-                return theResult;
+            Casa myHouse = tabuleiro.getCasas()[this.position], moveToHouse = tabuleiro.getCasas()[moveToPos];
+            //Add to other house
+            add_removeHouse(myHouse, moveToHouse, nrSquares, moveToPos);
+            //Lose energy
+            loseEnergyMovement(nrSquares);
+            for (int i = 0; i < thisHousesFood.size(); i++, this.numAlimentos++){
+                hasEaten = true;
+                tooltip += thisHousesFood.get(i).getEaten(tabuleiro);
             }
-            //Check if the movementspeed is legal
-            if (!byPassValidations && !(mySpecies.getMinSpeed() <= Math.abs(nrSquares) && mySpecies.getMaxSpeed() >= Math.abs(nrSquares) || nrSquares == 0)) {
-                theResult = new MovementResult(MovementResultCode.INVALID_MOVEMENT, null);
-                return theResult;
+            //Fix energy losses
+            this.energy = (this.energy < 0) ? 0 : this.energy;
+            //Check if he won
+            if (moveToPos == tabuleiro.getSize() - 1 && !tabuleiro.getWinner()){
+                gameWin(tabuleiro);
+                return new MovementResult(MovementResultCode.VALID_MOVEMENT, null); // he won the game
             }
-            ArrayList<Food> thisHousesFood = tabuleiro.getCasas()[moveToPos].getComida();
-            //If he moves do this
-            if (nrSquares != 0){
-                //Check energy I need for this House
-                int amountOfEnergyRequired = mySpecies.getEnergyConsumption() * (nrSquares);
-                //Current energy needs to be bigger than energy usage while move
-                if (this.energy < amountOfEnergyRequired){
-                    return new MovementResult(MovementResultCode.NO_ENERGY, null);
-                }
-                Casa myHouse = tabuleiro.getCasas()[this.position], moveToHouse = tabuleiro.getCasas()[moveToPos];
-                //Add to other house
-                add_removeHouse(myHouse, moveToHouse, nrSquares, moveToPos);
-                //Lose energy
-                loseEnergyMovement(nrSquares);
-                for (int i = 0; i < thisHousesFood.size(); i++, this.numAlimentos++){
-                    hasEaten = true;
-                    tooltip += thisHousesFood.get(i).getEaten(tabuleiro);
-                }
-                //Fix energy losses
-                this.energy = (this.energy < 0) ? 0 : this.energy;
-                //Check if he won
-                if (moveToPos == tabuleiro.getSize() - 1 && !tabuleiro.getWinner()){
-                    gameWin(tabuleiro);
-                    return new MovementResult(MovementResultCode.VALID_MOVEMENT, null); // he won the game
-                }
-                //half board finish we are not accounting for an empate happening i dont think it gets tested IF NEEDED ADD HERE
-                if(tabuleiro.updateTwoBiggestPosSaySize() > (tabuleiro.getSize()/2)){
-                    setWinnerMovementHalfBoard(tabuleiro);
-                }
-            }else {
-                gainEnergyResting();
-                for (int i = 0; i < thisHousesFood.size(); i++){
-                    hasEaten = true;
-                    tooltip += thisHousesFood.get(i).getEaten(tabuleiro);
-                }
-                //in case u dont move but would lose too much energy from not moving
-                if(this.energy < 0){
-                    this.energy = 0;
-                }
+            //half board finish we are not accounting for an empate happening i dont think it gets tested IF NEEDED ADD HERE
+            if(tabuleiro.updateTwoBiggestPosSaySize() > (tabuleiro.getSize()/2)){
+                setWinnerMovementHalfBoard(tabuleiro);
+            }
+        }else {
+            gainEnergyResting();
+            for (int i = 0; i < thisHousesFood.size(); i++){
+                hasEaten = true;
+                tooltip += thisHousesFood.get(i).getEaten(tabuleiro);
+            }
+            //in case u dont move but would lose too much energy from not moving
+            if(this.energy < 0){
+                this.energy = 0;
             }
         }
         return (hasEaten && !tooltip.equals("")) ? new MovementResult(MovementResultCode.CAUGHT_FOOD, tooltip) : new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
