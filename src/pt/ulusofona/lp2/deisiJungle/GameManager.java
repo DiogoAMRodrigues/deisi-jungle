@@ -534,8 +534,8 @@ public class GameManager {
             return false;
         }
         return true;
-    }// NEXT WEIRD
-    public void setPlayersPositions(String[][] players, String[] playersHouse, String[] playersDistance){
+    }
+    private void setPlayersPositions(String[][] players, String[] playersHouse, String[] playersDistance){
         Jogador player = tabuleiro.getCurrentPlayer();
         for(int k = 0; k < tabuleiro.getJogadores().size(); ++k){
             for(int b = 0; b < players.length; ++b){
@@ -548,7 +548,7 @@ public class GameManager {
             }
         }
     }
-    public void setPlayersEnergy(ArrayList<String> energia){
+    private void setPlayersEnergy(ArrayList<String> energia){
         for(int l = 0; l < tabuleiro.getJogadores().size(); ++l){
             for(int m = 0; m < energia.size(); ++m){
                 if(tabuleiro.getJogadores().get(l).getId() == Integer.parseInt(energia.get(m).split(" ")[0])){
@@ -556,8 +556,8 @@ public class GameManager {
                 }
             }
         }
-    } //NEXT WEIRD
-    public void setCurrentPlayer(int turn, int currentPlayerId){
+    }
+    private void setCurrentPlayer(int turn, int currentPlayerId){
         tabuleiro.setTurn(turn-1);
         tabuleiro.nextTurn();
         for(int l = 0; l < tabuleiro.getJogadores().size(); ++l){
@@ -565,15 +565,15 @@ public class GameManager {
                 tabuleiro.setCurrentPlayer(tabuleiro.getJogadores().get(l));
             }
         }
-    } //NEXT WEIRD
-    public void addMultiplePlayers(String[][] players, String text, int i, ArrayList<String> energia, String[] playersHouse){
+    }
+    private void addMultiplePlayers(String[][] players, String text, int i, ArrayList<String> energia, String[] playersHouse){
         players[i-1][0] = text.split(",")[0];
         players[i-1][1] = text.split(",")[1];
         players[i-1][2] = text.split(",")[6];
         energia.add(text.split(",")[0] + " " + text.split(",")[4]);
         playersHouse[i-1] = text.split(",")[3];
     }
-    public void addSinglePlayer(String[][] players, String read, int i, ArrayList<String> energia, String[] playersHouse, String[] playersDistance){
+    private void addSinglePlayer(String[][] players, String read, int i, ArrayList<String> energia, String[] playersHouse, String[] playersDistance){
         players[i-1][0] = read.split(",")[0];
         players[i-1][1] = read.split(",")[1];
         players[i-1][2] = read.split(",")[6];
