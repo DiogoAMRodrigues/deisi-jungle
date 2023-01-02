@@ -5,7 +5,7 @@ import pt.ulusofona.lp2.deisiJungle.AnimalType;
 public class Passaro extends Especie{
     public Passaro() {
         identifier = 'P';
-        name = "Pássaro";
+        name = "Passaro";
         image = "bird.png";
         startEnergy = 70;
         energyConsumption = 4;

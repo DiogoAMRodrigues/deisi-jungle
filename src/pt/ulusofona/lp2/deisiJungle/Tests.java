@@ -78,7 +78,7 @@ public class Tests {
       minSpeed = p.getMinSpeed();
       maxSpeed = p.getMaxSpeed();
       assertEquals('P', identifier);
-      assertEquals("Pássaro", name);
+      assertEquals("Passaro", name);
       assertEquals("bird.png", image);
       assertEquals(70, startEnergy);
       assertEquals(4, energyConsumption);
@@ -136,7 +136,7 @@ public class Tests {
       species[0][6] = "1..6";
 
       species[1][0] = "L";
-      species[1][1] = "Leão";
+      species[1][1] = "Leao";
       species[1][2] = "lion.png";
       species[1][3] = "80";
       species[1][4] = "2";
@@ -152,7 +152,7 @@ public class Tests {
       species[2][6] = "1..3";
 
       species[3][0] = "P";
-      species[3][1] = "Pássaro";
+      species[3][1] = "Passaro";
       species[3][2] = "bird.png";
       species[3][3] = "70";
       species[3][4] = "4";

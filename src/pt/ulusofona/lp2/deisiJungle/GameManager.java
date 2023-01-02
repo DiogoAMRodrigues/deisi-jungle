@@ -28,7 +28,7 @@ public class GameManager {
         species[0][6] = "1..6";
 
         species[1][0] = "L";
-        species[1][1] = "Leão";
+        species[1][1] = "Leao";
         species[1][2] = "lion.png";
         species[1][3] = "80";
         species[1][4] = "2";
@@ -44,7 +44,7 @@ public class GameManager {
         species[2][6] = "1..3";
 
         species[3][0] = "P";
-        species[3][1] = "Pássaro";
+        species[3][1] = "Passaro";
         species[3][2] = "bird.png";
         species[3][3] = "70";
         species[3][4] = "4";
@@ -427,9 +427,9 @@ public class GameManager {
             theArray[i] = "#" + counter + " " + player.getName() + ", " + player.getSpecies().getName() + ", " +
                     (player.getPosition() + 1) + ", " + player.getDistancia() + ", " + player.getNumAlimentos();
         }
-        if(tabuleiro.updateTwoBiggestPosSaySize() > (tabuleiro.getSize()/2)){
-            String placeholder = theArray[0];
-            theArray[0] = theArray[1];
+        if(tabuleiro.updateTwoBiggestPosSaySize() > (tabuleiro.getSize()/2) && (tabuleiro.getTwoBiggestPos().get(0).getPosition() != tabuleiro.getCasas().length - 1)){
+            String placeholder = theArray[0].replace("#1", "#2");
+            theArray[0] = theArray[1].replace("#2", "#1");
             theArray[1] = placeholder;
 
             players.add(theArray[1]);
@@ -437,6 +437,7 @@ public class GameManager {
             for (int i = 2; i < theArray.length; i++) {
                 players.add(theArray[i]);
             }
+
         }else {
             players.addAll(Arrays.asList(theArray));
         }
