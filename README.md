@@ -1,5 +1,5 @@
 # LP2Projeto
-Adicionamos uma espécie que se chama "Cobra" e tem uma imagem que se chama "snake.png".
-Fizemos isto, porque foi dito que podemos adicionar animais que achamos que são adequados e existem cobras na selva.
+Adicionamos uma espécie que se chama "Cobra" e tem uma imagem que se chama "snake.png", tal como uma classe "PoisonBerry", que é comida que pode ser ingerida pelos Jogadores, com a imagem "poisonBerry".
+Também foi mudada a página dos créditos.
 
-![UML](https://user-images.githubusercontent.com/100542823/201523764-093142ee-c553-4057-83a8-056a3fd8dc8f.png)
+![UML](UML.png)
