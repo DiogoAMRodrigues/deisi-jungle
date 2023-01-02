@@ -106,7 +106,7 @@ public class Jogador {
         tabuleiro.winGame();
         Jogador firstPlayer = tabuleiro.getTwoBiggestPos().get(0);
         Jogador secondPlayer = tabuleiro.getTwoBiggestPos().get(1);
-        tabuleiro.setPlayerWin(firstPlayer);
+        tabuleiro.setPlayerWin(secondPlayer);
     }
 
     public void gameWin(Tabuleiro tabuleiro){

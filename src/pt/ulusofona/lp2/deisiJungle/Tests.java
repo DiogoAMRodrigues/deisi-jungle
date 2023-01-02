@@ -844,7 +844,6 @@ public class Tests {
 
    }
 
-
    @Test
    public void missingTabuleiroTest_22(){
       GameManager g = new GameManager();
@@ -931,7 +930,7 @@ public class Tests {
       Jogador winner = g.getTabuleiro().getPlayerWin();
 
       //check if the right guy wins over half board rule
-      assertEquals(2, winner.getId());
+      assertEquals(1, winner.getId());
 
       g = new GameManager();
       g.createInitialJungle(10, players);
@@ -948,7 +947,7 @@ public class Tests {
       winner = g.getTabuleiro().getPlayerWin();
 
       //check if the right guy wins over half board rule
-      assertEquals(2, winner.getId());
+      assertEquals(1, winner.getId());
 
       g = new GameManager();
       g.createInitialJungle(10, players);

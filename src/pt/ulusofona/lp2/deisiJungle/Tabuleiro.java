@@ -101,7 +101,8 @@ public class Tabuleiro {
     }
 
     public int updateTwoBiggestPosSaySize() {
-        twoBiggestPos = jogadores;
+        twoBiggestPos = new ArrayList<>();
+        twoBiggestPos.addAll(jogadores);
         twoBiggestPos.sort(Comparator.comparingInt(Jogador::getPosition).reversed());
 
         return twoBiggestPos.get(0).getPosition() - twoBiggestPos.get(1).getPosition();
