@@ -415,6 +415,7 @@ public class GameManager {
                 species.getIdentifier() + "", winner.getEnergy() + "", species.getMinSpeed() + ".." + species.getMaxSpeed()};
     }
     public ArrayList<String> getGameResults() {
+        tabuleiro.updateTwoBiggestPosSaySize();
         ArrayList<String> players = new ArrayList<>();
         int counter = 1;
 
