@@ -5,6 +5,7 @@ import pt.ulusofona.lp2.deisiJungle.species.*;
 
 import javax.swing.*;
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -415,16 +416,23 @@ public class GameManager {
                 species.getIdentifier() + "", winner.getEnergy() + "", species.getMinSpeed() + ".." + species.getMaxSpeed()};
     }
     public ArrayList<String> getGameResults() {
-        tabuleiro.updateTwoBiggestPosSaySize();
         ArrayList<String> players = new ArrayList<>();
+        String[] theArray = new String[tabuleiro.getTwoBiggestPos().size()];
         int counter = 1;
+
 
         for (int i = 0; i < tabuleiro.getTwoBiggestPos().size(); i++){
             counter = i + 1;
             Jogador player = tabuleiro.getTwoBiggestPos().get(i);
-            players.add("#" + counter + " " + player.getName() + ", " + player.getSpecies().getName() + ", " +
-                    (player.getPosition() + 1) + ", " + player.getDistancia() + ", " + player.getNumAlimentos());
+            theArray[i] = "#" + counter + " " + player.getName() + ", " + player.getSpecies().getName() + ", " +
+                    (player.getPosition() + 1) + ", " + player.getDistancia() + ", " + player.getNumAlimentos();
         }
+        if(tabuleiro.updateTwoBiggestPosSaySize() > (tabuleiro.getSize()/2)){
+            String placeholder = theArray[0];
+            theArray[0] = theArray[1];
+            theArray[1] = placeholder;
+        }
+        players.addAll(Arrays.asList(theArray));
         return players;
     }
     public JPanel getAuthorsPanel() {
