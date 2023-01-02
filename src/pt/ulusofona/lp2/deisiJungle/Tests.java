@@ -613,9 +613,8 @@ public class Tests {
       ArrayList<String> thisString = g.getGameResults();
 
       assertEquals("#1 Heinz, Leão, 18, 17, 0", thisString.get(0));
-      assertEquals("#1 Jeff, Elefante, 15, 14, 0", thisString.get(1));
-      assertEquals("#1 Jefff, Leão, 15, 14, 0", thisString.get(2));
-
+      assertEquals("#2 Jeff, Elefante, 15, 14, 0", thisString.get(1));
+      assertEquals("#3 Jefff, Leão, 15, 14, 0", thisString.get(2));
    }
 
    @Test

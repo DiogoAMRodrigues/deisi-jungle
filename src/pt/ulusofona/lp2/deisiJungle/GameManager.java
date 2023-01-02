@@ -419,6 +419,7 @@ public class GameManager {
         int counter = 1;
 
         for (int i = 0; i < tabuleiro.getTwoBiggestPos().size(); i++){
+            counter = i + 1;
             Jogador player = tabuleiro.getTwoBiggestPos().get(i);
             players.add("#" + counter + " " + player.getName() + ", " + player.getSpecies().getName() + ", " +
                     (player.getPosition() + 1) + ", " + player.getDistancia() + ", " + player.getNumAlimentos());
