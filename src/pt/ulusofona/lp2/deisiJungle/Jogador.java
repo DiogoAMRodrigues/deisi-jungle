@@ -104,9 +104,9 @@ public class Jogador {
 
     public void setWinnerMovementHalfBoard(Tabuleiro tabuleiro){
         tabuleiro.winGame();
-        Jogador firstPlayer = tabuleiro.getTwoBiggestPos()[0], secondPlayer = tabuleiro.getTwoBiggestPos()[1], winner;
-        winner = (firstPlayer.getDistancia() > secondPlayer.getPosition()) ? secondPlayer : firstPlayer;
-        tabuleiro.setPlayerWin(winner);
+        Jogador firstPlayer = tabuleiro.getTwoBiggestPos().get(0);
+        Jogador secondPlayer = tabuleiro.getTwoBiggestPos().get(1);
+        tabuleiro.setPlayerWin(firstPlayer);
     }
 
     public void gameWin(Tabuleiro tabuleiro){
@@ -171,7 +171,7 @@ public class Jogador {
                     return new MovementResult(MovementResultCode.VALID_MOVEMENT, null); // he won the game
                 }
                 //half board finish we are not accounting for an empate happening i dont think it gets tested IF NEEDED ADD HERE
-                if(tabuleiro.updateTwoBiggestPosSaySize(this) > (tabuleiro.getSize()/2)){
+                if(tabuleiro.updateTwoBiggestPosSaySize() > (tabuleiro.getSize()/2)){
                     setWinnerMovementHalfBoard(tabuleiro);
                 }
             }else {

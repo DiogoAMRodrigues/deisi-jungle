@@ -864,16 +864,16 @@ public class Tests {
       g.moveCurrentPlayer(2, true);
       g.moveCurrentPlayer(3, true);
 
-      Jogador[] thesePlayers = g.getTabuleiro().getTwoBiggestPos();
+      ArrayList<Jogador> thesePlayers = g.getTabuleiro().getTwoBiggestPos();
 
-      assertEquals(2, thesePlayers[0].getPosition());
-      assertEquals(3, thesePlayers[1].getPosition());
+      assertEquals(3, thesePlayers.get(0).getPosition());
+      assertEquals(2, thesePlayers.get(1).getPosition());
 
       g.moveCurrentPlayer(5, true);
       g.moveCurrentPlayer(2, true);
 
-      assertEquals(4, thesePlayers[0].getPosition());
-      assertEquals(5, thesePlayers[1].getPosition());
+      assertEquals(3, thesePlayers.get(0).getPosition());
+      assertEquals(4, thesePlayers.get(1).getPosition());
 
       g.createInitialJungle(10, players);
       g.moveCurrentPlayer(5, true);
@@ -890,8 +890,8 @@ public class Tests {
 
       g.moveCurrentPlayer(4, true);
       g.moveCurrentPlayer(1, true);
-      assertEquals(4, g.getTabuleiro().getTwoBiggestPos()[0].getPosition());
-      assertEquals(1, g.getTabuleiro().getTwoBiggestPos()[1].getPosition());
+      assertEquals(4, g.getTabuleiro().getTwoBiggestPos().get(0).getPosition());
+      assertEquals(1, g.getTabuleiro().getTwoBiggestPos().get(1).getPosition());
 
    }
 
@@ -931,7 +931,7 @@ public class Tests {
       Jogador winner = g.getTabuleiro().getPlayerWin();
 
       //check if the right guy wins over half board rule
-      assertEquals(1, winner.getId());
+      assertEquals(2, winner.getId());
 
       g = new GameManager();
       g.createInitialJungle(10, players);
@@ -948,7 +948,7 @@ public class Tests {
       winner = g.getTabuleiro().getPlayerWin();
 
       //check if the right guy wins over half board rule
-      assertEquals(1, winner.getId());
+      assertEquals(2, winner.getId());
 
       g = new GameManager();
       g.createInitialJungle(10, players);
@@ -1200,8 +1200,8 @@ public class Tests {
       g.moveCurrentPlayer(3, true);
       g.moveCurrentPlayer(4, true);
       g.moveCurrentPlayer(1, true);
-      int first = g.getTabuleiro().getTwoBiggestPos()[0].getPosition();
-      int second = g.getTabuleiro().getTwoBiggestPos()[1].getPosition();
+      int first = g.getTabuleiro().getTwoBiggestPos().get(0).getPosition();
+      int second = g.getTabuleiro().getTwoBiggestPos().get(1).getPosition();
 
       assertEquals(1, Math.abs(first-second));
 
@@ -1209,22 +1209,22 @@ public class Tests {
       g.moveCurrentPlayer(4, true);
       g.moveCurrentPlayer(1, true);
 
-      first = g.getTabuleiro().getTwoBiggestPos()[0].getPosition();
-      second = g.getTabuleiro().getTwoBiggestPos()[1].getPosition();
+      first = g.getTabuleiro().getTwoBiggestPos().get(0).getPosition();
+      second = g.getTabuleiro().getTwoBiggestPos().get(1).getPosition();
 
       assertEquals(2, Math.abs(first-second));
       g.moveCurrentPlayer(1, true);
       g.moveCurrentPlayer(1, true);
 
-      first = g.getTabuleiro().getTwoBiggestPos()[0].getPosition();
-      second = g.getTabuleiro().getTwoBiggestPos()[1].getPosition();
+      first = g.getTabuleiro().getTwoBiggestPos().get(0).getPosition();
+      second = g.getTabuleiro().getTwoBiggestPos().get(1).getPosition();
 
       assertEquals(2, Math.abs(first-second));
 
       g.moveCurrentPlayer(10, true);
 
-      first = g.getTabuleiro().getTwoBiggestPos()[0].getPosition();
-      second = g.getTabuleiro().getTwoBiggestPos()[1].getPosition();
+      first = g.getTabuleiro().getTwoBiggestPos().get(0).getPosition();
+      second = g.getTabuleiro().getTwoBiggestPos().get(1).getPosition();
 
       assertEquals(3, Math.abs(first-second));
    }

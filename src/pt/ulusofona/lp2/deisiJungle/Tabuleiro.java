@@ -1,6 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 
@@ -14,7 +15,7 @@ public class Tabuleiro {
     private boolean winner = false;
     private Jogador playerWin;
     private int turns;
-    private Jogador[] twoBiggestPos;
+    private ArrayList<Jogador> twoBiggestPos;
     public Tabuleiro(int size) {
         this.size = size;
         casas = new Casa[size];
@@ -25,7 +26,7 @@ public class Tabuleiro {
         jogaresHS = new HashMap<>();
         currentPlayerInt = 0;
         turns = 0;
-        twoBiggestPos = new Jogador[2];
+        twoBiggestPos = new ArrayList<>();
     }
 
     public void addJogador(Jogador player){
@@ -91,7 +92,7 @@ public class Tabuleiro {
         this.playerWin = jogador;
     }
 
-    public Jogador[] getTwoBiggestPos() {
+    public ArrayList<Jogador> getTwoBiggestPos() {
         return twoBiggestPos;
     }
 
@@ -99,29 +100,29 @@ public class Tabuleiro {
         this.turns--;
     }
 
-    public int updateTwoBiggestPosSaySize(Jogador thisPlayer) {
-        if(twoBiggestPos[0] == null) {
-            twoBiggestPos[0] = thisPlayer;
-        } else if(twoBiggestPos[1] == null){
-            twoBiggestPos[1] = thisPlayer;
-        }else{
-            if ((twoBiggestPos[0].getPosition() < thisPlayer.getPosition()) && (twoBiggestPos[1].getId() != thisPlayer.getId())) {
-                twoBiggestPos[0] = thisPlayer;
-            }else if((twoBiggestPos[1].getPosition() < thisPlayer.getPosition()) && (twoBiggestPos[0].getId() != thisPlayer.getId())){
-                twoBiggestPos[1] = thisPlayer;
-            }
-            //reorder, so it keeps changing the smallest one of the two out
-            if (twoBiggestPos[0].getPosition() > twoBiggestPos[1].getPosition()){
-                Jogador placeholder = twoBiggestPos[0];
-                twoBiggestPos[0] = twoBiggestPos[1];
-                twoBiggestPos[1] = placeholder;
-            }
+    public int updateTwoBiggestPosSaySize() {
+        Jogador[] players = new Jogador[jogadores.size()];
+        twoBiggestPos = jogadores;
+        for (int i = 0; i < twoBiggestPos.size(); i++){
+            players[i] = twoBiggestPos.get(i);
         }
+        for (int i = 0; i < players.length - 1; i++){
+            for (int j = i + 1; j < players.length; j++){
+                if (players[i].getPosition() < players[j].getPosition()){
+                    Jogador placeHolder = players[i];
+                    players[i] = players[j];
+                    players[j] = placeHolder;
+                }else if(players[i].getId() > players[j].getId()){
+                    Jogador placeHolder = players[i];
+                    players[i] = players[j];
+                    players[j] = placeHolder;
+                }
 
-        if (twoBiggestPos[0] != null && twoBiggestPos[1] != null){
-            int difference = Math.abs(twoBiggestPos[0].getPosition() - twoBiggestPos[1].getPosition());
-            return difference;
+            }
         }
-        return 0;
+        twoBiggestPos = new ArrayList<>();
+        twoBiggestPos.addAll(Arrays.asList(players));
+
+        return twoBiggestPos.get(0).getPosition() - twoBiggestPos.get(1).getPosition();
     }
 }
