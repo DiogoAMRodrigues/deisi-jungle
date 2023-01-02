@@ -431,8 +431,15 @@ public class GameManager {
             String placeholder = theArray[0];
             theArray[0] = theArray[1];
             theArray[1] = placeholder;
+
+            players.add(theArray[1]);
+            players.add(theArray[0]);
+            for (int i = 2; i < theArray.length; i++) {
+                players.add(theArray[i]);
+            }
+        }else {
+            players.addAll(Arrays.asList(theArray));
         }
-        players.addAll(Arrays.asList(theArray));
         return players;
     }
     public JPanel getAuthorsPanel() {
