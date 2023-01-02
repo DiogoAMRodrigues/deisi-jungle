@@ -467,7 +467,6 @@ public class GameManager {
         b1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 tf.setText("Made by Diogo Rodrigues a22104341");
-
             }
         });
         b2.addActionListener(new ActionListener(){
@@ -535,7 +534,7 @@ public class GameManager {
             return false;
         }
         return true;
-    }
+    }// NEXT WEIRD
     public void setPlayersPositions(String[][] players, String[] playersHouse, String[] playersDistance){
         Jogador player = tabuleiro.getCurrentPlayer();
         for(int k = 0; k < tabuleiro.getJogadores().size(); ++k){
@@ -557,7 +556,7 @@ public class GameManager {
                 }
             }
         }
-    }
+    } //NEXT WEIRD
     public void setCurrentPlayer(int turn, int currentPlayerId){
         tabuleiro.setTurn(turn-1);
         tabuleiro.nextTurn();
@@ -566,7 +565,7 @@ public class GameManager {
                 tabuleiro.setCurrentPlayer(tabuleiro.getJogadores().get(l));
             }
         }
-    }
+    } //NEXT WEIRD
     public void addMultiplePlayers(String[][] players, String text, int i, ArrayList<String> energia, String[] playersHouse){
         players[i-1][0] = text.split(",")[0];
         players[i-1][1] = text.split(",")[1];

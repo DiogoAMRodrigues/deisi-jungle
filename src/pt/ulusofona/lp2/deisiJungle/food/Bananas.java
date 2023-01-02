@@ -5,10 +5,11 @@ import pt.ulusofona.lp2.deisiJungle.Tabuleiro;
 
 public class Bananas extends Food {
 
-    int bananaAmount = 3;
+    private int bananaAmount;
     public Bananas() {
         id = 'b';
         img = "bananas.png";
+        bananaAmount = 3;
     }
 
     @Override

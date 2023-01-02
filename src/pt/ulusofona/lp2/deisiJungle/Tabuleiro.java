@@ -12,7 +12,7 @@ public class Tabuleiro {
     private final HashMap<Integer, Jogador> jogaresHS;
     private Jogador currentPlayer;
     private int currentPlayerInt;
-    private boolean winner = false;
+    private boolean winner;
     private Jogador playerWin;
     private int turns;
     private ArrayList<Jogador> twoBiggestPos;
@@ -27,6 +27,7 @@ public class Tabuleiro {
         currentPlayerInt = 0;
         turns = 0;
         twoBiggestPos = new ArrayList<>();
+        winner = false;
     }
 
     public void addJogador(Jogador player){
