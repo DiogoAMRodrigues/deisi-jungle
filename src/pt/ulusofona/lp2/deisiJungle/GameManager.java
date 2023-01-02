@@ -5,6 +5,12 @@ import pt.ulusofona.lp2.deisiJungle.species.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+import java.io.IOException;
+import java.awt.Desktop;
+import java.net.URI;
+import java.net.URISyntaxException;
+import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -447,15 +453,48 @@ public class GameManager {
     }
     public JPanel getAuthorsPanel() {
         JPanel panel = new JPanel();
-        panel.setBounds(40,80,200,200);
-        panel.setBackground(Color.darkGray);
-        JButton b1=new JButton("a22104341\n Diogo Rodrigues");
-        b1.setBounds(50,100,80,30);
-        b1.setBackground(Color.magenta);
-        JButton b2=new JButton("a22106316\n Tiago Ferreira");
-        b2.setBounds(100,100,80,30);
+        final JTextField tf=new JTextField();
+        tf.setBounds(47,50, 214,30);
+        JButton b1=new JButton("Aluno 1");
+        b1.setBounds(50,100,200,30);
+        b1.setBackground(Color.yellow);
+        JButton b2=new JButton("Aluno 2");
+        b2.setBounds(50,140,200,30);
         b2.setBackground(Color.yellow);
-        panel.add(b1); panel.add(b2);
+        JButton b3=new JButton("MAGIC BUTTON");
+        b3.setBounds(50,200,200,30);
+        b3.setBackground(Color.magenta);
+        b1.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                tf.setText("Made by Diogo Rodrigues a22104341");
+
+            }
+        });
+        b2.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                tf.setText("Made by Tiago Ferreira a22106316");
+            }
+        });
+        b3.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                tf.setText("Hehe :)");
+                try {
+                    Desktop.getDesktop().browse(new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                } catch (URISyntaxException e1) {
+                    // TODO Auto-generated catch block
+                }
+            }
+        });
+        panel.add(b1);
+        panel.add(b2);
+        panel.add(b3);
+        panel.add(tf);
+        panel.setSize(400,400);
+        panel.setLayout(null);
+        panel.setVisible(true);
 
         return panel;
     }

@@ -617,6 +617,20 @@ public class Tests {
       assertEquals("#1 Heinz, Leao, 18, 17, 0", thisString.get(0));
       assertEquals("#2 Jeff, Elefante, 15, 14, 0", thisString.get(1));
       assertEquals("#3 Jefff, Leao, 15, 14, 0", thisString.get(2));
+
+      g = new GameManager();
+      g.createInitialJungle(10, playersInfo);
+      g.moveCurrentPlayer(2, true);
+      g.moveCurrentPlayer(1, true);
+      g.moveCurrentPlayer(8, true);
+
+      thisString = g.getGameResults();
+
+      assertEquals("#1 Jeff, Elefante, 3, 2, 0", thisString.get(0));
+      assertEquals("#2 Heinz, Leao, 9, 8, 0", thisString.get(1));
+      assertEquals("#3 Jefff, Leao, 2, 1, 0", thisString.get(2));
+
+
    }
 
    @Test
@@ -1040,6 +1054,7 @@ public class Tests {
       assertEquals("Wrestling", g.whoIsTaborda());
 
       g.getAuthorsPanel();
+
    }
 
    @Test
