@@ -5,7 +5,7 @@ import pt.ulusofona.lp2.deisiJungle.AnimalType;
 public class Leao extends Especie{
     public Leao() {
         identifier = 'L';
-        name = "Leão";
+        name = "Leao";
         image = "lion.png";
         startEnergy = 80;
         energyConsumption = 2;

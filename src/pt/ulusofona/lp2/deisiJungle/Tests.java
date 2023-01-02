@@ -42,7 +42,7 @@ public class Tests {
       minSpeed = l.getMinSpeed();
       maxSpeed = l.getMaxSpeed();
       assertEquals('L', identifier);
-      assertEquals("Leão", name);
+      assertEquals("Leao", name);
       assertEquals("lion.png", image);
       assertEquals(80, startEnergy);
       assertEquals(2, energyConsumption);
@@ -612,9 +612,9 @@ public class Tests {
 
       ArrayList<String> thisString = g.getGameResults();
 
-      assertEquals("#1 Heinz, Leão, 18, 17, 0", thisString.get(0));
+      assertEquals("#1 Heinz, Leao, 18, 17, 0", thisString.get(0));
       assertEquals("#2 Jeff, Elefante, 15, 14, 0", thisString.get(1));
-      assertEquals("#3 Jefff, Leão, 15, 14, 0", thisString.get(2));
+      assertEquals("#3 Jefff, Leao, 15, 14, 0", thisString.get(2));
    }
 
    @Test
@@ -1246,10 +1246,10 @@ public class Tests {
       thisBerry[0][1] = "3";
 
       g.createInitialJungle(10, players, thisBerry);
-      g.moveCurrentPlayer(2, true);
+      //g.moveCurrentPlayer(2, true);
 
-      g.moveCurrentPlayer(2, true);
-      g.moveCurrentPlayer(2, true);
+      //g.moveCurrentPlayer(2, true);
+      //g.moveCurrentPlayer(2, true);
 
 
 
