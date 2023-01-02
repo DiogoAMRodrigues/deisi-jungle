@@ -416,6 +416,7 @@ public class GameManager {
                 species.getIdentifier() + "", winner.getEnergy() + "", species.getMinSpeed() + ".." + species.getMaxSpeed()};
     }
     public ArrayList<String> getGameResults() {
+        tabuleiro.updateTwoBiggestPosSaySize();
         ArrayList<String> players = new ArrayList<>();
         String[] theArray = new String[tabuleiro.getTwoBiggestPos().size()];
         int counter = 1;
@@ -427,13 +428,14 @@ public class GameManager {
             theArray[i] = "#" + counter + " " + player.getName() + ", " + player.getSpecies().getName() + ", " +
                     (player.getPosition() + 1) + ", " + player.getDistancia() + ", " + player.getNumAlimentos();
         }
+
         if(tabuleiro.updateTwoBiggestPosSaySize() > (tabuleiro.getSize()/2) && (tabuleiro.getTwoBiggestPos().get(0).getPosition() != tabuleiro.getCasas().length - 1)){
             String placeholder = theArray[0].replace("#1", "#2");
             theArray[0] = theArray[1].replace("#2", "#1");
             theArray[1] = placeholder;
 
-            players.add(theArray[1]);
             players.add(theArray[0]);
+            players.add(theArray[1]);
             for (int i = 2; i < theArray.length; i++) {
                 players.add(theArray[i]);
             }
