@@ -180,10 +180,6 @@ public class Jogador {
                 hasEaten = true;
                 tooltip += thisHousesFood.get(i).getEaten(tabuleiro);
             }
-            //in case u dont move but would lose too much energy from not moving
-            if(this.energy < 0){
-                this.energy = 0;
-            }
         }
         return (hasEaten && !tooltip.equals("")) ? new MovementResult(MovementResultCode.CAUGHT_FOOD, tooltip) : new MovementResult(MovementResultCode.VALID_MOVEMENT, null);
     }

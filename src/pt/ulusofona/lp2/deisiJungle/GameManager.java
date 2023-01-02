@@ -4,11 +4,11 @@ import pt.ulusofona.lp2.deisiJungle.food.*;
 import pt.ulusofona.lp2.deisiJungle.species.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
+
 
 public class GameManager {
     private Tabuleiro tabuleiro;
@@ -446,7 +446,18 @@ public class GameManager {
         return players;
     }
     public JPanel getAuthorsPanel() {
-        return null;
+        JPanel panel = new JPanel();
+        panel.setBounds(40,80,200,200);
+        panel.setBackground(Color.darkGray);
+        JButton b1=new JButton("a22104341\n Diogo Rodrigues");
+        b1.setBounds(50,100,80,30);
+        b1.setBackground(Color.magenta);
+        JButton b2=new JButton("a22106316\n Tiago Ferreira");
+        b2.setBounds(100,100,80,30);
+        b2.setBackground(Color.yellow);
+        panel.add(b1); panel.add(b2);
+
+        return panel;
     }
     public String whoIsTaborda() {
         return "Wrestling";

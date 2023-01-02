@@ -4,6 +4,8 @@ import org.junit.Test;
 import pt.ulusofona.lp2.deisiJungle.food.*;
 import pt.ulusofona.lp2.deisiJungle.species.*;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -954,7 +956,7 @@ public class Tests {
       //Dont move, and then make it so my energy goes under 0 cuz of a fruit im standing on
    }
 
-   @Test //need to add stuff on this one that is commented
+   @Test
    public void missingGameManagerTest_24(){
       GameManager g = new GameManager();
       String[][] players = new String[3][3];
@@ -1030,22 +1032,14 @@ public class Tests {
       assertEquals(0, g.getPlayerIds(-1).length);
 
       g = new GameManager();
-      //its supposed to be null so i dont get the problem :)
-      //String[][] theThing = g.getPlayersInfo();
-      //assertNull(theThing);
 
       g.createInitialJungle(10, players);
 
       assertNull(g.getWinnerInfo());
 
-      //IDK WHAT JPANEL IS THIS NEEDS TO BE FIXED
-      assertNull(g.getAuthorsPanel());
-
       assertEquals("Wrestling", g.whoIsTaborda());
 
-      g = new GameManager();
-
-
+      g.getAuthorsPanel();
    }
 
    @Test
@@ -1237,23 +1231,42 @@ public class Tests {
       players[1][0] = "2";
       players[1][1] = "lion";
       players[1][2] = "L";
-      players[2][0] = "2";
-      players[2][1] = "lion";
+      players[2][0] = "3";
+      players[2][1] = "elefante";
       players[2][2] = "E";
 
-      String[][] thisBerry = new String[1][2];
-      thisBerry[0][0] = "p";
-      thisBerry[0][1] = "3";
+      String[][] thisErva = new String[1][2];
+      thisErva[0][0] = "p";
+      thisErva[0][1] = "4";
+      g.createInitialJungle(10, players, thisErva);
 
-      g.createInitialJungle(10, players, thisBerry);
-      //g.moveCurrentPlayer(2, true);
+      Food thisHousesFood = g.getTabuleiro().getCasas()[3].getComida().get(0);
 
-      //g.moveCurrentPlayer(2, true);
-      //g.moveCurrentPlayer(2, true);
+      Jogador tarz = g.getTabuleiro().getCurrentPlayer();
+      assertEquals(55, thisHousesFood.getEatenSim(tarz, 0));
+      g.moveCurrentPlayer(3, true);
+      assertEquals(49, tarz.getEnergy());
 
 
+      Jogador lion = g.getTabuleiro().getCurrentPlayer();
+      assertEquals(65, thisHousesFood.getEatenSim(lion, 0));
+      g.moveCurrentPlayer(3, true);
+      assertEquals(59, lion.getEnergy());
+      assertEquals("This poisonous berry dealt 15 of damage", g.getTabuleiro().getCasas()[3].getComida().get(0).getToolTip(g.getTabuleiro()));
 
-   }//UNFINISHED-
+
+      Jogador elefante = g.getTabuleiro().getCurrentPlayer();
+      assertEquals(10, thisHousesFood.getEatenSim(elefante, 0));
+      g.moveCurrentPlayer(3, true);
+      assertEquals(10, elefante.getEnergy());
+
+      assertEquals(10, thisHousesFood.getEatenSim(tarz, 1));
+      g.moveCurrentPlayer(0, true);
+      assertEquals(10, tarz.getEnergy());
+
+      assertEquals("This poisonous berry dealt LOADS of damage", g.getTabuleiro().getCasas()[3].getComida().get(0).getToolTip(g.getTabuleiro()));
+
+   }
 
 }
 

@@ -57,8 +57,4 @@ public class PoisonBerry extends Food {
     public String getToolTip(Tabuleiro tabuleiro){
         return "This poisonous berry dealt " + amount + " of damage" ;
     }
-
-    public String getAmount() {
-        return amount;
-    }
 }
