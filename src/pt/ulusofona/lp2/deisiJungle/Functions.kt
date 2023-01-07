@@ -24,7 +24,7 @@ enum class CommandType{
         players.filter { it.species.identifier.toString() == speciesID }.forEach { result += (it.name) + "," }
 
         if (result.isNotEmpty()) {
-            result.substring(result.length - 1)
+            result = result.substring(0,result.length - 1)
         }
         return result
     }
@@ -107,7 +107,9 @@ enum class CommandType{
 
     fun main() {
         val manager = GameManager()
+        manager.createInitialJungle(12, arrayOf(arrayOf("1", "Pedro", "E"), arrayOf("2", "Joao", "L")))
         val routerFn = router()
         val commandGetFn = routerFn.invoke(CommandType.GET)
-        val result = commandGetFn.invoke(manager, listOf("PLAYER_INFO", "Pedro"))
+        val result = commandGetFn.invoke(manager, listOf("PLAYERS_BY_SPECIE", "E"))
+        println(result)
     }

@@ -155,8 +155,7 @@ public class GameManager {
         }
         //Player amount check
         if (playersInfo.length < 2 || playersInfo.length > 4) {
-
-            return new InitializationError("WRONGPLAYERAMOUNT");
+            throw new InvalidInitialJungleException("Erro minimo de jogadores", true, false);
         }
 
         //Tabuleiro size check
