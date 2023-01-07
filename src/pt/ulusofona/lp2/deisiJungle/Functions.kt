@@ -108,7 +108,6 @@ enum class CommandType{
         }
     }
 
-
     fun getFunctions(commandType: CommandType): (GameManager, List<String>) -> String? {
 
         if (commandType == CommandType.GET) {
@@ -133,17 +132,12 @@ enum class CommandType{
 
 
     fun post(gameManager: GameManager, list: List<String>): String? {
-        return move(gameManager, list.get(1))
+        if(list.get(0).equals("MOVE")) {
+            return move(gameManager, list.get(1))
+        }
+        return null
     }
 
     fun router(): (CommandType) -> (GameManager, List<String>) -> String? {
         return ::getFunctions
     }
-
-fun main() {
-    val manager = GameManager()
-    manager.createInitialJungle(12, arrayOf(arrayOf("1", "Pedro", "E"), arrayOf("2", "Joao", "E")))
-    val routerFn = router()
-    val commandGetFn = routerFn.invoke(CommandType.POST)
-    println(commandGetFn.invoke(manager, listOf("MOVE", "4")))
-}
