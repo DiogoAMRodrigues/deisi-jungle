@@ -96,10 +96,12 @@ enum class CommandType{
     fun move(gameManager: GameManager, numPosições: String): String? {
         try{
             if(numPosições.equals("")){
+                gameManager.tabuleiro.nextTurn()
                 return "OK"
             }
 
             if(gameManager.tabuleiro.currentPlayer.position + numPosições.toInt() < 0){
+                gameManager.tabuleiro.nextTurn()
                 return "Movimento invalido"
             }
 
@@ -129,7 +131,7 @@ enum class CommandType{
         } else if (commandType == CommandType.POST) {
             return ::post
         }
-        return { a, b -> null } //função que retorna null
+        return { a, b -> null }
     }
 
 
@@ -157,11 +159,9 @@ enum class CommandType{
     }
 
 fun main() {
-
     val manager = GameManager()
     manager.createInitialJungle(12, arrayOf(arrayOf("1", "Tiago", "E"), arrayOf("2", "Joao", "L")))
     val routerFn = router()
     val commandGetFn = routerFn.invoke(CommandType.POST)
-    println(commandGetFn.invoke(manager, listOf("MOVE", "6")))
-
+    println(commandGetFn.invoke(manager, listOf("MOVE", "")))
 }
