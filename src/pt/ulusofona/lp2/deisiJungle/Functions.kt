@@ -95,6 +95,10 @@ enum class CommandType{
 
     fun move(gameManager: GameManager, numPosições: String): String? {
         try{
+            if(numPosições.equals("")){
+                return "OK"
+            }
+
             if(gameManager.tabuleiro.currentPlayer.position + numPosições.toInt() < 0){
                 return "Movimento invalido"
             }
