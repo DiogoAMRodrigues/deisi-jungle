@@ -138,7 +138,7 @@ public class GameManager {
         }
         return null;
     }
-    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo) {
+    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo) throws InvalidInitialJungleException{
         //assuming the start and finishlines count for the amount of houses
         int id = 0;
         int name = 1;
@@ -193,7 +193,7 @@ public class GameManager {
 
         return null;
     }
-    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo) {
+    public InitializationError createInitialJungle(int jungleSize, String[][] playersInfo, String[][] foodsInfo) throws InvalidInitialJungleException{
         InitializationError createJungle = createInitialJungle(jungleSize, playersInfo);
 
         if (createJungle != null) {
@@ -630,13 +630,15 @@ public class GameManager {
                 foodArray[k][1] = comida.get(k).split(" ")[0];
             }
             tabuleiro = new Tabuleiro(Integer.parseInt(size));
+
             if(createInitialJungle(Integer.parseInt(size), players, foodArray) != null){
                 return false;
             }
+
             setPlayersPositions(players, playersHouse, playersDistance);
             setPlayersEnergy(energia);
             setCurrentPlayer(turn, currentPlayerId);
-        }catch(IOException e){
+        }catch(IOException | InvalidInitialJungleException e){
             return false;
         }
         return true;
