@@ -88,20 +88,24 @@ enum class CommandType{
 
 
     fun move(gameManager: GameManager, numPosições: String): String? {
-        val move : MovementResult = gameManager.moveCurrentPlayer(numPosições.toInt(), true)
-        var message = ""
+        try{
+            val move : MovementResult = gameManager.moveCurrentPlayer(numPosições.toInt(), true)
+            var message = ""
 
-        if(move.message == null){
-            message = "OK"
-        }else if(move.code == MovementResultCode.CAUGHT_FOOD){
-            message = "Apanhou comida"
-        }else if(move.code == MovementResultCode.INVALID_MOVEMENT){
-            message = "Movimento invalido"
-        }else if(move.code == MovementResultCode.NO_ENERGY){
-            message = "Sem energia"
+            if(move.message == null){
+                message = "OK"
+            }else if(move.code == MovementResultCode.CAUGHT_FOOD){
+                message = "Apanhou comida"
+            }else if(move.code == MovementResultCode.INVALID_MOVEMENT){
+                message = "Movimento invalido"
+            }else if(move.code == MovementResultCode.NO_ENERGY){
+                message = "Sem energia"
+            }
+
+            return message
+        }catch(e : NumberFormatException){
+            return "Movimento invalido"
         }
-
-        return message
     }
 
 
@@ -129,13 +133,17 @@ enum class CommandType{
 
 
     fun post(gameManager: GameManager, list: List<String>): String? {
-        return move(gameManager, list[1])
+        return move(gameManager, list.get(1))
     }
 
     fun router(): (CommandType) -> (GameManager, List<String>) -> String? {
         return ::getFunctions
     }
 
-    fun main() {
-
-    }
+fun main() {
+    val manager = GameManager()
+    manager.createInitialJungle(12, arrayOf(arrayOf("1", "Pedro", "E"), arrayOf("2", "Joao", "E")))
+    val routerFn = router()
+    val commandGetFn = routerFn.invoke(CommandType.POST)
+    println(commandGetFn.invoke(manager, listOf("MOVE", "4")))
+}
