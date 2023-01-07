@@ -111,7 +111,7 @@ public class GameManager {
 
         return foodTypes;
     }
-    private InitializationError setFoodOnBoard(String[][] foodsInfo) {
+    private InitializationError setFoodOnBoard(String[][] foodsInfo) throws InvalidInitialJungleException{
         if (foodsInfo != null) {
             for (int i = 0; i < foodsInfo.length; i++) {
                 try {
@@ -124,17 +124,17 @@ public class GameManager {
                         if (food != null) {
                             tabuleiro.getCasas()[foodPosition].addComida(food);
                         } else {
-                            return new InitializationError("ILLEGALFOOD");
+                            throw new InvalidInitialJungleException("Comida ilegal", false, true);
                         }
                     } else {
-                        return new InitializationError("FOODOUTSIDETABULEIRO");
+                        throw new InvalidInitialJungleException("Comida fora do tabuleiro", false, true);
                     }
                 } catch (NumberFormatException e) {
-                    return new InitializationError("WRONGFOODFORMAT");
+                    throw new InvalidInitialJungleException("Formato de comida errado", false, true);
                 }
             }
         } else {
-            return new InitializationError("FOODSINFOISNULL");
+            throw new InvalidInitialJungleException("Comida nula", false, true);
         }
         return null;
     }
@@ -151,7 +151,7 @@ public class GameManager {
         tabuleiro = new Tabuleiro(jungleSize);
 
         if (playersInfo == null) {
-            return new InitializationError("PLAYERINFOISNULL");
+            throw new InvalidInitialJungleException("Jogadores são nulos", true, false);
         }
         //Player amount check
         if (playersInfo.length < 2 || playersInfo.length > 4) {
@@ -160,13 +160,13 @@ public class GameManager {
 
         //Tabuleiro size check
         if (jungleSize < playersInfo.length * 2) {
-            return new InitializationError("WRONGJUNGLESIZE");
+            throw new InvalidInitialJungleException("Erro minimo de jogadores", true, false);
         }
 
         for (int player1 = 0; player1 < playersInfo.length; player1++) {
 
             if (playersInfo[player1] == null || playersInfo[player1][id] == null) {
-                return new InitializationError("THISPLAYERSINFOISNULL");
+                throw new InvalidInitialJungleException("Este jogador é nulo", true, false);
             }
 
             String firstPlayerID = playersInfo[player1][id];
@@ -201,28 +201,28 @@ public class GameManager {
         InitializationError food = setFoodOnBoard(foodsInfo);
         return food;
     }
-    private InitializationError playerAttributeChecksAndAdd(String[][] playersInfo, int player1, int name, String firstPlayerID, int id, int species, boolean hasTarzan, ArrayList<Jogador> jogadores) {
+    private InitializationError playerAttributeChecksAndAdd(String[][] playersInfo, int player1, int name, String firstPlayerID, int id, int species, boolean hasTarzan, ArrayList<Jogador> jogadores) throws InvalidInitialJungleException{
         //name is well-made
         String thisName = playersInfo[player1][name];
         if (thisName == null || thisName.length() == 0) {
-            return new InitializationError("ILLEGALNAME");
+            throw new InvalidInitialJungleException("Nome Ilegal", true, false);
         }
 
         //no repeated ID's
         for (int player2 = player1 + 1; player2 < playersInfo.length; player2++) {
             String secondPlayerID = playersInfo[player2][id];
             if (firstPlayerID.equals(secondPlayerID)) {
-                return new InitializationError("REPEATEDPLAYER");
+                throw new InvalidInitialJungleException("Jogadores duplicados", true, false);
             }
         }
 
         //Check if the ID is an Integer
         try {
             if (Integer.parseInt(firstPlayerID) <= 0) {
-                return new InitializationError("NEGATIVEID");
+                throw new InvalidInitialJungleException("Id negativo", true, false);
             }
         } catch (NumberFormatException n) {
-            return new InitializationError("WRONGTYPEID");
+            throw new InvalidInitialJungleException("Tipo de id errado", true, false);
         }
         //is an eligible Species
         int playerID = Integer.parseInt(playersInfo[player1][0]);
@@ -232,7 +232,7 @@ public class GameManager {
             thisPlayersSpeciesID = playersInfo[player1][species].charAt(0);
             thisPlayersSpecies = createAnimal(thisPlayersSpeciesID);
         } else {
-            return new InitializationError("ANIMALNOTPROVIDED");
+            throw new InvalidInitialJungleException("Animal não dado", true, false);
         }
 
         //Adding the Player into the Tabuleiro
@@ -243,10 +243,10 @@ public class GameManager {
             }*/
             jogadores.add(thisPlayerObject);
         } else {
-            return new InitializationError("ILLEGALANIMAL");
+            throw new InvalidInitialJungleException("Animal ilegal", true, false);
         }
         if (hasTarzan && thisPlayersSpeciesID == 'Z') {
-            return new InitializationError("TOOMANYTARZAN");
+            throw new InvalidInitialJungleException("Demasiados Tarzan", true, false);
         }
         return new InitializationError("GOODPLAYERATTRIBUTES");
     }
