@@ -21,7 +21,13 @@ enum class CommandType{
     fun playersBySpecies(gameManager: GameManager, speciesID: String?): String {
         val players = gameManager.tabuleiro.jogadores
         var result = ""
-        players.filter { it.species.identifier.toString() == speciesID }.forEach { result += (it.name) + "," }
+        val arrayList = ArrayList<String>()
+
+        players.filter { it.species.identifier.toString() == speciesID }.forEach { arrayList.add(it.name)}
+
+        arrayList.sortDescending()
+
+        arrayList.forEach{result+=it+","}
 
         if (result.isNotEmpty()) {
             result = result.substring(0,result.length - 1)
@@ -43,7 +49,7 @@ enum class CommandType{
             result += it.name + ":" + it.species.identifier + ":" + it.distancia + "\n"
         }
 
-        return "Total:" + dist
+        return result + "Total:" + dist
     }
 
 
@@ -53,7 +59,7 @@ enum class CommandType{
 
         var list = players.filter { it.species.tipoAnimal == AnimalType.OMNIVORO }.sortedWith(compareBy { it.energy }).reversed()
 
-        list = list.subList(0, 1)
+        list = list.subList(0, 2)
 
         list.forEach { result += it.name + ":" + it.energy + "\n" }
 
@@ -107,7 +113,7 @@ enum class CommandType{
 
     fun main() {
         val manager = GameManager()
-        manager.createInitialJungle(12, arrayOf(arrayOf("1", "Pedro", "E"), arrayOf("2", "Joao", "L")))
+        manager.createInitialJungle(12, arrayOf(arrayOf("1", "Aedro", "E"), arrayOf("2", "Zoao", "E")))
         val routerFn = router()
         val commandGetFn = routerFn.invoke(CommandType.GET)
         val result = commandGetFn.invoke(manager, listOf("PLAYERS_BY_SPECIE", "E"))
