@@ -156,7 +156,7 @@ public class Jogador {
         //If he moves do this
         if (nrSquares != 0){
             //Check energy I need for this House
-            int amountOfEnergyRequired = mySpecies.getEnergyConsumption() * (nrSquares);
+            int amountOfEnergyRequired = mySpecies.getEnergyConsumption() * Math.abs(nrSquares);
             //Current energy needs to be bigger than energy usage while move
             if (this.energy < amountOfEnergyRequired){
                 return new MovementResult(MovementResultCode.NO_ENERGY, null);
