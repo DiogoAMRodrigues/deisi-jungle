@@ -120,6 +120,7 @@ enum class CommandType{
 
             return message
         }catch(e : NumberFormatException){
+            gameManager.tabuleiro.nextTurn()
             return "Movimento invalido"
         }
     }
