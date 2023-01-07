@@ -105,4 +105,11 @@ class Functions {
     fun router(): (CommandType) -> (GameManager, List<String>) -> String? {
         return ::getFunctions
     }
+
+    fun main() {
+        val manager = GameManager()
+        val routerFn = router()
+        val commandGetFn = routerFn.invoke(CommandType.GET)
+        val result = commandGetFn.invoke(manager, listOf("PLAYER_INFO", "Pedro"))
+    }
 }
