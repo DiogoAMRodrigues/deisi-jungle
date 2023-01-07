@@ -170,7 +170,7 @@ public class Jogador {
                 hasEaten = true;
                 tooltip += thisHousesFood.get(i).getEaten(tabuleiro);
                 if(!tooltip.equals("")){
-                    eatenFoods.add(tooltip.substring(7, tooltip.length())+"\n");
+                    eatenFoods.add(tooltip.substring(8, tooltip.length())+"\n");
                 }
             }
             //Fix energy losses

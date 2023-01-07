@@ -997,7 +997,7 @@ public class Tests{
 
       g = new GameManager();
 
-      assertEquals("WRONGJUNGLESIZE", g.createInitialJungle(3, players, thisWater).getMessage());
+      assertEquals("Erro minimo de jogadores", g.createInitialJungle(3, players, thisWater).getMessage());
 
       g = new GameManager();
 
@@ -1314,6 +1314,9 @@ public class Tests{
 
       //assertEquals(null, g.getSquareInfo(83)[0]);
    }
+
+   @Test
+   public void testGetPlayerInfoCommand(){
+
+   }
 }
-
-
