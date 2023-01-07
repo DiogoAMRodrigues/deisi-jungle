@@ -61,7 +61,11 @@ enum class CommandType{
 
         var list = players.filter { it.species.tipoAnimal == AnimalType.OMNIVORO }.sortedWith(compareBy { it.energy }).reversed()
 
-        list = list.subList(0, max_results.toInt())
+        if(list.size < max_results.toInt()){
+            list = list.subList(0, list.size)
+        }else{
+            list = list.subList(0, max_results.toInt())
+        }
 
         list.forEach { result += it.name + ":" + it.energy + "\n" }
 
@@ -81,7 +85,9 @@ enum class CommandType{
 
         arrayList.toSet().toList().sortedBy{it}.forEach{result += it}
 
-        result = result.substring(0, result.length-1)
+        if(result.isNotEmpty()){
+            result = result.substring(0, result.length-1)
+        }
 
         return result
     }
