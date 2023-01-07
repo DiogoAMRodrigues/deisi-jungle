@@ -89,12 +89,12 @@ enum class CommandType{
 
     fun move(gameManager: GameManager, numPosições: String): String? {
         try{
-            val move : MovementResult = gameManager.moveCurrentPlayer(numPosições.toInt(), true)
-            var message = ""
-
-            if(gameManager.tabuleiro.currentPlayer.position - numPosições.toInt() < 0){
+            if(gameManager.tabuleiro.currentPlayer.position + numPosições.toInt() < 0){
                 return "Movimento invalido"
             }
+
+            val move : MovementResult = gameManager.moveCurrentPlayer(numPosições.toInt(), true)
+            var message = ""
 
             if(move.message == null){
                 message = "OK"
@@ -145,3 +145,13 @@ enum class CommandType{
     fun router(): (CommandType) -> (GameManager, List<String>) -> String? {
         return ::getFunctions
     }
+
+fun main() {
+
+    val manager = GameManager()
+    manager.createInitialJungle(12, arrayOf(arrayOf("1", "Tiago", "E"), arrayOf("2", "Joao", "L")))
+    val routerFn = router()
+    val commandGetFn = routerFn.invoke(CommandType.POST)
+    println(commandGetFn.invoke(manager, listOf("MOVE", "6")))
+
+}
