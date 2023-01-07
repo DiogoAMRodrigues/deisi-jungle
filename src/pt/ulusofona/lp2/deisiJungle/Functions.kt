@@ -4,7 +4,6 @@ enum class CommandType{
     GET, POST
 }
 
-class Functions {
     fun getPlayerInfo(gameManager: GameManager, playerName: String?): String {
         val players = gameManager.tabuleiro.jogadores;
         var playerInfo = ""
@@ -112,4 +111,3 @@ class Functions {
         val commandGetFn = routerFn.invoke(CommandType.GET)
         val result = commandGetFn.invoke(manager, listOf("PLAYER_INFO", "Pedro"))
     }
-}
