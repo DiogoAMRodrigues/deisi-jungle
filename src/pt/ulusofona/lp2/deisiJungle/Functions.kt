@@ -92,6 +92,10 @@ enum class CommandType{
             val move : MovementResult = gameManager.moveCurrentPlayer(numPosições.toInt(), true)
             var message = ""
 
+            if(gameManager.tabuleiro.currentPlayer.position - numPosições.toInt() < 0){
+                return "Movimento invalido"
+            }
+
             if(move.message == null){
                 message = "OK"
             }else if(move.code == MovementResultCode.CAUGHT_FOOD){
