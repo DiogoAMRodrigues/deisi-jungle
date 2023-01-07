@@ -1,5 +1,7 @@
 package pt.ulusofona.lp2.deisiJungle
 
+import kotlin.math.max
+
 enum class CommandType{
     GET, POST
 }
@@ -59,7 +61,7 @@ enum class CommandType{
 
         var list = players.filter { it.species.tipoAnimal == AnimalType.OMNIVORO }.sortedWith(compareBy { it.energy }).reversed()
 
-        list = list.subList(0, 2)
+        list = list.subList(0, max_results.toInt())
 
         list.forEach { result += it.name + ":" + it.energy + "\n" }
 
@@ -76,7 +78,20 @@ enum class CommandType{
 
 
     fun move(gameManager: GameManager, numPosições: String): String? {
-        return null
+        val move : MovementResult = gameManager.moveCurrentPlayer(numPosições.toInt(), true)
+        var message = ""
+
+        if(move.message == null){
+            message = "OK"
+        }else if(move.code == MovementResultCode.CAUGHT_FOOD){
+            message = "Apanhou comida"
+        }else if(move.code == MovementResultCode.INVALID_MOVEMENT){
+            message = "Movimento invalido"
+        }else if(move.code == MovementResultCode.NO_ENERGY){
+            message = "Sem energia"
+        }
+
+        return message
     }
 
 
