@@ -73,7 +73,17 @@ enum class CommandType{
 
 
     fun consumedFoods(gameManager: GameManager): String? {
-        return ""
+        val players = gameManager.tabuleiro.jogadores
+        var arrayList = ArrayList<String>()
+        var result = ""
+
+        players.forEach {arrayList.addAll(it.eatenFoods)}
+
+        arrayList.toSet().toList().sortedBy{it}.forEach{result += it}
+
+        result = result.substring(0, result.length-1)
+
+        return result
     }
 
 
@@ -119,7 +129,7 @@ enum class CommandType{
 
 
     fun post(gameManager: GameManager, list: List<String>): String? {
-        return move(gameManager, list[0])
+        return move(gameManager, list[1])
     }
 
     fun router(): (CommandType) -> (GameManager, List<String>) -> String? {
@@ -127,10 +137,5 @@ enum class CommandType{
     }
 
     fun main() {
-        val manager = GameManager()
-        manager.createInitialJungle(12, arrayOf(arrayOf("1", "Aedro", "E"), arrayOf("2", "Zoao", "E")))
-        val routerFn = router()
-        val commandGetFn = routerFn.invoke(CommandType.GET)
-        val result = commandGetFn.invoke(manager, listOf("PLAYERS_BY_SPECIE", "E"))
-        println(result)
+
     }

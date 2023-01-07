@@ -14,6 +14,8 @@ public class Jogador {
     private int distancia;
     protected boolean hasEatenBanana;
 
+    private ArrayList<String> eatenFoods;
+
     public Jogador(int id, String name, Especie species) {
         this.id = id;
         this.name = name;
@@ -23,6 +25,7 @@ public class Jogador {
         hasEatenBanana = false;
         numAlimentos = 0;
         distancia = 0;
+        eatenFoods = new ArrayList<>();
     }
 
     public boolean getHasEatenBanana() {
@@ -121,6 +124,10 @@ public class Jogador {
         position = moveToPos;
     }
 
+    public ArrayList<String> getEatenFoods() {
+        return eatenFoods;
+    }
+
     public MovementResult theMovementPart(Tabuleiro tabuleiro, int nrSquares, boolean byPassValidations)  {
         MovementResult theResult = new MovementResult(MovementResultCode.VALID_MOVEMENT,"");
         Especie mySpecies = this.species;
@@ -162,6 +169,9 @@ public class Jogador {
             for (int i = 0; i < thisHousesFood.size(); i++, this.numAlimentos++){
                 hasEaten = true;
                 tooltip += thisHousesFood.get(i).getEaten(tabuleiro);
+                if(!tooltip.equals("")){
+                    eatenFoods.add(tooltip.substring(7, tooltip.length())+"\n");
+                }
             }
             //Fix energy losses
             this.energy = (this.energy < 0) ? 0 : this.energy;
