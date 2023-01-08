@@ -37,7 +37,6 @@ enum class CommandType{
         return result
     }
 
-
     fun mostTraveled(gameManager: GameManager): String {
 
         val players = gameManager.tabuleiro.jogadores
@@ -159,10 +158,3 @@ enum class CommandType{
         return ::getFunctions
     }
 
-fun main() {
-    val manager = GameManager()
-    manager.createInitialJungle(12, arrayOf(arrayOf("1", "Tiago", "E"), arrayOf("2", "Joao", "L")))
-    val routerFn = router()
-    val commandGetFn = routerFn.invoke(CommandType.POST)
-    println(commandGetFn.invoke(manager, listOf("MOVE", "")))
-}

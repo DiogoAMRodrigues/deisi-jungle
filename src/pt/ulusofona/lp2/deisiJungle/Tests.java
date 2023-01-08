@@ -1410,9 +1410,4 @@ public class Tests{
 
       //assertEquals(null, g.getSquareInfo(83)[0]);
    }
-
-   @Test
-   public void testGetPlayerInfoCommand(){
-
-   }
 }
