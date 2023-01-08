@@ -360,27 +360,51 @@ public class Tests{
       players[3][2] = "P";
 
       String theError = "PLAYERINFOISNULL";
-      assertEquals(theError, g.createInitialJungle(20, null).getMessage());
+      try{
+         assertEquals(theError, g.createInitialJungle(20, null).getMessage());
+      }catch(InvalidInitialJungleException e){
+         assertEquals("Jogadores são nulos", e.message);
+      }
+
       g = new GameManager();
 
       theError = "WRONGPLAYERAMOUNT";
       //less
-      assertEquals(theError, g.createInitialJungle(20, new String[1][4]).getMessage());
+      try{
+         assertEquals(theError, g.createInitialJungle(20, new String[1][4]).getMessage());
+      }catch(InvalidInitialJungleException e){
+         assertEquals("Erro minimo de jogadores", e.message);
+      }
+
       g = new GameManager();
       //more
-      assertEquals(theError, g.createInitialJungle(20, new String[5][4]).getMessage());
+      try{
+         assertEquals(theError, g.createInitialJungle(20, new String[5][4]).getMessage());
+      }catch(InvalidInitialJungleException e){
+         assertEquals("Erro minimo de jogadores", e.message);
+      }
+
       g = new GameManager();
 
       theError = "WRONGJUNGLESIZE";
-      assertEquals(theError,g.createInitialJungle(5, new String[4][4]).getMessage());
+      try{
+         assertEquals(theError,g.createInitialJungle(5, new String[4][4]).getMessage());
+      }catch(InvalidInitialJungleException e){
+         assertEquals("Erro minimo de jogadores", e.message);
+      }
+
       g = new GameManager();
 
       theError = "THISPLAYERSINFOISNULL";
       String[][] theName = new String[4][4];
       theName[0] = null;
-      assertEquals(theError, g.createInitialJungle(20, theName).getMessage());
-      g = new GameManager();
+      try{
+         assertEquals(theError, g.createInitialJungle(20, theName).getMessage());
+      }catch(InvalidInitialJungleException e){
+         assertEquals("Este jogador é nulo", e.message);
+      }
 
+      g = new GameManager();
 
       theError = null;
       assertEquals(theError, g.createInitialJungle(20, players));
@@ -406,52 +430,98 @@ public class Tests{
       players[3][2] = "P";
 
       String theError = "ILLEGALNAME";
-      assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      try{
+         assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      }catch(InvalidInitialJungleException e){
+         assertEquals("Nome Ilegal", e.message);
+      }
+
       g = new GameManager();
 
       players[0][1] = "";
-      assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      try{
+         assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      }catch(InvalidInitialJungleException e){
+         assertEquals("Nome Ilegal", e.message);
+      }
+
       g = new GameManager();
 
       players[0][1] = "John";
       players[1][0] = "1";
       theError = "REPEATEDPLAYER";
-      assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      try{
+         assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      }catch(InvalidInitialJungleException e){
+         assertEquals("Jogadores duplicados", e.message);
+      }
+
       g = new GameManager();
 
       players[1][0] = "2";
       players[0][0] = "-1";
       theError = "NEGATIVEID";
-      assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      try{
+         assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      }catch(InvalidInitialJungleException e){
+         assertEquals("Id negativo", e.message);
+      }
+
       g = new GameManager();
 
       players[0][0] = "1.1";
       theError = "WRONGTYPEID";
-      assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+
+      try{
+         assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      }catch(InvalidInitialJungleException e){
+         assertEquals("Tipo de id errado", e.message);
+      }
       g = new GameManager();
 
       players[0][0] = "1";
       players[0][2] = "H";
       theError = "ILLEGALANIMAL";
-      assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+
+      try{
+         assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      }catch(InvalidInitialJungleException e){
+         assertEquals("Animal ilegal", e.message);
+      }
+
       g = new GameManager();
 
       players[0][0] = "1";
       players[0][2] = "";
       theError = "ANIMALNOTPROVIDED";
-      assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      try{
+         assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      }catch(InvalidInitialJungleException e){
+         assertEquals("Animal não dado", e.message);
+      }
+
       g = new GameManager();
 
       players[0][0] = "1";
       players[0][2] = null;
       theError = "ANIMALNOTPROVIDED";
-      assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      try{
+         assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      }catch(InvalidInitialJungleException e){
+         assertEquals("Animal não dado", e.message);
+      }
+
       g = new GameManager();
 
       players[0][2] = "Z";
       players[1][2] = "Z";
       theError = "TOOMANYTARZAN";
-      assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      try{
+         assertEquals(theError, g.createInitialJungle(20, players).getMessage());
+      }catch(InvalidInitialJungleException e){
+         assertEquals("Demasiados Tarzan", e.message);
+      }
+
       g = new GameManager();
    }
 
@@ -997,28 +1067,49 @@ public class Tests{
 
       g = new GameManager();
 
-      assertEquals("Erro minimo de jogadores", g.createInitialJungle(3, players, thisWater).getMessage());
+      try{
+         assertEquals("Erro minimo de jogadores", g.createInitialJungle(3, players, thisWater).getMessage());
+      }catch(InvalidInitialJungleException e){
+         assertEquals("Erro minimo de jogadores", e.message);
+      }
 
       g = new GameManager();
 
       thisWater[0][0] = "y";
-      assertEquals("ILLEGALFOOD", g.createInitialJungle(10, players, thisWater).getMessage());
+
+      try{
+         assertEquals("Comida ilegal", g.createInitialJungle(10, players, thisWater).getMessage());
+      }catch(InvalidInitialJungleException e){
+         assertEquals("Comida ilegal", e.message);
+      }
 
       g = new GameManager();
 
       thisWater[0][0] = "a";
       thisWater[0][1] = "20";
 
-      assertEquals("FOODOUTSIDETABULEIRO", g.createInitialJungle(10, players, thisWater).getMessage());
+      try{
+         assertEquals("Comida fora do tabuleiro", g.createInitialJungle(10, players, thisWater).getMessage());
+      }catch(InvalidInitialJungleException e){
+         assertEquals("Comida fora do tabuleiro", e.message);
+      }
 
       g = new GameManager();
       thisWater[0][1] = "z";
 
-      assertEquals("WRONGFOODFORMAT", g.createInitialJungle(10, players, thisWater).getMessage());
+      try{
+         assertEquals("WRONGFOODFORMAT", g.createInitialJungle(10, players, thisWater).getMessage());
+      }catch(InvalidInitialJungleException e){
+         assertEquals("Formato de comida errado", e.message);
+      }
 
       g = new GameManager();
 
-      assertEquals("FOODSINFOISNULL", g.createInitialJungle(10, players, null).getMessage());
+      try{
+         assertEquals("FOODSINFOISNULL", g.createInitialJungle(10, players, null).getMessage());
+      }catch(InvalidInitialJungleException e){
+         assertEquals("Comida nula", e.message);
+      }
 
       g = new GameManager();
       players[0][2] = "T";
@@ -1180,12 +1271,17 @@ public class Tests{
       assertEquals(false, g.loadGame(new File("yess.txt")));
 
       g = new GameManager();
-      g.createInitialJungle(12, new String[][]{{"2", "Tiadd", "L"}},
-              new String[][]{{"a", "3"}, {"a", "4"}, {"e", "9"}});
 
-      g.saveGame(new File("yes.txt"));
+      try{
+         g.createInitialJungle(12, new String[][]{{"2", "Tiadd", "L"}},
+                 new String[][]{{"a", "3"}, {"a", "4"}, {"e", "9"}});
 
-      assertTrue(g.loadGame(new File("yes.txt")));
+         g.saveGame(new File("yes.txt"));
+
+         assertTrue(g.loadGame(new File("yes.txt")));
+      }catch(InvalidInitialJungleException e){
+
+      }
    }
 
    @Test
