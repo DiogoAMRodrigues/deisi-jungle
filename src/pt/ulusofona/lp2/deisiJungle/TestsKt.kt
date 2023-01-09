@@ -60,4 +60,32 @@ class TestsKt {
         val commandGetFn = routerFn.invoke(CommandType.POST)
         Assert.assertEquals("OK", commandGetFn.invoke(manager, listOf("MOVE", "6")))
     }
+
+    @Test
+    fun test07(){
+        val manager = GameManager()
+        manager.createInitialJungle(12, arrayOf(arrayOf("1", "Tiago", "P"), arrayOf("2", "Joao", "L")))
+        val routerFn = router()
+        val commandGetFn = routerFn.invoke(CommandType.POST)
+        Assert.assertEquals("OK", commandGetFn.invoke(manager, listOf("MOVE", "")))
+    }
+
+    @Test
+    fun test08(){
+        val manager = GameManager()
+        manager.createInitialJungle(12, arrayOf(arrayOf("1", "Tiago", "P"), arrayOf("2", "Joao", "L")), arrayOf(arrayOf("a","3")))
+        val routerFn = router()
+        val commandGetFn = routerFn.invoke(CommandType.POST)
+        Assert.assertEquals("Apanhou comida", commandGetFn.invoke(manager, listOf("MOVE", "2")))
+    }
+
+    @Test
+    fun test09(){
+        val manager = GameManager()
+        manager.createInitialJungle(12, arrayOf(arrayOf("1", "Tiago", "P"), arrayOf("2", "Joao", "L")), arrayOf(arrayOf("a","3")))
+        val routerFn = router()
+        val commandGetFn = routerFn.invoke(CommandType.POST)
+        Assert.assertEquals("Movimento invalido", commandGetFn.invoke(manager, listOf("MOVE", "-2")))
+    }
+
 }
