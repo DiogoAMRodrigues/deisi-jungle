@@ -145,8 +145,6 @@ enum class CommandType{
         }
         return null
     }
-
-
     fun post(gameManager: GameManager, list: List<String>): String? {
         if(list.get(0).equals("MOVE")) {
             return move(gameManager, list.get(1))
@@ -157,4 +155,3 @@ enum class CommandType{
     fun router(): (CommandType) -> (GameManager, List<String>) -> String? {
         return ::getFunctions
     }
-
